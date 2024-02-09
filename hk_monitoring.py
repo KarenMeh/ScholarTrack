@@ -862,7 +862,7 @@ def StudentTimeIN_Out():
                 #to insert the time in time
 
 
-                #to get the name who sing in and out
+                #to get the name who sing in and out by id input
                 qury.execute("SELECT `lname`, `fname` FROM `hk_users` WHERE `idnum` = '" + stdId + "' ")
                 fullname = qury.fetchall()
                 fname = fullname[0][1]
