@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>USER DASHBOARD</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="static/assetUser/img/NEW LOGO (1).png" rel="icon">
+  <link href="static/assetUser/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="static/assetUser/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="static/assetUser/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="static/assetUser/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="static/assetUser/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="static/assetUser/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="static/assetUser/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="static/assetUser/vendor/simple-datatables/style.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+
+  <!-- Template Main CSS File -->
+  <link href="/static/assetUser/css/assign.css" rel="stylesheet">
+
+  
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="/index.html" class="logo d-flex align-items-center">
+        <div class="picture">
+        <img src="static/assetUser/img/university_logo.default.png" width="180px" alt="">
+      </div>
+        <span class="d-none d-lg-block"></span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+
+    </div><!-- End Logo -->
+
+
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle " href="#">
+            <i class="bi bi-search"></i>
+          </a>
+        </li><!-- End Search Icon-->
+
+
+        <li class="nav-item dropdown pe-3">
+
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <img src="/static/assetUser/img/serjester.jpg" alt="Profile" class="rounded-circle">
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{logUser}}</span>
+          </a><!-- End Profile Iamge Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6>{{logUser}}</h6>
+              <span>User</span>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="http://127.0.0.1:5000/Profile">
+                <i class="bi bi-person"></i>
+                <span>My Profile</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-gear"></i>
+                <span>Account Settings</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <form action="/Logout" method="post">
+                <a>
+              <input class="dropdown-item d-flex align-items-center" type="submit" value="Sign Out">
+                <i class="bi bi-box-arrow-right"></i>
+                
+              </a>
+            </form>
+            </li>
+
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
+
+      </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link " href="{{url_for('admindashBoard')}}">
+          <div class="comp">
+            <img src="/static/assetUser/img/home.png" alt="" width="20px">
+          </div>
+          <span>Dashboard</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+
+
+      <li class="nav-item">
+       
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="/compliance">
+            <div class="comp">
+            <img src="/static/assetUser/img/compl.png" alt="" width="20px">
+          </div>
+            <span>Compliance Monitoring and Scholar Information</span>
+          </a>
+        </li><!-- End Profile Page Nav -->
+  
+       
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="/Duty Assignment And Management">
+            <div class="comp">
+              <img src="/static/assetUser/img/assign.png" alt="" width="20px">
+            </div>
+            <span>Duty Assignment And Management</span>
+          </a>
+        </li><!-- End Profile Page Nav -->
+  
+  
+  
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="/User Management">
+            <div class="comp">
+              <img src="/static/assetUser/img/usermanage.png" alt="" width="20px">
+            </div>
+            <span>User Management</span>
+          </a>
+        </li><!-- End Profile Page Nav -->
+  
+        <!-- <li class="nav-item">
+          <a class="nav-link collapsed" href="/Reports And Analytics">
+            <div class="comp">
+              <img src="/static/assetUser/img/reportanal.png" alt="" width="20px">
+            </div>
+            <span>Reports And Analytics</span>
+          </a>
+        </li> End Profile Page Nav -->
+  
+      
+         <li class="nav-item">
+          <a class="nav-link collapsed" href="/Export to Excel">
+            <div class="comp">
+              <img src="/static/assetUser/img/excel.png" alt="" width="20px">
+            </div>
+            <span>Export to Excel</span>
+          </a> 
+        </li>
+      
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="/Setting and Configurations">
+            <div class="comp">
+              <img src="/static/assetUser/img/settings.png" alt="" width="20px">
+            </div>
+            <span>Setting and Configurations</span>
+          </a>
+        </li><!-- End Profile Page Nav -->
+  
+        
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="/System Health Logs">
+            <div class="comp">
+              <img src="/static/assetUser/img/system health.png" alt="" width="20px">
+            </div>
+            <span>System Health Logs</span>
+          </a>
+        </li><!-- End Profile Page Nav -->
+  
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="/Feedback and Improvements">
+            <div class="comp">
+              <img src="/static/assetUser/img/feedback.png" alt="" width="20px">
+            </div>
+            <span>Feedback and Improvements</span>
+          </a>
+        </li><!-- End Profile Page Nav -->
+  
+  
+      </ul>
+
+    </aside><!-- End Sidebar-->
+    
+ <main id="main" class="main">
+
+  <div class="col-lg-6">
+
+    <div class="card">
+      <div class="card-body">
+
+        <div class="card-title2">Assignment List</span></div> 
+
+        <div class="tunes">
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Assignment</button>
+                </div>
+                
+                
+          
+                  <ul class="nav nav-tabs">
+                    <li class="active"><a href="#">AVAILABLE</a></li>
+                    <li><a href="#">COMPLETED</a></li>
+                   
+                  </ul> 
+                  <br>
+
+
+
+
+        <div class="search-bar">
+          <input class="search-form d-flex align-items-center" id="myInput" type="text" placeholder="Search scholar here" >
+        </div>
+        
+<br>
+        <!-- Table with stripped rows -->
+        <table class="table table-striped ">
+          <thead>
+            <tr>
+              <th scope="col">DESIGNATION</th>
+              <th scope="col">REQ</th>
+              <th scope="col">REPORT DAY/S</th>
+              <th scope="col">SUPERVISOR</th>
+              <th scope="col">DEPT</th>
+              <th scope="col">REQ</th>
+              <th scope="col"> ASSIGNED</th>
+              <th scope="col"> SELECT </th>
+            </tr>
+          </thead>
+          <tbody id="myTable">
+            {% for row in table_Assigment_Page_Admin %}
+            <tr>
+              <form action="/Duty Assignment" method="POST"  >
+
+             <td> {{row['DESIGNATION']}} </td>
+              <td>{{row['REQ']}}</td>
+              <td>{{row['REPORT DAY/S']}}</td>
+              <td>{{row['SUPERVISOR']}}</td>
+              <td>{{row['DEPT']}}</td> 
+               <td>{{row['REQST']}}</td>
+
+
+              <td><button type="button" name ="operations_Id_Selected" class="btn btn-success"  data-toggle="modal" data-target="#myModal"> assign</button> </td>
+                <td><button type="submit" name ="operations_Id_Selected" value="{{row['SUPERVISOR']}}" class="btn btn-success"  data-toggle="modal" data-target="#myModal"> select</button> </td>
+              <td><input type="hidden" name="operationId" value="{{row['SUPERVISOR']}}" ></td>
+
+            </form>
+            </tr>
+            {% endfor %}
+           
+          </tbody>
+        </table>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header float-left">
+        <div class="card-title3">AVAILABLE SCHOLARS</span></div> 
+        <div class="text-left">
+          <i data-dismiss="modal" aria-label="Close" class="fa fa-close"> X </i>
+          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+        </div>
+      </div>
+      <div class="modal-body">
+
+        <p>Purpose : Library need cute kindly bring the cutest Karen</p>
+          
+
+
+        <div>
+          
+  <table class="table table-striped-1">
+  <thead>
+    <tr>
+      <th scope="col"> <input type="hidden" name=""></th>
+      <th scope="col">STUDENT ID</th>
+      <th scope="col">SCHOLAR NAME</th>
+      <th scope="col">YEAR LVL</th>
+      <th scope="col">PROGRAM</th>
+      <th scope="col">DEPARTMENT</th>
+
+    </tr>
+  </thead>
+  <tbody>
+  <form action="/Assigment_modal_process" method="POST"  >
+  {% for row in table_avil_std %}
+    <tr>
+      <td> <input type="checkbox" name="selected_std" value="{{row['STUDENT ID']}}"></td>
+      <th scope="row">{{row['STUDENT ID']}} </th>
+      <td> {{row['SCHOLAR NAME']}}</td>
+      <td> {{row['YEAR LVL']}}</td>
+      <td> {{row['PROGRAM']}}</td>
+      <td> {{row['DEPARTMENT']}}</td>
+
+    </tr>
+
+    {% endfor %}
+
+  </tbody>
+</table>
+
+<div class="rej0">
+<div class="btn btn-outline-success">
+<p>Scholar Requested: 9</p>
+</div>
+<div class="btn btn-outline-success">
+<p>Scholar Rejected: 10</p>
+</div>
+</div>
+
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-success">Complete</button>
+
+      </div>
+</form>
+    </div>
+  </div>
+</div>
+
+
+      </div>
+
+      
+    </div>
+
+
+
+
+    <section class="section dashboard">
+
+      
+        <!-- Left side columns -->
+    
+          <div class="row">
+
+            <!-- Sales Card -->
+            <div class="col-6 " >
+              <div class="card info-card sales-card">
+
+                <div class="card-body">
+                  <h5 class="card-title"> Unassigned Scholar </h5>  <hr class="new1">
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon  d-flex align-items-center justify-content-center">
+                      <div class="piktur">
+                      <img src="/static/assetUser/img/boty.png" alt="" width="98px">
+                    </div>
+                    </div>
+                    <div class="ps-5">
+                      <h6> 1,234</h6>
+                      <span class="text-success small pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1"></span>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- End Sales Card -->
+
+            
+        <!-- Right side columns -->
+        <div class="col-lg-6">
+
+  
+
+            <div class="card info-card customers-card">
+              <div class="card-body">
+                <h5 class="card-title"> Assigned Scholar </h5> <hr class="new2">
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <div class="piktur">
+                      <img src="/static/assetUser/img/girl.png" alt="" width="92px">
+                    </div>
+                  </div>
+                  <div class="ps-5">
+                    <h6> 1,234</h6>
+                    <!-- <h6> {{remduty}}</h6> -->
+                    <span class="text-danger small pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1"></span>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div><!-- End Customers Card -->
+
+        </div><!-- End Left side columns -->
+    </section>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  </div>
+
+  
+
+
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title2"></h5>
+
+         <!-- Pie Chart -->
+         <div id="pieChart" style="min-height: 400px;" class="echart"></div>
+
+         <script>
+           document.addEventListener("DOMContentLoaded", () => {
+             echarts.init(document.querySelector("#pieChart")).setOption({
+               title: {
+                 text: 'Request Summary',
+                //  subtext: 'Fake Data',
+                 left: 'center'
+               },
+               tooltip: {
+                 trigger: 'item'
+               },
+               legend: {
+                 orient: 'vertical',
+                 left: 'left'
+               },
+               series: [{
+                 name: 'Access From',
+                 type: 'pie',
+                 radius: '50%',
+                 data: [{
+                     value: 1048,
+                     name: 'CCJE'
+                   },
+                   {
+                     value: 735,
+                     name: 'COM'
+                   },
+                   {
+                     value: 580,
+                     name: 'COA'
+                   },
+                   {
+                     value: 484,
+                     name: 'COED'
+                   },
+                   {
+                     value: 300,
+                     name: 'CITE'
+                   }
+                 ],
+                 emphasis: {
+                   itemStyle: {
+                     shadowBlur: 10,
+                     shadowOffsetX: 0,
+                     shadowColor: 'rgba(0, 0, 0, 0.5)'
+                   }
+                 }
+               }]
+             });
+           });
+         </script>
+         <!-- End Pie Chart -->
+
+
+
+                   
+      </div>
+                
+    </div>
+</div>
+                   
+
+
+<div class="col-lg-6">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title2">Write Announcement</h5>
+      <input type="hidden" name="announce">
+
+      <textarea rows="7" cols="66" name="comment" form="usrform">
+
+        </textarea>
+
+        <div class="submit">
+        <button type="submit" class="btn btn-success" data-dismiss="modal">SUBMIT</button>
+      </div>
+            
+<script>
+  $(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+  </script>
+
+
+
+                
+
+
+
+
+                
+
+            
+
+     
+      
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  
+
+  <!-- ======= Footer ======= -->
+  <!-- ======= Footer ======= -->
+  <!-- <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>Phinma-UI</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits"> -->
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      <!-- Designed by Proglematicv3</a> -->
+    </div>
+  </footer>
+ 
+
+  
+
+  <!-- Vendor JS Files -->
+  <script src="static/assetUser/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="static/assetUser/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="static/assetUser/vendor/chart.js/chart.umd.js"></script>
+  <script src="static/assetUser/vendor/echarts/echarts.min.js"></script>
+  <script src="static/assetUser/vendor/quill/quill.min.js"></script>
+  <script src="static/assetUser/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="static/assetUser/vendor/tinymce/tinymce.min.js"></script>
+  <script src="static/assetUser/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="static/assetUser/js/main.js"></script>
+
+</body>
+
+</html>
+
+<script>
+  $(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+  </script>
+
+
+
+
+
+  

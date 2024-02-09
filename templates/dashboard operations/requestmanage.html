@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>USER DASHBOARD</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="static/assetUser/img/NEW LOGO (1).png" rel="icon">
+  <link href="static/assetUser/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="static/assetUser/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="static/assetUser/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="static/assetUser/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="static/assetUser/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="static/assetUser/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="static/assetUser/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="static/assetUser/vendor/simple-datatables/style.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <!-- Template Main CSS File -->
+  <link href="/static/assetUser/css/compliance.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Updated: Sep 18 2023 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="/index.html" class="logo d-flex align-items-center">
+        <div class="picture">
+        <img src="static/assetUser/img/university_logo.default.png" width="180px" alt="">
+      </div>
+        <span class="d-none d-lg-block"></span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+
+    </div><!-- End Logo -->
+
+
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle " href="#">
+            <i class="bi bi-search"></i>
+          </a>
+        </li><!-- End Search Icon-->
+
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+            <li class="dropdown-header">
+              You have 4 new notifications
+              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="notification-item">
+              <i class="bi bi-exclamation-circle text-warning"></i>
+              <div>
+                <h4>Lorem Ipsum</h4>
+                <p>Quae dolorem earum veritatis oditseno</p>
+                <p>30 min. ago</p>
+              </div>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="notification-item">
+              <i class="bi bi-x-circle text-danger"></i>
+              <div>
+                <h4>Atque rerum nesciunt</h4>
+                <p>Quae dolorem earum veritatis oditseno</p>
+                <p>1 hr. ago</p>
+              </div>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="notification-item">
+              <i class="bi bi-check-circle text-success"></i>
+              <div>
+                <h4>Sit rerum fuga</h4>
+                <p>Quae dolorem earum veritatis oditseno</p>
+                <p>2 hrs. ago</p>
+              </div>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="notification-item">
+              <i class="bi bi-info-circle text-primary"></i>
+              <div>
+                <h4>Dicta reprehenderit</h4>
+                <p>Quae dolorem earum veritatis oditseno</p>
+                <p>4 hrs. ago</p>
+              </div>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li class="dropdown-footer">
+              <a href="#">Show all notifications</a>
+            </li>
+
+          </ul><!-- End Notification Dropdown Items -->
+
+        </li><!-- End Notification Nav -->
+
+
+
+
+
+        </li><!-- End Messages Nav -->
+
+        <li class="nav-item dropdown pe-3">
+
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <img src="static/img" alt="Profile" class="rounded-circle">
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{logUser}}</span>
+          </a><!-- End Profile Iamge Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6>{{logUser}}</h6>
+              <span>User</span>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="http://127.0.0.1:5000/Profile">
+                <i class="bi bi-person"></i>
+                <span>My Profile</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-gear"></i>
+                <span>Account Settings</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+                <i class="bi bi-question-circle"></i>
+                <span>Need Help?</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <form action="/Logout" method="post">
+                <a>
+              <input class="dropdown-item d-flex align-items-center" type="submit" value="Sign Out">
+                <i class="bi bi-box-arrow-right"></i>
+
+              </a>
+            </form>
+            </li>
+
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
+
+      </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link " href="{{url_for('Dashboard')}}">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+
+      <li class="nav-item">
+       
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{{url_for('request_Scholar')}}">
+            <i class="bi bi-person"></i>
+            <span>Request and Scholar Management</span>
+          </a>
+        </li><!-- End Profile Page Nav -->
+  
+       
+      
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{{url_for('Profile_Operations')}}">
+            <i class="bi bi-person"></i>
+            <span>Profile</span>
+          </a>
+        </li><!-- End Profile Page Nav -->
+
+
+    </ul>
+
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+   
+
+
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-9">
+          <div class="row">
+
+
+
+
+
+
+
+
+            <!-- Recent Sales -->
+            <div class="col-30">
+              <div class="card recent-sales overflow-auto">
+                <div class="card-body">
+                  <div class="card-title2">Assigned Scholar List</span></div>
+
+               <div class="container">
+               
+               </div>
+
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Request Scholar Assistance</button>
+  
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-dialog-centered">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">REGISTRATION</h4>
+          </div>
+          <div class="modal-body">
+            <form action="/Modal_request_process" method="post">
+                <label>Designation</label>
+                <input type="text" name="Designation" required><br>
+                <label>Requirements</label>
+                <input type="text" name="Requirements" required><br>
+                <label>Report Day/s</label>
+                <input type="text" name="Report Day/s" required><br>
+                <label>Request</label>
+                <input type="text" name="Request" required>
+
+                <input type="Submit" value="Submit" name="request">
+
+
+
+
+
+            </form>
+            
+
+
+
+
+
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    
+  </div>
+
+
+
+
+
+
+                
+                </div>
+
+              
+
+                  </ul>
+                  <br>
+
+
+
+
+                  <div class="search-bar">
+                    <div class="container">
+
+                 <input class="search-form d-flex align-items-center" id="myInput" type="text" placeholder="Search.." >
+
+
+  <br>
+                  </div>
+                           <!-- Table with stripped rows -->
+                <table class="table datatable">
+                  <thead>
+                    <tr>
+
+                      <th>STUDENT ID</th>
+                      <th>SCHOLAR NAME</th>
+                      <th>COMPLETED HOURS</th>
+                      <th>REMAINING HOURS</th>
+                      <th>STATUS</th>
+                    </tr>
+                  </thead>
+                  <tbody id="myTable">
+                   {% for row in student_underMe %}
+                    <tr>
+                      <form action="{{url_for('student_rec_process')}}" method="POST">
+                     <td><button type="submit" name="select" value="select"> <i style="margin-right: 0.5em; color: #000000;"><i class="bi bi-box-arrow-down"></i></button> {{row['STUDENT ID']}}</td>
+
+                    <td>{{row['SCHOLAR NAME']}}</td>
+                      <td>{{row['COMPLETED HOURS']}}</td>
+                        <td>{{row['REMAINING HOURS']}}</td>
+                    <td>{{row['STATUS']}}</td>
+                        <td></td>
+
+                        </form>
+                    </tr>
+                   {% endfor %}
+                    <tr>
+
+
+
+
+                  </tbody>
+                </table>
+                <!-- End Table with stripped rows -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+<script>
+  $(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+  </script>
+
+                      <hr>
+
+
+
+                  </div>
+
+
+
+
+                </div>
+
+              </div>
+            </div><!-- End Recent Sales -->
+
+
+          </div>
+        </div><!-- End Left side columns -->
+
+        <!-- Right side columns -->
+        <div class="col-lg-3">
+
+
+
+
+
+
+
+        </div><!-- End Right side columns -->
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>Phinma-UI</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      Designed by Proglematicv3</a>
+    </div>
+  </footer><!-- End Footer -->
+
+
+
+
+  <!-- Vendor JS Files -->
+  <script src="static/assetUser/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="static/assetUser/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="static/assetUser/vendor/chart.js/chart.umd.js"></script>
+  <script src="static/assetUser/vendor/echarts/echarts.min.js"></script>
+  <script src="static/assetUser/vendor/quill/quill.min.js"></script>
+  <script src="static/assetUser/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="static/assetUser/vendor/tinymce/tinymce.min.js"></script>
+  <script src="static/assetUser/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="static/assetUser/js/main.js"></script>
+
+</body>
+
+</html>
+
+<script>
+  $(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+  </script>

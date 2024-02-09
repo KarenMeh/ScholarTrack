@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+
+
+    <style>
+        body {
+          margin: 0;
+        }
+
+        ul {
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+          width: 25%;
+          background-color: #f1f1f1;
+          position: fixed;
+          height: 100%;
+          overflow: auto;
+        }
+
+        li a {
+          display: block;
+          color: #000;
+          padding: 8px 16px;
+          text-decoration: none;
+        }
+
+        li a.active {
+          background-color: #04AA6D;
+          color: white;
+        }
+
+        li a:hover:not(.active) {
+          background-color: #555;
+          color: white;
+        }
+        </style>
+
+
+
+</head>
+<body>
+    <body>
+
+
+<!--     d ko ni need   <ul>-->
+<!--          <li><a href="/Dash board">Home</a></li>-->
+<!--          <li><a href="/dutyHours">Total Duty Hours</a></li>-->
+<!--          <li><a class="active" href="/Profile">Profile</a></li>-->
+
+<!--        </ul>-->
+
+        <div style="margin-left:25%;padding:1px 16px;height:1000px;">
+
+          <form action="/delProcess" method="post">
+
+              <h1>THIS ACCOUNT WILL B LOST FOREVER!</h1>
+
+              <input type="submit" name="DELETE" value="DELETE"><br>
+
+
+             {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for i in messages %}
+                    <p>{{i}}</p>
+                {% endfor %}
+
+             {% endif %}
+
+            {% endwith %}
+          </form>
+            <br>
+
+            <button><a href="/Profile">back</a></button>
+
+
+
+
+
+        </div>
+
+
+
+        </body>
+</body>
+</html>
