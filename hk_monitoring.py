@@ -121,6 +121,10 @@ for k in faculty_id:
     faculty_counter+=1
 print(faculty_credintials)
 
+
+
+
+
 #------------------------data table for Duty_assignment------------------------
 qury.execute("SELECT * FROM `operation_request`")
 operation_request_DB = qury.fetchall()
@@ -134,7 +138,6 @@ for k in range(len(operation_request)):
     process = {"DESIGNATION": operation_request[k][0],"REQ": operation_request[k][1],"REPORT DAY/S": operation_request[k][2], "SUPERVISOR":operation_request[k][5],	"DEPT":operation_request[k][4], "REQST":operation_request[k][3]}
     table_Assigment_Page_Admin.append(process)
 print(table_Assigment_Page_Admin)
-
 
 
 
@@ -297,27 +300,6 @@ def Profile_Operations():
     return render_template("dashboard operations/profile.html",logUser = session['username'])
 
 
-@app.route("/Modal_request_process", methods=['POST'])
-def Modal_request_process():
-    Designation = request.form['Designation']
-    Requirements = request.form['Requirements']
-    Report_Days = request.form['Report Day/s']
-    Request = request.form['Request']
-
-    qury.execute("SELECT `Operation_Dept` FROM `operations_data` WHERE `Faculty_Id_Number` = '"+str(session["user"])+"' ")
-    dept = qury.fetchall()
-    print(dept[0][0])
-
-
-    qury.execute("INSERT INTO `operation_request`(`Designation`, `Requirements`, `Report Day/s`, `Request`, `DEPT`, `SUPERVISOR`) VALUES ('"+Designation+"','"+Requirements+"','"+Report_Days+"','"+Request+"', '"+dept[0][0]+"', '"+session['lname']+"') ")
-    conn.commit()
-
-    process = {"DESIGNATION": Designation, "REQ": Requirements,
-               "REPORT DAY/S": Report_Days, "SUPERVISOR": session["lname"],
-               "DEPT":dept[0][0] , "REQST":Request }
-    table_Assigment_Page_Admin.append(process)
-
-    return '<script>alert("Request Sent!!");window.location="/Request and Scholar Management"</script>'
 
 
 
@@ -633,11 +615,33 @@ def compliance_Hk_100():
 
 
 
+@app.route("/Modal_request_process", methods=['POST'])
+def Modal_request_process():
+    Designation = request.form['Designation']
+    Requirements = request.form['Requirements']
+    Report_Days = request.form['Report Day/s']
+    Request = request.form['Request']
 
+    qury.execute("SELECT `Operation_Dept` FROM `operations_data` WHERE `Faculty_Id_Number` = '"+str(session["user"])+"' ")
+    dept = qury.fetchall()
+    print(dept[0][0])
+
+
+    qury.execute("INSERT INTO `operation_request`(`Designation`, `Requirements`, `Report Day/s`, `Request`, `DEPT`, `SUPERVISOR`) VALUES ('"+Designation+"','"+Requirements+"','"+Report_Days+"','"+Request+"', '"+dept[0][0]+"', '"+session['lname']+"') ")
+    conn.commit()
+
+    process = {"DESIGNATION": Designation, "REQ": Requirements,
+               "REPORT DAY/S": Report_Days, "SUPERVISOR": session["lname"],
+               "DEPT":dept[0][0] , "REQST":Request }
+    table_Assigment_Page_Admin.append(process)
+
+    return '<script>alert("Request Sent!!");window.location="/Request and Scholar Management"</script>'
 @app.route("/Duty Assignment And Management")
 def DutyAssig():
     # messages = request.args['h'] mag pass value halin sa url_for
     return render_template("dashboard admin/assignment.html",logUser=session["adminUser"],table_Assigment_Page_Admin = table_Assigment_Page_Admin  )
+
+
 
 
 #to assign a studen to a faculty
@@ -736,14 +740,14 @@ def student_rec_process():
         hkdetails = qury.fetchall()  # len of 17
 
         # details to show in profile of the student searched
-        idnum = hkdetails[0][0]  # idnum
-        Lname = hkdetails[0][2]  # Lname
-        Fname = hkdetails[0][3]  # Fname
-        totalDuty = hkdetails[0][5]  # totalDuty
-        course_Program = hkdetails[0][6]  # course_Program
+        idnum= hkdetails[0][0]  # idnum
+        Lname= hkdetails[0][2]  # Lname
+        Fname= hkdetails[0][3]  # Fname
+        totalDuty= hkdetails[0][5]  # totalDuty
+        course_Program= hkdetails[0][6]  # course_Program
         department = hkdetails[0][7]  # department
-        yearLvl = hkdetails[0][8]  # yearLvl
-        scholarship = hkdetails[0][9]  # scholarship
+        yearLvl= hkdetails[0][8]  # yearLvl
+        scholarship= hkdetails[0][9]  # scholarship
         DUTY_DESIGNATION = hkdetails[0][10]  # DUTY_DESIGNATION
         DUTY_SUPERVISOR = hkdetails[0][11]  # DUTY_SUPERVISOR
         reqiredDuty = hkdetails[0][12]  # reqiredDuty
