@@ -135,7 +135,7 @@ for k in operation_request_DB:
 
 table_Assigment_Page_Admin =[]
 for k in range(len(operation_request)):
-    process = {"DESIGNATION": operation_request[k][0],"REQ": operation_request[k][1],"REPORT DAY/S": operation_request[k][2], "SUPERVISOR":operation_request[k][5],	"DEPT":operation_request[k][4], "REQST":operation_request[k][3]}
+    process = {"DESIGNATION": operation_request[k][0],"REQ": operation_request[k][1],"REPORT DAY/S": operation_request[k][2], "SUPERVISOR":operation_request[k][5],	"DEPT":operation_request[k][4], "REQST":operation_request[k][3],"REQ ID":operation_request[k][6]}
     table_Assigment_Page_Admin.append(process)
 print(table_Assigment_Page_Admin)
 
@@ -196,6 +196,7 @@ def indexprocess():
                          " `Operations_Mname`, `Operation_phone_Number`, `Operation_Designation-Position`, `Operations_Email`)"
                          " VALUES ('"+lname+"','"+fname+"','"+password+"','"+idnum+"','"+dept+"','"+mname+"','"+phone+"','"+Position+"','"+gmail+"')")
             conn.commit()
+
             return '<script>alert("Registered Complete");window.location="/register"</script>'
         else:
             return '<script>alert("wrong pass");window.location="/register"</script>'
@@ -252,6 +253,7 @@ def logOut():
     session.pop("username",None)
     session.pop("lname",None)
     session.pop("fname", None)
+    session.pop("assigmentstdList", None)
 
 
 
@@ -291,7 +293,27 @@ def request_Scholar():
         student_underMe.append(tables)
     return render_template("dashboard operations/requestmanage.html",logUser = session['username'], student_underMe =student_underMe)
 
+@app.route("/Modal_request_process", methods=['POST'])
+def Modal_request_process():
+    Designation = request.form['Designation']
+    Requirements = request.form['Requirements']
+    Report_Days = request.form['Report Day/s']
+    Request = request.form['Request']
 
+    qury.execute("SELECT `Operation_Dept` FROM `operations_data` WHERE `Faculty_Id_Number` = '"+str(session["user"])+"' ")
+    dept = qury.fetchall()
+    print(dept[0][0])
+
+
+    qury.execute("INSERT INTO `operation_request`(`Designation`, `Requirements`, `Report Day/s`, `Request`, `DEPT`, `SUPERVISOR`) VALUES ('"+Designation+"','"+Requirements+"','"+Report_Days+"','"+Request+"', '"+dept[0][0]+"', '"+session['lname']+"') ")
+    conn.commit()
+
+    process = {"DESIGNATION": Designation, "REQ": Requirements,
+               "REPORT DAY/S": Report_Days, "SUPERVISOR": session["lname"],
+               "DEPT":dept[0][0] , "REQST":Request }
+    table_Assigment_Page_Admin.append(process)
+
+    return '<script>alert("Request Sent!!");window.location="/Request and Scholar Management"</script>'
 
 
 @app.route("/Profile")
@@ -299,7 +321,7 @@ def Profile_Operations():
 
     return render_template("dashboard operations/profile.html",logUser = session['username'])
 
-
+#-----------------------------end of operations requesr--------------------------------------------------
 
 
 
@@ -615,32 +637,26 @@ def compliance_Hk_100():
 
 
 
-@app.route("/Modal_request_process", methods=['POST'])
-def Modal_request_process():
-    Designation = request.form['Designation']
-    Requirements = request.form['Requirements']
-    Report_Days = request.form['Report Day/s']
-    Request = request.form['Request']
 
-    qury.execute("SELECT `Operation_Dept` FROM `operations_data` WHERE `Faculty_Id_Number` = '"+str(session["user"])+"' ")
-    dept = qury.fetchall()
-    print(dept[0][0])
-
-
-    qury.execute("INSERT INTO `operation_request`(`Designation`, `Requirements`, `Report Day/s`, `Request`, `DEPT`, `SUPERVISOR`) VALUES ('"+Designation+"','"+Requirements+"','"+Report_Days+"','"+Request+"', '"+dept[0][0]+"', '"+session['lname']+"') ")
-    conn.commit()
-
-    process = {"DESIGNATION": Designation, "REQ": Requirements,
-               "REPORT DAY/S": Report_Days, "SUPERVISOR": session["lname"],
-               "DEPT":dept[0][0] , "REQST":Request }
-    table_Assigment_Page_Admin.append(process)
-
-    return '<script>alert("Request Sent!!");window.location="/Request and Scholar Management"</script>'
 @app.route("/Duty Assignment And Management")
 def DutyAssig():
-    # messages = request.args['h'] mag pass value halin sa url_for
-    return render_template("dashboard admin/assignment.html",logUser=session["adminUser"],table_Assigment_Page_Admin = table_Assigment_Page_Admin  )
+    # ------------------------data table for Duty_assignment------------------------
+    qury.execute("SELECT * FROM `operation_request`")
+    operation_request_DB = qury.fetchall()
+    operation_request = []
+    for k in operation_request_DB:
+        operation_request.append(k)
 
+    table_Assigment_Page_Admin1 = []
+    session["assigmentstdList"] =table_Assigment_Page_Admin1
+    for k in range(len(operation_request)):
+        process = {"DESIGNATION": operation_request[k][0], "REQ": operation_request[k][1],
+                   "REPORT DAY/S": operation_request[k][2], "SUPERVISOR": operation_request[k][5],
+                   "DEPT": operation_request[k][4], "REQST": operation_request[k][3], "REQ ID": operation_request[k][6]}
+        table_Assigment_Page_Admin1.append(process)
+    print(table_Assigment_Page_Admin1)
+
+    return render_template("dashboard admin/assignment.html",logUser=session["adminUser"],table_Assigment_Page_Admin = table_Assigment_Page_Admin1  )
 
 
 
@@ -653,11 +669,17 @@ def DutyAssig_process():
     student_db_data = qury.fetchall()
 
     supervi = request.form['operations_Id_Selected']
+    reqid = request.form['operationId']
+    session["supervi"] = supervi
+    session['reqid'] = reqid
     techer.append(supervi)
+
 
     avil_std_list = []
     for k in student_db_data:
         avil_std_list.append(k)
+    print("selected supervisur:", supervi)
+    print("id of req", reqid)
     print(avil_std_list)
 
     table_avil_std =[]
@@ -665,24 +687,73 @@ def DutyAssig_process():
         table = {"STUDENT ID":avil_std_list[k][0],"SCHOLAR NAME":avil_std_list[k][1]+" "+avil_std_list[k][2],"YEAR LVL":avil_std_list[k][3],"PROGRAM":avil_std_list[k][4], "DEPARTMENT":avil_std_list[k][5]}
         table_avil_std.append(table)
 
-    return render_template("dashboard admin/assignment.html", logUser=session["adminUser"],table_Assigment_Page_Admin=table_Assigment_Page_Admin,table_avil_std=table_avil_std )
+    return render_template("dashboard admin/assignment.html", logUser=session["adminUser"],table_Assigment_Page_Admin=session["assigmentstdList"],table_avil_std=table_avil_std ,supervi=supervi)
 
 @app.route("/Assigment_modal_process", methods =['POST'])
 def Assigment_modal_process():
 
     checkList = request.form.getlist("selected_std")
-    print(checkList)
+    print(len(checkList))
     tc_selected = techer[len(techer)-1]
 
-    for k in checkList:
-        print(k)
-        qury.execute("INSERT INTO `hk_assignd_teaecher`(`operatikon_ID`, `hk_ID`) VALUES ('"+tc_selected+"','"+k+"')")
-        conn.commit()
+    session["supervi"]
+    session['reqid']
+    print(session["supervi"],session['reqid'])
+    qury.execute("SELECT `Request` FROM `operation_request` WHERE `ID` = '"+session['reqid']+"'")
+    req_Process_for_assigning_duty = qury.fetchall()
+    print(req_Process_for_assigning_duty[0][0])
 
-        qury.execute("UPDATE `hk_users` SET `Status_avail`='Na' WHERE `idnum` = '"+k+"' ")
+    if int(req_Process_for_assigning_duty[0][0]) == len(checkList):
+#       to assign a student to selected teacher
+        for k in checkList:
+            print(k)
+            qury.execute(
+                "INSERT INTO `hk_assignd_teaecher`(`operatikon_ID`, `hk_ID`) VALUES ('" + tc_selected + "','" + k + "')")
+            conn.commit()
+
+            qury.execute("UPDATE `hk_users` SET `Status_avail`='Na' WHERE `idnum` = '" + k + "' ")
+            conn.commit()
+
+
+
+        #to remove the rows in the website
+        qury.execute("SELECT * FROM `operation_request` WHERE `ID`='"+session['reqid']+"'")
+#       to remove the requst from list
+        dataTodel=list(qury.fetchall()[0])
+        print(dataTodel)
+        tableTodel = {"DESIGNATION":dataTodel[0],"REQ":dataTodel[1], "REPORT DAY/S":dataTodel[2],"SUPERVISOR":dataTodel[5],"DEPT":dataTodel[4],"REQST":dataTodel[3],"REQ ID":dataTodel[6]}
+        print(tableTodel)
+        session["assigmentstdList"].remove(tableTodel)
+        qury.execute("DELETE FROM `operation_request` WHERE `ID`='"+session['reqid']+"'")
         conn.commit()
+    elif len(checkList) < int(req_Process_for_assigning_duty[0][0]) :
+        for k in checkList:
+            print(k)
+            qury.execute(
+                "INSERT INTO `hk_assignd_teaecher`(`operatikon_ID`, `hk_ID`) VALUES ('" + tc_selected + "','" + k + "')")
+            conn.commit()
+
+            qury.execute("UPDATE `hk_users` SET `Status_avail`='Na' WHERE `idnum` = '" + k + "' ")
+            conn.commit()
+        req_need_std = int(req_Process_for_assigning_duty[0][0])-len(checkList)
+        qury.execute("UPDATE `operation_request` SET `Request`='"+str(req_need_std)+"' WHERE `ID` ='"+session['reqid']+"' ")
+        conn.commit()
+    elif len(checkList) > int(req_Process_for_assigning_duty[0][0]):
+        print("nagsubra mango")
+    else:
+        print("error")
+
+
+
+
+
+
+
 
     techer.clear()
+    session.pop("supervi",None)
+    session.pop("reqid", None)
+
 
 
     return redirect(url_for("DutyAssig"))
