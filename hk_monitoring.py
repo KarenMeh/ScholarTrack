@@ -151,6 +151,35 @@ timeInList =[]
 
 
 
+#logout for admin
+@app.route("/LogoutAdmin", methods=['POST'])
+def logOutAmin():
+    session.pop("adminUser",None)
+    return '<script>alert("Log Out");window.location="/"</script>'
+
+
+#------------------------------------log out----------------------------------------------
+@app.route("/Logout", methods=['POST'])
+def logOut():
+    session.pop("user",None)
+    session.pop("username",None)
+    session.pop("lname",None)
+    session.pop("fname", None)
+    session.pop("assigmentstdList", None)
+
+
+
+    return '<script>alert("Log Out");window.location="/"</script>'
+
+
+
+
+
+
+
+
+
+
 #-----------------------landing page----------------------------------------------
 
 @app.route("/")
@@ -246,24 +275,12 @@ def signInprocess():
         return '<script>alert("Wrong ssword or Email");window.location="/Sign in"</script>'
 
 
-#------------------------------------log out----------------------------------------------
-@app.route("/Logout", methods=['POST'])
-def logOut():
-    session.pop("user",None)
-    session.pop("username",None)
-    session.pop("lname",None)
-    session.pop("fname", None)
-    session.pop("assigmentstdList", None)
-
-
-
-    return '<script>alert("Log Out");window.location="/"</script>'
 
 #-------------------------------dash board-----------------------------------------
 @app.route("/Dash board")
 def Dashboard():
 
-    if "user" in session:
+    if "username" in session:
 
         return render_template("dashboard operations/OpartionsDashBoard.html",logUser = session['username'])
 
@@ -273,26 +290,27 @@ def Dashboard():
 
 @app.route("/Request and Scholar Management")
 def request_Scholar():
+    try:
 
-    print(session['username'])
+        qury.execute("SELECT `hk_ID`FROM `hk_assignd_teaecher` WHERE `operatikon_ID` = '"+session["lname"]+"'")
+        mYStudent_Db_Id = qury.fetchall()
+        print("my student",mYStudent_Db_Id)
 
-    qury.execute("SELECT `hk_ID`FROM `hk_assignd_teaecher` WHERE `operatikon_ID` = '"+session["lname"]+"'")
-    mYStudent_Db_Id = qury.fetchall()
-    print("my student",mYStudent_Db_Id)
+        listahan = []
+        for k in mYStudent_Db_Id:
+            print(k[0])
+            qury.execute("SELECT `idnum`,`lname`, `fname`, `id_totalHours`,  `remaningDuty`, `remDutyMins`,`statsForRenewal` FROM `hk_users` WHERE `idnum`= '"+k[0]+"'")
+            listahan.append(qury.fetchall()[0])
+        print(listahan)
 
-    listahan = []
-    for k in mYStudent_Db_Id:
-        print(k[0])
-        qury.execute("SELECT `idnum`,`lname`, `fname`, `id_totalHours`,  `remaningDuty`, `remDutyMins`,`statsForRenewal` FROM `hk_users` WHERE `idnum`= '"+k[0]+"'")
-        listahan.append(qury.fetchall()[0])
-    print(listahan)
+        student_underMe=[]
+        for k in range(len(listahan)):
+            tables = {"STUDENT ID":listahan[k][0],"SCHOLAR NAME":listahan[k][1]+" "+listahan[k][2],"COMPLETED HOURS":listahan[k][3],"REMAINING HOURS":listahan[k][4]+"h "+str(float(listahan[k][5]).__round__()).split(".")[0]+"m","STATUS":listahan[k][6]}
+            student_underMe.append(tables)
+        return render_template("dashboard operations/requestmanage.html",logUser = session['username'], student_underMe =student_underMe)
 
-    student_underMe=[]
-    for k in range(len(listahan)):
-        tables = {"STUDENT ID":listahan[k][0],"SCHOLAR NAME":listahan[k][1]+" "+listahan[k][2],"COMPLETED HOURS":listahan[k][3],"REMAINING HOURS":listahan[k][4]+"h "+str(listahan[k][5]).split(".")[0]+"m","STATUS":listahan[k][6]}
-        student_underMe.append(tables)
-    return render_template("dashboard operations/requestmanage.html",logUser = session['username'], student_underMe =student_underMe)
-
+    except Exception:
+        return redirect(url_for("signInPAge"))
 @app.route("/Modal_request_process", methods=['POST'])
 def Modal_request_process():
     Designation = request.form['Designation']
@@ -318,8 +336,14 @@ def Modal_request_process():
 
 @app.route("/Profile")
 def Profile_Operations():
+    if "username" in session:
 
-    return render_template("dashboard operations/profile.html",logUser = session['username'])
+        return render_template("dashboard operations/profile.html",logUser = session['username'])
+
+    else:
+        return redirect(url_for("signInPAge"))
+
+
 
 #-----------------------------end of operations requesr--------------------------------------------------
 
@@ -491,172 +515,221 @@ def admindashBoard():
 #to check if the user is still log in
     if "adminUser" in session:
 
+    #to get data reports from db to display
+    # qury.execute()
+
+
+
         return render_template('dashboard admin/dashboardAdminFinal.html', logUser=session["adminUser"])
     else:
         return redirect(url_for("admin"))
 
 # to log out the admin log and clear all session
-@app.route("/LogoutAdmin", methods=['POST'])
-def logOutAmin():
-    session.pop("adminUser",None)
-    return '<script>alert("Log Out");window.location="/"</script>'
+
    #-----------------------end of admin dash board----------------------
 
 #----------------------------ADMIN SIDE BARS----------------------------
 
 @app.route("/compliance")
 def compliance():
-    # -------------student informations---------------------
-    qury.execute("SELECT * FROM `hk_users`")
-    student_Info_FromDb = qury.fetchall()
+    # to check if the user is still log in
+    if "adminUser" in session:
 
-    student_info = []
-    for k in student_Info_FromDb:
-        student_info.append(k)
-    print(len(student_info))
+        # -------------student informations---------------------
+        qury.execute("SELECT * FROM `hk_users`")
+        student_Info_FromDb = qury.fetchall()
 
-    table_OfStudent_Info = []
-    counter_Table1 = 0
-    # details to show in profile of the student searched #
-    for k in student_info:
-        std_fullNmae = str(student_info[counter_Table1][3]) + " " + str(student_info[counter_Table1][2])
-        dataProcess = {"STUDENT ID": student_info[counter_Table1][0], "SCHOLAR NAME": std_fullNmae,
-                       "COMPLETED HOURS": student_info[counter_Table1][5]+"m",
-                       "REMAINING HOURS": student_info[counter_Table1][13]+"h "+str(student_info[counter_Table1][14]).split(".")[0]+"m", "STATUS": student_info[counter_Table1][15]}
-        table_OfStudent_Info.append(dataProcess)
-        counter_Table1 += 1
+        student_info = []
+        for k in student_Info_FromDb:
+            student_info.append(k)
+        print(len(student_info))
 
-    print(table_OfStudent_Info)
+        table_OfStudent_Info = []
+        counter_Table1 = 0
+        # details to show in profile of the student searched #
+        for k in student_info:
+            std_fullNmae = str(student_info[counter_Table1][3]) + " " + str(student_info[counter_Table1][2])
+            dataProcess = {"STUDENT ID": student_info[counter_Table1][0], "SCHOLAR NAME": std_fullNmae,
+                           "COMPLETED HOURS": student_info[counter_Table1][5] + "m",
+                           "REMAINING HOURS": student_info[counter_Table1][13] + "h " +
+                                              str(float(student_info[counter_Table1][14]).__round__()).split(".")[0] + "m",
+                           "STATUS": student_info[counter_Table1][15]}
+            table_OfStudent_Info.append(dataProcess)
+            counter_Table1 += 1
 
+        print(table_OfStudent_Info)
 
-    return render_template("dashboard admin/compliance.html",logUser=session["adminUser"], table_OfStudent_Info = table_OfStudent_Info)
+        return render_template("dashboard admin/compliance.html", logUser=session["adminUser"],
+                               table_OfStudent_Info=table_OfStudent_Info)
+
+    else:
+        return redirect(url_for("admin"))
 
 #----------------------Hk 25, 50, 75, 100-----------------------------
 @app.route("/compliance_hk_25")
 def compliance_Hk_25():
 
-    #Qeury Student with 25% hk
+    try:
+        #Qeury Student with 25% hk
 
-    qury.execute("SELECT * FROM `hk_users` WHERE `scholarship` = 'HK25' " )
-    student_Info_FromDb_25 = qury.fetchall()
+        qury.execute("SELECT * FROM `hk_users` WHERE `scholarship` = 'HK25' " )
+        student_Info_FromDb_25 = qury.fetchall()
 
-    student_info_25 = []
-    for k in student_Info_FromDb_25:
-        student_info_25.append(k)
+        student_info_25 = []
+        for k in student_Info_FromDb_25:
+            student_info_25.append(k)
 
-    table_OfStudent_Info_25 = []
-    counter_Table1 = 0
-    # details to show in profile of the student searched #
-    for k in student_info_25:
-        std_fullNmae = str(student_info_25[counter_Table1][3]) + " " + str(student_info_25[counter_Table1][2])
-        dataProcess = {"STUDENT ID": student_info_25[counter_Table1][0], "SCHOLAR NAME": std_fullNmae,
-                       "COMPLETED HOURS": student_info_25[counter_Table1][5],
-                       "REMAINING HOURS": student_info_25[counter_Table1][13], "STATUS": student_info_25[counter_Table1][14]}
-        table_OfStudent_Info_25.append(dataProcess)
-        counter_Table1 += 1
+        table_OfStudent_Info_25 = []
+        counter_Table1 = 0
+        # details to show in profile of the student searched #
+        for k in student_info_25:
+            std_fullNmae = str(student_info_25[counter_Table1][3]) + " " + str(student_info_25[counter_Table1][2])
+            dataProcess = {"STUDENT ID": student_info_25[counter_Table1][0], "SCHOLAR NAME": std_fullNmae,
+                           "COMPLETED HOURS": student_info_25[counter_Table1][5] + "m",
+                           "REMAINING HOURS": student_info_25[counter_Table1][13] + "h " +
+                                              str(float(student_info_25[counter_Table1][14]).__round__()).split(".")[0] + "m",
+                           "STATUS": student_info_25[counter_Table1][15]}
+            table_OfStudent_Info_25.append(dataProcess)
+            counter_Table1 += 1
 
 
-    return render_template("dashboard admin/compliance_Hk_25.html",logUser=session["adminUser"], table_OfStudent_Info = table_OfStudent_Info_25)
-
+        return render_template("dashboard admin/compliance_Hk_25.html",logUser=session["adminUser"], table_OfStudent_Info = table_OfStudent_Info_25)
+    except Exception:
+        return redirect(url_for("admin"))
 @app.route("/compliance_hk_50")
 def compliance_Hk_50():
-    # Qeury Student with 50% hk
 
-    qury.execute("SELECT * FROM `hk_users` WHERE `scholarship` = 'HK50' ")
-    student_Info_FromDb_50 = qury.fetchall()
+    try:
 
-    student_info_50 = []
-    for k in student_Info_FromDb_50:
-        student_info_50.append(k)
+        # Qeury Student with 50% hk
 
-    table_OfStudent_Info_50 = []
-    counter_Table1 = 0
-    # details to show in profile of the student searched #
-    for k in student_info_50:
-        std_fullNmae = str(student_info_50[counter_Table1][3]) + " " + str(student_info_50[counter_Table1][2])
-        dataProcess = {"STUDENT ID": student_info_50[counter_Table1][0], "SCHOLAR NAME": std_fullNmae,
-                       "COMPLETED HOURS": student_info_50[counter_Table1][5],
-                       "REMAINING HOURS": student_info_50[counter_Table1][13],
-                       "STATUS": student_info_50[counter_Table1][14]}
-        table_OfStudent_Info_50.append(dataProcess)
-        counter_Table1 += 1
+        qury.execute("SELECT * FROM `hk_users` WHERE `scholarship` = 'HK50' ")
+        student_Info_FromDb_50 = qury.fetchall()
 
-    return render_template("dashboard admin/compliance_Hk_50.html",logUser=session["adminUser"], table_OfStudent_Info = table_OfStudent_Info_50)
+        student_info_50 = []
+        for k in student_Info_FromDb_50:
+            student_info_50.append(k)
 
+        table_OfStudent_Info_50 = []
+        counter_Table1 = 0
+        # details to show in profile of the student searched #
+        for k in student_info_50:
+            std_fullNmae = str(student_info_50[counter_Table1][3]) + " " + str(student_info_50[counter_Table1][2])
+            dataProcess = {"STUDENT ID": student_info_50[counter_Table1][0], "SCHOLAR NAME": std_fullNmae,
+                           "COMPLETED HOURS": student_info_50[counter_Table1][5] + "m",
+                           "REMAINING HOURS": student_info_50[counter_Table1][13] + "h " +
+                                              str(float(student_info_50[counter_Table1][14]).__round__()).split(".")[0] + "m",
+                           "STATUS": student_info_50[counter_Table1][15]}
+            table_OfStudent_Info_50.append(dataProcess)
+            counter_Table1 += 1
+
+        return render_template("dashboard admin/compliance_Hk_50.html",logUser=session["adminUser"], table_OfStudent_Info = table_OfStudent_Info_50)
+    except Exception:
+        return  redirect(url_for("admin"))
 @app.route("/compliance_hk_75")
 def compliance_Hk_75():
-    # Qeury Student with 75% hk
 
-    qury.execute("SELECT * FROM `hk_users` WHERE `scholarship` = 'HK75' ")
-    student_Info_FromDb_75 = qury.fetchall()
+    try:
 
-    student_info_75 = []
-    for k in student_Info_FromDb_75:
-        student_info_75.append(k)
+        # Qeury Student with 75% hk
 
-    table_OfStudent_Info_75 = []
-    counter_Table1 = 0
-    # details to show in profile of the student searched #
-    for k in student_info_75:
-        std_fullNmae = str(student_info_75[counter_Table1][3]) + " " + str(student_info_75[counter_Table1][2])
-        dataProcess = {"STUDENT ID": student_info_75[counter_Table1][0], "SCHOLAR NAME": std_fullNmae,
-                       "COMPLETED HOURS": student_info_75[counter_Table1][5],
-                       "REMAINING HOURS": student_info_75[counter_Table1][13],
-                       "STATUS": student_info_75[counter_Table1][14]}
-        table_OfStudent_Info_75.append(dataProcess)
-        counter_Table1 += 1
+        qury.execute("SELECT * FROM `hk_users` WHERE `scholarship` = 'HK75' ")
+        student_Info_FromDb_75 = qury.fetchall()
 
-    return render_template("dashboard admin/compliance_Hk_75.html",logUser=session["adminUser"], table_OfStudent_Info = table_OfStudent_Info_75)
+        student_info_75 = []
+        for k in student_Info_FromDb_75:
+            student_info_75.append(k)
 
+        table_OfStudent_Info_75 = []
+        counter_Table1 = 0
+        # details to show in profile of the student searched #
+        for k in student_info_75:
+            std_fullNmae = str(student_info_75[counter_Table1][3]) + " " + str(student_info_75[counter_Table1][2])
+            dataProcess = {"STUDENT ID": student_info_75[counter_Table1][0], "SCHOLAR NAME": std_fullNmae,
+                           "COMPLETED HOURS": student_info_75[counter_Table1][5] + "m",
+                           "REMAINING HOURS": student_info_75[counter_Table1][13] + "h " +
+                                              str(float(student_info_75[counter_Table1][14]).__round__()).split(".")[0] + "m",
+                           "STATUS": student_info_75[counter_Table1][15]}
+            table_OfStudent_Info_75.append(dataProcess)
+            counter_Table1 += 1
+
+
+        return render_template("dashboard admin/compliance_Hk_75.html",logUser=session["adminUser"], table_OfStudent_Info = table_OfStudent_Info_75)
+    except Exception:
+        return redirect(url_for("admin"))
 @app.route("/compliance_hk_100")
 def compliance_Hk_100():
-    # Qeury Student with 100% hk
+    try:
 
-    qury.execute("SELECT * FROM `hk_users` WHERE `scholarship` = 'HK100' ")
-    student_Info_FromDb_100 = qury.fetchall()
+        # Qeury Student with 100% hk
 
-    student_info_100 = []
-    for k in student_Info_FromDb_100:
-        student_info_100.append(k)
+        qury.execute("SELECT * FROM `hk_users` WHERE `scholarship` = 'HK100' ")
+        student_Info_FromDb_100 = qury.fetchall()
 
-    table_OfStudent_Info_100 = []
-    counter_Table1 = 0
-    # details to show in profile of the student searched #
-    for k in student_info_100:
-        std_fullNmae = str(student_info_100[counter_Table1][3]) + " " + str(student_info_100[counter_Table1][2])
-        dataProcess = {"STUDENT ID": student_info_100[counter_Table1][0], "SCHOLAR NAME": std_fullNmae,
-                       "COMPLETED HOURS": student_info_100[counter_Table1][5],
-                       "REMAINING HOURS": student_info_100[counter_Table1][13],
-                       "STATUS": student_info_100[counter_Table1][14]}
-        table_OfStudent_Info_100.append(dataProcess)
-        counter_Table1 += 1
+        student_info_100 = []
+        for k in student_Info_FromDb_100:
+            student_info_100.append(k)
 
-    return render_template("dashboard admin/compliance_Hk_100.html",logUser=session["adminUser"], table_OfStudent_Info = table_OfStudent_Info_100)
+        table_OfStudent_Info_100 = []
+        counter_Table1 = 0
+        # details to show in profile of the student searched #
+        for k in student_info_100:
+            std_fullNmae = str(student_info_100[counter_Table1][3]) + " " + str(student_info_100[counter_Table1][2])
+            dataProcess = {"STUDENT ID": student_info_100[counter_Table1][0], "SCHOLAR NAME": std_fullNmae,
+                           "COMPLETED HOURS": student_info_100[counter_Table1][5] + "m",
+                           "REMAINING HOURS": student_info_100[counter_Table1][13] + "h " +
+                                              str(float(student_info_100[counter_Table1][14]).__round__()).split(".")[0] + "m",
+                           "STATUS": student_info_100[counter_Table1][15]}
+            table_OfStudent_Info_100.append(dataProcess)
+            counter_Table1 += 1
 
-
-
-
-
+        return render_template("dashboard admin/compliance_Hk_100.html",logUser=session["adminUser"], table_OfStudent_Info = table_OfStudent_Info_100)
+    except Exception:
+        return redirect(url_for("admin"))
 
 @app.route("/Duty Assignment And Management")
 def DutyAssig():
-    # ------------------------data table for Duty_assignment------------------------
-    qury.execute("SELECT * FROM `operation_request`")
-    operation_request_DB = qury.fetchall()
-    operation_request = []
-    for k in operation_request_DB:
-        operation_request.append(k)
 
-    table_Assigment_Page_Admin1 = []
-    session["assigmentstdList"] =table_Assigment_Page_Admin1
-    for k in range(len(operation_request)):
-        process = {"DESIGNATION": operation_request[k][0], "REQ": operation_request[k][1],
-                   "REPORT DAY/S": operation_request[k][2], "SUPERVISOR": operation_request[k][5],
-                   "DEPT": operation_request[k][4], "REQST": operation_request[k][3], "REQ ID": operation_request[k][6]}
-        table_Assigment_Page_Admin1.append(process)
-    print(table_Assigment_Page_Admin1)
+    try:
+        # ------------------------data table for Duty_assignment------------------------
+        qury.execute("SELECT * FROM `operation_request`")
+        operation_request_DB = qury.fetchall()
+        operation_request = []
+        for k in operation_request_DB:
+            operation_request.append(k)
 
-    return render_template("dashboard admin/assignment.html",logUser=session["adminUser"],table_Assigment_Page_Admin = table_Assigment_Page_Admin1  )
+        table_Assigment_Page_Admin1 = []
+        session["assigmentstdList"] =table_Assigment_Page_Admin1
+        for k in range(len(operation_request)):
+            process = {"DESIGNATION": operation_request[k][0], "REQ": operation_request[k][1],
+                       "REPORT DAY/S": operation_request[k][2], "SUPERVISOR": operation_request[k][5],
+                       "DEPT": operation_request[k][4], "REQST": operation_request[k][3], "REQ ID": operation_request[k][6]}
+            table_Assigment_Page_Admin1.append(process)
+        print(table_Assigment_Page_Admin1)
+
+        return render_template("dashboard admin/assignment.html",logUser=session["adminUser"],table_Assigment_Page_Admin = table_Assigment_Page_Admin1  )
+    except Exception:
+        return redirect(url_for("admin"))
+#---------------for announcment methodss
+@app.route("/Announcement", methods=['POST'])
+def Announcement():
+    # Get current date
+    tday = datetime.date.today()
+    # Get the current time
+    current_time = datetime.datetime.now()
+    curtime =str(current_time.hour)+":"+str(current_time.minute)
+
+    announcemnet = request.form.get('comment')
+    print(tday, curtime,announcemnet)
+
+    #INSERT ANNOUNCMENT TO DB
+    qury.execute("INSERT INTO `reports/announcement`(`content`, `date`, `time`, `adminName`)"
+                " VALUES ('"+announcemnet+"','"+str(tday)+"','"+str(curtime)+"','"+session["adminUser"]+"')")
+    conn.commit()
+
+    return render_template("dashboard admin/assignment.html",logUser=session["adminUser"],table_Assigment_Page_Admin = session["assigmentstdList"])
+
+
 
 
 
@@ -764,41 +837,52 @@ def Assigment_modal_process():
 
 @app.route("/User Management")
 def UserManagement():
-    return render_template("dashboard admin/UserManagement.html",logUser=session["adminUser"])
+    try:
+        return render_template("dashboard admin/UserManagement.html",logUser=session["adminUser"])
+    except Exception:
+        return redirect(url_for("admin"))
 
-@app.route("/Scholar Information")
-def scholarinfor():
-    return render_template("dashboard admin/scholarinfo.html",logUser=session["adminUser"])
-
-@app.route("/Reports And Analytics")
-def analytics():
-    return render_template("dashboard admin/analytics.html",logUser=session["adminUser"])
 
 @app.route("/Export to Excel")
 def Excel():
-    return render_template("dashboard admin/Excel.html",logUser=session["adminUser"])
-
+    try:
+        return render_template("dashboard admin/Excel.html",logUser=session["adminUser"])
+    except Exception:
+        return redirect(url_for("admin"))
 @app.route("/Setting and Configurations")
 def Setting():
-    return render_template("dashboard admin/Setting.html",logUser=session["adminUser"])
+    try:
 
+        return render_template("dashboard admin/Setting.html",logUser=session["adminUser"])
+    except Exception:
+        return redirect(url_for("admin"))
 @app.route("/System Health Logs")
 def Systemhealth():
-    return render_template("dashboard admin/Systemhealth.html",logUser=session["adminUser"])
-
+    try:
+        return render_template("dashboard admin/Systemhealth.html",logUser=session["adminUser"])
+    except Exception:
+        return redirect(url_for("admin"))
 @app.route("/Feedback and Improvements")
 def Feedback():
-    return render_template("dashboard admin/Feedback.html",logUser=session["adminUser"])
-
+    try:
+        return render_template("dashboard admin/Feedback.html",logUser=session["adminUser"])
+    except Exception:
+        return redirect(url_for("admin"))
 @app.route("/assigment")
 def assiment():
+    try:
 
-    return  render_template("dashboard admin/assignment.html",logUser=session["adminUser"])
+        return  render_template("dashboard admin/assignment.html",logUser=session["adminUser"])
+    except Exception:
+        return redirect(url_for("admin"))
 @app.route("/student_records")
 def student_records():
 
-    return render_template("dashboard admin/ScholarRecordAdmin.html")
-
+    try:
+        session["adminUser"]
+        return render_template("dashboard admin/ScholarRecordAdmin.html")
+    except Exception:
+        return redirect(url_for("admin"))
 
 
 @app.route("/student_rec_process", methods=['POST'])
@@ -823,7 +907,7 @@ def student_rec_process():
         DUTY_SUPERVISOR = hkdetails[0][11]  # DUTY_SUPERVISOR
         reqiredDuty = hkdetails[0][12]  # reqiredDuty
         remaningDuty = hkdetails[0][13]  # remaningDuty
-        remDutyMin = str(float(hkdetails[0][14])).split(".")# remDutyMin
+        remDutyMin = str(float(hkdetails[0][14]).__round__()).split(".")# remDutyMin
         statsuForRenewal = hkdetails[0][15]  # statsuForRenewal
         Schoolyr = hkdetails[0][16]  # Schoolyr
         semister = hkdetails[0][17]  # semister
@@ -1052,8 +1136,6 @@ def StudentTimeIN_Out():
 
 
     return render_template("Terminal/terminal.html", errormess =errormess  )
-
-
 
 
 

@@ -106,7 +106,7 @@
             </li>
 
             <li>
-              <form action="/Logout" method="post">
+              <form action="/LogoutAdmin" method="post">
                 <a>
               <input class="dropdown-item d-flex align-items-center" type="submit" value="Sign Out">
                 <i class="bi bi-box-arrow-right"></i>
@@ -528,21 +528,22 @@
 </div>
                    
 
-
+<form action="/Announcement" method="post">
 <div class="col-lg-6">
   <div class="card">
     <div class="card-body">
       <h5 class="card-title2">Write Announcement</h5>
-      <input type="hidden" name="announce">
 
-      <textarea rows="7" cols="66" name="comment" form="usrform">
 
+      <textarea rows="7" cols="66" name="comment">
         </textarea>
+
 
         <div class="submit">
         <button type="submit" class="btn btn-success" data-dismiss="modal">SUBMIT</button>
       </div>
-            
+     </form>
+
 <script>
   $(document).ready(function(){
     $("#myInput").on("keyup", function() {
