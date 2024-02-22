@@ -282,7 +282,23 @@ def Dashboard():
 
     if "username" in session:
 
-        return render_template("dashboard operations/OpartionsDashBoard.html",logUser = session['username'])
+        # to get data reports from db to display
+        qury.execute("SELECT `content`, `date`, `time`, `adminName`, `id` FROM `reports/announcement`")
+        db_announc_data = qury.fetchall()
+        announcment_List = []
+
+        for k in db_announc_data:
+            announcment_List.append(k)
+        print(announcment_List)
+        #       to display date and time
+        dateTimeLista_announcment = []
+        for k in range(len(announcment_List)):
+            dateTimeLista_announcment.append(
+                str(announcment_List[k][1]) + " " + str(announcment_List[k][2]) + "\n\n" + str(
+                    announcment_List[k][3]) + " >" + str(announcment_List[k][0]))
+        print(dateTimeLista_announcment)
+
+        return render_template("dashboard operations/OpartionsDashBoard.html",logUser = session['username'],dateTimeLista_announcment=dateTimeLista_announcment)
 
     else:
         return redirect(url_for("signInPAge"))
@@ -515,12 +531,22 @@ def admindashBoard():
 #to check if the user is still log in
     if "adminUser" in session:
 
-    #to get data reports from db to display
-    # qury.execute()
+        #to get data reports from db to display
+        qury.execute("SELECT `content`, `date`, `time`, `adminName`, `id` FROM `reports/announcement`")
+        db_announc_data = qury.fetchall()
+        announcment_List = []
+
+        for k in db_announc_data:
+            announcment_List.append(k)
+        print(announcment_List)
+#       to display date and time
+        dateTimeLista_announcment = []
+        for k in range (len(announcment_List)):
+            dateTimeLista_announcment.append(str(announcment_List[k][1])+" "+str(announcment_List[k][2])+"\n\n"+str(announcment_List[k][3])+" >"+str(announcment_List[k][0]))
+        print(dateTimeLista_announcment)
 
 
-
-        return render_template('dashboard admin/dashboardAdminFinal.html', logUser=session["adminUser"])
+        return render_template('dashboard admin/dashboardAdminFinal.html', logUser=session["adminUser"],dateTimeLista_announcment=dateTimeLista_announcment)
     else:
         return redirect(url_for("admin"))
 
@@ -536,7 +562,7 @@ def compliance():
     if "adminUser" in session:
 
         # -------------student informations---------------------
-        qury.execute("SELECT * FROM `hk_users`")
+        qury.execute("SELECT * FROM `hk_users` WHERE 1")
         student_Info_FromDb = qury.fetchall()
 
         student_info = []

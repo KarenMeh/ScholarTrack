@@ -353,16 +353,21 @@
             
             <div class="card-body">
               <h5 class="card-title">Reports <span>| Today</span></h5>
+              {% for dateTIme in dateTimeLista_announcment%}
 
               <div class="activity">
 
                 <div class="activity-item d-flex">
-                  <div class="activite-label">32 min</div>
+
+                  <div class="activite-label"></div>
+
                   <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
                   <div class="activity-content">
-                    Duty Assigments the Upcoming for Week Announce <a href="#" class="fw-bold text-dark"></a>
+                    {{dateTIme}} <a href="#" class="fw-bold text-dark"></a>
                   </div>
+
                 </div><!-- End activity item-->
+                {% endfor %}
 
 
              
