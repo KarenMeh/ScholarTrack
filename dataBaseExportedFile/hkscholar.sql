@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 09, 2024 at 04:52 AM
+-- Generation Time: Feb 22, 2024 at 02:54 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -119,14 +119,14 @@ CREATE TABLE `hk_users` (
 --
 
 INSERT INTO `hk_users` (`idnum`, `email`, `lname`, `fname`, `password`, `id_totalHours`, `program_course`, `department`, `yrLvL`, `scholarship`, `dutyDesignation`, `dutySupervisor`, `reqiredDuty`, `remaningDuty`, `remDutyMins`, `statsForRenewal`, `SchoolYr`, `semister`, `Status_avail`) VALUES
-('02-2387-700001', 'carmilo@gmail.com', 'Flame', 'Carmelo', '123', '0', 'BSCE', 'COME', '4', 'HK100', 'Student Facilitator', 'Nicole Lampa', '180', '180', '0', 'pending', '2023-2024', '2nd sem', 'av'),
+('02-2387-700001', 'carmilo@gmail.com', 'Flame', 'Carmelo', '123', '0', 'BSCE', 'COM', '4', 'HK100', 'Student Facilitator', 'Nicole Lampa', '180', '180', '0', 'pending', '2023-2024', '2nd sem', 'av'),
 ('04-2122-000002', 'donna@gmail.com', 'Mallorca', 'Donna', '123', '0', 'BSBA', 'CMA', '1', 'HK25', 'Assistant Facilitator', 'Dean Seth Nono', '180', '180', '0', 'pending', '2023-2024', '2nd sem', 'av'),
 ('04-2122-000001', 'jasper@gmail.com', 'operio', 'jasper', '123', '0', 'BSIT', 'CITE', '2', 'HK100', 'Student Facilitator', 'Zesty Mondia', '180', '180', '0', 'pending', '2023-2024', '2nd sem', 'Na'),
 ('04-2122-91734', 'jimama@gmail.com', 'Mariano', 'Jemima', 'jem', '0', 'BSBA', 'CAS', '1', 'HK100', 'Student Facilitator', 'Robert Calasara', '180', '180', '0', 'pending', '2023 - 2024', '2nd sem', 'av'),
 ('04-2122-035512', 'karenmay@gmail.com', 'Gaytano', 'Karen May', '1313', '0', 'BSIT', 'CITE', '4', 'HK75', 'Student Facilitator', 'Robert Calasara', '180', '180', '0', 'pending', '2023 - 2024', '2nd sem', 'Na'),
 ('04-2122-035546', 'kylepama@gnail.cute', 'Pama', 'Kayle', 'kyle', '0', 'BSBA', 'CAS', '2', 'HK25', 'Assistant Facilitator', 'Robert Calasara', '180', '180', '0', 'pending', '2023 - 2024', '2nd sem', 'av'),
-('04-2122-031572', 'ream.mallorca.ui@phinmaed.com', 'Mallorca', 'Reuben', '123', '10', 'BSIT', 'CITE', '3', 'HK50', 'Assistant Facilitator', 'Robert Calasara', '180', '179', '50.000000000000405', 'pending', '2023 - 2024', '2nd sem', 'Na'),
-('04-2122-000003', 'ryan@gmail.com', 'Mallorca', 'Ryan', '123', '0', 'BSCE', 'COE', '4', 'HK75', 'Assistant Facilitator', 'Kurt Parel', '180', '180', '0', 'pending', '2023-2024', '2nd sem', 'av');
+('04-2122-031572', 'ream.mallorca.ui@phinmaed.com', 'Mallorca', 'Reuben', '123', '11', 'BSIT', 'CITE', '3', 'HK50', 'Assistant Facilitator', 'Robert Calasara', '180', '179', '48.9999999999996', 'pending', '2023 - 2024', '2nd sem', 'Na'),
+('04-2122-000003', 'ryan@gmail.com', 'Mallorca', 'Ryan', '123', '0', 'BSCE', 'COED', '4', 'HK75', 'Assistant Facilitator', 'Kurt Parel', '180', '180', '0', 'pending', '2023-2024', '2nd sem', 'av');
 
 -- --------------------------------------------------------
 
@@ -177,13 +177,30 @@ CREATE TABLE `operation_request` (
 --
 
 INSERT INTO `operation_request` (`Designation`, `Requirements`, `Report Day/s`, `Request`, `DEPT`, `SUPERVISOR`, `ID`) VALUES
-('af', '2nd', 'F', '2', 'CITE', 'Calasra', 2),
-('sf', '2nd', 'F-TH', '1', 'CITE', 'Calasra', 3),
-('af', '3rd', 'F/Sat', '5', 'CITE', 'Parel', 4),
 ('af', '4th', 'M-Wed', '1', 'CITE', 'Parel', 5),
 ('sf', '3rd', 'f-th', '4', 'CITE', 'Parel', 6),
-('Gosto  migo', 'gwapo', 'forever', '1', 'CITE', 'Calasra', 7),
 ('AF', '3rd yr', 'T', '3', 'CHAS', 'Mondia', 8);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reports/announcement`
+--
+
+CREATE TABLE `reports/announcement` (
+  `content` varchar(500) NOT NULL,
+  `date` varchar(255) NOT NULL,
+  `time` varchar(255) NOT NULL,
+  `adminName` varchar(255) NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `reports/announcement`
+--
+
+INSERT INTO `reports/announcement` (`content`, `date`, `time`, `adminName`, `id`) VALUES
+('        Duty Assignments the Upcoming for Week Announce', '2024-02-22', '8:43', 'admin', 5);
 
 -- --------------------------------------------------------
 
@@ -235,7 +252,11 @@ INSERT INTO `scholar_duty_records` (`date`, `Hours_In_Out`, `Minutes_In_Out`, `S
 ('2024-02-09', 10, 54, '04-2122-031572', 256, 'IN'),
 ('2024-02-09', 10, 55, '04-2122-031572', 257, 'OUT'),
 ('2024-02-09', 10, 57, '04-2122-031572', 258, 'IN'),
-('2024-02-09', 10, 58, '04-2122-031572', 259, 'OUT');
+('2024-02-09', 10, 58, '04-2122-031572', 259, 'OUT'),
+('2024-02-13', 18, 5, '04-2122-031572', 260, 'IN'),
+('2024-02-13', 18, 5, '04-2122-031572', 261, 'OUT'),
+('2024-02-20', 23, 16, '04-2122-031572', 262, 'IN'),
+('2024-02-20', 23, 17, '04-2122-031572', 263, 'OUT');
 
 --
 -- Indexes for dumped tables
@@ -280,6 +301,12 @@ ALTER TABLE `operation_request`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indexes for table `reports/announcement`
+--
+ALTER TABLE `reports/announcement`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `request`
 --
 ALTER TABLE `request`
@@ -311,13 +338,19 @@ ALTER TABLE `dutyhourformulationdata`
 -- AUTO_INCREMENT for table `hk_assignd_teaecher`
 --
 ALTER TABLE `hk_assignd_teaecher`
-  MODIFY `assigmentID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `assigmentID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `operation_request`
 --
 ALTER TABLE `operation_request`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `reports/announcement`
+--
+ALTER TABLE `reports/announcement`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `request`
@@ -329,7 +362,7 @@ ALTER TABLE `request`
 -- AUTO_INCREMENT for table `scholar_duty_records`
 --
 ALTER TABLE `scholar_duty_records`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=260;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=264;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
