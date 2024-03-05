@@ -9,7 +9,7 @@ mysql = MySQL()
 
 #setter kung ano nga db gamiton
 app.config["MYSQL_DATABASE_USER"]="root"
-app.config["MYSQL_DATABSE_PASSWORD"]=""
+app.config["MYSQL_DATABASE_PASSWORD"]=""
 app.config["MYSQL_DATABASE_DB"]="hkscholar"
 app.config["MYSQLI_DATABASE_HOST"]="localhost"
 
