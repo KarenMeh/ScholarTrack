@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 22, 2024 at 02:54 AM
+-- Generation Time: Mar 06, 2024 at 05:20 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -143,18 +143,19 @@ CREATE TABLE `operations_data` (
   `Operations_Mname` varchar(255) NOT NULL,
   `Operation_phone_Number` varchar(255) NOT NULL,
   `Operation_Designation-Position` varchar(255) NOT NULL,
-  `Operations_Email` varchar(255) NOT NULL
+  `Operations_Email` varchar(255) NOT NULL,
+  `profilePics` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `operations_data`
 --
 
-INSERT INTO `operations_data` (`Faculty_Lname`, `Faculty_Fname`, `Faculty_Password`, `Faculty_Id_Number`, `Operation_Dept`, `Operations_Mname`, `Operation_phone_Number`, `Operation_Designation-Position`, `Operations_Email`) VALUES
-('Mondia', 'Zesty', 'zest123', '03-1234-123456', 'CHAS', 'G', '09876543219', 'Faculty', 'Zesty@gmail.com'),
-('Calasra', 'Robert', 'Robert123', '04-2119-123456', 'CITE', 'J', '09991234567', 'Faculty', 'robert@gmail.com'),
-('Parel', 'Kurt', 'kurt123', '04-2122-031289', 'CITE', 'H', '09921345678', 'Faculty', 'Kurt@gmail.com'),
-('Yacub', 'Bruce', 'bruce123', '05-3451-90896712', 'COME', 'F', '12345678901', 'Faculty', 'Bruce@gmail');
+INSERT INTO `operations_data` (`Faculty_Lname`, `Faculty_Fname`, `Faculty_Password`, `Faculty_Id_Number`, `Operation_Dept`, `Operations_Mname`, `Operation_phone_Number`, `Operation_Designation-Position`, `Operations_Email`, `profilePics`) VALUES
+('Mondia', 'Zesty', 'zest123', '03-1234-123456', 'CHAS', 'G', '09876543219', 'Faculty', 'Zesty@gmail.com', ''),
+('Calasra', 'Robert', 'Robert123', '04-2119-123456', 'CITE', 'J', '09991234567', 'Faculty', 'robert@gmail.com', 'faculty_robert.jpg'),
+('Parel', 'Kurt', 'kurt123', '04-2122-031289', 'CITE', 'H', '09921345678', 'Faculty', 'Kurt@gmail.com', 'ser.jpg'),
+('Yacub', 'Bruce', 'bruce123', '05-3451-90896712', 'COME', 'F', '12345678901', 'Faculty', 'Bruce@gmail', '');
 
 -- --------------------------------------------------------
 
@@ -200,7 +201,11 @@ CREATE TABLE `reports/announcement` (
 --
 
 INSERT INTO `reports/announcement` (`content`, `date`, `time`, `adminName`, `id`) VALUES
-('        Duty Assignments the Upcoming for Week Announce', '2024-02-22', '8:43', 'admin', 5);
+('        Duty Assignments the Upcoming for Week Announce', '2024-02-22', '8:43', 'admin', 5),
+('        sir robert calasar ikaw gina pa tawag sa csdl kadto d mga 3 pm d ka ma late ha manda kalang', '2024-02-22', '10:28', 'admin', 6),
+('        tryal acnnouncment lang dont pansin it hehe\r\n', '2024-02-22', '22:23', 'admin', 7),
+('        Karen may cutieee pls go to csdl to claim your 10 pesos', '2024-02-22', '22:31', 'admin', 8),
+('    good day students of PHINMA, im announcing that starting today, the most handsome man in the world is my cousin. CJ SHEM M. TOLOSA. its a mortal sin if you dis agree. thanks', '2024-02-28', '20:3', 'admin', 9);
 
 -- --------------------------------------------------------
 
@@ -256,7 +261,9 @@ INSERT INTO `scholar_duty_records` (`date`, `Hours_In_Out`, `Minutes_In_Out`, `S
 ('2024-02-13', 18, 5, '04-2122-031572', 260, 'IN'),
 ('2024-02-13', 18, 5, '04-2122-031572', 261, 'OUT'),
 ('2024-02-20', 23, 16, '04-2122-031572', 262, 'IN'),
-('2024-02-20', 23, 17, '04-2122-031572', 263, 'OUT');
+('2024-02-20', 23, 17, '04-2122-031572', 263, 'OUT'),
+('2024-02-28', 19, 54, '04-2122-031572', 264, 'IN'),
+('2024-02-28', 19, 54, '04-2122-031572', 265, 'OUT');
 
 --
 -- Indexes for dumped tables
@@ -350,7 +357,7 @@ ALTER TABLE `operation_request`
 -- AUTO_INCREMENT for table `reports/announcement`
 --
 ALTER TABLE `reports/announcement`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `request`
@@ -362,7 +369,7 @@ ALTER TABLE `request`
 -- AUTO_INCREMENT for table `scholar_duty_records`
 --
 ALTER TABLE `scholar_duty_records`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=264;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=266;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
