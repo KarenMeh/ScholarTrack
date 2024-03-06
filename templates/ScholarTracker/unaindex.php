@@ -404,7 +404,7 @@ margin: 0;
   <section id="hero">
     <div class="hero-container">
   
-      <a href="index.html" class="hero-logo"><img src="static/assetsLanding\img\2.png" width="340px"></a>
+      <a href="" class="hero-logo"><img src="static/assetsLanding\img\2.png" width="340px"></a>
       <h2 data-aos="fade-up">Automated Phinma UI Scholar's System for <br> Monitoring</p></h2>
       <h1 data-aos="zoom-in">SCHOLAR TRACK</h1>
       <a data-aos="fade-up" data-aos-delay00 ="100" href="{{url_for('sts_Page')}}" class="btn-get-started1 scrollto">GET STARTED</a>
