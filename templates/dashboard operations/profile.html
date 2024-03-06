@@ -76,7 +76,7 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="/static/assetUser/img/ser.jpg" alt="Profile" class="rounded-circle">
+            <img src="/static/profilePics/{{profilepicDb}}" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">{{logUser}}</span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -200,7 +200,7 @@
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-              <img src="/static/assetUser/img/ser.jpg" alt="Profile" class="rounded-circle">
+              <img src="/static/profilePics/{{profilepicDb}}" alt="Profile" class="rounded-circle">
               <h2>Kurt Ellie Paler</h2>
               <h3>Faculty</h3>
               <div class="social-links mt-2">
@@ -275,13 +275,15 @@
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                   <!-- Profile Edit Form -->
-                  <form>
+                  <form action="/uplaodProfile" method="post"  enctype="multipart/form-data">
                     <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                       <div class="col-md-8 col-lg-9">
-                        <img src="/static/assetUser/img/ser.jpg" alt="Profile">
+                        <img src="/static/profilePics/{{profilepicDb}}" alt="Profile"><input type="file" name="file"  accept=".jpg, .jpeg, .png, .gif">
                         <div class="pt-2">
-                          <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
+
+<!--                          <button  class="btn btn-primary btn-sm" ><i class="bi bi-upload"></i></button>-->
+
                           <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
                         </div>
                       </div>

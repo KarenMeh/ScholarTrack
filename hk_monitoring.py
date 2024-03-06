@@ -1,17 +1,26 @@
+import os
+
 from flask import  Flask, render_template, request, redirect, url_for, session, flash
 from flaskext.mysql import MySQL
 import datetime
 
+from werkzeug.exceptions import RequestEntityTooLarge
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.secret_key = "i love you cute"
 mysql = MySQL()
+
+#dir whare photo are stored
+app.config['UPLOAD_DIR']="static/profilePics/"
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 #setter kung ano nga db gamiton
 app.config["MYSQL_DATABASE_USER"]="root"
 app.config["MYSQL_DATABASE_PASSWORD"]=""
 app.config["MYSQL_DATABASE_DB"]="hkscholar"
 app.config["MYSQLI_DATABASE_HOST"]="localhost"
+
 
 #connection mo ni sa db kag sa python aka conn
 mysql.init_app(app)
@@ -354,12 +363,33 @@ def Modal_request_process():
 def Profile_Operations():
     if "username" in session:
 
-        return render_template("dashboard operations/profile.html",logUser = session['username'])
+        qury.execute("SELECT `profilePics` FROM `operations_data` WHERE `Faculty_Id_Number`= '"+session["user"]+"'")
+        profilepicDb = qury.fetchall()[0][0]
+        print(profilepicDb)
+
+        return render_template("dashboard operations/profile.html",logUser = session['username'],profilepicDb=profilepicDb)
 
     else:
         return redirect(url_for("signInPAge"))
 
+@app.route("/uplaodProfile", methods=['POST']) #to upate profile picture of operations
+def uplaodProfile():
+    print("gagana")
 
+
+
+    try:
+        profilePic = request.files['file']
+        profilePic.save(os.path.join(app.config['UPLOAD_DIR']+secure_filename(profilePic.filename)))
+        qury.execute("UPDATE `operations_data` SET `profilePics`='"+str(secure_filename(profilePic.filename))+"' WHERE  `Faculty_Id_Number` = '"+session["user"]+"' ")
+        conn.commit()
+    except RequestEntityTooLarge:
+        return '<script>alert("file to large");window.location="/Profile"</script>'
+
+
+
+
+    return redirect(url_for("Profile_Operations"))
 
 #-----------------------------end of operations requesr--------------------------------------------------
 
@@ -523,7 +553,7 @@ def adminLog():
     if check in admin_cridentials:
         return '<script>alert("Welcome");window.location="admindashBoard"</script>'
     else:
-        return  '<script>alert("Wrong Cridentials!");window.location="/adminLanding"</script>'
+        return  '<script>alert("Wrong Credentials!");window.location="/adminLanding"</script>'
 
 @app.route("/admindashBoard")
 def admindashBoard():
