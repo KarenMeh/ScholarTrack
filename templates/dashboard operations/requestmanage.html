@@ -31,6 +31,17 @@
 
   <!-- Template Main CSS File -->
   <link href="/static/assetUser/css/compliance.css" rel="stylesheet">
+  <style>
+    .bi-calendar2-minus {
+      font-size: 20px;
+      color: #002b80;
+      background: none;
+      margin-left: -30px;
+      align-items: center;
+    }
+    
+  
+  </style>
 
   <!-- =======================================================
   * Template Name: NiceAdmin
@@ -148,7 +159,7 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="static/img" alt="Profile" class="rounded-circle">
+            <img src="/static/assetUser/img/serjester.jpg" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">{{logUser}}</span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -209,36 +220,45 @@
 
   </header><!-- End Header -->
 
-  <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar">
+ <!-- ======= Sidebar ======= -->
+ <aside id="sidebar" class="sidebar">
 
-    <ul class="sidebar-nav" id="sidebar-nav">
+  <ul class="sidebar-nav" id="sidebar-nav">
 
-      <li class="nav-item">
-        <a class="nav-link " href="{{url_for('Dashboard')}}">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="/Dash board">
+        <div class="comp">
+          <img src="/static/assetUser/img/home.png" alt="" width="20px">
+        </div>
+        <span>Dashboard</span>
+      </a>
+    </li><!-- End Dashboard Nav -->
 
 
-      <li class="nav-item">
+
+    <li class="nav-item">
+     
+    <li class="nav-item">
+      <a class="nav-link" href="/Request and Scholar Management">
+        <div class="comp">
+          <img src="/static/assetUser/img/requestt.png" alt="" width="25px">
+      </div>
+        <span>Request and Scholar Management</span>
+      </a>
+    </li><!-- End Profile Page Nav -->
+
+   
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="/Profile">
+        <div class="comp">
+          <img src="/static/assetUser/img/user.png" alt="" width="25px">
+        </div>
+        <span>Profile </span>
+      </a>
+    </li><!-- End Profile Page Nav -->
+
        
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="{{url_for('request_Scholar')}}">
-            <i class="bi bi-person"></i>
-            <span>Request and Scholar Management</span>
-          </a>
-        </li><!-- End Profile Page Nav -->
-  
-       
-      
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="{{url_for('Profile_Operations')}}">
-            <i class="bi bi-person"></i>
-            <span>Profile</span>
-          </a>
-        </li><!-- End Profile Page Nav -->
+    
 
 
     </ul>
@@ -246,29 +266,17 @@
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
-
-   
-
-
     <section class="section dashboard">
       <div class="row">
 
         <!-- Left side columns -->
-        <div class="col-lg-9">
-          <div class="row">
-
-
-
-
-
-
-
-
+        <div class="col-12">
+          <div class="card p-1" >
             <!-- Recent Sales -->
             <div class="col-30">
               <div class="card recent-sales overflow-auto">
                 <div class="card-body">
-                  <div class="card-title2">Assigned Scholar List</span></div>
+  <div class="card-title2">Assigned Scholar List</span>
 
                <div class="container">
                
@@ -298,19 +306,8 @@
 
                 <input type="Submit" value="Submit" name="request">
 
-
-
-
-
             </form>
-            
-
-
-
-
-
-
-
+          
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -320,7 +317,7 @@
       </div>
     </div>
     
-  </div>
+   </div>
 
 
 
@@ -344,7 +341,7 @@
                  <input class="search-form d-flex align-items-center" id="myInput" type="text" placeholder="Search.." >
 
 
-  <br>
+                  <br>
                   </div>
                            <!-- Table with stripped rows -->
                 <table class="table datatable">
@@ -362,7 +359,7 @@
                    {% for row in student_underMe %}
                     <tr>
                       <form action="{{url_for('student_rec_process')}}" method="POST">
-                     <td><button type="submit" name="select" value="select"> <i style="margin-right: 0.5em; color: #000000;"><i class="bi bi-box-arrow-down"></i></button> {{row['STUDENT ID']}}</td>
+                     <td><button type="submit" name="select" value="select"> <i style="margin-right: 0.5em; color: #000000;"><class="bi bi-calendar2-minus"></i></button> {{row['STUDENT ID']}}</td>
 
                     <td>{{row['SCHOLAR NAME']}}</td>
                       <td>{{row['COMPLETED HOURS']}}</td>
@@ -381,12 +378,14 @@
                   </tbody>
                 </table>
                 <!-- End Table with stripped rows -->
+
+    </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-
+   
 <script>
   $(document).ready(function(){
     $("#myInput").on("keyup", function() {
