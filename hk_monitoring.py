@@ -273,8 +273,8 @@ def signInprocess():
 
     else:
 
-        flash("Wrong Email or Password", "info")
-        return '<script>alert("Wrong ssword or Email");window.location="/Sign in"</script>'
+       
+        return '<script>alert("Wrong password or Email");window.location="/Sign in"</script>'
 
 
 
