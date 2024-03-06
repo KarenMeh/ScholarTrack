@@ -803,7 +803,22 @@ def DutyAssig():
             table_Assigment_Page_Admin1.append(process)
         print(table_Assigment_Page_Admin1)
 
-        return render_template("dashboard admin/assignment.html",logUser=session["adminUser"],table_Assigment_Page_Admin = table_Assigment_Page_Admin1  )
+
+
+        # to display std whitout assigmnt
+        qury.execute("SELECT  `Status_avail` FROM `hk_users` WHERE `Status_avail` ='Na' ")
+        stduentNotAv = qury.fetchall()
+
+        # to display std whitout assigmnt
+        qury.execute("SELECT  `Status_avail` FROM `hk_users` WHERE `Status_avail` ='av' ")
+        studentAv = qury.fetchall()
+
+
+
+        return render_template("dashboard admin/assignment.html",
+                               logUser=session["adminUser"],
+                               table_Assigment_Page_Admin = table_Assigment_Page_Admin1
+                               ,stduentNotAv=len(stduentNotAv),studentAv=len(studentAv))
     except Exception:
         return redirect(url_for("admin"))
 #---------------for announcment methodss
