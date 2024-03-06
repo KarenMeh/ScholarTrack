@@ -305,31 +305,7 @@ def Dashboard():
         profilepicDb = qury.fetchall()[0][0]
         print(profilepicDb)
 
-        # this is to display how many hk student
-        qury.execute("SELECT * FROM `hk_users`")
-        number_of_stndt = qury.fetchall()
-        print(len(number_of_stndt))
-
-        # display student that dont have an assignment
-        qury.execute("SELECT `Status_avail` FROM `hk_users` WHERE `Status_avail` = 'av' ")
-        studentAv = qury.fetchall()
-
-        # display student that had assignment
-        qury.execute("SELECT `Status_avail` FROM `hk_users` WHERE `Status_avail` = 'Na' ")
-        stduentNotAv = qury.fetchall()
-
-        # display student that dont have an assignment
-        qury.execute("SELECT `Status_avail` FROM `hk_users` WHERE `Status_avail` = 'av' ")
-        studentAv = qury.fetchall()
-
-        # complaince rate
-        complirate = (len(stduentNotAv) / len(number_of_stndt)) * 100
-
-        return render_template("dashboard operations/OpartionsDashBoard.html",
-                               logUser = session['username'],
-                               dateTimeLista_announcment=dateTimeLista_announcment,
-                               profilepicDb=profilepicDb,number_of_stndt=len(number_of_stndt),
-                               studentAv=len(studentAv),complirate=str(complirate)+"%")
+        return render_template("dashboard operations/OpartionsDashBoard.html",logUser = session['username'],dateTimeLista_announcment=dateTimeLista_announcment,profilepicDb=profilepicDb)
 
     else:
         return redirect(url_for("signInPAge"))
@@ -600,26 +576,9 @@ def admindashBoard():
         for k in range (len(announcment_List)):
             dateTimeLista_announcment.append(str(announcment_List[k][1])+" "+str(announcment_List[k][2])+"\n\n"+str(announcment_List[k][3])+" >"+str(announcment_List[k][0]))
         print(dateTimeLista_announcment)
-        #this is to display how many hk student
-        qury.execute("SELECT * FROM `hk_users`")
-        number_of_stndt = qury.fetchall()
-        print(len(number_of_stndt))
 
-        # display student that had assignment
-        qury.execute("SELECT `Status_avail` FROM `hk_users` WHERE `Status_avail` = 'Na' ")
-        stduentNotAv = qury.fetchall()
 
-        # display student that dont have an assignment
-        qury.execute("SELECT `Status_avail` FROM `hk_users` WHERE `Status_avail` = 'av' ")
-        studentAv = qury.fetchall()
-
-        #complaince rate
-        complirate= (len(stduentNotAv)/len(number_of_stndt))*100
-        return render_template('dashboard admin/dashboardAdminFinal.html',
-                               logUser=session["adminUser"],
-                               dateTimeLista_announcment=dateTimeLista_announcment,
-                               number_of_stndt=len(number_of_stndt),stduentNotAv=len(stduentNotAv),
-                               studentAv=len(studentAv),complirate=str(complirate)+"%")
+        return render_template('dashboard admin/dashboardAdminFinal.html', logUser=session["adminUser"],dateTimeLista_announcment=dateTimeLista_announcment)
     else:
         return redirect(url_for("admin"))
 
@@ -806,17 +765,7 @@ def DutyAssig():
             table_Assigment_Page_Admin1.append(process)
         print(table_Assigment_Page_Admin1)
 
-        #display student that had assignment
-        qury.execute("SELECT `Status_avail` FROM `hk_users` WHERE `Status_avail` = 'Na' ")
-        stduentNotAv = qury.fetchall()
-
-        #display student that dont have an assignment
-        qury.execute("SELECT `Status_avail` FROM `hk_users` WHERE `Status_avail` = 'av' ")
-        studentAv = qury.fetchall()
-
-        return render_template("dashboard admin/assignment.html",logUser=session["adminUser"]
-                               ,table_Assigment_Page_Admin = table_Assigment_Page_Admin1,
-                               stduentNotAv=len(stduentNotAv),studentAv=len(studentAv)  )
+        return render_template("dashboard admin/assignment.html",logUser=session["adminUser"],table_Assigment_Page_Admin = table_Assigment_Page_Admin1  )
     except Exception:
         return redirect(url_for("admin"))
 #---------------for announcment methodss
@@ -835,8 +784,6 @@ def Announcement():
     qury.execute("INSERT INTO `reports/announcement`(`content`, `date`, `time`, `adminName`)"
                 " VALUES ('"+announcemnet+"','"+str(tday)+"','"+str(curtime)+"','"+session["adminUser"]+"')")
     conn.commit()
-
-
 
     return render_template("dashboard admin/assignment.html",logUser=session["adminUser"],table_Assigment_Page_Admin = session["assigmentstdList"])
 
@@ -871,19 +818,7 @@ def DutyAssig_process():
         table = {"STUDENT ID":avil_std_list[k][0],"SCHOLAR NAME":avil_std_list[k][1]+" "+avil_std_list[k][2],"YEAR LVL":avil_std_list[k][3],"PROGRAM":avil_std_list[k][4], "DEPARTMENT":avil_std_list[k][5]}
         table_avil_std.append(table)
 
-        # display student that had assignment
-        qury.execute("SELECT `Status_avail` FROM `hk_users` WHERE `Status_avail` = 'Na' ")
-        stduentNotAv = qury.fetchall()
-
-        # display student that dont have an assignment
-        qury.execute("SELECT `Status_avail` FROM `hk_users` WHERE `Status_avail` = 'av' ")
-        studentAv = qury.fetchall()
-
-    return render_template("dashboard admin/assignment.html",
-                           logUser=session["adminUser"],
-                           table_Assigment_Page_Admin=session["assigmentstdList"],
-                           table_avil_std=table_avil_std ,supervi=supervi,
-                           stduentNotAv=len(stduentNotAv),studentAv=len(studentAv))
+    return render_template("dashboard admin/assignment.html", logUser=session["adminUser"],table_Assigment_Page_Admin=session["assigmentstdList"],table_avil_std=table_avil_std ,supervi=supervi)
 
 @app.route("/Assigment_modal_process", methods =['POST'])
 def Assigment_modal_process():
@@ -1230,7 +1165,7 @@ def StudentTimeIN_Out():
             qury.execute("UPDATE `hk_users` SET `remaningDuty`='"+str(remdutyHours)+"',`remDutyMins`='"+str(remdutyMinscpnvertion)+"' WHERE `idnum` = '"+stdId+"'")
             conn.commit()
             timeInList.clear()
-            #------------------formulation of reminin duty hours
+            #------------------formulation of remainin duty hours
 
 
 
@@ -1252,7 +1187,7 @@ def StudentTimeIN_Out():
 
 
     except Exception:
-        errormess = "Sign in first "
+        errormess = "Sign in first"
 
 
 
