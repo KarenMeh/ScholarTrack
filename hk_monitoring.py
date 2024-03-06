@@ -273,8 +273,8 @@ def signInprocess():
 
     else:
 
-        flash("Wrong Email or Password", "info")
-        return '<script>alert("Wrong ssword or Email");window.location="/Sign in"</script>'
+       
+        return '<script>alert("Wrong password or Email");window.location="/Sign in"</script>'
 
 
 
@@ -305,7 +305,26 @@ def Dashboard():
         profilepicDb = qury.fetchall()[0][0]
         print(profilepicDb)
 
-        return render_template("dashboard operations/OpartionsDashBoard.html",logUser = session['username'],dateTimeLista_announcment=dateTimeLista_announcment,profilepicDb=profilepicDb)
+        # to display how many hk student there are
+        qury.execute("SELECT * FROM `hk_users`")
+        number_of_stndt = qury.fetchall()
+
+        # to display std whitout assigmnt
+        qury.execute("SELECT  `Status_avail` FROM `hk_users` WHERE `Status_avail` ='Na' ")
+        stduentNotAv = qury.fetchall()
+
+        # to display std whitout assigmnt
+        qury.execute("SELECT  `Status_avail` FROM `hk_users` WHERE `Status_avail` ='av' ")
+        studentAv = qury.fetchall()
+
+        # comliance rate data
+        complirate = (len(stduentNotAv) / len(number_of_stndt)) * 100
+
+        return render_template("dashboard operations/OpartionsDashBoard.html",
+                               logUser = session['username'],
+                               dateTimeLista_announcment=dateTimeLista_announcment,
+                               profilepicDb=profilepicDb,complirate=str(complirate)+"%",
+                               number_of_stndt=len(number_of_stndt))
 
     else:
         return redirect(url_for("signInPAge"))
@@ -577,8 +596,27 @@ def admindashBoard():
             dateTimeLista_announcment.append(str(announcment_List[k][1])+" "+str(announcment_List[k][2])+"\n\n"+str(announcment_List[k][3])+" >"+str(announcment_List[k][0]))
         print(dateTimeLista_announcment)
 
+        # to display how many hk student there are
+        qury.execute("SELECT * FROM `hk_users`")
+        number_of_stndt = qury.fetchall()
 
-        return render_template('dashboard admin/dashboardAdminFinal.html', logUser=session["adminUser"],dateTimeLista_announcment=dateTimeLista_announcment)
+        #to display std whitout assigmnt
+        qury.execute("SELECT  `Status_avail` FROM `hk_users` WHERE `Status_avail` ='Na' ")
+        stduentNotAv = qury.fetchall()
+
+        # to display std whitout assigmnt
+        qury.execute("SELECT  `Status_avail` FROM `hk_users` WHERE `Status_avail` ='av' ")
+        studentAv = qury.fetchall()
+
+        #comliance rate data
+        complirate = (len(stduentNotAv)/len(number_of_stndt))*100
+
+        return render_template('dashboard admin/dashboardAdminFinal.html',
+                               logUser=session["adminUser"],
+                               dateTimeLista_announcment=dateTimeLista_announcment,
+                               number_of_stndt=len(number_of_stndt),
+                               stduentNotAv=len(stduentNotAv),
+                               studentAv=len(studentAv),complirate=str(complirate)+"%")
     else:
         return redirect(url_for("admin"))
 
@@ -785,7 +823,10 @@ def Announcement():
                 " VALUES ('"+announcemnet+"','"+str(tday)+"','"+str(curtime)+"','"+session["adminUser"]+"')")
     conn.commit()
 
-    return render_template("dashboard admin/assignment.html",logUser=session["adminUser"],table_Assigment_Page_Admin = session["assigmentstdList"])
+    return render_template("dashboard admin/assignment.html",
+                           logUser=session["adminUser"],
+                           table_Assigment_Page_Admin = session["assigmentstdList"]
+                           )
 
 
 
