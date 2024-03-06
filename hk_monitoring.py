@@ -307,7 +307,12 @@ def Dashboard():
                     announcment_List[k][3]) + " >" + str(announcment_List[k][0]))
         print(dateTimeLista_announcment)
 
-        return render_template("dashboard operations/OpartionsDashBoard.html",logUser = session['username'],dateTimeLista_announcment=dateTimeLista_announcment)
+        # select profile pic
+        qury.execute("SELECT `profilePics` FROM `operations_data` WHERE `Faculty_Id_Number`= '" + session["user"] + "'")
+        profilepicDb = qury.fetchall()[0][0]
+        print(profilepicDb)
+
+        return render_template("dashboard operations/OpartionsDashBoard.html",logUser = session['username'],dateTimeLista_announcment=dateTimeLista_announcment,profilepicDb=profilepicDb)
 
     else:
         return redirect(url_for("signInPAge"))
@@ -332,7 +337,11 @@ def request_Scholar():
         for k in range(len(listahan)):
             tables = {"STUDENT ID":listahan[k][0],"SCHOLAR NAME":listahan[k][1]+" "+listahan[k][2],"COMPLETED HOURS":listahan[k][3],"REMAINING HOURS":listahan[k][4]+"h "+str(float(listahan[k][5]).__round__()).split(".")[0]+"m","STATUS":listahan[k][6]}
             student_underMe.append(tables)
-        return render_template("dashboard operations/requestmanage.html",logUser = session['username'], student_underMe =student_underMe)
+        #select profile pic
+        qury.execute("SELECT `profilePics` FROM `operations_data` WHERE `Faculty_Id_Number`= '" + session["user"] + "'")
+        profilepicDb = qury.fetchall()[0][0]
+        print(profilepicDb)
+        return render_template("dashboard operations/requestmanage.html",logUser = session['username'], student_underMe =student_underMe,profilepicDb=profilepicDb)
 
     except Exception:
         return redirect(url_for("signInPAge"))
