@@ -175,18 +175,11 @@ def logOut():
     session.pop("lname",None)
     session.pop("fname", None)
     session.pop("assigmentstdList", None)
+    
 
 
 
     return '<script>alert("Log Out");window.location="/"</script>'
-
-
-
-
-
-
-
-
 
 
 #-----------------------landing page----------------------------------------------
@@ -1194,7 +1187,7 @@ def StudentTimeIN_Out():
 
 
     except Exception:
-        errormess = "..Sign in first.. "
+        errormess = "Sign in first "
 
 
 
