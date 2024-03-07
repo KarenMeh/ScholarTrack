@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2024 at 05:20 AM
+-- Generation Time: Mar 07, 2024 at 04:14 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
   `userName` varchar(255) NOT NULL,
+  `adminIdNumber` varchar(255) NOT NULL,
   `passWord` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -37,9 +38,8 @@ CREATE TABLE `admin` (
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id`, `userName`, `passWord`) VALUES
-(1, 'admin', 'admin123'),
-(2, 'robert', 'robert123');
+INSERT INTO `admin` (`id`, `userName`, `adminIdNumber`, `passWord`) VALUES
+(1, 'Jester Paul Bacabac', '04-1234-1234', 'admin123');
 
 -- --------------------------------------------------------
 
@@ -125,7 +125,7 @@ INSERT INTO `hk_users` (`idnum`, `email`, `lname`, `fname`, `password`, `id_tota
 ('04-2122-91734', 'jimama@gmail.com', 'Mariano', 'Jemima', 'jem', '0', 'BSBA', 'CAS', '1', 'HK100', 'Student Facilitator', 'Robert Calasara', '180', '180', '0', 'pending', '2023 - 2024', '2nd sem', 'av'),
 ('04-2122-035512', 'karenmay@gmail.com', 'Gaytano', 'Karen May', '1313', '0', 'BSIT', 'CITE', '4', 'HK75', 'Student Facilitator', 'Robert Calasara', '180', '180', '0', 'pending', '2023 - 2024', '2nd sem', 'Na'),
 ('04-2122-035546', 'kylepama@gnail.cute', 'Pama', 'Kayle', 'kyle', '0', 'BSBA', 'CAS', '2', 'HK25', 'Assistant Facilitator', 'Robert Calasara', '180', '180', '0', 'pending', '2023 - 2024', '2nd sem', 'av'),
-('04-2122-031572', 'ream.mallorca.ui@phinmaed.com', 'Mallorca', 'Reuben', '123', '11', 'BSIT', 'CITE', '3', 'HK50', 'Assistant Facilitator', 'Robert Calasara', '180', '179', '48.9999999999996', 'pending', '2023 - 2024', '2nd sem', 'Na'),
+('04-2122-031572', 'ream.mallorca.ui@phinmaed.com', 'Mallorca', 'Reuben', '123', '12', 'BSIT', 'CITE', '3', 'HK50', 'Assistant Facilitator', 'Robert Calasara', '180', '179', '48.0', 'pending', '2023 - 2024', '2nd sem', 'Na'),
 ('04-2122-000003', 'ryan@gmail.com', 'Mallorca', 'Ryan', '123', '0', 'BSCE', 'COED', '4', 'HK75', 'Assistant Facilitator', 'Kurt Parel', '180', '180', '0', 'pending', '2023-2024', '2nd sem', 'av');
 
 -- --------------------------------------------------------
@@ -263,7 +263,9 @@ INSERT INTO `scholar_duty_records` (`date`, `Hours_In_Out`, `Minutes_In_Out`, `S
 ('2024-02-20', 23, 16, '04-2122-031572', 262, 'IN'),
 ('2024-02-20', 23, 17, '04-2122-031572', 263, 'OUT'),
 ('2024-02-28', 19, 54, '04-2122-031572', 264, 'IN'),
-('2024-02-28', 19, 54, '04-2122-031572', 265, 'OUT');
+('2024-02-28', 19, 54, '04-2122-031572', 265, 'OUT'),
+('2024-03-06', 23, 25, '04-2122-031572', 266, 'IN'),
+('2024-03-06', 23, 26, '04-2122-031572', 267, 'OUT');
 
 --
 -- Indexes for dumped tables
@@ -369,7 +371,7 @@ ALTER TABLE `request`
 -- AUTO_INCREMENT for table `scholar_duty_records`
 --
 ALTER TABLE `scholar_duty_records`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=266;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=268;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
