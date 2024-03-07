@@ -820,10 +820,13 @@ def DutyAssig():
 
 
 
+
+
+
         return render_template("dashboard admin/assignment.html",
                                logUser=session["adminUser"],
                                table_Assigment_Page_Admin = table_Assigment_Page_Admin1
-                               ,stduentNotAv=len(stduentNotAv),studentAv=len(studentAv))
+                               ,stduentNotAv=len(stduentNotAv),studentAv=len(studentAv) )
     except Exception:
         return redirect(url_for("admin"))
 #---------------for announcment methodss
@@ -862,8 +865,10 @@ def DutyAssig_process():
 
     supervi = request.form['operations_Id_Selected']
     reqid = request.form['operationId']
+    hkDESIGNATION = request.form['hkDESIGNATION']
     session["supervi"] = supervi
     session['reqid'] = reqid
+    session['hkDESIGNATION'] = hkDESIGNATION
     techer.append(supervi)
 
 
@@ -905,7 +910,7 @@ def Assigment_modal_process():
     print(session["supervi"],session['reqid'])
     qury.execute("SELECT `Request` FROM `operation_request` WHERE `ID` = '"+session['reqid']+"'")
     req_Process_for_assigning_duty = qury.fetchall()
-    print(req_Process_for_assigning_duty[0][0])
+    print(">>>",req_Process_for_assigning_duty[0][0])
 
 
 
@@ -922,8 +927,11 @@ def Assigment_modal_process():
 
             # to update the sipervisor of the student in the student rec
             qury.execute("UPDATE `hk_users` SET `dutySupervisor`='"+str(session["lname"])+" "+str(session["fname"])+"' WHERE `idnum` = '" + k + "'")
+            conn.commit()
 
-
+            #to update the DUTY DESIGNATION
+            qury.execute("UPDATE `hk_users` SET `dutyDesignation`='"+session['hkDESIGNATION']+"'WHERE `idnum` = '" + k + "' ")
+            conn.commit()
 
         #to remove the rows in the website
         qury.execute("SELECT * FROM `operation_request` WHERE `ID`='"+session['reqid']+"'")
@@ -954,6 +962,13 @@ def Assigment_modal_process():
             # to update the sipervisor of the student in the student rec
             qury.execute("UPDATE `hk_users` SET `dutySupervisor`='" + str(session["lname"]) + " " + str(
                 session["fname"]) + "' WHERE `idnum` = '" + k + "'")
+            conn.commit()
+
+            # to update the DUTY DESIGNATION
+            qury.execute("UPDATE `hk_users` SET `dutyDesignation`='" + session[
+                'hkDESIGNATION'] + "'WHERE `idnum` = '" + k + "' ")
+            conn.commit()
+
 
         req_need_std = int(req_Process_for_assigning_duty[0][0])-len(checkList)
         qury.execute("UPDATE `operation_request` SET `Request`='"+str(req_need_std)+"' WHERE `ID` ='"+session['reqid']+"' ")
