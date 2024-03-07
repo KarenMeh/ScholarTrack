@@ -78,7 +78,7 @@ adminls = []
 #------------admin data---------------------
 
 
-qury.execute("SELECT `userName` FROM `admin` ")
+qury.execute("SELECT `adminIdNumber` FROM `admin` ")
 adminUsername = qury.fetchall()
 
 adminusernamels=[]
@@ -567,14 +567,17 @@ def adminLog():
 
     useraAdmin = request.form['email']
     pswAdmin = request.form['pass']
-    session["adminUser"] = useraAdmin
+
+    qury.execute("SELECT `userName` FROM `admin` WHERE `adminIdNumber` = '"+useraAdmin+"'")
+    adminfullname = qury.fetchall()
+    session["adminUser"] = adminfullname[0][0]
 
 
     check = useraAdmin+" "+pswAdmin
     if check in admin_cridentials:
         return '<script>alert("Welcome");window.location="admindashBoard"</script>'
     else:
-        return  '<script>alert("Wrong Credentials!");window.location="/adminLanding"</script>'
+        return  '<script>alert("Wrong Credetials!");window.location="/adminLanding"</script>'
 
 @app.route("/admindashBoard")
 def admindashBoard():
@@ -874,7 +877,19 @@ def DutyAssig_process():
         table = {"STUDENT ID":avil_std_list[k][0],"SCHOLAR NAME":avil_std_list[k][1]+" "+avil_std_list[k][2],"YEAR LVL":avil_std_list[k][3],"PROGRAM":avil_std_list[k][4], "DEPARTMENT":avil_std_list[k][5]}
         table_avil_std.append(table)
 
-    return render_template("dashboard admin/assignment.html", logUser=session["adminUser"],table_Assigment_Page_Admin=session["assigmentstdList"],table_avil_std=table_avil_std ,supervi=supervi)
+        # to display std whitout assigmnt
+        qury.execute("SELECT  `Status_avail` FROM `hk_users` WHERE `Status_avail` ='Na' ")
+        stduentNotAv = qury.fetchall()
+
+        # to display std whitout assigmnt
+        qury.execute("SELECT  `Status_avail` FROM `hk_users` WHERE `Status_avail` ='av' ")
+        studentAv = qury.fetchall()
+
+    return render_template("dashboard admin/assignment.html",
+                           logUser=session["adminUser"],
+                           table_Assigment_Page_Admin=session["assigmentstdList"]
+                           ,table_avil_std=table_avil_std ,supervi=supervi
+                           ,stduentNotAv=len(stduentNotAv),studentAv=len(studentAv))
 
 @app.route("/Assigment_modal_process", methods =['POST'])
 def Assigment_modal_process():
