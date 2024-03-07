@@ -144,7 +144,7 @@ for k in operation_request_DB:
 
 table_Assigment_Page_Admin =[]
 for k in range(len(operation_request)):
-    process = {"DESIGNATION": operation_request[k][0],"REQ": operation_request[k][1],"REPORT DAY/S": operation_request[k][2], "SUPERVISOR":operation_request[k][5],	"DEPT":operation_request[k][4], "REQST":operation_request[k][3],"REQ ID":operation_request[k][6]}
+    process = {"DESIGNATION": operation_request[k][0],"REQ": operation_request[k][1],"REPORT DAY/S": operation_request[k][2], "SUPERVISOR":str(operation_request[k][5]),	"DEPT":operation_request[k][4], "REQST":operation_request[k][3],"REQ ID":operation_request[k][6]}
     table_Assigment_Page_Admin.append(process)
 print(table_Assigment_Page_Admin)
 
@@ -332,13 +332,14 @@ def Dashboard():
 
 @app.route("/Request and Scholar Management")
 def request_Scholar():
+    listahan = []
     try:
 
-        qury.execute("SELECT `hk_ID`FROM `hk_assignd_teaecher` WHERE `operatikon_ID` = '"+session["lname"]+"'")
+        qury.execute("SELECT `hk_ID`FROM `hk_assignd_teaecher` WHERE `operatikon_ID` = '"+str(session["lname"])+" "+str(session["fname"])+"'")
         mYStudent_Db_Id = qury.fetchall()
         print("my student",mYStudent_Db_Id)
 
-        listahan = []
+
         for k in mYStudent_Db_Id:
             print(k[0])
             qury.execute("SELECT `idnum`,`lname`, `fname`, `id_totalHours`,  `remaningDuty`, `remDutyMins`,`statsForRenewal` FROM `hk_users` WHERE `idnum`= '"+k[0]+"'")
@@ -369,11 +370,11 @@ def Modal_request_process():
     print(dept[0][0])
 
 
-    qury.execute("INSERT INTO `operation_request`(`Designation`, `Requirements`, `Report Day/s`, `Request`, `DEPT`, `SUPERVISOR`) VALUES ('"+Designation+"','"+Requirements+"','"+Report_Days+"','"+Request+"', '"+dept[0][0]+"', '"+session['lname']+"') ")
+    qury.execute("INSERT INTO `operation_request`(`Designation`, `Requirements`, `Report Day/s`, `Request`, `DEPT`, `SUPERVISOR`) VALUES ('"+Designation+"','"+Requirements+"','"+Report_Days+"','"+Request+"', '"+dept[0][0]+"', '"+str(session['lname'])+" "+str(session['fname'])+"') ")
     conn.commit()
 
     process = {"DESIGNATION": Designation, "REQ": Requirements,
-               "REPORT DAY/S": Report_Days, "SUPERVISOR": session["lname"],
+               "REPORT DAY/S": Report_Days, "SUPERVISOR": str(session["lname"])+" "+str(session["fname"]),
                "DEPT":dept[0][0] , "REQST":Request }
     table_Assigment_Page_Admin.append(process)
 
@@ -808,6 +809,7 @@ def DutyAssig():
 
 
 
+
         # to display std whitout assigmnt
         qury.execute("SELECT  `Status_avail` FROM `hk_users` WHERE `Status_avail` ='Na' ")
         stduentNotAv = qury.fetchall()
@@ -873,7 +875,7 @@ def DutyAssig_process():
     print(avil_std_list)
 
     table_avil_std =[]
-    for k in range (len(avil_std_list)):
+    for k in range (len(avil_std_list)):#table of request of the teacher from operations
         table = {"STUDENT ID":avil_std_list[k][0],"SCHOLAR NAME":avil_std_list[k][1]+" "+avil_std_list[k][2],"YEAR LVL":avil_std_list[k][3],"PROGRAM":avil_std_list[k][4], "DEPARTMENT":avil_std_list[k][5]}
         table_avil_std.append(table)
 
@@ -905,6 +907,8 @@ def Assigment_modal_process():
     req_Process_for_assigning_duty = qury.fetchall()
     print(req_Process_for_assigning_duty[0][0])
 
+
+
     if int(req_Process_for_assigning_duty[0][0]) == len(checkList):
 #       to assign a student to selected teacher
         for k in checkList:
@@ -912,9 +916,12 @@ def Assigment_modal_process():
             qury.execute(
                 "INSERT INTO `hk_assignd_teaecher`(`operatikon_ID`, `hk_ID`) VALUES ('" + tc_selected + "','" + k + "')")
             conn.commit()
-
+            #to update if the std is avilable
             qury.execute("UPDATE `hk_users` SET `Status_avail`='Na' WHERE `idnum` = '" + k + "' ")
             conn.commit()
+
+            # to update the sipervisor of the student in the student rec
+            qury.execute("UPDATE `hk_users` SET `dutySupervisor`='"+str(session["lname"])+" "+str(session["fname"])+"' WHERE `idnum` = '" + k + "'")
 
 
 
@@ -928,6 +935,10 @@ def Assigment_modal_process():
         session["assigmentstdList"].remove(tableTodel)
         qury.execute("DELETE FROM `operation_request` WHERE `ID`='"+session['reqid']+"'")
         conn.commit()
+
+
+
+
     elif len(checkList) < int(req_Process_for_assigning_duty[0][0]) :
         for k in checkList:
             print(k)
@@ -935,8 +946,15 @@ def Assigment_modal_process():
                 "INSERT INTO `hk_assignd_teaecher`(`operatikon_ID`, `hk_ID`) VALUES ('" + tc_selected + "','" + k + "')")
             conn.commit()
 
+
+            # to update the sipervisor of the student in the student rec
             qury.execute("UPDATE `hk_users` SET `Status_avail`='Na' WHERE `idnum` = '" + k + "' ")
             conn.commit()
+
+            # to update the sipervisor of the student in the student rec
+            qury.execute("UPDATE `hk_users` SET `dutySupervisor`='" + str(session["lname"]) + " " + str(
+                session["fname"]) + "' WHERE `idnum` = '" + k + "'")
+
         req_need_std = int(req_Process_for_assigning_duty[0][0])-len(checkList)
         qury.execute("UPDATE `operation_request` SET `Request`='"+str(req_need_std)+"' WHERE `ID` ='"+session['reqid']+"' ")
         conn.commit()
