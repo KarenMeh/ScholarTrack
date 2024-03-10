@@ -175,6 +175,7 @@ def logOut():
     session.pop("lname",None)
     session.pop("fname", None)
     session.pop("assigmentstdList", None)
+    session.pop("opration_Id", None)
     
 
 
@@ -262,11 +263,16 @@ def signInprocess():
         qury.execute("SELECT `Faculty_Lname` FROM `operations_data` WHERE `Faculty_Id_Number` = '"+idNum+"'")
         lname = qury.fetchall()[0][0]
 
+        qury.execute("SELECT `Faculty_Id_Number` FROM `operations_data` WHERE `Faculty_Id_Number`= '"+idNum+"'")
+        opration_Id = qury.fetchall()[0][0]
+
+
         session["fname"] = fname
         session["lname"] = lname
 
         username = (fname+" "+lname).upper()
         session['username']=username
+        session["opration_Id"] = opration_Id
 
 
         return '<script>alert("Log in");window.location="/Dash board"</script>'
@@ -387,9 +393,33 @@ def Profile_Operations():
 
         qury.execute("SELECT `profilePics` FROM `operations_data` WHERE `Faculty_Id_Number`= '"+session["user"]+"'")
         profilepicDb = qury.fetchall()[0][0]
-        print(profilepicDb)
 
-        return render_template("dashboard operations/profile.html",logUser = session['username'],profilepicDb=profilepicDb)
+        qury.execute("SELECT `Faculty_Lname`, `Faculty_Fname`,"
+                     " `Operation_phone_Number`, `Operations_Email`,  "
+                     "`operations_about`, `twitter`, `facebook`, `instagram`, "
+                     "`linkedin` FROM `operations_data` WHERE `Faculty_Id_Number` = "
+                     "'"+session["opration_Id"]+"'")
+        operation_Db_datas = qury.fetchall()
+        operation_data_list = []
+
+        for k in operation_Db_datas[0]:
+            operation_data_list.append(k)
+        print(operation_Db_datas)
+
+
+
+        return render_template("dashboard operations/profile.html",
+                               logUser = session['username'],
+                               profilepicDb=profilepicDb,
+                               lname=session["lname"],
+                               fname=session["fname"],
+                               phone=operation_data_list[2],
+                               emailacc=operation_data_list[3],
+                               about=operation_data_list[4],
+                               twitter=operation_data_list[5],
+                               facebook=operation_data_list[6],
+                               instagram=operation_data_list[7],
+                               linkedin=operation_data_list[8])
 
     else:
         return redirect(url_for("signInPAge"))
@@ -398,13 +428,60 @@ def Profile_Operations():
 def uplaodProfile():
     print("gagana")
 
-
-
     try:
         profilePic = request.files['file']
-        profilePic.save(os.path.join(app.config['UPLOAD_DIR']+secure_filename(profilePic.filename)))
-        qury.execute("UPDATE `operations_data` SET `profilePics`='"+str(secure_filename(profilePic.filename))+"' WHERE  `Faculty_Id_Number` = '"+session["user"]+"' ")
-        conn.commit()
+        print(str(profilePic))
+        if str(profilePic) != "<FileStorage: '' ('application/octet-stream')>":
+            profilePic.save(os.path.join(app.config['UPLOAD_DIR']+secure_filename(profilePic.filename)))
+            qury.execute("UPDATE `operations_data` SET `profilePics`='"+str(secure_filename(profilePic.filename))+"' WHERE  `Faculty_Id_Number` = '"+session["user"]+"' ")
+            conn.commit()
+
+            firstName = request.form['firstName']
+            lasttName = request.form['lasttName']
+            about = request.form['about']
+            phone = request.form['phone']
+            email = request.form['email']
+            twitter = request.form['twitter']
+            facebook = request.form['facebook']#
+            instagram = request.form['instagram']#
+            linkedin = request.form['linkedin']#
+
+            qury.execute("UPDATE `operations_data` "
+                         "SET `twitter`='"+twitter+"',`facebook`='"+facebook+"',"
+                         "`instagram`='"+instagram+"',`linkedin`='"+linkedin+"',"
+                         "`operations_about`='"+about+"',`Faculty_Lname`='"+lasttName+"'"
+                         ",`Faculty_Fname`='"+firstName+"',`Operation_phone_Number`='"+phone+"'"
+                         ",`Operations_Email`='"+email+"' WHERE `Faculty_Id_Number`= "
+                         "'"+session["opration_Id"]+"' ")
+            conn.commit()
+        else:
+            print("workzz")
+            firstName = request.form['firstName']
+            lasttName = request.form['lasttName']
+            about = request.form['about']
+            phone = request.form['phone']
+            email = request.form['email']
+            twitter = request.form['twitter']
+            facebook = request.form['facebook']  #
+            instagram = request.form['instagram']  #
+            linkedin = request.form['linkedin']  #
+
+            qury.execute("UPDATE `operations_data` "
+                        "SET `twitter`='" + twitter + "',`facebook`='" + facebook + "',"
+                        "`instagram`='" + instagram + "',`linkedin`='" + linkedin + "',"
+                        "`operations_about`='" + about + "',`Faculty_Lname`='" + lasttName + "'"
+                        ",`Faculty_Fname`='" + firstName + "',`Operation_phone_Number`='" + phone + "'"
+                        ",`Operations_Email`='" + email + "' WHERE `Faculty_Id_Number`= '" +
+                         session["opration_Id"] + "' ")
+            conn.commit()
+
+
+
+
+
+
+
+
     except RequestEntityTooLarge:
         return '<script>alert("file to large");window.location="/Profile"</script>'
 
@@ -826,7 +903,7 @@ def DutyAssig():
         return render_template("dashboard admin/assignment.html",
                                logUser=session["adminUser"],
                                table_Assigment_Page_Admin = table_Assigment_Page_Admin1
-                               ,stduentNotAv=len(stduentNotAv),studentAv=len(studentAv) )
+                               ,stduentNotAv=len(studentAv),studentAv=len(stduentNotAv) )
     except Exception:
         return redirect(url_for("admin"))
 #---------------for announcment methodss

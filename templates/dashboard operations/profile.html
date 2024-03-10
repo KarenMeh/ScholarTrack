@@ -196,10 +196,10 @@
               <h2>{{logUser}}</h2>
               <h3>Faculty</h3>
               <div class="social-links mt-2">
-                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="https://web.facebook.com/kurt.parel" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                <a href="{{twitter}}" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="{{facebook}}" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="{{instagram}}" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="{{linkedin}}" class="linkedin"><i class="bi bi-linkedin"></i></a>
               </div>
             </div>
           </div>
@@ -287,16 +287,23 @@
                     </div>
 
                     <div class="row mb-3">
-                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
+                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">First Name</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="fullName" type="text" class="form-control" id="fullName" value="{{logUser}}">
+                        <input name="firstName" type="text" class="form-control" id="fullName" value="{{fname}}">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="lastName" class="col-md-4 col-lg-3 col-form-label">Last Name</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="lasttName" type="text" class="form-control" id="lastName" value="{{lname}}">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
                       <div class="col-md-8 col-lg-9">
-                        <textarea name="about" class="form-control" id="about" style="height: 100px"></textarea>
+                        <textarea name="about" class="form-control" id="about"  placeholder="" style="height: 100px">{{about}}</textarea>
                       </div>
                     </div>
 
@@ -304,42 +311,42 @@
                     <div class="row mb-3">
                       <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="phone" type="text" class="form-control" id="Phone" value="">
+                        <input name="phone" type="text" class="form-control" id="Phone" value="{{phone}}">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="email" type="email" class="form-control" id="Email" value="">
+                        <input name="email" type="email" class="form-control" id="Email" value="{{emailacc}}">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="twitter" type="text" class="form-control" id="Twitter" value="">
+                        <input name="twitter" type="text" class="form-control" id="Twitter" value="{{twitter}}">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook Profile</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="facebook" type="text" class="form-control" id="Facebook" value="">
+                        <input name="facebook" type="text" class="form-control" id="Facebook" value="{{facebook}}">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram Profile</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="instagram" type="text" class="form-control" id="Instagram" value="">
+                        <input name="instagram" type="text" class="form-control" id="Instagram" value="{{instagram}}">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin Profile</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="linkedin" type="text" class="form-control" id="Linkedin" value="">
+                        <input name="linkedin" type="text" class="form-control" id="Linkedin" value="{{linkedin}}">
                       </div>
                     </div>
 
