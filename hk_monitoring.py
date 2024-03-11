@@ -988,11 +988,45 @@ def DutyAssig_process():
         qury.execute("SELECT  `Status_avail` FROM `hk_users` WHERE `Status_avail` ='av' ")
         studentAv = qury.fetchall()
 
+        # this is for puting value to the pai charts
+        qury.execute("SELECT `department` FROM `hk_users`")
+        department_data_db = qury.fetchall()
+
+        coa = []
+        coed = []
+        cite = []
+        com = []
+        ccje = []
+        coe = []
+        cahs = []
+        come = []
+        for k in department_data_db:
+
+            if str(k[0]).upper() == "COA":
+                coa.append(str(k[0]).upper())
+            elif str(k[0]).upper() == "COED":
+                coed.append(str(k[0]).upper())
+            elif str(k[0]).upper() == "CITE":
+                cite.append(str(k[0]).upper())
+            elif str(k[0]).upper() == "COM":
+                com.append(str(k[0]).upper())
+            elif str(k[0]).upper() == "CCJE":
+                ccje.append(str(k[0]).upper())
+            elif str(k[0]).upper() == "COE":
+                coe.append(str(k[0]).upper())
+            elif str(k[0]).upper() == "CAHS":
+                cahs.append(str(k[0]).upper())
+            elif str(k[0]).upper() == "COME":
+                come.append(str(k[0]).upper())
+
     return render_template("dashboard admin/assignment.html",
                            logUser=session["adminUser"],
                            table_Assigment_Page_Admin=session["assigmentstdList"]
                            ,table_avil_std=table_avil_std ,supervi=supervi
-                           ,stduentNotAv=len(stduentNotAv),studentAv=len(studentAv))
+                           ,stduentNotAv=len(stduentNotAv),studentAv=len(studentAv)
+                           ,coa = len(coa), coed = len(coed),cite = len(cite),
+                            com = len(com),ccje = len(ccje),coe = len(coe),
+                            cahs = len(cahs),come = len(come))
 
 @app.route("/Assigment_modal_process", methods =['POST'])
 def Assigment_modal_process():
