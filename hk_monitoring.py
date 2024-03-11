@@ -238,11 +238,12 @@ def indexprocess():
         return '<script>alert("Email already used");window.location="/register"</script>'
 
 
-#---------------------------------log in-----------------------------------------------------
+#---------------------------------/Sign in-----------------------------------------------------
 
 
 @app.route("/Sign in")
 def signInPAge():
+    print(faculty_credintials)
     return render_template("SignIn.html")
 
 
@@ -387,24 +388,30 @@ def Modal_request_process():
     return '<script>alert("Request Sent!!");window.location="/Request and Scholar Management"</script>'
 
 
+#-----------------------------end of operations requesr--------------------------------------------------
+
+
+#-------------------------------------profile------------------------------------------
 @app.route("/Profile")
 def Profile_Operations():
     if "username" in session:
 
         qury.execute("SELECT `profilePics` FROM `operations_data` WHERE `Faculty_Id_Number`= '"+session["user"]+"'")
         profilepicDb = qury.fetchall()[0][0]
-
+        #fetch all data need to show in edit profile
         qury.execute("SELECT `Faculty_Lname`, `Faculty_Fname`,"
                      " `Operation_phone_Number`, `Operations_Email`,  "
                      "`operations_about`, `twitter`, `facebook`, `instagram`, "
-                     "`linkedin` FROM `operations_data` WHERE `Faculty_Id_Number` = "
+                     "`linkedin`,`Address` FROM `operations_data`  WHERE `Faculty_Id_Number` = "
                      "'"+session["opration_Id"]+"'")
         operation_Db_datas = qury.fetchall()
         operation_data_list = []
-
         for k in operation_Db_datas[0]:
             operation_data_list.append(k)
-        print(operation_Db_datas)
+
+
+        qury.execute("SELECT `Operation_Designation-Position`FROM `operations_data` WHERE `Faculty_Id_Number` = '"+session["opration_Id"]+"'")
+        Job = str(qury.fetchall()[0][0]).upper()
 
 
 
@@ -419,21 +426,21 @@ def Profile_Operations():
                                twitter=operation_data_list[5],
                                facebook=operation_data_list[6],
                                instagram=operation_data_list[7],
-                               linkedin=operation_data_list[8])
+                               linkedin=operation_data_list[8],
+                               Address=str(operation_data_list[9]).upper(),
+                               Job=Job)
 
     else:
         return redirect(url_for("signInPAge"))
 
 @app.route("/uplaodProfile", methods=['POST']) #to upate profile picture of operations
 def uplaodProfile():
-    print("gagana")
 
     try:
         profilePic = request.files['file']
-        print(str(profilePic))
         if str(profilePic) != "<FileStorage: '' ('application/octet-stream')>":
             profilePic.save(os.path.join(app.config['UPLOAD_DIR']+secure_filename(profilePic.filename)))
-            qury.execute("UPDATE `operations_data` SET `profilePics`='"+str(secure_filename(profilePic.filename))+"' WHERE  `Faculty_Id_Number` = '"+session["user"]+"' ")
+            qury.execute("UPDATE `operations_data` SET `profilePics`='"+str(secure_filename(profilePic.filename))+"' WHERE  `Faculty_Id_Number` = '"+session["opration_Id"]+"' ")
             conn.commit()
 
             firstName = request.form['firstName']
@@ -442,36 +449,37 @@ def uplaodProfile():
             phone = request.form['phone']
             email = request.form['email']
             twitter = request.form['twitter']
-            facebook = request.form['facebook']#
-            instagram = request.form['instagram']#
-            linkedin = request.form['linkedin']#
+            facebook = request.form['facebook']
+            instagram = request.form['instagram']
+            linkedin = request.form['linkedin']
+            Address = request.form['Address']
 
             qury.execute("UPDATE `operations_data` "
                          "SET `twitter`='"+twitter+"',`facebook`='"+facebook+"',"
                          "`instagram`='"+instagram+"',`linkedin`='"+linkedin+"',"
                          "`operations_about`='"+about+"',`Faculty_Lname`='"+lasttName+"'"
                          ",`Faculty_Fname`='"+firstName+"',`Operation_phone_Number`='"+phone+"'"
-                         ",`Operations_Email`='"+email+"' WHERE `Faculty_Id_Number`= "
+                         ",`Operations_Email`='"+email+"',`Address`='"+Address+"' WHERE `Faculty_Id_Number`= "
                          "'"+session["opration_Id"]+"' ")
             conn.commit()
         else:
-            print("workzz")
             firstName = request.form['firstName']
             lasttName = request.form['lasttName']
             about = request.form['about']
             phone = request.form['phone']
             email = request.form['email']
             twitter = request.form['twitter']
-            facebook = request.form['facebook']  #
-            instagram = request.form['instagram']  #
-            linkedin = request.form['linkedin']  #
+            facebook = request.form['facebook']
+            instagram = request.form['instagram']
+            linkedin = request.form['linkedin']
+            Address = request.form['Address']
 
             qury.execute("UPDATE `operations_data` "
                         "SET `twitter`='" + twitter + "',`facebook`='" + facebook + "',"
                         "`instagram`='" + instagram + "',`linkedin`='" + linkedin + "',"
                         "`operations_about`='" + about + "',`Faculty_Lname`='" + lasttName + "'"
                         ",`Faculty_Fname`='" + firstName + "',`Operation_phone_Number`='" + phone + "'"
-                        ",`Operations_Email`='" + email + "' WHERE `Faculty_Id_Number`= '" +
+                        ",`Operations_Email`='" + email + "',`Address`='"+Address+"' WHERE `Faculty_Id_Number`= '" +
                          session["opration_Id"] + "' ")
             conn.commit()
 
@@ -490,8 +498,39 @@ def uplaodProfile():
 
     return redirect(url_for("Profile_Operations"))
 
-#-----------------------------end of operations requesr--------------------------------------------------
 
+@app.route("/change_password_operations", methods=['POST'])
+def change_password_operations():
+
+    old_password = request.form['password']
+    new_password = request.form['newpassword']
+    re_enter_password = request.form['renewpassword']
+    print(old_password,new_password,re_enter_password)
+
+    qury.execute("SELECT `Faculty_Password` FROM `operations_data` WHERE `Faculty_Id_Number` = '"+session["opration_Id"]+"'")
+    old_password_db = qury.fetchall()[0][0]
+    if old_password == old_password_db:
+        if new_password == re_enter_password:
+            qury.execute("UPDATE `operations_data` SET `Faculty_Password`='"+str(new_password)+"' WHERE `Faculty_Id_Number` = '"+session["opration_Id"]+"' ")
+            conn.commit()
+
+            # -----------------operations Datas-------------------------------------------
+
+            faculty_credintials.insert(faculty_credintials.index(session["opration_Id"]+" "+old_password),session["opration_Id"]+" "+new_password)
+            faculty_credintials.remove(str(session["opration_Id"]+" "+old_password))
+
+
+
+            return '<script>alert("Password had been updated");window.location="/Profile"</script>'
+        else:
+            return '<script>alert("New password did not match");window.location="/Profile"</script>'
+    else:
+        return '<script>alert("Old password did not match");window.location="/Profile"</script>'
+
+    return redirect(url_for("Profile_Operations"))
+
+
+#------------ end of operation profile--------------------
 
 
 
@@ -534,56 +573,6 @@ def showDutyHours():
 #-------------------------------------request end-------------------------------------
 
 
-
-
-
-#-------------------------------------Profile-------------------------------------------------------
-@app.route("/Profile")
-def profile():
-    return render_template("Profile.html",lname=session["lname"],fname=session["fname"])
-
-@app.route("/Profile process", methods=['POST'])
-def ProfileProcess():
-
-    newFname = request.form['fnameNew']
-    newLname = request.form['lnameNew']
-    oldpsw = request.form['OldPassword']
-    newpsw = request.form['NewPassword']
-    qury.execute("SELECT`password`FROM `hk_users` WHERE `email`='"+session["user"]+"' ")
-    pswcon = qury.fetchall()
-    print(pswcon)
-
-
-    if oldpsw == str(pswcon[0][0]) :
-        print("true")
-        qury.execute("UPDATE `hk_users` SET `fname`='"+newFname+"',`lname`='"+newLname+"',`password`='"+newpsw+"'WHERE `email` ='"+session["user"]+"'")
-        conn.commit()
-
-        flash("Update sucess!! pls Re-login to see changes", "info")
-
-    else:
-
-        flash("wrong old password", "info")
-
-    return redirect(url_for("profile"))
-
-@app.route("/Acc del")
-def accDel():
-
-    return render_template("deleteAccount.html")
-@app.route("/delProcess", methods=['POST'])
-def delProccess():
-
-    qury.execute("DELETE FROM `hk_users` WHERE `email` = '"+session['user']+"'")
-    conn.commit()
-
-    qury.execute("DELETE FROM `dutyhourformulationdata` WHERE `email` = '" + session['user'] + "'")
-    conn.commit()
-    session.pop("user",None)
-
-    flash("Account Deleted!")
-    return redirect(url_for("indexpage"))
-#-------------------------------------end Profile---------------------------------------------------
 
 #------------------------------------scholar info searching--------------------------------------------------
 @app.route("/search_PAge")

@@ -231,7 +231,7 @@
 
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
                   <h5 class="card-title">About</h5>
-                  <p class="small fst-italic"> IT Instructor in College of Information Technology Education. With expertise in the field of robotics, programming, and cybersecurity.  </p>
+                  <p class="small fst-italic">{{about}}  </p>
 
                   <h5 class="card-title">Profile Details</h5>
 
@@ -243,23 +243,23 @@
                  
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Job</div>
-                    <div class="col-lg-9 col-md-8">Teacher</div>
+                    <div class="col-lg-9 col-md-8">{{Job}}</div>
                   </div>
 
         
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Address</div>
-                    <div class="col-lg-9 col-md-8"> Iloilo City</div>
+                    <div class="col-lg-9 col-md-8"> {{Address}}</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Phone</div>
-                    <div class="col-lg-9 col-md-8">099-8342-303</div>
+                    <div class="col-lg-9 col-md-8">{{phone}}</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Email</div>
-                    <div class="col-lg-9 col-md-8">kurtvena@gmailm</div>
+                    <div class="col-lg-9 col-md-8">{{emailacc}}</div>
                   </div>
 
                 </div>
@@ -316,6 +316,13 @@
                     </div>
 
                     <div class="row mb-3">
+                      <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="Address" type="text" class="form-control" id="Address" value="{{Address}}">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
                       <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="email" type="email" class="form-control" id="Email" value="{{emailacc}}">
@@ -363,26 +370,26 @@
 
                 <div class="tab-pane fade pt-3" id="profile-change-password">
                   <!-- Change Password Form -->
-                  <form>
+                  <form action="/change_password_operations" method="post">
 
                     <div class="row mb-3">
                       <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="password" type="password" class="form-control" id="currentPassword">
+                        <input name="password" required type="password" class="form-control" id="currentPassword">
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+                      <label for="newPassword"   class="col-md-4 col-lg-3 col-form-label">New Password</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="newpassword" type="password" class="form-control" id="newPassword">
+                        <input name="newpassword" required type="password" class="form-control" id="newPassword">
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
+                      <label for="renewPassword"  class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="renewpassword" type="password" class="form-control" id="renewPassword">
+                        <input name="renewpassword" type="password" class="form-control" required id="renewPassword">
                       </div>
                     </div>
 
