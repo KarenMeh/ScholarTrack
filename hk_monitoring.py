@@ -330,7 +330,7 @@ def Dashboard():
         return render_template("dashboard operations/OpartionsDashBoard.html",
                                logUser = session['username'],
                                dateTimeLista_announcment=dateTimeLista_announcment,
-                               profilepicDb=profilepicDb,complirate=str(complirate)+"%",
+                               profilepicDb=profilepicDb,complirate=str(complirate.__round__())+"%",
                                number_of_stndt=len(number_of_stndt))
 
     else:
@@ -686,7 +686,7 @@ def admindashBoard():
                                dateTimeLista_announcment=dateTimeLista_announcment,
                                number_of_stndt=len(number_of_stndt),
                                stduentNotAv=len(stduentNotAv),
-                               studentAv=len(studentAv),complirate=str(complirate)+"%")
+                               studentAv=len(studentAv),complirate=str(complirate.__round__())+"%")
     else:
         return redirect(url_for("admin"))
 
@@ -717,8 +717,7 @@ def compliance():
             std_fullNmae = str(student_info[counter_Table1][3]) + " " + str(student_info[counter_Table1][2])
             dataProcess = {"STUDENT ID": student_info[counter_Table1][0], "SCHOLAR NAME": std_fullNmae,
                            "COMPLETED HOURS": student_info[counter_Table1][5] + "m",
-                           "REMAINING HOURS": student_info[counter_Table1][13] + "h " +
-                                              str(float(student_info[counter_Table1][14]).__round__()).split(".")[0] + "m",
+                           "REMAINING HOURS": student_info[counter_Table1][13] + "h " +str(float(student_info[counter_Table1][14]).__round__()).split(".")[0] + "m",
                            "STATUS": student_info[counter_Table1][15]}
             table_OfStudent_Info.append(dataProcess)
             counter_Table1 += 1
@@ -873,9 +872,6 @@ def DutyAssig():
             table_Assigment_Page_Admin1.append(process)
         print(table_Assigment_Page_Admin1)
 
-
-
-
         # to display std whitout assigmnt
         qury.execute("SELECT  `Status_avail` FROM `hk_users` WHERE `Status_avail` ='Na' ")
         stduentNotAv = qury.fetchall()
@@ -885,15 +881,49 @@ def DutyAssig():
         studentAv = qury.fetchall()
 
 
+# this is for puting value to the pai charts
+        qury.execute("SELECT `department` FROM `hk_users`")
+        department_data_db= qury.fetchall()
 
+        coa = []
+        coed = []
+        cite = []
+        com = []
+        ccje = []
+        coe = []
+        cahs = []
+        come = []
+        for k in department_data_db:
 
+            if str(k[0]).upper() == "COA":
+                coa.append(str(k[0]).upper())
+            elif str(k[0]).upper() =="COED":
+                coed.append(str(k[0]).upper())
+            elif str(k[0]).upper() =="CITE":
+                cite.append(str(k[0]).upper())
+            elif str(k[0]).upper() =="COM":
+                com.append(str(k[0]).upper())
+            elif str(k[0]).upper() =="CCJE":
+                ccje.append(str(k[0]).upper())
+            elif str(k[0]).upper() =="COE":
+                coe.append(str(k[0]).upper())
+            elif str(k[0]).upper() =="CAHS":
+                cahs.append(str(k[0]).upper())
+            elif str(k[0]).upper() =="COME":
+                come.append(str(k[0]).upper())
+
+        print(coa ,coed ,cite ,com ,ccje,coe,cahs,come)
 
 
         return render_template("dashboard admin/assignment.html",
                                logUser=session["adminUser"],
                                table_Assigment_Page_Admin = table_Assigment_Page_Admin1
-                               ,stduentNotAv=len(studentAv),studentAv=len(stduentNotAv) )
+                               ,stduentNotAv=len(studentAv),studentAv=len(stduentNotAv)
+                               ,coa = len(coa), coed = len(coed),cite = len(cite),
+                               com = len(com),ccje = len(ccje),coe = len(coe),
+                               cahs = len(cahs),come = len(come) )
     except Exception:
+
         return redirect(url_for("admin"))
 #---------------for announcment methodss
 @app.route("/Announcement", methods=['POST'])
