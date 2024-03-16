@@ -164,6 +164,8 @@ timeInList =[]
 @app.route("/LogoutAdmin", methods=['POST'])
 def logOutAmin():
     session.pop("adminUser",None)
+    session.pop("Duty_record_table", None)
+    session.pop("student_Id_num", None)
     return '<script>alert("Log Out");window.location="/"</script>'
 
 
@@ -1211,18 +1213,23 @@ def student_rec_process():
         remaningDuty=remaningDuty,statsuForRenewal=statsuForRenewal,Schoolyr=Schoolyr,semister=semister, remDutyMin = remDutyMin[0])
 
 
-
+#-------------------------END OF ADMIN SIDE BARS------------------
 @app.route("/Duty_Records", methods=['POST'])
 def Duty_Records():
     DUTY_Id_Num = request.form.get('Duty_Id')
+    session["student_Id_num"]=DUTY_Id_Num
 
     qury.execute("SELECT * FROM `scholar_duty_records` WHERE `Student_id_Number` = '"+DUTY_Id_Num+"'")
     rec_list_Db = qury.fetchall()
+
 
     rec_list = []
     for k in rec_list_Db:
         rec_list.append(k)
     record_table = []
+    print(record_table)
+
+    session["Duty_record_table"] = record_table
     time_in = ""
 #----- solve the renderd duty hours in minutes format-----------
     total_duty = 0
@@ -1248,11 +1255,40 @@ def Duty_Records():
             conn.commit()
 
 
-
-
     return render_template("dashboard admin/dutyrecords.html", DUTY_Id_Num =DUTY_Id_Num, record_table= record_table)
 
-#-------------------------END OF ADMIN SIDE BARS------------------
+@app.route("/delete_records", methods = ['POST'])
+def delete_records():
+    DATE = request.form.get('DATE')
+    CHECK_IN_TIME = request.form.get('CHECK-IN TIME')
+    check_in_time = CHECK_IN_TIME.split(":")
+    check_in_time_Hours = check_in_time[0]
+    check_in_time_Mins = check_in_time[1]
+
+
+    CHECK_OUT_TIME = request.form.get('CHECK-OUT TIME')
+    check_out_time = CHECK_OUT_TIME.split(":")
+    check_out_time_Hours = check_out_time[0]
+    check_out_time_Mins = check_out_time[1]
+
+
+    qury.execute("DELETE FROM `scholar_duty_records` WHERE `date` = '"+str(DATE)+"'"
+                " AND `Hours_In_Out` = '"+str(check_in_time_Hours)+"'"
+                " AND `Minutes_In_Out` = '"+str(check_in_time_Mins)+"' "
+                "AND `Student_id_Number` = '"+session["student_Id_num"]+"' ")
+    conn.commit()
+    qury.execute("DELETE FROM `scholar_duty_records` WHERE `date` = '" + str(DATE) + "'"
+                " AND `Hours_In_Out` = '" + str(check_out_time_Hours) + "'"
+                " AND `Minutes_In_Out` = '" + str(check_out_time_Mins) + "' "
+                "AND `Student_id_Number` = '" +session["student_Id_num"] + "' ")
+    conn.commit()
+
+
+    print(DATE,CHECK_IN_TIME,CHECK_OUT_TIME,session["student_Id_num"])
+    print(session["Duty_record_table"][0])
+
+    return render_template("dashboard admin/dutyrecords.html",record_table=session["Duty_record_table"] )
+
 
 
 
@@ -1356,7 +1392,7 @@ def StudentTimeIN_Out():
                     HourTo_min = durationoH * 60
                     totalduty_mins = HourTo_min + durationm
 
-                    print("ngaa",totalduty_mins)
+
                     total_duty += totalduty_mins
                     print(total_duty)
                     duration = f"{durationoH:}h {durationm:02d}m"

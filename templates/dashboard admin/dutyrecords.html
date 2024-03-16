@@ -617,6 +617,7 @@ hr.new2 {
              
             </tr>
           </thead>
+          <form action="/delete_records" method="post">
           <tbody>
           {%for row in record_table%}
             <tr>
@@ -624,10 +625,17 @@ hr.new2 {
               <td>{{row['CHECK-IN TIME']}}</td>
               <td>{{row['CHECK-OUT TIME']}}</td>
               <td>{{row['DURATION']}}</td>
+
+
                  <td><button type="submit" name="select" value="select"> <i style="margin-left: 0.5em; color: #000000;"><i class="bi bi-trash"></i></button></td>
+                <input type="hidden" name="DATE" value="{{row['DATE']}}">
+                <input type="hidden" name="CHECK-IN TIME" value="{{row['CHECK-IN TIME']}}">
+                <input type="hidden" name="CHECK-OUT TIME" value="{{row['CHECK-OUT TIME']}}">
+                <input type="hidden" name="DURATION" value="{{row['DURATION']}}">
             </tr>
            {% endfor %}
           </tbody>
+            </form>
         </table>
       </div>
    
