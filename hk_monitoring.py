@@ -355,7 +355,7 @@ def request_Scholar():
 
         student_underMe=[]
         for k in range(len(listahan)):
-            tables = {"STUDENT ID":listahan[k][0],"SCHOLAR NAME":listahan[k][1]+" "+listahan[k][2],"COMPLETED HOURS":listahan[k][3],"REMAINING HOURS":listahan[k][4]+"h "+str(float(listahan[k][5]).__round__()).split(".")[0]+"m","STATUS":listahan[k][6]}
+            tables = {"STUDENT ID":listahan[k][0],"SCHOLAR NAME":listahan[k][1]+" "+listahan[k][2],"COMPLETED HOURS":str(listahan[k][3])+"m","REMAINING HOURS":listahan[k][4]+"h "+str(float(listahan[k][5]).__round__()).split(".")[0]+"m","STATUS":listahan[k][6]}
             student_underMe.append(tables)
         #select profile pic
         qury.execute("SELECT `profilePics` FROM `operations_data` WHERE `Faculty_Id_Number`= '" + session["user"] + "'")
