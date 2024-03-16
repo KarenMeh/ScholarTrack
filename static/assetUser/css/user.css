@@ -797,9 +797,10 @@ th {
 .dashboard .recent-sales .table thead th {
   border: 10;
   color: #ffffff;
-  margin-left: 30px;
+  margin-left: 3px;
   text-align: center;
   background-color: #012970;
+  padding-right: -90px;
 }
 
 .container .sarch :placeholder-shown {
@@ -832,6 +833,7 @@ th {
 .table thead th {
   background-color: #012970;
   color: white;
+  padding-right: -90px;
 }
 .table tbody td button {
   border: none;

@@ -877,7 +877,7 @@ th {
 
 .table tbody td {
   border: 10;
-  font-size: 15px;
+  font-size: 14px;
   text-align: center;
   padding: 10px;
   padding-top: 15px;
@@ -889,14 +889,18 @@ th {
   color: #ffffff;
   font-size: 7px;
   background-color: #012970;
-  margin-left: 30px;
+  align-items: center;
+  margin-right: 30px;
+  align-self: center;
   text-align: center;
+  
+ 
+ 
 }
 
 .dashboard .recent-sales .table tbody td button {
   border: none;
   background: none;
-
   text-decoration: none;
 }
 .dashboard .recent-sales .dataTable-top {
