@@ -181,14 +181,15 @@
         </li> End Profile Page Nav -->
   
       
-         <li class="nav-item">
+      
+        <li class="nav-item">
           <a class="nav-link collapsed" href="/Export to Excel">
             <div class="comp">
-              <img src="/static/assetUser/img/excel.png" alt="" width="20px">
+              <img src="/static/assetUser/img/SINFO.png" alt="" width="20px">
             </div>
-            <span>Export to Excel</span>
-          </a> 
-        </li>
+            <span>Scholar Information</span>
+          </a>
+        </li><!-- End Profile Page Nav -->
       
         <li class="nav-item">
           <a class="nav-link collapsed" href="/Setting and Configurations">
@@ -265,6 +266,8 @@
               <th scope="col">DEPT</th>
                <th scope="col">REQID</th>
               <th scope="col"> SELECT </th>
+              <th scope="col">  </th>
+              <th scope="col">  </th>
 
 
             </tr>
@@ -308,7 +311,7 @@
       </div>
       <div class="modal-body">
 
-        <p>Assign a Student fo : {{supervi}}</p>
+        <p>Assign a Student for : {{supervi}}</p>
           
 
 
@@ -435,6 +438,65 @@
           </div><!-- End Customers Card -->
 
         </div><!-- End Left side columns -->
+
+        <!-- Left side columns -->
+    
+        <div class="row">
+
+          <!-- Sales Card -->
+          <div class="col-6 " >
+            <div class="card info-card sales-card">
+
+              <div class="card-body">
+                <h5 class="card-title"> Unassigned Scholar </h5>  <hr class="new1">
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon  d-flex align-items-center justify-content-center">
+                    <div class="piktur">
+                    <img src="/static/assetUser/img/boty.png" alt="" width="98px">
+                  </div>
+                  </div>
+                  <div class="ps-5">
+                    <h6> {{stduentNotAv}}</h6>
+                    <span class="text-success small pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1"></span>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div><!-- End Sales Card -->
+
+          
+      <!-- Right side columns -->
+      <div class="col-lg-6">
+
+
+
+          <div class="card info-card customers-card">
+            <div class="card-body">
+              <h5 class="card-title"> Assigned Scholar </h5> <hr class="new2">
+
+              <div class="d-flex align-items-center">
+                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                  <div class="piktur">
+                    <img src="/static/assetUser/img/girl.png" alt="" width="92px">
+                  </div>
+                </div>
+                <div class="ps-5">
+                  <h6> {{studentAv}}</h6>
+                  <!-- <h6> {{remduty}}</h6> -->
+                  <span class="text-danger small pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1"></span>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div><!-- End Customers Card -->
+
+      </div><!-- End Left side columns -->
     </section>
   </div>
 
