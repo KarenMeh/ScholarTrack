@@ -385,7 +385,15 @@ def request_Scholar():
 def Modal_request_process():
     Designation = request.form['Designation']
     Requirements = request.form['Requirements']
-    Report_Days = request.form['Report Day/s']
+    Report_Days_mon = request.form.get("monday")
+    Report_Days_mon = request.form.get("tuesday")
+    Report_Days_mon = request.form.get("wednesday")
+    Report_Days_mon = request.form.get("")
+    Report_Days_mon = request.form.get("")
+    Report_Days_mon = request.form.get("")
+    Report_Days_mon = request.form.get("")
+
+
     Request = request.form['Request']
 
     qury.execute("SELECT `Operation_Dept` FROM `operations_data` WHERE `Faculty_Id_Number` = '"+str(session["user"])+"' ")
