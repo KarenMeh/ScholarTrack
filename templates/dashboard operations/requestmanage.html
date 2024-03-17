@@ -246,7 +246,7 @@
 
      
               <label for="Requirement">Department</label>
-              <select name="Requirements" id="Designation" required>
+              <select name="dept" id="Designation" required>
                 <option value="">Select</option>
                 <option value="COM">COM</option>
                 <option value="COA">COA</option>
@@ -258,12 +258,11 @@
                 <option value="COME">COME</option>
                 
               </select>
+              <label for="quantity">Number of Students:</label>
+              <input type="number" id="quantity" name="Request" min="1" max="10">
+
               <br>
 
-              <label> Description</label>
-
-              <textarea rows="5" cols="30" name="description" required>
-              </textarea>
                 <input type="Submit" value="Submit" name="request">
 
             </form>
