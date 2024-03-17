@@ -12,6 +12,7 @@ app.secret_key = "i love you cute"
 mysql = MySQL()
 
 #dir whare photo are stored
+#dir whare photo are stored
 app.config['UPLOAD_DIR']="static/profilePics/"
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 

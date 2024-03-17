@@ -30,7 +30,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
   <!-- Template Main CSS File -->
-  <link href="/static/assetUser/css/compliance.css" rel="stylesheet">
+  <link href="/static/assetUser/css/request.css" rel="stylesheet">
   <style>
     .bi-calendar2-minus {
       font-size: 20px;
@@ -194,10 +194,8 @@
                 <div class="card-body">
   <div class="card-title2">Assigned Scholar List</span>
 
-               <div class="container">
-               
-               </div>
-
+  
+    <div class="container">
     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Request Scholar Assistance</button>
   
     <!-- Modal -->
@@ -211,48 +209,81 @@
           </div>
           <div class="modal-body">
             <form action="/Modal_request_process" method="post">
-                <label>Designation</label>
-                <input type="text" name="Designation" required><br>
-                <label>Requirements</label>
-                <input type="text" name="Requirements" required><br>
-                <label>Report Day/s</label>
-                <input type="text" name="Report Day/s" required><br>
-                <label>Request</label>
-                <input type="text" name="Request" required>
 
+              <label for="Designation">Designation</label>
+              <select name="Designation" id="Designation" required>
+                <option value="">Select</option>
+                <option value="SF">Student Facilitator(SF)</option>
+                <option value="AF">Assistant Facilitator(AF)</option>
+                <option value="mercedes">Clerk</option>
+               
+              </select>
+
+              <label for="Requirement">Specification</label>
+              <select name="Requirements" id="Designation" required>
+                <option value="">Select</option>
+                <option value="volvo">First Year</option>
+                <option value="saab">Second Year</option>
+                <option value="mercedes">Third Year</option>
+                <option value="audi">Fourth Year</option>
+              </select>
+
+              <label for="Requirement">Reporting Days: </label> </br>
+                <input type="checkbox"  name="monday" value="Monday">
+                <label for="vehicle1"> Monday</label><br>
+                <input type="checkbox"  name="tuesday" value="Tuesday">
+                <label for="vehicle2"> Tuesday</label><br>
+                <input type="checkbox" name="wednesday" value="Wednesday">
+                <label for="vehicle3"> Wednesday</label><br>
+                <input type="checkbox"  name="thursday" value="Thursday">
+                <label for="vehicle2"> Thursday</label><br>
+                <input type="checkbox" name="friday" value="Friday">
+                <label for="vehicle3"> Friday</label><br>
+                <input type="checkbox"  name="saturday" value="Saturday">
+                <label for="vehicle2"> Saturday</label><br>
+                
+
+
+     
+              <label for="Requirement">Department</label>
+              <select name="Requirements" id="Designation" required>
+                <option value="">Select</option>
+                <option value="">COM</option>
+                <option value="">COA</option>
+                <option value="">COED</option>
+                <option value="">CCJE</option>
+                <option value="">COE</option>
+                <option value="">CAHS</option>
+                <option value="">CITE</option>
+                <option value="">COME</option>
+                
+              </select>
+              <br>
+
+              <label> Description</label>
+
+              <textarea rows="5" cols="30" name="description" required>
+              </textarea>
                 <input type="Submit" value="Submit" name="request">
 
             </form>
-          
-          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
-        </div>
         
+          
+        </div>
       </div>
     </div>
     
    </div>
 
-                </div>
+</div>
+</div>
 
               
 
-                  </ul>
-                  <br>
-
-
-
-
-                  <div class="search-bar">
-                    <div class="container">
-
-                 <input class="search-form d-flex align-items-center" id="myInput" type="text" placeholder="Search.." >
-
-
-                  <br>
-                  </div>
+      
                            <!-- Table with stripped rows -->
                 <table class="table datatable">
                   <thead>
@@ -275,7 +306,7 @@
                       <td>{{row['COMPLETED HOURS']}}</td>
                         <td>{{row['REMAINING HOURS']}}</td>
                     <td>{{row['STATUS']}}</td>
-                        <td></td>
+                       
 
                         </form>
                     </tr>
@@ -382,3 +413,12 @@
     });
   });
   </script>
+ 
+  <script>
+    const toggleDropdown = document.getElementById('toggle-dropdown');
+    const optionsContainer = document.querySelector('.options');
+
+    toggleDropdown.addEventListener('change', () => {
+        optionsContainer.classList.toggle('open');
+    });
+</script>

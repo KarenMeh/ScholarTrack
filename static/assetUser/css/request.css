@@ -87,8 +87,8 @@ h6 {
 }
 
 /*--------------------------------------------------------------
-    # Override some default Bootstrap stylings
-    --------------------------------------------------------------*/
+  # Override some default Bootstrap stylings
+  --------------------------------------------------------------*/
 /* Dropdown menus */
 .dropdown-menu {
   border-radius: 4px;
@@ -204,7 +204,7 @@ h6 {
 
 .card-title2 {
   padding: 20px 0 2px 0;
-  font-size: 30px;
+  font-size: 25px;
   font-weight: bold;
 
   letter-spacing: 2px;
@@ -242,8 +242,8 @@ h6 {
 }
 
 /*--------------------------------------------------------------
-    # Header
-    --------------------------------------------------------------*/
+  # Header
+  --------------------------------------------------------------*/
 .logo {
   line-height: 1;
 }
@@ -347,8 +347,8 @@ h6 {
 }
 
 /*--------------------------------------------------------------
-    # Header Nav
-    --------------------------------------------------------------*/
+  # Header Nav
+  --------------------------------------------------------------*/
 .header-nav ul {
   list-style: none;
 }
@@ -487,8 +487,8 @@ h6 {
 }
 
 /*--------------------------------------------------------------
-    # Sidebar
-    --------------------------------------------------------------*/
+  # Sidebar
+  --------------------------------------------------------------*/
 .sidebar {
   position: fixed;
   top: 60px;
@@ -648,8 +648,8 @@ h6 {
 }
 
 /*--------------------------------------------------------------
-    # Dashboard
-    --------------------------------------------------------------*/
+  # Dashboard
+  --------------------------------------------------------------*/
 /* Filter dropdown */
 .dashboard .filter {
   position: absolute;
@@ -785,7 +785,7 @@ th {
 }
 
 .dashboard .recent-sales .button {
-  font-size: 10px;
+  font-size: 16px;
 }
 
 .dashboard .recent-sales .table thead {
@@ -801,7 +801,7 @@ th {
   text-align: center;
   background-color: #012970;
 }
-
+/* 
 .container .sarch :placeholder-shown {
   border: none;
   background: none;
@@ -811,12 +811,15 @@ th {
   color: black;
   padding: 10px;
   margin-left: -12px;
-}
+} */
 
 .container .sarch::after {
   background-color: #002b80;
 }
 
+.container .nav-tabs li a {
+  font-size: 90px;
+}
 .dashboard .recent-sales .table thead tr {
   border: 10;
   color: #7c9ed7;
@@ -859,7 +862,7 @@ th {
 }
 
 .container button {
-  background-color: #012970;
+  background-color: #069664;
   border: none;
   color: white;
   padding: 8px 10px;
@@ -892,8 +895,8 @@ th {
 }
 
 /*--------------------------------------------------------------
-    # Profie Page
-    --------------------------------------------------------------*/
+  # Profie Page
+  --------------------------------------------------------------*/
 .profile .profile-card img {
   max-width: 120px;
 }
@@ -941,39 +944,7 @@ th {
   color: rgba(1, 41, 112, 0.6);
 }
 
-.contact .php-email-form input,
-.contact .php-email-form textarea {
-  border-radius: 0;
-  box-shadow: none;
-  font-size: 14px;
-  border-radius: 0;
-}
 
-.contact .php-email-form input:focus,
-.contact .php-email-form textarea:focus {
-  border-color: #4154f1;
-}
-
-.contact .php-email-form input {
-  padding: 10px 15px;
-}
-
-.contact .php-email-form textarea {
-  padding: 12px 15px;
-}
-
-.contact .php-email-form button[type="submit"] {
-  background: #4154f1;
-  border: 0;
-  padding: 10px 30px;
-  color: #fff;
-  transition: 0.4s;
-  border-radius: 4px;
-}
-
-.contact .php-email-form button[type="submit"]:hover {
-  background: #5969f3;
-}
 
 @keyframes animate-loading {
   0% {
@@ -992,8 +963,8 @@ th {
 }
 
 /*--------------------------------------------------------------
-    # Footer
-    --------------------------------------------------------------*/
+  # Footer
+  --------------------------------------------------------------*/
 .footer {
   padding: 20px 0;
   font-size: 14px;

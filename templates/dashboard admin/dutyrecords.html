@@ -613,7 +613,7 @@ hr.new2 {
               <th>CHECK-IN TIME</th>
               <th>CHECK-OUT TIME</th>
               <th>DURATION</th>
-              <th></th>
+            
              
             </tr>
           </thead>
@@ -627,11 +627,13 @@ hr.new2 {
               <td>{{row['DURATION']}}</td>
 
 
-                 <td><button type="submit" name="select" value="select"> <i style="margin-left: 0.5em; color: #000000;"><i class="bi bi-trash"></i></button></td>
+
+
                 <input type="hidden" name="DATE" value="{{row['DATE']}}">
                 <input type="hidden" name="CHECK-IN TIME" value="{{row['CHECK-IN TIME']}}">
                 <input type="hidden" name="CHECK-OUT TIME" value="{{row['CHECK-OUT TIME']}}">
                 <input type="hidden" name="DURATION" value="{{row['DURATION']}}">
+
             </tr>
            {% endfor %}
           </tbody>
