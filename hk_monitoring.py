@@ -172,12 +172,17 @@ def logOutAmin():
 #------------------------------------log out----------------------------------------------
 @app.route("/Logout", methods=['POST'])
 def logOut():
+    qury.execute("UPDATE `operations_data` SET `status_ol`='Offline' WHERE `Faculty_Id_Number` = '" + session[
+        'opration_Id'] + "'")
+    conn.commit()
     session.pop("user",None)
     session.pop("username",None)
     session.pop("lname",None)
     session.pop("fname", None)
     session.pop("assigmentstdList", None)
     session.pop("opration_Id", None)
+
+
     
 
 
@@ -259,6 +264,8 @@ def signInprocess():
 
     if logindata in faculty_credintials:
 
+
+
         # faculty usr namea
         qury.execute("SELECT `Faculty_Fname` FROM `operations_data` WHERE `Faculty_Id_Number` = '"+idNum+"'")
         fname = qury.fetchall()[0][0]
@@ -276,7 +283,9 @@ def signInprocess():
         username = (fname+" "+lname).upper()
         session['username']=username
         session["opration_Id"] = opration_Id
-
+        qury.execute("UPDATE `operations_data` SET `status_ol`='Online' WHERE `Faculty_Id_Number` = '" + session[
+            'opration_Id'] + "'")
+        conn.commit()
 
         return '<script>alert("Log in");window.location="/Dash board"</script>'
 
@@ -887,6 +896,7 @@ def DutyAssig():
         qury.execute("SELECT `department` FROM `hk_users`")
         department_data_db= qury.fetchall()
 
+
         coa = []
         coed = []
         cite = []
@@ -914,7 +924,11 @@ def DutyAssig():
             elif str(k[0]).upper() =="COME":
                 come.append(str(k[0]).upper())
 
-        print(coa ,coed ,cite ,com ,ccje,coe,cahs,come)
+        # to display how many hk student there are
+        qury.execute("SELECT * FROM `hk_users`")
+        number_of_stndt = qury.fetchall()
+
+        complirate = (len(stduentNotAv) / len(number_of_stndt)) * 100
 
 
         return render_template("dashboard admin/assignment.html",
@@ -923,7 +937,8 @@ def DutyAssig():
                                ,stduentNotAv=len(studentAv),studentAv=len(stduentNotAv)
                                ,coa = len(coa), coed = len(coed),cite = len(cite),
                                com = len(com),ccje = len(ccje),coe = len(coe),
-                               cahs = len(cahs),come = len(come) )
+                               cahs = len(cahs),come = len(come) ,complirate=str(complirate.__round__())+"%",
+                               number_of_stndt=len(number_of_stndt))
     except Exception:
 
         return redirect(url_for("admin"))
@@ -1021,6 +1036,10 @@ def DutyAssig_process():
             elif str(k[0]).upper() == "COME":
                 come.append(str(k[0]).upper())
 
+        qury.execute("SELECT * FROM `hk_users`")
+        number_of_stndt = qury.fetchall()
+
+        complirate = (len(stduentNotAv) / len(number_of_stndt)) * 100
     return render_template("dashboard admin/assignment.html",
                            logUser=session["adminUser"],
                            table_Assigment_Page_Admin=session["assigmentstdList"]
@@ -1028,7 +1047,7 @@ def DutyAssig_process():
                            ,stduentNotAv=len(stduentNotAv),studentAv=len(studentAv)
                            ,coa = len(coa), coed = len(coed),cite = len(cite),
                             com = len(com),ccje = len(ccje),coe = len(coe),
-                            cahs = len(cahs),come = len(come))
+                            cahs = len(cahs),come = len(come),complirate=str(complirate.__round__())+"%",number_of_stndt=len(number_of_stndt))
 
 @app.route("/Assigment_modal_process", methods =['POST'])
 def Assigment_modal_process():
@@ -1058,7 +1077,7 @@ def Assigment_modal_process():
             conn.commit()
 
             # to update the sipervisor of the student in the student rec
-            qury.execute("UPDATE `hk_users` SET `dutySupervisor`='"+str(session["lname"])+" "+str(session["fname"])+"' WHERE `idnum` = '" + k + "'")
+            qury.execute("UPDATE `hk_users` SET `dutySupervisor`='"+str(session["supervi"])+"' WHERE `idnum` = '" + k + "'")
             conn.commit()
 
             #to update the DUTY DESIGNATION
@@ -1092,8 +1111,8 @@ def Assigment_modal_process():
             conn.commit()
 
             # to update the sipervisor of the student in the student rec
-            qury.execute("UPDATE `hk_users` SET `dutySupervisor`='" + str(session["lname"]) + " " + str(
-                session["fname"]) + "' WHERE `idnum` = '" + k + "'")
+
+            qury.execute("UPDATE `hk_users` SET `dutySupervisor`='"+str(session["supervi"])+"' WHERE `idnum` = '" + k + "'")
             conn.commit()
 
             # to update the DUTY DESIGNATION
@@ -1132,7 +1151,38 @@ def Assigment_modal_process():
 @app.route("/User Management")
 def UserManagement():
     try:
-        return render_template("dashboard admin/UserManagement.html",logUser=session["adminUser"])
+
+        qury.execute("SELECT `Faculty_Lname` FROM `operations_data`")
+        operations_lname = qury.fetchall()
+
+        qury.execute("SELECT `Faculty_Fname` FROM `operations_data`")
+        operations_fname = qury.fetchall()
+
+        qury.execute("SELECT `Faculty_Id_Number` FROM `operations_data`")
+        operations_Id_number = qury.fetchall()
+
+        qury.execute("SELECT  `Operation_Dept` FROM `operations_data`")
+        operations_department = qury.fetchall()
+
+        qury.execute("SELECT `Operations_Mname` FROM `operations_data`")
+        operations_Mname = qury.fetchall()
+
+        qury.execute("SELECT `Operation_Designation-Position` FROM `operations_data`")
+        operations_Designate = qury.fetchall()
+
+        qury.execute("SELECT `status_ol` FROM `operations_data`")
+        status_ol = qury.fetchall()
+
+        print(operations_lname,operations_fname,operations_Id_number,operations_department,operations_Mname,operations_Designate)
+
+        operations_table =[]
+        operations_counter = 0
+        for k in operations_lname:
+            tbl = {"USER ID":operations_Id_number[operations_counter][0], "NAME":str(operations_fname[operations_counter][0])+" "+str(k[0]), "DESIGNATION":operations_Designate[operations_counter][0],"DEPARTMENT":operations_department[operations_counter][0],"STATUS":status_ol[operations_counter][0]}
+            operations_table.append(tbl)
+            operations_counter += 1
+
+        return render_template("dashboard admin/UserManagement.html",logUser=session["adminUser"],operations_table=operations_table)
     except Exception:
         return redirect(url_for("admin"))
 
@@ -1246,8 +1296,8 @@ def Duty_Records():
             durationm = int(rec_list[k][2]) - int(inm)
             HourTo_min = durationoH * 60
             totalduty_mins = HourTo_min + durationm
-            total_duty +=totalduty_mins
             duration = f"{durationoH:}h {durationm:02d}m"
+            total_duty += totalduty_mins
             rec_process = {"DATE": rec_list[k][0], "CHECK-IN TIME": time_in, "CHECK-OUT TIME": time_out, "DURATION": duration}
             record_table.append(rec_process)
 
@@ -1287,7 +1337,7 @@ def delete_records():
     print(DATE,CHECK_IN_TIME,CHECK_OUT_TIME,session["student_Id_num"])
     print(session["Duty_record_table"][0])
 
-    return render_template("dashboard admin/dutyrecords.html",record_table=session["Duty_record_table"] )
+    return redirect(url_for("Duty_Records"))
 
 
 

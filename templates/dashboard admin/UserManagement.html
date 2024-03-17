@@ -328,7 +328,6 @@
         <th>NAME</th>
         <th>DESIGNATION</th>
         <th>DEPARTMENT</th>
-        <th>ROLE</th>
         <th>STATUS</th>
         <th></th>
         
@@ -337,36 +336,18 @@
       </tr>
     </thead>
     <tbody id="myTable">
+    {% for row in operations_table%}
       <tr>
-        <td>04-2122-000777</td>
-        <td>Karen May Gaytano</td>
-        <td>Faculty</td>
-        <td>CITE</td>
-        <td>USER</td>
-        <td> <span class=" bg-warning text-dark d-inline p-1">Pending</span></td>
+        <td>{{row['USER ID']}}</td>
+        <td>{{row['NAME']}}</td>
+        <td>{{row['DESIGNATION']}}</td>
+        <td>{{row['DEPARTMENT']}}</td>
+        <td> <span class=" bg-warning text-dark d-inline p-1">{{row['STATUS']}}</span></td>
         <td><a href="">Details</a></td>
       </tr>
 
-      <tr>
-        <td>04-4122-010777</td>
-        <td>Jasper Jev Operio</td>
-        <td>Faculty</td>
-        <td>CITE</td>
-        <td>USER</td>
-        <td> <span class=" bg-success text-white d-inline p-1">Active</span></td>
-        <td><a href="">Details</a></td>
-      </tr>
 
-      <tr>
-        <td>04-2342-000777</td>
-        <td>Reuben Mallorca</td>
-        <td>Faculty</td>
-        <td>CITE</td>
-        <td>USER</td>
-        <td> <span class=" bg-danger text-white d-inline p-1">Pending</span></td>
-        <td><a href="">Details</a></td>
-      </tr>
-     
+     {% endfor %}
     </tbody>
   </table>
 </div>
