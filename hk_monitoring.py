@@ -170,10 +170,14 @@ def logOutAmin():
 
 
 #------------------------------------log out----------------------------------------------
+
 @app.route("/Logout", methods=['POST'])
 def logOut():
     qury.execute("UPDATE `operations_data` SET `status_ol`='Offline' WHERE `Faculty_Id_Number` = '" + session[
         'opration_Id'] + "'")
+
+
+
     conn.commit()
     session.pop("user",None)
     session.pop("username",None)
