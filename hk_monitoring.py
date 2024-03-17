@@ -1311,38 +1311,6 @@ def Duty_Records():
 
     return render_template("dashboard admin/dutyrecords.html", DUTY_Id_Num =DUTY_Id_Num, record_table= record_table)
 
-@app.route("/delete_records", methods = ['POST'])
-def delete_records():
-    DATE = request.form.get('DATE')
-    CHECK_IN_TIME = request.form.get('CHECK-IN TIME')
-    check_in_time = CHECK_IN_TIME.split(":")
-    check_in_time_Hours = check_in_time[0]
-    check_in_time_Mins = check_in_time[1]
-
-
-    CHECK_OUT_TIME = request.form.get('CHECK-OUT TIME')
-    check_out_time = CHECK_OUT_TIME.split(":")
-    check_out_time_Hours = check_out_time[0]
-    check_out_time_Mins = check_out_time[1]
-
-
-    qury.execute("DELETE FROM `scholar_duty_records` WHERE `date` = '"+str(DATE)+"'"
-                " AND `Hours_In_Out` = '"+str(check_in_time_Hours)+"'"
-                " AND `Minutes_In_Out` = '"+str(check_in_time_Mins)+"' "
-                "AND `Student_id_Number` = '"+session["student_Id_num"]+"' ")
-    conn.commit()
-    qury.execute("DELETE FROM `scholar_duty_records` WHERE `date` = '" + str(DATE) + "'"
-                " AND `Hours_In_Out` = '" + str(check_out_time_Hours) + "'"
-                " AND `Minutes_In_Out` = '" + str(check_out_time_Mins) + "' "
-                "AND `Student_id_Number` = '" +session["student_Id_num"] + "' ")
-    conn.commit()
-
-
-    print(DATE,CHECK_IN_TIME,CHECK_OUT_TIME,session["student_Id_num"])
-    print(session["Duty_record_table"][0])
-
-    return redirect(url_for("Duty_Records"))
-
 
 
 
