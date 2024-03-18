@@ -62,19 +62,8 @@ print(stdntIdNumberAvilable)
 
 
 
-#------------------------admin side request data--------------------------------
-
-qury.execute("SELECT `email`, `date`, `timeIn`, `timeOut`, `id` FROM `request` WHERE 1 ")
-reqdata = qury.fetchall()
-
-reqdataList = []
-for i in reqdata:
-    reqdataList.append(i)
-print(reqdataList)
 
 
-
-#storage for admin usernames dont delete this
 adminls = []
 #------------admin data---------------------
 
@@ -227,22 +216,21 @@ def indexprocess():
 
         gmail = request.form["email"]
         password = request.form["psw"]
-        repPaswrd = request.form['cnfrpsw']
+        repPaswrd = request.form['reppsw']
         idnum = request.form['idnum']
         fname = request.form['fname']
         lname = request.form['lname']
         mname = request.form['Mname']
         phone = request.form['phone']
         Position = request.form['Position']
-        dept = request.form['dept']
+        dept = request.form.get('dept')
+        print(dept)
 
 
         if password == repPaswrd:
 
             faculty_credintials.append(idnum+" "+password)
-            qury.execute("INSERT INTO `operations_data`(`Faculty_Lname`, `Faculty_Fname`, `Faculty_Password`, `Faculty_Id_Number`, `Operation_Dept`,"
-                         " `Operations_Mname`, `Operation_phone_Number`, `Operation_Designation-Position`, `Operations_Email`)"
-                         " VALUES ('"+lname+"','"+fname+"','"+password+"','"+idnum+"','"+dept+"','"+mname+"','"+phone+"','"+Position+"','"+gmail+"')")
+            qury.execute("INSERT INTO `opertaion_req_acc`(`Faculty_Lname`, `Faculty_Fname`, `Faculty_Password`, `Faculty_Id_Number`, `Operation_Dept`, `Operations_Mname`, `Operation_phone_Number`, `Operation_Designation-Position`, `Operations_Email`) VALUES ('"+str(lname)+"','"+str(fname)+"','"+str(password)+"','"+str(idnum)+"','"+str(dept)+"','"+str(mname)+"','"+str(phone)+"','"+str(Position)+"','"+str(gmail)+"')")
             conn.commit()
 
             return '<script>alert("Registered Complete");window.location="/register"</script>'
@@ -251,7 +239,7 @@ def indexprocess():
 
     except:
 
-        return '<script>alert("Email already used");window.location="/register"</script>'
+        return '<script>alert("ID number already used");window.location="/register"</script>'
 
 
 #---------------------------------/Sign in-----------------------------------------------------
@@ -516,13 +504,8 @@ def uplaodProfile():
             linkedin = request.form['linkedin']
             Address = request.form['Address']
 
-            qury.execute("UPDATE `operations_data` "
-                         "SET `twitter`='"+twitter+"',`facebook`='"+facebook+"',"
-                         "`instagram`='"+instagram+"',`linkedin`='"+linkedin+"',"
-                         "`operations_about`='"+about+"',`Faculty_Lname`='"+lasttName+"'"
-                         ",`Faculty_Fname`='"+firstName+"',`Operation_phone_Number`='"+phone+"'"
-                         ",`Operations_Email`='"+email+"',`Address`='"+Address+"' WHERE `Faculty_Id_Number`= "
-                         "'"+session["opration_Id"]+"' ")
+            qury.execute("UPDATE `operations_data` SET `Faculty_Lname`='"+str(lasttName)+"',`Faculty_Fname`='"+str(firstName)+"',`Operation_phone_Number`='"+str(phone)+"',`Operations_Email`='"+str(email)+"',`operations_about`='"+str(about)+"',`twitter`='"+str(twitter)+"',`facebook`='"+str(facebook)+"',`instagram`='"+str(instagram)+"',`linkedin`='"+str(linkedin)+"',`Address`='"+str(Address)+"' WHERE `Faculty_Id_Number` =  '" + str(session["opration_Id"]) + "' ")
+
             conn.commit()
         else:
             firstName = request.form['firstName']
@@ -536,14 +519,17 @@ def uplaodProfile():
             linkedin = request.form['linkedin']
             Address = request.form['Address']
 
-            qury.execute("UPDATE `operations_data` "
-                        "SET `twitter`='" + twitter + "',`facebook`='" + facebook + "',"
-                        "`instagram`='" + instagram + "',`linkedin`='" + linkedin + "',"
-                        "`operations_about`='" + about + "',`Faculty_Lname`='" + lasttName + "'"
-                        ",`Faculty_Fname`='" + firstName + "',`Operation_phone_Number`='" + phone + "'"
-                        ",`Operations_Email`='" + email + "',`Address`='"+Address+"' WHERE `Faculty_Id_Number`= '" +
-                         session["opration_Id"] + "' ")
+            qury.execute(
+                "UPDATE `operations_data` SET `Faculty_Lname`='" + str(lasttName) + "',`Faculty_Fname`='" + str(
+                    firstName) + "',`Operation_phone_Number`='" + str(phone) + "',`Operations_Email`='" + str(
+                    email) + "',`operations_about`='" + str(about) + "',`twitter`='" + str(
+                    twitter) + "',`facebook`='" + str(facebook) + "',`instagram`='" + str(
+                    instagram) + "',`linkedin`='" + str(linkedin) + "',`Address`='" + str(
+                    Address) + "' WHERE `Faculty_Id_Number` =  '" + str(session["opration_Id"]) + "' ")
+
             conn.commit()
+
+
 
 
 
@@ -1237,9 +1223,97 @@ def UserManagement():
             operations_table.append(tbl)
             operations_counter += 1
 
-        return render_template("dashboard admin/UserManagement.html",logUser=session["adminUser"],operations_table=operations_table)
+        qury.execute("SELECT `Faculty_Lname`, `Faculty_Fname`, `Faculty_Id_Number`, `Operation_Dept`, `Operations_Mname`,`Operation_Designation-Position` FROM `opertaion_req_acc`")
+        operation_req_acc_data_db = qury.fetchall()
+
+
+
+        operation_req_acc_Table = []
+        for k in operation_req_acc_data_db:
+
+            table = {"EMP ID":k[2], "NAME":str(k[1])+" "+str(k[0])+" "+str(k[4]), "POSITION":k[5], "DEPARTMENT":k[3]}
+            operation_req_acc_Table.append(table)
+        print(operation_req_acc_Table)
+
+        return render_template("dashboard admin/UserManagement.html",logUser=session["adminUser"],operations_table=operations_table, operation_req_acc_Table=operation_req_acc_Table)
     except Exception:
         return redirect(url_for("admin"))
+
+@app.route("/request_modal_Process_User_Management", methods = ['POST'])
+def request_modal_Process_User_Management():
+
+    delbtn = request.form.get('del')
+    conbtn = request.form.get('con')
+    confirmation = str(delbtn)+str(conbtn)
+
+    print(confirmation.split(">>"))
+
+    if confirmation.split(">>")[0] == "del":
+        print("deleted")
+        register_Id = str(delbtn).split(">>")[1]
+        qury.execute("DELETE FROM `opertaion_req_acc` WHERE `Faculty_Id_Number` = '"+register_Id+"'")
+        conn.commit()
+    else:
+        print("aproved")
+        register_Id = str(conbtn).split(">>")[1]
+        qury.execute("SELECT * FROM `opertaion_req_acc` WHERE `Faculty_Id_Number` = '"+register_Id+"'")
+        data_to_Aprove = qury.fetchall()
+
+
+
+
+        print(data_to_Aprove)
+
+        # to add the new user to the list so it can sign up
+        add_user_data = str(data_to_Aprove[0][3]) + " " + str(data_to_Aprove[0][2])
+        credintials.append(add_user_data)
+
+        qury.execute("INSERT INTO `operations_data`(`Faculty_Lname`, `Faculty_Fname`, `Faculty_Password`, `Faculty_Id_Number`, `Operation_Dept`, `Operations_Mname`, `Operation_phone_Number`, `Operation_Designation-Position`, `Operations_Email`) VALUES "
+                     "('"+str(data_to_Aprove[0][0])+"','"+str(data_to_Aprove[0][1])+"','"+str(data_to_Aprove[0][2])+"','"+str(data_to_Aprove[0][3])+"','"+str(data_to_Aprove[0][4])+"','"+str(data_to_Aprove[0][5])+"','"+str(data_to_Aprove[0][6])+"','"+str(data_to_Aprove[0][7])+"','"+str(data_to_Aprove[0][8])+"')")
+        conn.commit()
+
+
+        qury.execute("DELETE FROM `opertaion_req_acc` WHERE `Faculty_Id_Number` = '" + register_Id + "'")
+        conn.commit()
+
+        qury.execute("UPDATE `operations_data` SET `status_ol`='INACTIVE',`color_status`='danger' WHERE `Faculty_Id_Number` = '" + register_Id + "' ")
+        conn.commit()
+
+
+    return redirect(url_for('UserManagement'))
+
+
+@app.route("/modal_add_user", methods=['POST'])
+def modal_add_user():
+    empid = request.form['empid']
+    lname = request.form['lname']
+    fname = request.form['fname']
+    mname = request.form['mname']
+    email = request.form['email']
+    phone = request.form['phone']
+    dept = request.form.get('dept')
+    Designation = request.form.get('Designation')
+    psw = request.form['psw']
+
+    #to add the new user to the list so it can sign up
+    add_user_data = str(empid)+" "+str(psw)
+    credintials.append(add_user_data)
+
+
+    qury.execute(
+        "INSERT INTO `operations_data`(`Faculty_Lname`, `Faculty_Fname`, `Faculty_Password`, `Faculty_Id_Number`, `Operation_Dept`, `Operations_Mname`, `Operation_phone_Number`, `Operation_Designation-Position`, `Operations_Email`) VALUES "
+        "('" + str(lname) + "','" + str(fname) + "','" + str(psw) + "','" + str(empid) + "','" + str(dept) + "','" + str(mname) + "','" + str(phone) + "','" + str(Designation) + "','" + str(email) + "')")
+    conn.commit()
+
+    qury.execute(
+        "UPDATE `operations_data` SET `status_ol`='INACTIVE',`color_status`='danger' WHERE `Faculty_Id_Number` = '" + empid + "' ")
+    conn.commit()
+
+
+
+
+
+    return redirect(url_for('UserManagement'))
 
 
 @app.route("/Export to Excel")

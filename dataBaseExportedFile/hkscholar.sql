@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2024 at 05:40 AM
+-- Generation Time: Mar 18, 2024 at 03:52 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -143,8 +143,10 @@ CREATE TABLE `operations_data` (
 --
 
 INSERT INTO `operations_data` (`Faculty_Lname`, `Faculty_Fname`, `Faculty_Password`, `Faculty_Id_Number`, `Operation_Dept`, `Operations_Mname`, `Operation_phone_Number`, `Operation_Designation-Position`, `Operations_Email`, `profilePics`, `operations_about`, `twitter`, `facebook`, `instagram`, `linkedin`, `Address`, `status_ol`, `color_status`) VALUES
-('Mondia', 'Zesty', 'zest123', '03-1234-123456', 'CAHS', 'G', '09876543219', 'Faculty', 'Zesty@gmail.com', 'Screenshot_2024-02-07_195658.png', '', '', '', '', '', '', 'ACTIVE', 'success'),
+('Mondia', 'Zesty', 'zest123', '03-1234-123456', 'CAHS', 'G', '09876543219', 'Faculty', 'Zesty@gmail.com', 'Screenshot_2024-02-07_195658.png', '', '', '', '', '', '', 'INACTIVE', 'danger'),
 ('Calasra', 'Robert', 'Robert123', '04-2119-123456', 'CITE', 'J', '09991234567', 'Faculty', 'robert@gmail.com', 'faculty_robert.jpg', '', '', '', '', '', '', 'INACTIVE', 'danger'),
+('Gaytano', 'Karen May', '@Karen123', '04-2122-000777', 'CITE', 'G', '09876543219', 'Super Cute', 'karenmaygaytano@gmail.com', 'karenProfile.jpg', 'Im cute', 'https://www.facebook.com/karenmaygaytano', 'https://www.facebook.com/karenmaygaytano', 'https://www.facebook.com/karenmaygaytano', 'https://www.facebook.com/karenmaygaytano', 'BORACAY', 'ACTIVE', 'success'),
+('Mariano', 'Jemima', '@Deanjem2', '04-2122-0227722', 'COA', 'g', '12345678901', 'DEAN', 'Jemima@gmail.com', 'jemProfile.jpg', 'im for tintin only', 'https://www.facebook.com/jemayyyy', 'https://www.facebook.com/jemayyyy', 'https://www.facebook.com/jemayyyy', 'https://www.facebook.com/jemayyyy', 'BORACAY', 'INACTIVE', 'danger'),
 ('Parel', 'Kurt', '@Kurt123456789', '04-2122-031289', 'CITE', 'H', '09996563067', 'Faculty', 'KURT2@GMAILK.COM', 'ser.jpg', 'Our mission is to explore the limitless possibilities of technology and harness its potential to drive positive change in the world. We are committed to staying at the forefront of technological advancements, empowering individuals with the knowledge and ', 'HTTPS://WWW.FACEBOOK.COM/KURT.PAREL', 'HTTPS://WWW.FACEBOOK.COM/KURT.PAREL', 'HTTPS://WWW.FACEBOOK.COM/KURT.PAREL', 'https://www.facebook.com/reuben.mallorca', 'ILOILO CITY MANDURRIAO', 'INACTIVE', 'danger'),
 ('Yacub', 'Bruce', 'bruce123', '05-3451-90896712', 'COME', 'F', '12345678901', 'Faculty', 'Bruce@gmail', '', '', '', '', '', '', '', 'INACTIVE', 'danger');
 
@@ -162,6 +164,32 @@ CREATE TABLE `operation_request` (
   `DEPT` varchar(255) NOT NULL,
   `SUPERVISOR` varchar(255) NOT NULL,
   `ID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `operation_request`
+--
+
+INSERT INTO `operation_request` (`Designation`, `Requirements`, `Report Day/s`, `Request`, `DEPT`, `SUPERVISOR`, `ID`) VALUES
+('Clerk', 'Fourth Year', 'wala', '3', 'COED', 'Mariano Jemima', 18),
+('SF', 'Fourth Year', 'wala', '2', 'CITE', 'Gaytano Karen May', 19);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `opertaion_req_acc`
+--
+
+CREATE TABLE `opertaion_req_acc` (
+  `Faculty_Lname` varchar(255) NOT NULL,
+  `Faculty_Fname` varchar(255) NOT NULL,
+  `Faculty_Password` varchar(255) NOT NULL,
+  `Faculty_Id_Number` varchar(255) NOT NULL,
+  `Operation_Dept` varchar(255) NOT NULL,
+  `Operations_Mname` varchar(255) NOT NULL,
+  `Operation_phone_Number` varchar(255) NOT NULL,
+  `Operation_Designation-Position` varchar(255) NOT NULL,
+  `Operations_Email` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -187,20 +215,6 @@ INSERT INTO `reports/announcement` (`content`, `date`, `time`, `adminName`, `id`
 ('        sir robert calasar ikaw gina pa tawag sa csdl kadto d mga 3 pm d ka ma late ha manda kalang', '2024-02-22', '10:28', 'admin', 6),
 ('        tryal acnnouncment lang dont pansin it hehe\r\n', '2024-02-22', '22:23', 'admin', 7),
 ('  DUTY HOURS EXTENDED      ', '2024-03-08', '15:3', 'Jester Paul Bacabac', 11);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `request`
---
-
-CREATE TABLE `request` (
-  `email` varchar(255) NOT NULL,
-  `timeIn` varchar(255) NOT NULL,
-  `date` varchar(255) NOT NULL,
-  `timeOut` varchar(255) NOT NULL,
-  `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -262,15 +276,15 @@ ALTER TABLE `operation_request`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indexes for table `opertaion_req_acc`
+--
+ALTER TABLE `opertaion_req_acc`
+  ADD PRIMARY KEY (`Faculty_Id_Number`);
+
+--
 -- Indexes for table `reports/announcement`
 --
 ALTER TABLE `reports/announcement`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `request`
---
-ALTER TABLE `request`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -299,19 +313,13 @@ ALTER TABLE `hk_assignd_teaecher`
 -- AUTO_INCREMENT for table `operation_request`
 --
 ALTER TABLE `operation_request`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `reports/announcement`
 --
 ALTER TABLE `reports/announcement`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT for table `request`
---
-ALTER TABLE `request`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `scholar_duty_records`
