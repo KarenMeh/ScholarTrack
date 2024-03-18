@@ -12,6 +12,8 @@
   <!-- Favicons -->
   <link href="static/assetUser/img/NEW LOGO (1).png" rel="icon">
   <link href="static/assetUser/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -168,32 +170,12 @@
               <hr class="dropdown-divider">
             </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-gear"></i>
-                <span>Account Settings</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+           
 
             <li>
               <form action="/LogoutAdmin" method="post">
                 <a>
               <input class="dropdown-item d-flex align-items-center" type="submit" value="Sign Out">
-                <i class="bi bi-box-arrow-right"></i>
-                
               </a>
             </form>
             </li>
@@ -253,17 +235,8 @@
             </div>
             <span>User Management</span>
           </a>
-        </li><!-- End Profile Page Nav -->
-  <!-- 
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="/Reports And Analytics">
-            <div class="comp">
-              <img src="/static/assetUser/img/reportanal.png" alt="" width="20px">
-            </div>
-            <span>Reports And Analytics</span>
-          </a>
-        </li>End Profile Page Nav -->
-  
+        </li>
+
       
         
       <li class="nav-item">
@@ -315,27 +288,188 @@
      <div class="col-12">
       <div class="card p-1" >
           <div class="card-title2 "> USER Management</span>
-            <p><button onclick="sortTable()">Sort</button></p>
-          </div>
+
+<div class="container mt-3">
+
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+    ADD USER
+  </button>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">ADD USER</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form action="" action="post" >
+        <label for="lname">Employee ID</label>
+          <input type="text" id="lname" name="lname" required><br><br>
+   
         
+          <label for="lname">Last name:</label>
+          <input type="text" id="lname" name="lname" required><br><br>
+          <label for="fname">First name:</label>
+          <input type="text" id="fname" name="fname" required><br><br>
+          <label for="mname">Middlename:</label>
+          <input type="text" id="mname" name="mname" required><br><br>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required><br><br>
+          <label for="phone">  Phone:</label>
+          <input type="number" id="phone" name="phone" required><br><br>
+
+          <label for="Requirement">Department</label>
+          <select name="Requirements" id="Designation" required>
+            <option value="">Select</option>
+            <option value="COM">COM</option>
+            <option value="COA">COA</option>
+            <option value="COED">COED</option>
+            <option value="CCJE">CCJE</option>
+            <option value="COE">COE</option>
+            <option value="CAHS">CAHS</option>
+            <option value="CITE">CITE</option>
+            <option value="COME">COME</option>
+            
+          </select>
+          <br>
+
+          <label for="Designation">Designation</label>
+              <select name="Designation" id="Designation" required>
+                <option value="">Select</option>
+                <option value="SF">Student Facilitator(SF)</option>
+                <option value="AF">Assistant Facilitator(AF)</option>
+                <option value="Clerk">Clerk</option>
+               
+              </select>
 
 
-<div class="container mt-2 p-3 my-5 ">
+              <div class="row mb-3">
+                <label for="newPassword"   class="col-md-5 col-lg-6 col-form-label">Password</label>
+                <div class="col-md-4 col-lg-9">
+                  <input   type="password"  name="newpassword" class="form-control" id="newPassword"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="renewPassword"  class="col-md-5 col-lg-6  col-form-label">Confirm Password</label>
+                <div class="col-md-4 col-lg-9">
+                  <input  type="password" name="renewpassword"  class="form-control" id="renewPassword"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                </div>
+              </div>
+          <input type="Submit" value="Submit" name="request">
+           
+
+      </div>
+    </form>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
  
-  <table class="table table-striped ">
+<!-- REQUEST -->
+<div class="container mt-3">
+
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal1">
+   REQUEST
+  </button>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="myModal1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">PENDING ACCOUNTS</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+                 
+  <table class="table table-striped-1">
     <thead>
       <tr>
-        <th>USER ID</th>
-        <th>NAME</th>
-        <th>DESIGNATION</th>
-        <th>DEPARTMENT</th>
-        <th>STATUS</th>
-        <th></th>
         
-        
-
+        <th scope="col">EMP ID</th>
+        <th scope="col">NAME</th>
+        <th scope="col">POSITION</th>
+        <th scope="col">DEPARTMENT</th>
+        <th scope="col">ACTION</th>
+  
       </tr>
     </thead>
+    <tbody>
+    <form action="" method="POST"  >
+  
+      <tr>
+        <td> 13232</td>
+        <th scope="row"> KAREN ME </th>
+        <td> PERFORMANCE MATTER</td>
+        <td> CITE E </td>
+        <td> <button type="button" onclick="alert('CUTE SI KAREN')">CONFIRM</button>
+       <button type="button"   onclick="alert('CUTE SI KAREN SUPER')">DELETE</button></td>
+  
+      </tr>
+  
+     
+  
+    </tbody>
+  </table>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+   
+       <div class="container ">
+        <div class="sarch">
+        <input class="search-form d-flex align-items-center" id="myInput" type="text" placeholder="Search a scholar"> 
+        </div>
+
+              
+        <div class="container mt-2 p-3 my-5 ">
+          <table class="table table-striped ">
+            <thead>
+              <tr>
+                <th>USER ID</th>
+                <th>NAME</th>
+                <th>DESIGNATION</th>
+                <th>DEPARTMENT</th>
+                <th>STATUS</th>
+                <th></th>
+                
+      
+      </tr>
+    </thead>
+   
     <tbody id="myTable">
     {% for row in operations_table%}
       <tr>
@@ -343,33 +477,20 @@
         <td>{{row['NAME']}}</td>
         <td>{{row['DESIGNATION']}}</td>
         <td>{{row['DEPARTMENT']}}</td>
-        <td> <span class=" bg-success text-dark d-inline p-1">{{row['STATUS']}}</span></td>
+        <td> <span class=" bg-success text-white d-inline p-1">{{row['STATUS']}}</span></td>
         <td><a href="">Details</a></td>
       </tr>
 
 
-     {% endfor %}
+       {% endfor %}
     </tbody>
   </table>
 </div>
 
 </div> 
 
-<script>
-  $(document).ready(function(){
-    $("#myInput").on("keyup", function() {
-      var value = $(this).val().toLowerCase();
-      $("#myTable tr").filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-      });
-    });
-  });
-  </script>
 
-
-              
-
-
+    
         </div><!-- End Right side columns -->
 
       </div>
@@ -413,39 +534,24 @@
 </html>
 
 <script>
-  function sortTable() {
-    var table, rows, switching, i, x, y, shouldSwitch;
-    table = document.getElementById("myTable");
-    switching = true;
-    /*Make a loop that will continue until
-    no switching has been done:*/
-    while (switching) {
-      //start by saying: no switching is done:
-      switching = false;
-      rows = table.rows;
-      /*Loop through all table rows (except the
-      first, which contains table headers):*/
-      for (i = 1; i < (rows.length - 1); i++) {
-        //start by saying there should be no switching:
-        shouldSwitch = false;
-        /*Get the two elements you want to compare,
-        one from current row and one from the next:*/
-        x = rows[i].getElementsByTagName("TD")[0];
-        y = rows[i + 1].getElementsByTagName("TD")[0];
-        //check if the two rows should switch place:
-        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-          //if so, mark as a switch and break the loop:
-          shouldSwitch = true;
-          break;
-        }
-      }
-      if (shouldSwitch) {
-        /*If a switch has been marked, make the switch
-        and mark that a switch has been done:*/
-        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-        switching = true;
-      }
+  function myFunction() {
+    var x = document.getElementById("newPassword");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
     }
   }
   </script>
+
   
+<script>
+  function myFunction() {
+    var x = document.getElementById("renewPassword");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+  </script>
