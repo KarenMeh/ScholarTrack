@@ -17,6 +17,16 @@
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
+  <link rel="stylesheet" href="static/assetUser/css/style1.css">
+  <!-- Demo CSS (No need to include it into your project) -->
+  <link rel="stylesheet" href="static/assetUser/css/demo.css">
+  <!-- Bootstrap 5 CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+<!-- Data Table CSS -->
+<link rel='stylesheet' href='https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css'>
+<!-- Font Awesome CSS -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
+
   <!-- Vendor CSS Files -->
   <link href="static/assetUser/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="static/assetUser/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -27,7 +37,7 @@
   <link href="static/assetUser/vendor/simple-datatables/style.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="static/assetUser/css/style.css" rel="stylesheet">
+  <link href="static/assetUser/css/user.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: NiceAdmin
@@ -196,14 +206,6 @@
   
       
     
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="/Export to Excel">
-            <div class="comp">
-              <img src="/static/assetUser/img/SINFO.png" alt="" width="20px">
-            </div>
-            <span>Scholar Information</span>
-          </a>
-        </li><!-- End Profile Page Nav -->
   
       
         <li class="nav-item">
@@ -217,76 +219,127 @@
   
         
         <li class="nav-item">
-          <a class="nav-link" href="/System Health Logs">
+          <a class="nav-link collapsed" href="/System Health Logs">
             <div class="comp">
               <img src="/static/assetUser/img/system health.png" alt="" width="20px">
             </div>
-            <span>System Health Logs</span>
+            <span>System Health Logs and Feedback</span>
           </a>
         </li><!-- End Profile Page Nav -->
   
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="/Feedback and Improvements">
-            <div class="comp">
-              <img src="/static/assetUser/img/feedback.png" alt="" width="20px">
-            </div>
-            <span>Feedback and Improvements</span>
-          </a>
-        </li><!-- End Profile Page Nav -->
+       
   
   
       </ul>
   
     </aside><!-- End Sidebar-->
 
-  <main id="main" class="main">
+    <main id="main" class="main">
 
-   <div class="card align-items-center">
-<h1>UNDER MAINTENACE</h1>
+      <!-- Recent Sales -->
+      <div class="col-12">
+       <div class="card p-1" >
+           <div class="card-title2 ">ACTIVITY LOG</span>
 
-<img src="/static/assetUser/img/construction_7.webp" alt="" width="100%">
+  <!--$%adsense%$-->
+  <main class="cd__main">
+     <!-- Start DEMO HTML (Use the following code into your project)-->
+     <table id="example" class="table table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>Date and Time</th>
+            <th>ID</th>
+            <th>USER</th>
+            <th>DEPT</th>
+            <th>ACTIONS PERFORMED</th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>KAREN</td>
+            <td>04-2122-22</td>
+            <td>kAREN</td>
+            <td>CITE</td>
+            <td>NAG TULOG</td>
+          
+        </tr>
+
+        <tr>
+          <td>MAY</td>
+          <td>04-2122-22</td>
+          <td>AREN</td>
+          <td>CITE</td>
+          <td>NAG TULOG</td>
+        
+      </tr>
+
+      <tr>
+        <td>GAYTANO</td>
+        <td>04-2122-22</td>
+        <td>MAY</td>
+        <td>CITE</td>
+        <td>NAG TULOG</td>
+      
+    </tr>
+       
+    </tfoot>
+</table>
 
 
 
 
 
 
-
-
-   </div>
-  </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
-    <div class="copyright">
-      &copy; Copyright <strong><span>Phinma-UI</span></strong>. All Rights Reserved
-    </div>
-    <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by Proglematicv3</a>
-    </div>
-  </footer><!-- End Footer -->
  
+ 
+     
+         </div><!-- End Right side columns -->
+ 
+       </div>
+     </section>
+ 
+   </main><!-- End #main -->
 
+   <!-- ======= Footer ======= -->
+   <footer id="footer" class="footer">
+     <div class="copyright">
+       &copy; Copyright <strong><span>Phinma-UI</span></strong>. All Rights Reserved
+     </div>
+     <div class="credits">
+       <!-- All the links in the footer should remain intact. -->
+       <!-- You can delete the links only if you purchased the pro version. -->
+       <!-- Licensing information: https://bootstrapmade.com/license/ -->
+       <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+       Designed by Proglematicv3</a>
+     </div>
+   
+<script src='https://code.jquery.com/jquery-3.7.0.js'></script>
+<!-- Data Table JS -->
+<script src='https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js'></script>
+<script src='https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js'></script>
+<script src='https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js'></script>
+      <!-- Script JS -->
+      <script src="static/assetUser/js/script.js"></script>
+   </footer><!-- End Footer -->
   
-
-  <!-- Vendor JS Files -->
-  <script src="static/assetUser/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="static/assetUser/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="static/assetUser/vendor/chart.js/chart.umd.js"></script>
-  <script src="static/assetUser/vendor/echarts/echarts.min.js"></script>
-  <script src="static/assetUser/vendor/quill/quill.min.js"></script>
-  <script src="static/assetUser/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="static/assetUser/vendor/tinymce/tinymce.min.js"></script>
-  <script src="static/assetUser/vendor/php-email-form/validate.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="static/assetUser/js/main.js"></script>
-
-</body>
-
-</html>
+ 
+   
+ 
+   <!-- Vendor JS Files -->
+   <script src="static/assetUser/vendor/apexcharts/apexcharts.min.js"></script>
+   <script src="static/assetUser/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+   <script src="static/assetUser/vendor/chart.js/chart.umd.js"></script>
+   <script src="static/assetUser/vendor/echarts/echarts.min.js"></script>
+   <script src="static/assetUser/vendor/quill/quill.min.js"></script>
+   <script src="static/assetUser/vendor/simple-datatables/simple-datatables.js"></script>
+   <script src="static/assetUser/vendor/tinymce/tinymce.min.js"></script>
+   <script src="static/assetUser/vendor/php-email-form/validate.js"></script>
+ 
+   <!-- Template Main JS File -->
+   <script src="static/assetUser/js/script.js"></script>
+ 
+ </body>
+ 
+ </html>
+ 
