@@ -174,8 +174,12 @@ def logOutAmin():
 
 @app.route("/Logout", methods=['POST'])
 def logOut():
-    qury.execute("UPDATE `operations_data` SET `status_ol`='Offline' WHERE `Faculty_Id_Number` = '" + session[
+    qury.execute("UPDATE `operations_data` SET `status_ol`='INACTIVE' WHERE `Faculty_Id_Number` = '" + session[
         'opration_Id'] + "'")
+    conn.commit()
+    qury.execute("UPDATE `operations_data` SET `color_status`='danger' WHERE `Faculty_Id_Number` = '"+session[
+        'opration_Id']+"'")
+
 
 
 
@@ -271,6 +275,8 @@ def signInprocess():
 
 
 
+
+
         # faculty usr namea
         qury.execute("SELECT `Faculty_Fname` FROM `operations_data` WHERE `Faculty_Id_Number` = '"+idNum+"'")
         fname = qury.fetchall()[0][0]
@@ -288,7 +294,10 @@ def signInprocess():
         username = (fname+" "+lname).upper()
         session['username']=username
         session["opration_Id"] = opration_Id
-        qury.execute("UPDATE `operations_data` SET `status_ol`='Online' WHERE `Faculty_Id_Number` = '" + session[
+        qury.execute("UPDATE `operations_data` SET `status_ol`='ACTIVE' WHERE `Faculty_Id_Number` = '" + session[
+            'opration_Id'] + "'")
+        conn.commit()
+        qury.execute("UPDATE `operations_data` SET `color_status`='success' WHERE `Faculty_Id_Number` = '" + session[
             'opration_Id'] + "'")
         conn.commit()
 
@@ -383,29 +392,58 @@ def request_Scholar():
         return redirect(url_for("signInPAge"))
 @app.route("/Modal_request_process", methods=['POST'])
 def Modal_request_process():
+
     Designation = request.form['Designation']
     Requirements = request.form['Requirements']
-    Report_Days_mon = request.form.get("monday")
-    Report_Days_mon = request.form.get("tuesday")
-    Report_Days_mon = request.form.get("wednesday")
-    Report_Days_mon = request.form.get("")
-    Report_Days_mon = request.form.get("")
-    Report_Days_mon = request.form.get("")
-    Report_Days_mon = request.form.get("")
 
+    sched_list =[]
+    Report_Days_mon = request.form.get("monday")
+    if str(Report_Days_mon) == "None":
+        pass
+    else:
+        sched_list.append(str(Report_Days_mon))
+    Report_Days_tues = request.form.get("tuesday")
+    if str(Report_Days_tues) == "None":
+        pass
+    else:
+        sched_list.append(str(Report_Days_tues))
+    Report_Days_wed = request.form.get("wednesday")
+    if str(Report_Days_wed) == "None":
+        pass
+    else:
+        sched_list.append(str(Report_Days_wed))
+    Report_Days_thurs = request.form.get("thursday")
+    if str(Report_Days_thurs) == "None":
+        pass
+    else:
+        sched_list.append(str(Report_Days_thurs))
+    Report_Days_fri = request.form.get("friday")
+    if str(Report_Days_fri) == "None":
+        pass
+    else:
+        sched_list.append(str(Report_Days_fri))
+    Report_Days_sat = request.form.get("saturday")
+    if str(Report_Days_sat) == "None":
+        pass
+    else:
+        sched_list.append(str(Report_Days_sat))
+
+    print(sched_list)
+
+    dept = request.form["dept"]
 
     Request = request.form['Request']
 
-    qury.execute("SELECT `Operation_Dept` FROM `operations_data` WHERE `Faculty_Id_Number` = '"+str(session["user"])+"' ")
-    dept = qury.fetchall()
-    print(dept[0][0])
 
 
-    qury.execute("INSERT INTO `operation_request`(`Designation`, `Requirements`, `Report Day/s`, `Request`, `DEPT`, `SUPERVISOR`) VALUES ('"+Designation+"','"+Requirements+"','"+Report_Days+"','"+Request+"', '"+dept[0][0]+"', '"+str(session['lname'])+" "+str(session['fname'])+"') ")
+
+
+    qury.execute("INSERT INTO `operation_request`(`Designation`, `Requirements`, `Report Day/s`, `Request`, `DEPT`, `SUPERVISOR`) VALUES ('"+Designation+"','"+Requirements+"','"+"wala"+"','"+Request+"', '"+dept
+                 +"', '"+str(session['lname'])+" "+str(session['fname'])+"') ")
     conn.commit()
 
     process = {"DESIGNATION": Designation, "REQ": Requirements,
-               "REPORT DAY/S": Report_Days, "SUPERVISOR": str(session["lname"])+" "+str(session["fname"]),
+               "REPORT DAY/S": str(sched_list), "SUPERVISOR": str(session["lname"])+" "+str(session["fname"]),
                "DEPT":dept[0][0] , "REQST":Request }
     table_Assigment_Page_Admin.append(process)
 
@@ -1186,12 +1224,16 @@ def UserManagement():
         qury.execute("SELECT `status_ol` FROM `operations_data`")
         status_ol = qury.fetchall()
 
-        print(operations_lname,operations_fname,operations_Id_number,operations_department,operations_Mname,operations_Designate)
+        qury.execute("SELECT `color_status` FROM `operations_data`")
+        color_status = qury.fetchall()
+
+        print(color_status)
+
 
         operations_table =[]
         operations_counter = 0
         for k in operations_lname:
-            tbl = {"USER ID":operations_Id_number[operations_counter][0], "NAME":str(operations_fname[operations_counter][0])+" "+str(k[0]), "DESIGNATION":operations_Designate[operations_counter][0],"DEPARTMENT":operations_department[operations_counter][0],"STATUS":status_ol[operations_counter][0]}
+            tbl = {"USER ID":operations_Id_number[operations_counter][0], "NAME":str(operations_fname[operations_counter][0])+" "+str(k[0]), "DESIGNATION":operations_Designate[operations_counter][0],"DEPARTMENT":operations_department[operations_counter][0],"STATUS":status_ol[operations_counter][0],"color_status":color_status[operations_counter][0]}
             operations_table.append(tbl)
             operations_counter += 1
 
