@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 17, 2024 at 04:13 PM
+-- Generation Time: Mar 18, 2024 at 05:40 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -59,7 +59,10 @@ CREATE TABLE `hk_assignd_teaecher` (
 
 INSERT INTO `hk_assignd_teaecher` (`operatikon_ID`, `hk_ID`, `assigmentID`) VALUES
 ('Parel Kurt', '02-2387-700001', 45),
-('Parel Kurt', '04-2200-90001', 46);
+('Parel Kurt', '04-2200-90001', 46),
+('Parel Kurt', '04-2122-000002', 47),
+('Parel Kurt', '04-2122-035512', 48),
+('Parel Kurt', '04-2122-031572', 49);
 
 -- --------------------------------------------------------
 
@@ -96,16 +99,16 @@ CREATE TABLE `hk_users` (
 INSERT INTO `hk_users` (`idnum`, `email`, `lname`, `fname`, `password`, `id_totalHours`, `program_course`, `department`, `yrLvL`, `scholarship`, `dutyDesignation`, `dutySupervisor`, `reqiredDuty`, `remaningDuty`, `remDutyMins`, `statsForRenewal`, `SchoolYr`, `semister`, `Status_avail`) VALUES
 ('02-2387-700001', 'carmilo@gmail.com', 'Flame', 'Carmelo', '', '0', 'BSCE', 'COME', '4', 'HK100', 'AF', 'Parel Kurt', '180', '180', '0', 'pending', '2023-2024', '2nd sem', 'Na'),
 ('04-2200-90001', 'Dionar@gmail.com', 'Antioquia', 'Dionard', '', '0', 'BSHM', 'COA', '4', 'HK50', 'AF', 'Parel Kurt', '180', '180', '0', 'pending', '2023-2024', '2nd sem', 'Na'),
-('04-2122-000002', 'donna@gmail.com', 'Mallorca', 'Donna', '', '0', 'BSBA', 'COM', '1', 'HK25', '', '', '180', '180', '0', 'pending', '2023-2024', '2nd sem', 'av'),
+('04-2122-000002', 'donna@gmail.com', 'Mallorca', 'Donna', '', '0', 'BSBA', 'COM', '1', 'HK25', 'SF', 'Parel Kurt', '180', '180', '0', 'pending', '2023-2024', '2nd sem', 'Na'),
 ('04-2122-000001', 'jasper@gmail.com', 'operio', 'jasper', '', '0', 'BSIT', 'CITE', '2', 'HK100', '', '', '180', '180', '0', 'pending', '2023-2024', '2nd sem', 'av'),
 ('04-2122-78627', 'Javelosa@gmail.com', 'Javelosa ', 'Wolf', '', '0', 'BSC', 'CCJE', '1', 'HK100', '', '', '180', '180', '0', 'pending', '2023-2024', '2nd sem', 'av'),
 ('04-2122-91734', 'jimama@gmail.com', 'Mariano', 'Jemima', '', '0', 'BSBA', 'CAS', '1', 'HK100', '', '', '180', '180', '0', 'pending', '2023 - 2024', '2nd sem', 'av'),
 ('04-2002-90021', 'justin@gmail.com', 'Susal', 'Justiene', '', '0', 'BSCE', 'CHAS', '2', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', '2nd sem', 'av'),
-('04-2122-035512', 'karenmay@gmail.com', 'Gaytano', 'Karen May', '', '0', 'BSIT', 'CITE', '4', 'HK75', '', '', '180', '180', '0', 'pending', '2023 - 2024', '2nd sem', 'av'),
+('04-2122-035512', 'karenmay@gmail.com', 'Gaytano', 'Karen May', '', '0', 'BSIT', 'CITE', '4', 'HK75', 'SF', 'Parel Kurt', '180', '180', '0', 'pending', '2023 - 2024', '2nd sem', 'Na'),
 ('04-2122-035546', 'kylepama@gnail.cute', 'Pama', 'Kayle', '', '0', 'BSBA', 'CAS', '2', 'HK25', '', '', '180', '180', '0', 'pending', '2023 - 2024', '2nd sem', 'av'),
 ('09-2155-90828', 'malo@gmail.com', 'Amante', 'Malorena', '', '0', 'BSHM', 'CAHS', '1', 'HK100', '', '', '180', '180', '0', 'pending', '2023-2024', '2nd sem', 'av'),
 ('04-1234-87237', 'Pechera@gamil.com', 'Pechera', 'Alessandra', '', '0', 'BSBS', 'COE', '1', 'HK25', '', '', '180', '180', '0', 'pending', '2023-2024', '2nd sem', 'av'),
-('04-2122-031572', 'ream.mallorca.ui@phinmaed.com', 'Mallorca', 'Reuben', '', '40', 'BSIT', 'CITE', '3', 'HK75', '', '', '180', '179', '16.9999999999998', 'pending', '2023 - 2024', '2nd sem', 'av'),
+('04-2122-031572', 'ream.mallorca.ui@phinmaed.com', 'Mallorca', 'Reuben', '', '40', 'BSIT', 'CITE', '3', 'HK75', 'SF', 'Parel Kurt', '180', '179', '16.9999999999998', 'pending', '2023 - 2024', '2nd sem', 'Na'),
 ('04-2122-000003', 'ryan@gmail.com', 'Mallorca', 'Ryan', '', '0', 'BSCE', 'COED', '4', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', '2nd sem', 'av');
 
 -- --------------------------------------------------------
@@ -131,18 +134,19 @@ CREATE TABLE `operations_data` (
   `instagram` varchar(255) NOT NULL,
   `linkedin` varchar(255) NOT NULL,
   `Address` varchar(255) NOT NULL,
-  `status_ol` varchar(255) NOT NULL
+  `status_ol` varchar(255) NOT NULL,
+  `color_status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `operations_data`
 --
 
-INSERT INTO `operations_data` (`Faculty_Lname`, `Faculty_Fname`, `Faculty_Password`, `Faculty_Id_Number`, `Operation_Dept`, `Operations_Mname`, `Operation_phone_Number`, `Operation_Designation-Position`, `Operations_Email`, `profilePics`, `operations_about`, `twitter`, `facebook`, `instagram`, `linkedin`, `Address`, `status_ol`) VALUES
-('Mondia', 'Zesty', 'zest123', '03-1234-123456', 'CHAS', 'G', '09876543219', 'Faculty', 'Zesty@gmail.com', '', '', '', '', '', '', '', 'offline'),
-('Calasra', 'Robert', 'Robert123', '04-2119-123456', 'CITE', 'J', '09991234567', 'Faculty', 'robert@gmail.com', 'faculty_robert.jpg', '', '', '', '', '', '', 'offline'),
-('Parel', 'Kurt', '@Kurt123456789', '04-2122-031289', 'CITE', 'H', '09996563067', 'Faculty', 'KURT2@GMAILK.COM', 'ser.jpg', 'Our mission is to explore the limitless possibilities of technology and harness its potential to drive positive change in the world. We are committed to staying at the forefront of technological advancements, empowering individuals with the knowledge and ', 'HTTPS://WWW.FACEBOOK.COM/KURT.PAREL', 'HTTPS://WWW.FACEBOOK.COM/KURT.PAREL', 'HTTPS://WWW.FACEBOOK.COM/KURT.PAREL', 'HTTPS://WWW.FACEBOOK.COM/KURT.PAREL', 'ILOILO CITY MANDURRIAO', 'Online'),
-('Yacub', 'Bruce', 'bruce123', '05-3451-90896712', 'COME', 'F', '12345678901', 'Faculty', 'Bruce@gmail', '', '', '', '', '', '', '', 'offline');
+INSERT INTO `operations_data` (`Faculty_Lname`, `Faculty_Fname`, `Faculty_Password`, `Faculty_Id_Number`, `Operation_Dept`, `Operations_Mname`, `Operation_phone_Number`, `Operation_Designation-Position`, `Operations_Email`, `profilePics`, `operations_about`, `twitter`, `facebook`, `instagram`, `linkedin`, `Address`, `status_ol`, `color_status`) VALUES
+('Mondia', 'Zesty', 'zest123', '03-1234-123456', 'CAHS', 'G', '09876543219', 'Faculty', 'Zesty@gmail.com', 'Screenshot_2024-02-07_195658.png', '', '', '', '', '', '', 'ACTIVE', 'success'),
+('Calasra', 'Robert', 'Robert123', '04-2119-123456', 'CITE', 'J', '09991234567', 'Faculty', 'robert@gmail.com', 'faculty_robert.jpg', '', '', '', '', '', '', 'INACTIVE', 'danger'),
+('Parel', 'Kurt', '@Kurt123456789', '04-2122-031289', 'CITE', 'H', '09996563067', 'Faculty', 'KURT2@GMAILK.COM', 'ser.jpg', 'Our mission is to explore the limitless possibilities of technology and harness its potential to drive positive change in the world. We are committed to staying at the forefront of technological advancements, empowering individuals with the knowledge and ', 'HTTPS://WWW.FACEBOOK.COM/KURT.PAREL', 'HTTPS://WWW.FACEBOOK.COM/KURT.PAREL', 'HTTPS://WWW.FACEBOOK.COM/KURT.PAREL', 'https://www.facebook.com/reuben.mallorca', 'ILOILO CITY MANDURRIAO', 'INACTIVE', 'danger'),
+('Yacub', 'Bruce', 'bruce123', '05-3451-90896712', 'COME', 'F', '12345678901', 'Faculty', 'Bruce@gmail', '', '', '', '', '', '', '', 'INACTIVE', 'danger');
 
 -- --------------------------------------------------------
 
@@ -289,13 +293,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `hk_assignd_teaecher`
 --
 ALTER TABLE `hk_assignd_teaecher`
-  MODIFY `assigmentID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `assigmentID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `operation_request`
 --
 ALTER TABLE `operation_request`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `reports/announcement`
