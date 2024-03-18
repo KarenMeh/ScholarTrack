@@ -309,11 +309,9 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-        <form action="" action="post" >
+        <form action="/modal_add_user" method="post" >
         <label for="lname">Employee ID</label>
-          <input type="text" id="lname" name="lname" required><br><br>
-   
-        
+          <input type="text" id="lname" name="empid" required><br><br>
           <label for="lname">Last name:</label>
           <input type="text" id="lname" name="lname" required><br><br>
           <label for="fname">First name:</label>
@@ -326,7 +324,7 @@
           <input type="number" id="phone" name="phone" required><br><br>
 
           <label for="Requirement">Department</label>
-          <select name="Requirements" id="Designation" required>
+          <select name="dept" id="Designation" required>
             <option value="">Select</option>
             <option value="COM">COM</option>
             <option value="COA">COA</option>
@@ -340,12 +338,12 @@
           </select>
           <br>
 
-          <label for="Designation">Designation</label>
+          <label for="Designation">Designation/Position:</label>
               <select name="Designation" id="Designation" required>
                 <option value="">Select</option>
-                <option value="SF">Student Facilitator(SF)</option>
-                <option value="AF">Assistant Facilitator(AF)</option>
-                <option value="Clerk">Clerk</option>
+                <option value="Faculty">Faculty</option>
+                <option value="COO">COO</option>
+                <option value="Dean">Dean</option>
                
               </select>
 
@@ -353,14 +351,14 @@
               <div class="row mb-3">
                 <label for="newPassword"   class="col-md-5 col-lg-6 col-form-label">Password</label>
                 <div class="col-md-4 col-lg-9">
-                  <input   type="password"  name="newpassword" class="form-control" id="newPassword"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                  <input   type="password"  name="psw" class="form-control" id="newPassword"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
                 </div>
               </div>
 
               <div class="row mb-3">
                 <label for="renewPassword"  class="col-md-5 col-lg-6  col-form-label">Confirm Password</label>
                 <div class="col-md-4 col-lg-9">
-                  <input  type="password" name="renewpassword"  class="form-control" id="renewPassword"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                  <input  type="password" name="repsw"  class="form-control" id="renewPassword"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
                 </div>
               </div>
           <input type="Submit" value="Submit" name="request">
@@ -413,20 +411,21 @@
       </tr>
     </thead>
     <tbody>
-    <form action="" method="POST"  >
+    {% for row in operation_req_acc_Table%}
+    <form action="/request_modal_Process_User_Management" method="POST"  >
   
       <tr>
-        <td> 13232</td>
-        <th scope="row"> KAREN ME </th>
-        <td> PERFORMANCE MATTER</td>
-        <td> CITE E </td>
-        <td> <button type="button" onclick="alert('CUTE SI KAREN')">CONFIRM</button>
-       <button type="button"   onclick="alert('CUTE SI KAREN SUPER')">DELETE</button></td>
+        <td> {{row['EMP ID']}}</td>
+        <th scope="row"> {{row['NAME']}} </th>
+        <td> {{row['POSITION']}}</td>
+        <td>{{row['DEPARTMENT']}} </td>
+        <td> <button type="submit" name="con" value="confirm>>{{row['EMP ID']}}" onclick="alert('CUTE SI KAREN')">CONFIRM</button>
+       <button type="submit" name="del" value="del>>{{row['EMP ID']}}"  onclick="alert('CUTE SI KAREN SUPER')">DELETE</button></td>
   
       </tr>
   
      
-  
+    {% endfor %}
     </tbody>
   </table>
       </div>
@@ -477,11 +476,9 @@
         <td>{{row['NAME']}}</td>
         <td>{{row['DESIGNATION']}}</td>
         <td>{{row['DEPARTMENT']}}</td>
-<<<<<<< HEAD
-        <td> <span class=" bg-success text-white d-inline p-1">{{row['STATUS']}}</span></td>
-=======
+
         <td> <span class=" bg-{{row['color_status']}} text-white d-inline p-1">{{row['STATUS']}}</span></td>
->>>>>>> d754b036f7aadf8b56b53108a87a4205e9598615
+
         <td><a href="">Details</a></td>
       </tr>
 
