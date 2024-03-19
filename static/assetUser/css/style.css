@@ -545,16 +545,29 @@ hr.new2 {
   font-family: "Poppins", sans-serif;
 }
 
+.container .row .col p{
+  font-size: 45px;
+  margin-bottom: 10px;
+  margin-top: 15px;
+  font-weight:500;
+}
+
+
 .container .row .col .non {
   /* border-left: 5px solid #012970; */
-  font-size: 15px;
+  font-size: 14px;
+  margin-top: -4px;
+  margin-bottom: 10px;
+  padding-bottom: 4px;
+
 }
 
 .container .row .col .comp {
-  font-size: 15px;
-  margin-bottom: 15px;
+  font-size: 14px;
+  margin-bottom: 20px;
   margin-left: 10px;
-  padding-bottom: 22px;
+  padding-bottom: 18px;
+  margin-top: -3px;
 }
 
 .header-nav .nav-profile img {

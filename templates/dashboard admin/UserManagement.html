@@ -31,6 +31,16 @@
   <!-- Template Main CSS File -->
   <link href="/static/assetUser/css/user.css" rel="stylesheet">
 
+  <link rel="stylesheet" href="static/assetUser/css/style1.css">
+  <!-- Demo CSS (No need to include it into your project) -->
+  <link rel="stylesheet" href="static/assetUser/css/demo.css">
+  <!-- Bootstrap 5 CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+<!-- Data Table CSS -->
+<link rel='stylesheet' href='https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css'>
+<!-- Font Awesome CSS -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
+ 
   <!-- =======================================================
   * Template Name: NiceAdmin
   * Updated: Sep 18 2023 with Bootstrap v5.3.2
@@ -268,17 +278,18 @@
     </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
-    <h1 class="text-danger">  <img src="" alt="" srcset="">UNDER MAINTENANCE 80%</h1>
+  
      <!-- Recent Sales -->
      <div class="col-12">
       <div class="card p-1" >
           <div class="card-title2 "> USER Management</span>
 
 <div class="container mt-3">
-
+<div class = "add"
   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
     ADD USER
   </button>
+</div>
 </div>
 
 <!-- The Modal -->
@@ -364,10 +375,11 @@
  
 <!-- REQUEST -->
 <div class="container mt-3">
-
+  <div class = "req"
   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal1">
    REQUEST
   </button>
+</div>
 </div>
 
 <!-- The Modal -->
@@ -426,49 +438,45 @@
 </div>
 
 
-   
-       <div class="container ">
-        <div class="sarch">
-        <input class="search-form d-flex align-items-center" id="myInput" type="text" placeholder="Search a scholar"> 
-        </div>
-
-              
-        <div class="container mt-2 p-3 my-5 ">
-          <table class="table table-striped ">
-            <thead>
-              <tr>
-                <th>USER ID</th>
-                <th>NAME</th>
-                <th>DESIGNATION</th>
-                <th>DEPARTMENT</th>
-                <th>STATUS</th>
-                <th></th>
-                
+                  
+<!--$%adsense%$-->
+<main class="cd__main">
+  <!-- Start DEMO HTML (Use the following code into your project)-->
+  <table id="example1" class="table table-striped" style="width:100%">
+ <thead>
+     <tr>              
+      <th>USER ID</th>
+      <th>NAME</th>
+      <th>DESIGNATION</th>
+      <th>DEPARTMENT</th>
+      <th>STATUS</th>
+      <th></th>
       
-      </tr>
-    </thead>
-   
-    <tbody id="myTable">
-    {% for row in operations_table%}
-      <tr>
-        <td>{{row['USER ID']}}</td>
-        <td>{{row['NAME']}}</td>
-        <td>{{row['DESIGNATION']}}</td>
-        <td>{{row['DEPARTMENT']}}</td>
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 5be97976152e91a0f73efc8b67b612bdd9443a6c
-        <td> <span class=" bg-{{row['color_status']}} text-white d-inline p-1">{{row['STATUS']}}</span></td>
-
-        <td><a href="">Details</a></td>
-      </tr>
+                   
+     </tr>
+ </thead>
+ <tbody id="myTable">
+  {% for row in operations_table%}
+    <tr>
+      <td>{{row['USER ID']}}</td>
+      <td>{{row['NAME']}}</td>
+      <td>{{row['DESIGNATION']}}</td>
+      <td>{{row['DEPARTMENT']}}</td>
 
 
-       {% endfor %}
-    </tbody>
-  </table>
+      <td> <span class=" bg-{{row['color_status']}} text-white d-inline p-1">{{row['STATUS']}}</span></td>
+
+      <td><a href="">Details</a></td>
+    </tr>
+
+
+     {% endfor %}
+  </tfoot>
+  </tbody>
+</table>
+
+
+ 
 </div>
 
 </div> 
@@ -477,13 +485,14 @@
     
         </div><!-- End Right side columns -->
 
+
       </div>
     </section>
 
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <!-- ======= Footer ======= -->
+
   <footer id="footer" class="footer">
     <div class="copyright">
       &copy; Copyright <strong><span>Phinma-UI</span></strong>. All Rights Reserved
@@ -495,6 +504,17 @@
       <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
       Designed by Proglematicv3</a>
     </div>
+
+      
+<script src='https://code.jquery.com/jquery-3.7.0.js'></script>
+<!-- Data Table JS -->
+<script src='https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js'></script>
+<script src='https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js'></script>
+<script src='https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js'></script>
+      <!-- Script JS -->
+      <script src="static/assetUser/js/table.js"></script>
+   </footer><!-- End Footer -->
+  
   </footer><!-- End Footer -->
  
 
@@ -511,31 +531,23 @@
   <script src="static/assetUser/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="static/assetUser/js/main.js"></script>
+  <script src="static/assetUser/js/table.js"></script>
+
+   <!-- Template Main JS File -->
+   <script src="static/assetUser/js/table.js"></script>
+ 
 
 </body>
 
 </html>
 
 <script>
-  function myFunction() {
-    var x = document.getElementById("newPassword");
-    if (x.type === "password") {
-      x.type = "text";
-    } else {
-      x.type = "password";
-    }
-  }
-  </script>
-
-  
-<script>
-  function myFunction() {
-    var x = document.getElementById("renewPassword");
-    if (x.type === "password") {
-      x.type = "text";
-    } else {
-      x.type = "password";
-    }
-  }
+  $(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
   </script>

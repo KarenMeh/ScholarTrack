@@ -38,20 +38,22 @@
 
     .card .ps-5 h6{
       font-size: 40px;
-      text-decoration: solid;
-      padding: 0;
+      padding-left: 15px;
       margin-bottom: -12px;
+      font-weight: bold;
     }
 
     .card .ps-5 h5{
       font-size: 40px;
+      font-weight: bold;
+      padding-left: 15px;
+
       color: #012970;
       font-weight: bolder;
       margin-top: 30px;
-      margin-bottom: -11px;
+      margin-bottom: -8px;
       
     }
-
 
 
 
@@ -242,10 +244,10 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Dashboard </h1>
+      <h1> Admin Dashboard </h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="{{url_for('admindashBoard')}}">Home</a></li>
           <li class="breadcrumb-item active">Dashboard</li>
         </ol>
       </nav>
@@ -276,7 +278,7 @@
                   <div class="d-flex align-items-center">
                     <div class="card-icon  d-flex align-items-center justify-content-center">
                       <div class="piktur">
-                      <img src="/static/assetUser/img/hkschol.png" alt="" width="80px">
+                      <img src="/static/assetUser/img/hkschol.png" alt="" width="90px">
                     </div>
                     </div>
                     <div class="ps-5 ">
@@ -302,14 +304,13 @@
                       Compliant Scholar
                      </div>
                   
-                     
                      <hr>
                      <p> {{stduentNotAv}}</p>
                     </div>
                     <div class="col ">
                       <div class="non" >Non-Compliant Scholar
                       </div>
-                      <hr>
+                     <hr>
                       <p> {{studentAv}}</p>
                     </div>
                    
@@ -333,7 +334,7 @@
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                       <div class="piktur">
-                        <img src="/static/assetUser/img/comply.png" alt="" width="92px">
+                        <img src="/static/assetUser/img/comply.png" alt="" width="95px">
                       </div>
                     </div>
                     <div class="ps-5">
@@ -363,7 +364,7 @@
             
             <div class="card-body">
               <h5 class="card-title">Reports <span>| Today</span></h5>
-              {% for dateTIme in dateTimeLista_announcment%}
+              {% for dateTIme in dateTimeLista_announcment%} 
 
               <div class="activity">
 
@@ -373,7 +374,7 @@
 
                   <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
                   <div class="activity-content">
-                    {{dateTIme}} <a href="#" class="fw-bold text-dark"></a>
+                    <h6>{{dateTIme}}</h6> <a href="#" class="fw-bold text-dark"></a>
                   </div>
 
                 </div><!-- End activity item-->
@@ -404,7 +405,10 @@
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <!-- ======= Footer ======= -->
+
+  <br>
+  <br>
+  <br>
   <footer id="footer" class="footer">
     <div class="copyright">
       &copy; Copyright <strong><span>Phinma-UI</span></strong>. All Rights Reserved
