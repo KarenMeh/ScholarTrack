@@ -31,7 +31,16 @@
 
   <!-- Template Main CSS File -->
   <link href="static/assetUser/css/compliance.css" rel="stylesheet">
-
+  <link rel="stylesheet" href="static/assetUser/css/style1.css">
+  <!-- Demo CSS (No need to include it into your project) -->
+  <link rel="stylesheet" href="static/assetUser/css/demo.css">
+  <!-- Bootstrap 5 CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+<!-- Data Table CSS -->
+<link rel='stylesheet' href='https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css'>
+<!-- Font Awesome CSS -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
+ 
  
 </head>
 
@@ -250,133 +259,146 @@
                     <li class="active"><a href="{{url_for('compliance_Hk_100')}}">HK 100</a></li>
 
                   </ul>
-                  <br>
+          
     
-                  
+                    
               
+        
+                 <!--$%adsense%$-->
+                 <main class="cd__main">
+                  <!-- Start DEMO HTML (Use the following code into your project)-->
+                  <table id="example1" class="table table-striped" style="width:100%">
+                 <thead>
+                     <tr>              
+                                      <th>STUDENT ID</th>
+                                      <th>SCHOLAR NAME</th>
+                                      <th>COMPLETED HOURS</th>
+                                      <th>REMAINING HOURS</th>
+                                      <th> STATUS </th>
+                                      <th> </th>
+                                   
+                     </tr>
+                 </thead>
+                 <tbody id="myTable">
+                  {% for row in table_OfStudent_Info %}
+                   <tr>
+                     <form action="{{url_for('student_rec_process')}}" method="POST">
+                    <td><button type="submit" name="select" value="select"> <i class="bi bi-calendar2-minus"> </i></button>
+                      {{row['STUDENT ID']}}</td>
+                  
+                   <td>{{row['SCHOLAR NAME']}}</td>
+                   <td>{{row['COMPLETED HOURS']}}</td>
+                     <td>{{row['REMAINING HOURS']}}</td>
+                   <td>{{row['STATUS']}}</td>
+                       <td><input type="hidden" name="Selected_Id" value="{{row['STUDENT ID']}}">
+                       </form>
+                   </tr>
+                  {% endfor %}
+                   
                 
-                  <div class="search-bar">
-                    <div class="container ">
-
-                 <input class="search-form d-flex align-items-center" id="myInput" type="text" placeholder="Search.." >
-
-
-  <br>
-                  </div>
-                           <!-- Table with stripped rows -->
-                           <table class="table table-striped">
-                  <thead >
-                    <tr class="info ">
-                      <th>STUDENT ID</th>
-                      <th>SCHOLAR NAME</th>
-                      <th>COMPLETED HOURS</th>
-                      <th>REMAINING HOURS</th>
-                      <th>STATUS</th>
-                    </tr>
-                  </thead>
-                  <tbody id="myTable">
-                   {% for row in table_OfStudent_Info %}
-                    <tr class="">
-                      <form action="{{url_for('student_rec_process')}}" method="POST">
-                        <td><button type="submit" name="select" value="select"> <i class="bi bi-calendar2-minus"></i></button> {{row['STUDENT ID']}}</td>
-                        <td>{{row['SCHOLAR NAME']}}</td>
-                    <td>{{row['COMPLETED HOURS']}}</td>
-                      <td class="">{{row['REMAINING HOURS']}}</td>
-                    <td>{{row['STATUS']}}</td>
-                        <td><input type="hidden" name="Selected_Id" value="{{row['STUDENT ID']}}">
-                        </form>
-                    </tr>
-                   {% endfor %}
-                    
-
-
-
-                    
-                  </tbody>
+                
+                
+                  </tfoot>
+                 </tbody>
                 </table>
-                <!-- End Table with stripped rows -->
-              </div>
+                
             </div>
           </div>
         </div>
-      </section>
-  
+      </div>
+    </section>
+
 <script>
-  $(document).ready(function(){
-    $("#myInput").on("keyup", function() {
-      var value = $(this).val().toLowerCase();
-      $("#myTable tr").filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-      });
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
   });
-  </script>
+});
+</script>
 
-                      <hr>
-                      
-
-
-                  </div>
-
-
+                    <hr>
+                    
 
 
                 </div>
 
+
+
+
               </div>
-            </div><!-- End Recent Sales -->
+
+            </div>
+          </div><!-- End Recent Sales -->
 
 
-          </div>
-        </div><!-- End Left side columns -->
+        </div>
+      </div><!-- End Left side columns -->
 
-      </div>
-    </section>
-
-  </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
-    <div class="copyright">
-      &copy; Copyright <strong><span>Phinma-UI</span></strong>. All Rights Reserved
     </div>
-    <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by Proglematicv3</a>
-    </div>
-  </footer><!-- End Footer -->
- 
+  </section>
 
-  
+</main><!-- End #main -->
 
-  <!-- Vendor JS Files -->
-  <script src="static/assetUser/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="static/assetUser/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="static/assetUser/vendor/chart.js/chart.umd.js"></script>
-  <script src="static/assetUser/vendor/echarts/echarts.min.js"></script>
-  <script src="static/assetUser/vendor/quill/quill.min.js"></script>
-  <script src="static/assetUser/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="static/assetUser/vendor/tinymce/tinymce.min.js"></script>
-  <script src="static/assetUser/vendor/php-email-form/validate.js"></script>
+<!-- ======= Footer ======= -->
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+  <div class="copyright">
+    &copy; Copyright <strong><span>Phinma-UI</span></strong>. All Rights Reserved
+  </div>
+  <div class="credits">
+    <!-- All the links in the footer should remain intact. -->
+    <!-- You can delete the links only if you purchased the pro version. -->
+    <!-- Licensing information: https://bootstrapmade.com/license/ -->
+    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+    Designed by Proglematicv3</a>
+  </div>
 
-  <!-- Template Main JS File -->
-  <script src="static/assetUser/js/main.js"></script>
+    
+<script src='https://code.jquery.com/jquery-3.7.0.js'></script>
+<!-- Data Table JS -->
+<script src='https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js'></script>
+<script src='https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js'></script>
+<script src='https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js'></script>
+    <!-- Script JS -->
+    <script src="static/assetUser/js/table.js"></script>
+ </footer><!-- End Footer -->
+
+</footer><!-- End Footer -->
+
+
+
+
+<!-- Vendor JS Files -->
+<script src="static/assetUser/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="static/assetUser/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="static/assetUser/vendor/chart.js/chart.umd.js"></script>
+<script src="static/assetUser/vendor/echarts/echarts.min.js"></script>
+<script src="static/assetUser/vendor/quill/quill.min.js"></script>
+<script src="static/assetUser/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="static/assetUser/vendor/tinymce/tinymce.min.js"></script>
+<script src="static/assetUser/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="static/assetUser/js/table.js"></script>
+
+ <!-- Template Main JS File -->
+ <script src="static/assetUser/js/table.js"></script>
+
 
 </body>
 
 </html>
 
 <script>
-  $(document).ready(function(){
-    $("#myInput").on("keyup", function() {
-      var value = $(this).val().toLowerCase();
-      $("#myTable tr").filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-      });
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
   });
-  </script>
+});
+</script>

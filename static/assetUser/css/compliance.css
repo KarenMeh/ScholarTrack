@@ -853,7 +853,7 @@ th {
   font-size: 14px;
 }
 
-.bi-calendar2-minus {
+.bi-printer {
   font-size: 20px;
   color: #002b80;
   background: none;
@@ -861,6 +861,13 @@ th {
   align-items: center;
 }
 
+.bi-calendar2-minus {
+  font-size: 20px;
+  color: #002b80;
+  background: none;
+  margin-left: -30px;
+  align-items: center;
+}
 .container button {
   background-color: #069664;
   border: none;
