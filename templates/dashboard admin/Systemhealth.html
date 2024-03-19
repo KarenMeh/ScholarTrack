@@ -249,41 +249,19 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>KAREN</td>
-            <td>04-2122-22</td>
-            <td>kAREN</td>
-            <td>CITE</td>
-            <td>NAG TULOG</td>
-          
-        </tr>
 
-        <tr>
-          <td>MAY</td>
-          <td>04-2122-22</td>
-          <td>AREN</td>
-          <td>CITE</td>
-          <td>NAG TULOG</td>
-        
-      </tr>
+    {% for row in activity_log_table%}
 
-      <tr>
-        <td>GAYTANO</td>
-        <td>04-2122-22</td>
-        <td>MAY</td>
-        <td>CITE</td>
-        <td>NAG TULOG</td>
-      
-    </tr>
     <tr>
-      <td>KAREN</td>
-      <td>04-2122-22</td>
-      <td>kAREN</td>
-      <td>CITE</td>
-      <td>NAG TULOG</td>
+      <td>{{row['Date and Time']}}</td>
+      <td>{{row['ID']}}</td>
+      <td>{{row['USER']}}</td>
+      <td>{{row['DEPT']}}</td>
+      <td>{{row['ACT PERM']}}</td>
     
   </tr>
 
+<<<<<<< HEAD
   <tr>
     <td>MAY</td>
     <td>04-2122-22</td>
@@ -303,8 +281,11 @@
 
 </tr>
 
+=======
+>>>>>>> f67c6a0dd61ea076b556c35e9caaa44e73d1cf65
        
     </tfoot>
+       {% endfor%}
 </table>
 
 

@@ -170,6 +170,22 @@ def logOut():
     qury.execute("UPDATE `operations_data` SET `color_status`='danger' WHERE `Faculty_Id_Number` = '"+session[
         'opration_Id']+"'")
 
+    # ---------- this is for recording all activities of the user-----------------
+
+    x = datetime.datetime.now()
+
+    qury.execute(
+        "SELECT `Faculty_Lname`, `Faculty_Fname`, `Faculty_Id_Number`, `Operation_Dept` FROM `operations_data` WHERE `Faculty_Id_Number` = '" +
+        session['opration_Id'] + "'")
+    operation_data = qury.fetchall()
+    print(operation_data)
+    fullname = str(operation_data[0][0]) + " " + str(operation_data[0][1])
+
+    qury.execute("INSERT INTO `active_logs`(`date_time`, `user_id`, `uname`, `dept`, `act_perm`)"
+                 " VALUES ('" + str(x).split(".")[0] + "','" + str(operation_data[0][2]) + "','" + str(
+        fullname) + "','" + str(operation_data[0][3]) + "','Just log out to the system')")
+    conn.commit()
+
 
 
 
@@ -264,8 +280,6 @@ def signInprocess():
 
 
 
-
-
         # faculty usr namea
         qury.execute("SELECT `Faculty_Fname` FROM `operations_data` WHERE `Faculty_Id_Number` = '"+idNum+"'")
         fname = qury.fetchall()[0][0]
@@ -289,11 +303,22 @@ def signInprocess():
         qury.execute("UPDATE `operations_data` SET `color_status`='success' WHERE `Faculty_Id_Number` = '" + session[
             'opration_Id'] + "'")
         conn.commit()
+#---------- this is for recording all activities of the user-----------------
+
+        x = datetime.datetime.now()
+
+        qury.execute("SELECT `Faculty_Lname`, `Faculty_Fname`, `Faculty_Id_Number`, `Operation_Dept` FROM `operations_data` WHERE `Faculty_Id_Number` = '"+ session['opration_Id']+"'")
+        operation_data = qury.fetchall()
+        print(operation_data)
+        fullname = str(operation_data[0][0])+" "+str(operation_data[0][1])
+
+        qury.execute("INSERT INTO `active_logs`(`date_time`, `user_id`, `uname`, `dept`, `act_perm`)"
+                     " VALUES ('"+str(x).split(".")[0]+"','"+str(operation_data[0][2])+"','"+str(fullname)+"','"+str(operation_data[0][3])+"','Just log in to the system')")
+        conn.commit()
 
         return '<script>alert("Log in");window.location="/Dash board"</script>'
 
     else:
-
        
         return '<script>alert("Wrong password or Email");window.location="/Sign in"</script>'
 
@@ -308,6 +333,7 @@ def Dashboard():
         # to get data reports from db to display
         qury.execute("SELECT `content`, `date`, `time`, `adminName`, `id` FROM `reports/announcement`")
         db_announc_data = qury.fetchall()
+
         announcment_List = []
 
         for k in db_announc_data:
@@ -436,6 +462,22 @@ def Modal_request_process():
                "DEPT":dept[0][0] , "REQST":Request }
     table_Assigment_Page_Admin.append(process)
 
+    # ---------- this is for recording all activities of the user-----------------
+
+    x = datetime.datetime.now()
+
+    qury.execute(
+        "SELECT `Faculty_Lname`, `Faculty_Fname`, `Faculty_Id_Number`, `Operation_Dept` FROM `operations_data` WHERE `Faculty_Id_Number` = '" +
+        session['opration_Id'] + "'")
+    operation_data = qury.fetchall()
+    print(operation_data)
+    fullname = str(operation_data[0][0]) + " " + str(operation_data[0][1])
+
+    qury.execute("INSERT INTO `active_logs`(`date_time`, `user_id`, `uname`, `dept`, `act_perm`)"
+                 " VALUES ('" + str(x).split(".")[0] + "','" + str(operation_data[0][2]) + "','" + str(
+        fullname) + "','" + str(operation_data[0][3]) + "','Requested an HK scholar')")
+    conn.commit()
+
     return '<script>alert("Request Sent!!");window.location="/Request and Scholar Management"</script>'
 
 
@@ -487,6 +529,7 @@ def Profile_Operations():
 @app.route("/uplaodProfile", methods=['POST']) #to upate profile picture of operations
 def uplaodProfile():
 
+
     try:
         profilePic = request.files['file']
         if str(profilePic) != "<FileStorage: '' ('application/octet-stream')>":
@@ -508,6 +551,25 @@ def uplaodProfile():
             qury.execute("UPDATE `operations_data` SET `Faculty_Lname`='"+str(lasttName)+"',`Faculty_Fname`='"+str(firstName)+"',`Operation_phone_Number`='"+str(phone)+"',`Operations_Email`='"+str(email)+"',`operations_about`='"+str(about)+"',`twitter`='"+str(twitter)+"',`facebook`='"+str(facebook)+"',`instagram`='"+str(instagram)+"',`linkedin`='"+str(linkedin)+"',`Address`='"+str(Address)+"' WHERE `Faculty_Id_Number` =  '" + str(session["opration_Id"]) + "' ")
 
             conn.commit()
+
+            # ---------- this is for recording all activities of the user-----------------
+
+            x = datetime.datetime.now()
+
+            qury.execute(
+                "SELECT `Faculty_Lname`, `Faculty_Fname`, `Faculty_Id_Number`, `Operation_Dept` FROM `operations_data` WHERE `Faculty_Id_Number` = '" +
+                session['opration_Id'] + "'")
+            operation_data = qury.fetchall()
+            print(operation_data)
+            fullname = str(operation_data[0][0]) + " " + str(operation_data[0][1])
+
+            qury.execute("INSERT INTO `active_logs`(`date_time`, `user_id`, `uname`, `dept`, `act_perm`)"
+                         " VALUES ('" + str(x).split(".")[0] + "','" + str(operation_data[0][2]) + "','" + str(
+                fullname) + "','" + str(operation_data[0][3]) + "','Update profile')")
+            conn.commit()
+
+
+
         else:
             firstName = request.form['firstName']
             lasttName = request.form['lasttName']
@@ -530,18 +592,27 @@ def uplaodProfile():
 
             conn.commit()
 
+            # ---------- this is for recording all activities of the user-----------------
 
+            x = datetime.datetime.now()
 
+            qury.execute(
+                "SELECT `Faculty_Lname`, `Faculty_Fname`, `Faculty_Id_Number`, `Operation_Dept` FROM `operations_data` WHERE `Faculty_Id_Number` = '" +
+                session['opration_Id'] + "'")
+            operation_data = qury.fetchall()
+            print(operation_data)
+            fullname = str(operation_data[0][0]) + " " + str(operation_data[0][1])
 
-
-
+            qury.execute("INSERT INTO `active_logs`(`date_time`, `user_id`, `uname`, `dept`, `act_perm`)"
+                         " VALUES ('" + str(x).split(".")[0] + "','" + str(operation_data[0][2]) + "','" + str(
+                fullname) + "','" + str(operation_data[0][3]) + "','Update profile')")
+            conn.commit()
 
 
 
 
     except RequestEntityTooLarge:
         return '<script>alert("file to large");window.location="/Profile"</script>'
-
 
 
 
@@ -568,7 +639,21 @@ def change_password_operations():
             faculty_credintials.insert(faculty_credintials.index(session["opration_Id"]+" "+old_password),session["opration_Id"]+" "+new_password)
             faculty_credintials.remove(str(session["opration_Id"]+" "+old_password))
 
+            # ---------- this is for recording all activities of the user-----------------
 
+            x = datetime.datetime.now()
+
+            qury.execute(
+                "SELECT `Faculty_Lname`, `Faculty_Fname`, `Faculty_Id_Number`, `Operation_Dept` FROM `operations_data` WHERE `Faculty_Id_Number` = '" +
+                session['opration_Id'] + "'")
+            operation_data = qury.fetchall()
+            print(operation_data)
+            fullname = str(operation_data[0][0]) + " " + str(operation_data[0][1])
+
+            qury.execute("INSERT INTO `active_logs`(`date_time`, `user_id`, `uname`, `dept`, `act_perm`)"
+                         " VALUES ('" + str(x).split(".")[0] + "','" + str(operation_data[0][2]) + "','" + str(
+                fullname) + "','" + str(operation_data[0][3]) + "','Change credentials')")
+            conn.commit()
 
             return '<script>alert("Password had been updated");window.location="/Profile"</script>'
         else:
@@ -1432,14 +1517,21 @@ def Excel():
         return redirect(url_for("admin"))
 @app.route("/Setting and Configurations")
 def Setting():
-    # try:
-    qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
-    profilepicDb = qury.fetchall()[0][0]
-    print(profilepicDb)
+    try:
+        qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
+        profilepicDb = qury.fetchall()[0][0]
 
-    return render_template("dashboard admin/Setting.html",logUser=session["adminUser"],profilepicDb=profilepicDb)
-    # except Exception:
-    #     return redirect(url_for("admin"))
+
+        #get data from admin db to display in front end using jinja
+        qury.execute("SELECT `userName`, `About`, `Phone`, `Address`, `Email`, `Twitter`, `Facebook`, `Instagram`, `Linkedin` ,`adminIdNumber` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
+        adminData = qury.fetchall()
+
+        print(adminData[0][1])
+
+
+        return render_template("dashboard admin/Setting.html",logUser=session["adminUser"],profilepicDb=profilepicDb,fullName=adminData[0][0],about=adminData[0][1],phone=adminData[0][2],Address = adminData[0][3],emailacc=adminData[0][4],twitter=adminData[0][5],facebook=adminData[0][6],instagram=adminData[0][7],linkedin=adminData[0][8], adminId =adminData[0][8+1])
+    except Exception:
+        return redirect(url_for("admin"))
 
 
 @app.route("/uplaodProfile_admin", methods=['POST']) #to upate profile picture of operations
@@ -1451,6 +1543,46 @@ def uplaodProfile_admin():
             profilePic.save(os.path.join(app.config['UPLOAD_DIR']+secure_filename(profilePic.filename)))
             qury.execute("UPDATE `admin` SET `profilePics`='"+str(secure_filename(profilePic.filename))+"' WHERE  `adminIdNumber` = '"+session["userIdAdmin"]+"' ")
             conn.commit()
+
+            FullName = request.form['fulltName']
+            about = request.form['about']
+            phone = request.form['phone']
+            address = request.form['Address']
+            Email = request.form['email']
+            Twitter  = request.form['twitter']
+            Facebook  = request.form['facebook']
+            Instagram  = request.form['instagram']
+            Linkedin  = request.form['linkedin']
+
+            qury.execute("UPDATE `admin` SET `userName`='"+str(FullName)+"',`About`='"+str(about)+"',`Phone`='"+str(phone)+"'"
+                        ",`Address`='"+str(address)+"',`Email`='"+str(Email)+"',`Twitter`='"+str(Twitter)+"',`Facebook`='"+str(Facebook)+"'"
+                        ",`Instagram`='"+str(Instagram)+"',`Linkedin`='"+str(Linkedin)+"' WHERE `adminIdNumber` = '"+str(session["userIdAdmin"])+"'")
+            conn.commit()
+
+            return redirect(url_for("Setting"))
+        else:
+
+            FullName = request.form['fulltName']
+            about = request.form['about']
+            phone = request.form['phone']
+            address = request.form['Address']
+            Email = request.form['email']
+            Twitter = request.form['twitter']
+            Facebook = request.form['facebook']
+            Instagram = request.form['instagram']
+            Linkedin = request.form['linkedin']
+
+            qury.execute(
+                "UPDATE `admin` SET `userName`='" + str(FullName) + "',`About`='" + str(about) + "',`Phone`='" + str(
+                    phone) + "'"
+                             ",`Address`='" + str(address) + "',`Email`='" + str(Email) + "',`Twitter`='" + str(
+                    Twitter) + "',`Facebook`='" + str(Facebook) + "'"
+                                                                  ",`Instagram`='" + str(
+                    Instagram) + "',`Linkedin`='" + str(Linkedin) + "' WHERE `adminIdNumber` = '" + str(
+                    session["userIdAdmin"]) + "'")
+            conn.commit()
+
+
 
 
 
@@ -1499,7 +1631,17 @@ def Systemhealth():
 
         qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
         profilepicDb = qury.fetchall()[0][0]
-        return render_template("dashboard admin/Systemhealth.html",logUser=session["adminUser"],profilepicDb=profilepicDb)
+
+        qury.execute("SELECT * FROM `active_logs` WHERE 1")
+        active_log_data_db = qury.fetchall()
+
+        activity_log_table = []
+
+        for k in active_log_data_db:
+            tables= {"Date and Time":k[1],"ID":k[2],"USER":k[3],"DEPT":k[4],"ACT PERM":k[5]}
+            activity_log_table.append(tables)
+
+        return render_template("dashboard admin/Systemhealth.html",logUser=session["adminUser"],profilepicDb=profilepicDb, activity_log_table=activity_log_table)
     except Exception:
         return redirect(url_for("admin"))
 @app.route("/Feedback and Improvements")
