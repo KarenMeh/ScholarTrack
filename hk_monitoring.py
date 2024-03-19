@@ -1354,7 +1354,7 @@ def Assigment_modal_process():
         qury.execute("UPDATE `operation_request` SET `Request`='"+str(req_need_std)+"' WHERE `ID` ='"+session['reqid']+"' ")
         conn.commit()
     elif len(checkList) > int(req_Process_for_assigning_duty[0][0]):
-        print("nagsubra mango")
+        return '<script>alert("Exceeded number of request!!");window.location="/Duty Assignment And Management"</script>'
     else:
         print("error")
 
