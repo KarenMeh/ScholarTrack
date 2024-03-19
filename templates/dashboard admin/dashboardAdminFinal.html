@@ -29,7 +29,38 @@
   <!-- Template Main CSS File -->
   <link href="static/assetUser/css/style.css" rel="stylesheet">
 
+
+  <style>
+    .card  p{
+      font-size: 40px;
+      text-decoration: none;
+    }
+
+    .card .ps-5 h6{
+      font-size: 40px;
+      text-decoration: solid;
+      padding: 0;
+      margin-bottom: -12px;
+    }
+
+    .card .ps-5 h5{
+      font-size: 40px;
+      color: #012970;
+      font-weight: bolder;
+      margin-top: 30px;
+      margin-bottom: -11px;
+      
+    }
+
+
+
+
+
+
+  </style>
+
 </head>
+
 
 <body>
 
@@ -69,7 +100,7 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="/static/assetUser/img/serjester.jpg" alt="Profile" class="rounded-circle">
+            <img src="/static/profilePics/{{profilepicDb}}" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">{{logUser}}</span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -248,7 +279,7 @@
                       <img src="/static/assetUser/img/hkschol.png" alt="" width="80px">
                     </div>
                     </div>
-                    <div class="ps-5">
+                    <div class="ps-5 ">
                       <h6> {{number_of_stndt}}</h6>
                       <span class="text-success small pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1"></span>
 
@@ -295,7 +326,7 @@
             <!-- Customers Card -->
             <div class="col-xxl-4 col-xl-12">
 
-              <div class="card info-card customers-card">
+              <div class="card info-card customers-card ">
                 <div class="card-body">
                   <h5 class="card-title"> Compliance Rate </h5> <hr class="new2">
 
@@ -306,7 +337,7 @@
                       </div>
                     </div>
                     <div class="ps-5">
-                      <h6> {{complirate}}</h6>
+                      <h5> {{complirate}}</h5>
 
                       <span class="text-danger small pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1"></span>
 

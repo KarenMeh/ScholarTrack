@@ -75,7 +75,7 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="/static/assetUser/img/serjester.jpg" alt="Profile" class="rounded-circle">
+            <img src="/static/profilePics/{{profilepicDb}}" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">{{logUser}}</span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -108,21 +108,13 @@
               <hr class="dropdown-divider">
             </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+           
 
             <li>
               <form action="/LogoutAdmin" method="post">
                 <a>
               <input class="dropdown-item d-flex align-items-center" type="submit" value="Sign Out">
-                <i class="bi bi-box-arrow-right"></i>
+             
                 
               </a>
             </form>
@@ -224,7 +216,7 @@
     </aside><!-- End Sidebar-->
   
     <main id="main" class="main">
-
+      <h1 class="text-danger">  <img src="" alt="" srcset="">UNDER MAINTENANCE 75%</h1>
       <div class="pagetitle">
         <h1>Setting and Configuration</h1>
       
@@ -248,7 +240,7 @@
                   <a href="{{linkedin}}" class="linkedin"><i class="bi bi-linkedin"></i></a>
                 </div>
 
-                <form action="/change_password_operations" method="post">
+                <form action="/change_admin_password" method="post">
   
                   <div class="row mb-3">
                     <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
@@ -337,14 +329,14 @@
                   <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
   
                     <!-- Profile Edit Form -->
-                    <form action="/uplaodProfile" method="post"  enctype="multipart/form-data">
+                    <form action="/uplaodProfile_admin" method="post"  enctype="multipart/form-data">
                       <div class="row mb-2">
                         <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                          
                         <div class="col-md-8 col-lg-2 mt-9">
   
                        
-                          <img src="/static/profilePics/{{profilepicDb}}" alt="Profile">
+                          <img src="/static/profilePics/{{profilepicDb}}" alt="Profile" width="100px">
                           <label class="button" for="upload"></label>
                           <input type="file" name="file"  accept=".jpg, .jpeg, .png, .gif">
   
@@ -440,35 +432,35 @@
   
                   <div class="tab-pane fade show active" id="profile-change-password">
                     <!-- Change Password Form -->
-                    <form action="" method="post">
-  
-                      <div class="row mb-3">
-                        <label for="academicyr" class="col-md-4 col-lg-3 col-form-label">ACADEMIC YEAR</label>
-                        <div class="col-md-8 col-lg-9">
-                          <script>document.write( new Date().getUTCFullYear() );</script>
+                    <form action="/semester_change" method="post">
+
+                        <div class="row mb-3">
+                          <label for="academicyr" class="col-md-4 col-lg-3 col-form-label">ACADEMIC YEAR</label>
+                          <div class="col-md-8 col-lg-9">
+                            <script>document.write( new Date().getUTCFullYear() );</script>
+                          </div>
                         </div>
-                      </div>
-  
-                      <div class="row mb-3">
-                        <label for="semester"   class="col-md-4 col-lg-3 col-form-label">SEMESTER</label>
-                        <div class="col-md-8 col-lg-9">
-                        <select name="semester" id="semester" required>
-                          <option value="">Select</option>
-                          <option value="COM">FIRST SEMESTER</option>
-                          <option value="COA">SECOND SEMESTER</option>
-                          
-            
-          </select>
+
+                        <div class="row mb-3">
+                          <label for="semester"   class="col-md-4 col-lg-3 col-form-label">SEMESTER</label>
+                          <div class="col-md-8 col-lg-9">
+                          <select name="semester" id="semester" required>
+                            <option value="">Select</option>
+                            <option value="FIRST SEMESTER">FIRST SEMESTER</option>
+                            <option value="SECOND SEMESTER">SECOND SEMESTER</option>
 
 
+                          </select>
+
+
+                          </div>
                         </div>
-                      </div>
-  
-                     
-  
-                      <div class="text-center">
-                        <button type="submit" class="btn btn-primary">SUBMIT</button>
-                      </div>
+
+
+
+                        <div class="text-center">
+                          <button type="submit" class="btn btn-primary">SUBMIT</button>
+                        </div>
                     </form><!-- End Change Password Form -->
   
                   </div>
