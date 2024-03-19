@@ -156,6 +156,7 @@ def logOutAmin():
     session.pop("adminUser",None)
     session.pop("Duty_record_table", None)
     session.pop("student_Id_num", None)
+    session.pop("userIdAdmin", None)
     return '<script>alert("Log Out");window.location="/"</script>'
 
 
@@ -679,12 +680,12 @@ def admin():
 
 @app.route("/adminLog", methods=['POST'])
 def adminLog():
-
     useraAdmin = request.form['email']
     pswAdmin = request.form['pass']
 
     qury.execute("SELECT `userName` FROM `admin` WHERE `adminIdNumber` = '"+useraAdmin+"'")
     adminfullname = qury.fetchall()
+    session["userIdAdmin"] =useraAdmin
     session["adminUser"] = adminfullname[0][0]
 
 
@@ -729,12 +730,16 @@ def admindashBoard():
         #comliance rate data
         complirate = (len(stduentNotAv)/len(number_of_stndt))*100
 
+        qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
+        profilepicDb = qury.fetchall()[0][0]
+
         return render_template('dashboard admin/dashboardAdminFinal.html',
                                logUser=session["adminUser"],
                                dateTimeLista_announcment=dateTimeLista_announcment,
                                number_of_stndt=len(number_of_stndt),
                                stduentNotAv=len(stduentNotAv),
-                               studentAv=len(studentAv),complirate=str(complirate.__round__())+"%")
+                               studentAv=len(studentAv),complirate=str(complirate.__round__())+"%",
+                               profilepicDb=profilepicDb)
     else:
         return redirect(url_for("admin"))
 
@@ -770,10 +775,13 @@ def compliance():
             table_OfStudent_Info.append(dataProcess)
             counter_Table1 += 1
 
-        print(table_OfStudent_Info)
+
+        qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
+        profilepicDb = qury.fetchall()[0][0]
+
 
         return render_template("dashboard admin/compliance.html", logUser=session["adminUser"],
-                               table_OfStudent_Info=table_OfStudent_Info)
+                               table_OfStudent_Info=table_OfStudent_Info,profilepicDb=profilepicDb)
 
     else:
         return redirect(url_for("admin"))
@@ -806,7 +814,11 @@ def compliance_Hk_25():
             counter_Table1 += 1
 
 
-        return render_template("dashboard admin/compliance_Hk_25.html",logUser=session["adminUser"], table_OfStudent_Info = table_OfStudent_Info_25)
+        qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
+        profilepicDb = qury.fetchall()[0][0]
+
+
+        return render_template("dashboard admin/compliance_Hk_25.html",profilepicDb=profilepicDb,logUser=session["adminUser"], table_OfStudent_Info = table_OfStudent_Info_25)
     except Exception:
         return redirect(url_for("admin"))
 @app.route("/compliance_hk_50")
@@ -836,7 +848,11 @@ def compliance_Hk_50():
             table_OfStudent_Info_50.append(dataProcess)
             counter_Table1 += 1
 
-        return render_template("dashboard admin/compliance_Hk_50.html",logUser=session["adminUser"], table_OfStudent_Info = table_OfStudent_Info_50)
+
+        qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
+        profilepicDb = qury.fetchall()[0][0]
+
+        return render_template("dashboard admin/compliance_Hk_50.html",profilepicDb=profilepicDb,logUser=session["adminUser"], table_OfStudent_Info = table_OfStudent_Info_50)
     except Exception:
         return  redirect(url_for("admin"))
 @app.route("/compliance_hk_75")
@@ -867,7 +883,11 @@ def compliance_Hk_75():
             counter_Table1 += 1
 
 
-        return render_template("dashboard admin/compliance_Hk_75.html",logUser=session["adminUser"], table_OfStudent_Info = table_OfStudent_Info_75)
+        qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
+        profilepicDb = qury.fetchall()[0][0]
+
+
+        return render_template("dashboard admin/compliance_Hk_75.html",profilepicDb=profilepicDb,logUser=session["adminUser"], table_OfStudent_Info = table_OfStudent_Info_75)
     except Exception:
         return redirect(url_for("admin"))
 @app.route("/compliance_hk_100")
@@ -896,7 +916,11 @@ def compliance_Hk_100():
             table_OfStudent_Info_100.append(dataProcess)
             counter_Table1 += 1
 
-        return render_template("dashboard admin/compliance_Hk_100.html",logUser=session["adminUser"], table_OfStudent_Info = table_OfStudent_Info_100)
+
+        qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
+        profilepicDb = qury.fetchall()[0][0]
+
+        return render_template("dashboard admin/compliance_Hk_100.html",profilepicDb=profilepicDb,logUser=session["adminUser"], table_OfStudent_Info = table_OfStudent_Info_100)
     except Exception:
         return redirect(url_for("admin"))
 
@@ -968,7 +992,12 @@ def DutyAssig():
         complirate = (len(stduentNotAv) / len(number_of_stndt)) * 100
 
 
+
+        qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
+        profilepicDb = qury.fetchall()[0][0]
+
         return render_template("dashboard admin/assignment.html",
+                               profilepicDb=profilepicDb,
                                logUser=session["adminUser"],
                                table_Assigment_Page_Admin = table_Assigment_Page_Admin1
                                ,stduentNotAv=len(studentAv),studentAv=len(stduentNotAv)
@@ -996,9 +1025,84 @@ def Announcement():
                 " VALUES ('"+announcemnet+"','"+str(tday)+"','"+str(curtime)+"','"+session["adminUser"]+"')")
     conn.commit()
 
+    #======================================
+    qury.execute("SELECT * FROM `operation_request`")
+    operation_request_DB = qury.fetchall()
+    operation_request = []
+    for k in operation_request_DB:
+        operation_request.append(k)
+
+    table_Assigment_Page_Admin1 = []
+    session["assigmentstdList"] = table_Assigment_Page_Admin1
+    for k in range(len(operation_request)):
+        process = {"DESIGNATION": operation_request[k][0], "REQ": operation_request[k][1],
+                   "REPORT DAY/S": operation_request[k][2], "SUPERVISOR": operation_request[k][5],
+                   "DEPT": operation_request[k][4], "REQST": operation_request[k][3], "REQ ID": operation_request[k][6]}
+        table_Assigment_Page_Admin1.append(process)
+    print(table_Assigment_Page_Admin1)
+
+    # to display std whitout assigmnt
+    qury.execute("SELECT  `Status_avail` FROM `hk_users` WHERE `Status_avail` ='Na' ")
+    stduentNotAv = qury.fetchall()
+
+    # to display std whitout assigmnt
+    qury.execute("SELECT  `Status_avail` FROM `hk_users` WHERE `Status_avail` ='av' ")
+    studentAv = qury.fetchall()
+
+    # this is for puting value to the pai charts
+    qury.execute("SELECT `department` FROM `hk_users`")
+    department_data_db = qury.fetchall()
+
+    coa = []
+    coed = []
+    cite = []
+    com = []
+    ccje = []
+    coe = []
+    cahs = []
+    come = []
+    for k in department_data_db:
+
+        if str(k[0]).upper() == "COA":
+            coa.append(str(k[0]).upper())
+        elif str(k[0]).upper() == "COED":
+            coed.append(str(k[0]).upper())
+        elif str(k[0]).upper() == "CITE":
+            cite.append(str(k[0]).upper())
+        elif str(k[0]).upper() == "COM":
+            com.append(str(k[0]).upper())
+        elif str(k[0]).upper() == "CCJE":
+            ccje.append(str(k[0]).upper())
+        elif str(k[0]).upper() == "COE":
+            coe.append(str(k[0]).upper())
+        elif str(k[0]).upper() == "CAHS":
+            cahs.append(str(k[0]).upper())
+        elif str(k[0]).upper() == "COME":
+            come.append(str(k[0]).upper())
+
+    # to display how many hk student there are
+    qury.execute("SELECT * FROM `hk_users`")
+    number_of_stndt = qury.fetchall()
+
+    complirate = (len(stduentNotAv) / len(number_of_stndt)) * 100
+
+    #======================================
+
+
+
+
+
+    qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
+    profilepicDb = qury.fetchall()[0][0]
+
     return render_template("dashboard admin/assignment.html",
                            logUser=session["adminUser"],
-                           table_Assigment_Page_Admin = session["assigmentstdList"]
+                           table_Assigment_Page_Admin = session["assigmentstdList"],
+                           profilepicDb=profilepicDb, stduentNotAv=len(studentAv), studentAv=len(stduentNotAv)
+                           , coa=len(coa), coed=len(coed), cite=len(cite),
+                           com=len(com), ccje=len(ccje), coe=len(coe),
+                           cahs=len(cahs), come=len(come), complirate=str(complirate.__round__()) + "%",
+                           number_of_stndt=len(number_of_stndt)
                            )
 
 
@@ -1077,8 +1181,11 @@ def DutyAssig_process():
         number_of_stndt = qury.fetchall()
 
         complirate = (len(stduentNotAv) / len(number_of_stndt)) * 100
+
+        qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
+        profilepicDb = qury.fetchall()[0][0]
     return render_template("dashboard admin/assignment.html",
-                           logUser=session["adminUser"],
+                           logUser=session["adminUser"],profilepicDb=profilepicDb,
                            table_Assigment_Page_Admin=session["assigmentstdList"]
                            ,table_avil_std=table_avil_std ,supervi=supervi
                            ,stduentNotAv=len(stduentNotAv),studentAv=len(studentAv)
@@ -1168,11 +1275,6 @@ def Assigment_modal_process():
 
 
 
-
-
-
-
-
     techer.clear()
     session.pop("supervi",None)
     session.pop("reqid", None)
@@ -1235,7 +1337,11 @@ def UserManagement():
             operation_req_acc_Table.append(table)
         print(operation_req_acc_Table)
 
-        return render_template("dashboard admin/UserManagement.html",logUser=session["adminUser"],operations_table=operations_table, operation_req_acc_Table=operation_req_acc_Table)
+
+        qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
+        profilepicDb = qury.fetchall()[0][0]
+
+        return render_template("dashboard admin/UserManagement.html",logUser=session["adminUser"],profilepicDb=profilepicDb,operations_table=operations_table, operation_req_acc_Table=operation_req_acc_Table)
     except Exception:
         return redirect(url_for("admin"))
 
@@ -1319,33 +1425,101 @@ def modal_add_user():
 @app.route("/Export to Excel")
 def Excel():
     try:
-        return render_template("dashboard admin/Excel.html",logUser=session["adminUser"])
+        qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
+        profilepicDb = qury.fetchall()[0][0]
+        return render_template("dashboard admin/Excel.html",logUser=session["adminUser"],profilepicDb=profilepicDb)
     except Exception:
         return redirect(url_for("admin"))
 @app.route("/Setting and Configurations")
 def Setting():
-    try:
+    # try:
+    qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
+    profilepicDb = qury.fetchall()[0][0]
+    print(profilepicDb)
 
-        return render_template("dashboard admin/Setting.html",logUser=session["adminUser"])
-    except Exception:
-        return redirect(url_for("admin"))
+    return render_template("dashboard admin/Setting.html",logUser=session["adminUser"],profilepicDb=profilepicDb)
+    # except Exception:
+    #     return redirect(url_for("admin"))
+
+
+@app.route("/uplaodProfile_admin", methods=['POST']) #to upate profile picture of operations
+def uplaodProfile_admin():
+
+    try:
+        profilePic = request.files['file']
+        if str(profilePic) != "<FileStorage: '' ('application/octet-stream')>":
+            profilePic.save(os.path.join(app.config['UPLOAD_DIR']+secure_filename(profilePic.filename)))
+            qury.execute("UPDATE `admin` SET `profilePics`='"+str(secure_filename(profilePic.filename))+"' WHERE  `adminIdNumber` = '"+session["userIdAdmin"]+"' ")
+            conn.commit()
+
+
+
+            return redirect(url_for("Setting"))
+
+    except RequestEntityTooLarge:
+        return '<script>alert("file to large");window.location="/Setting and Configurations"</script>'
+
+
+
+
+@app.route("/semester_change", methods =['POST'])
+def semester_change():
+    semester = request.form.get('semester')
+    qury.execute("UPDATE `hk_users` SET `semister`='"+str(semester)+"' ")
+    conn.commit()
+
+    return redirect(url_for('Setting'))
+
+@app.route("/change_admin_password", methods = ['POST'])
+def change_admin_password():
+
+
+    currentPass = request.form['password']
+    newPass = request.form['newpassword']
+    print(newPass, session["userIdAdmin"])
+
+    if currentPass in adminuserpassWord:
+
+        print(newPass, session["userIdAdmin"])
+        qury.execute("UPDATE `admin` SET `passWord`='"+str(newPass)+"' WHERE `adminIdNumber` = '"+session["userIdAdmin"]+"'")
+        conn.commit()
+
+        adminuserpassWord.insert(adminuserpassWord.index(str(currentPass)),str(newPass))
+        adminuserpassWord.remove(str(currentPass))
+        admin_cridentials.insert(admin_cridentials.index(str(session["userIdAdmin"])+" "+str(currentPass)),str(session["userIdAdmin"])+" "+str(newPass))
+        admin_cridentials.remove(str(session["userIdAdmin"])+" "+str(currentPass))
+        return redirect(url_for('Setting'))
+    else:
+        return redirect(url_for('Setting'))
+
+
 @app.route("/System Health Logs")
 def Systemhealth():
     try:
-        return render_template("dashboard admin/Systemhealth.html",logUser=session["adminUser"])
+
+        qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
+        profilepicDb = qury.fetchall()[0][0]
+        return render_template("dashboard admin/Systemhealth.html",logUser=session["adminUser"],profilepicDb=profilepicDb)
     except Exception:
         return redirect(url_for("admin"))
 @app.route("/Feedback and Improvements")
 def Feedback():
     try:
-        return render_template("dashboard admin/Feedback.html",logUser=session["adminUser"])
+
+        qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
+        profilepicDb = qury.fetchall()[0][0]
+        return render_template("dashboard admin/Feedback.html",logUser=session["adminUser"],profilepicDb=profilepicDb)
     except Exception:
         return redirect(url_for("admin"))
 @app.route("/assigment")
 def assiment():
     try:
 
-        return  render_template("dashboard admin/assignment.html",logUser=session["adminUser"])
+
+        qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
+        profilepicDb = qury.fetchall()[0][0]
+
+        return  render_template("dashboard admin/assignment.html",logUser=session["adminUser"],profilepicDb=profilepicDb)
     except Exception:
         return redirect(url_for("admin"))
 @app.route("/student_records")
@@ -1386,7 +1560,11 @@ def student_rec_process():
         semister = hkdetails[0][17]  # semister
 
 
-    return render_template("dashboard admin/ScholarRecordAdmin.html",idnum=idnum,Lname=Lname,Fname=Fname,totalDuty=totalDuty,
+        qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
+        profilepicDb = qury.fetchall()[0][0]
+
+
+    return render_template("dashboard admin/ScholarRecordAdmin.html",profilepicDb=profilepicDb,idnum=idnum,Lname=Lname,Fname=Fname,totalDuty=totalDuty,
         course_Program=course_Program,department=department,yearLvl=yearLvl,scholarship=scholarship,
         DUTY_DESIGNATION=DUTY_DESIGNATION,DUTY_SUPERVISOR=DUTY_SUPERVISOR,reqiredDuty=reqiredDuty,
         remaningDuty=remaningDuty,statsuForRenewal=statsuForRenewal,Schoolyr=Schoolyr,semister=semister, remDutyMin = remDutyMin[0])

@@ -397,7 +397,6 @@ font-weight: 700;
 float: left;
 margin-left: 60px;
 
-
 }
 
 /*--------------------------------------------------------------
@@ -426,10 +425,34 @@ margin-left: 60px;
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   background-color: #ececec;
   font-size: 18;
-  
-  
 
 }
+
+.user-details .input-box .details{
+font-weight: 700;
+float: left;
+margin-left: 60px;
+
+}
+
+select {
+  height: 30px;
+align-items: center;
+width: 225px;
+outline: none;
+border-radius: 1px;
+border-color:solid gray 4px ;
+padding-left: 19px;
+padding-right: 1px;
+font-size: 16px;
+border-bottom-width: 2px;
+transition: all 0.3s ease;
+background-color: #ececec;
+}
+
+
+
+
 </style>
 
 </head>
@@ -450,7 +473,7 @@ margin-left: 60px;
 
           <div class="input-box">
           <label class="details">ID number:</label> <br>
-          <input type="text" placeholder="" name="idnum" id="Idnum" required> 
+          <input type="text" placeholder="" name="idnum" id="Idnum"  maxlength="14"  required> 
           </div>
       
           <div class="input-box">
@@ -486,7 +509,7 @@ margin-left: 60px;
             <input type="text" placeholder="" name="Position" id="fname" required>
            </div>
 
-                <div class="input-box">
+          <div class="input-box">
             <label class="details">Department </label><br>
            <select name="dept" id="department" required>
             <option value="">Select</option>
