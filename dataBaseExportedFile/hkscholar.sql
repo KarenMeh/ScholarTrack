@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2024 at 02:21 PM
+-- Generation Time: Mar 19, 2024 at 04:47 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -24,6 +24,40 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `active_logs`
+--
+
+CREATE TABLE `active_logs` (
+  `id` int(255) NOT NULL,
+  `date_time` varchar(255) NOT NULL,
+  `user_id` varchar(255) NOT NULL,
+  `uname` varchar(255) NOT NULL,
+  `dept` varchar(255) NOT NULL,
+  `act_perm` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `active_logs`
+--
+
+INSERT INTO `active_logs` (`id`, `date_time`, `user_id`, `uname`, `dept`, `act_perm`) VALUES
+(2, '2024-03-19 22:48:31', '03-1234-123456', 'Mondia Zesty', 'CAHS', 'Just log in to the system'),
+(3, '2024-03-19 23:15:59', '03-1234-123456', 'Mondia Zesty', 'CAHS', 'Just log out to the system'),
+(4, '2024-03-19 23:17:33', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
+(5, '2024-03-19 23:20:57', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Requested an HK scholar'),
+(6, '2024-03-19 23:30:55', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
+(7, '2024-03-19 23:31:12', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Update profile'),
+(8, '2024-03-19 23:34:44', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Change credentials'),
+(9, '2024-03-19 23:39:47', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log out to the system'),
+(10, '2024-03-19 23:40:35', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
+(11, '2024-03-19 23:40:39', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log out to the system'),
+(12, '2024-03-19 23:41:24', '04-2122-022772', 'Mariano Jemima', 'COA', 'Just log in to the system'),
+(13, '2024-03-19 23:41:46', '04-2122-022772', 'Mariano Jemima', 'COA', 'Update profile'),
+(14, '2024-03-19 23:43:12', '04-2122-022772', 'Mariano Jemima', 'COA', 'Update profile');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `admin`
 --
 
@@ -32,15 +66,23 @@ CREATE TABLE `admin` (
   `userName` varchar(255) NOT NULL,
   `adminIdNumber` varchar(255) NOT NULL,
   `passWord` varchar(255) NOT NULL,
-  `profilePics` varchar(255) NOT NULL
+  `profilePics` varchar(255) NOT NULL,
+  `About` varchar(255) NOT NULL,
+  `Phone` varchar(255) NOT NULL,
+  `Address` varchar(255) NOT NULL,
+  `Email` varchar(255) NOT NULL,
+  `Twitter` varchar(255) NOT NULL,
+  `Facebook` varchar(255) NOT NULL,
+  `Instagram` varchar(255) NOT NULL,
+  `Linkedin` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id`, `userName`, `adminIdNumber`, `passWord`, `profilePics`) VALUES
-(1, 'Jester Paul Bacabac', '04-1234-1234', '@Jester123', 'sir_ryan.jpg');
+INSERT INTO `admin` (`id`, `userName`, `adminIdNumber`, `passWord`, `profilePics`, `About`, `Phone`, `Address`, `Email`, `Twitter`, `Facebook`, `Instagram`, `Linkedin`) VALUES
+(1, 'Bacabac Jester Paul', '04-1234-1234', '@Jester123', 'serjester.jpg', 'im good', '09876543219', 'Iloilo city', 'Bruce@gmail', 'https://www.facebook.com/jemayyyy', 'https://www.facebook.com/karenmaygaytano', 'https://www.facebook.com/jemayyyy', 'https://www.facebook.com/reuben.mallorca');
 
 -- --------------------------------------------------------
 
@@ -150,11 +192,11 @@ CREATE TABLE `operations_data` (
 INSERT INTO `operations_data` (`Faculty_Lname`, `Faculty_Fname`, `Faculty_Password`, `Faculty_Id_Number`, `Operation_Dept`, `Operations_Mname`, `Operation_phone_Number`, `Operation_Designation-Position`, `Operations_Email`, `profilePics`, `operations_about`, `twitter`, `facebook`, `instagram`, `linkedin`, `Address`, `status_ol`, `color_status`) VALUES
 ('Mondia', 'Zesty', 'zest123', '03-1234-123456', 'CAHS', 'G', '09876543219', 'Faculty', 'Zesty@gmail.com', 'Screenshot_2024-02-07_195658.png', '', '', '', '', '', '', 'INACTIVE', 'danger'),
 ('Calasra', 'Robert', 'Robert123', '04-2119-123456', 'CITE', 'J', '09991234567', 'Faculty', 'robert@gmail.com', 'faculty_robert.jpg', '', '', '', '', '', '', 'INACTIVE', 'danger'),
-('Gaytano', 'Karen May', '@Karen123', '04-2122-000777', 'CITE', 'G', '09876543219', 'Super Cute', 'karenmaygaytano@gmail.com', 'KARENS.jpg', 'Im cute', 'https://www.facebook.com/karenmaygaytano', 'https://www.facebook.com/karenmaygaytano', 'https://www.facebook.com/karenmaygaytano', 'https://www.facebook.com/karenmaygaytano', 'BORACAY', 'INACTIVE', 'danger'),
-('Mariano', 'Jemima', '@Deanjem2', '04-2122-0227722', 'COA', 'G', '', 'DEAN', '', 'serjester.jpg', '', '', '', '', '', '', 'INACTIVE', 'danger'),
+('Gaytano', 'Karen May', '@Karencute1313', '04-2122-000777', 'CITE', 'G', '09876543219', 'Super Cute', 'karenmaygaytano@gmail.com', 'KARENS.jpg', 'Im super cute ', 'https://www.facebook.com/karenmaygaytano', 'https://www.facebook.com/karenmaygaytano', 'https://www.facebook.com/karenmaygaytano', 'https://www.facebook.com/karenmaygaytano', 'BORACAY', 'INACTIVE', 'danger'),
+('Mariano', 'Jemima', '@Deanjem2', '04-2122-022772', 'COA', 'G', '12345678901', 'DEAN', 'karenmaygaytano@gmail.com', 'jemProfile.jpg', 'excel expert and very organize', 'https://www.facebook.com/jemayyyy', 'https://www.facebook.com/jemayyyy', 'https://www.facebook.com/jemayyyy', 'https://www.facebook.com/jemayyyy', 'Boracay', 'ACTIVE', 'success'),
 ('Parel', 'Kurt', '@Kurt123456789', '04-2122-031289', 'CITE', 'H', '09996563067', 'Faculty', 'KURT2@GMAILK.COM', 'ser.jpg', 'Our mission is to explore the limitless possibilities of technology and harness its potential to drive positive change in the world. We are committed to staying at the forefront of technological advancements, empowering individuals with the knowledge and ', 'HTTPS://WWW.FACEBOOK.COM/KURT.PAREL', 'HTTPS://WWW.FACEBOOK.COM/KURT.PAREL', 'HTTPS://WWW.FACEBOOK.COM/KURT.PAREL', 'https://www.facebook.com/reuben.mallorca', 'ILOILO CITY MANDURRIAO', 'INACTIVE', 'danger'),
 ('Operio', 'Jasper Jev ', 'Operio03182002', '04-2122-033823', 'CITE', 'P', '09476959407', 'Chairman', 'jape.operio.ui@phinmaed.com', '', '', '', '', '', '', '', 'INACTIVE', 'danger'),
-('Yacub', 'Bruce', 'bruce123', '05-3451-90896712', 'COME', 'F', '12345678901', 'Faculty', 'Bruce@gmail', '', '', '', '', '', '', '', 'INACTIVE', 'danger');
+('Yacub', 'Bruce', 'bruce123', '05-3451-908967', 'COME', 'F', '12345678901', 'Faculty', 'Bruce@gmail', '', '', '', '', '', '', '', 'INACTIVE', 'danger');
 
 -- --------------------------------------------------------
 
@@ -177,7 +219,8 @@ CREATE TABLE `operation_request` (
 --
 
 INSERT INTO `operation_request` (`Designation`, `Requirements`, `Report Day/s`, `Request`, `DEPT`, `SUPERVISOR`, `ID`) VALUES
-('SF', 'Fourth Year', 'Mon', '2', 'CITE', 'Gaytano Karen May', 19);
+('SF', 'Fourth Year', 'Mon', '2', 'CITE', 'Gaytano Karen May', 19),
+('Clerk', 'First Year', 'wala', '2', 'CCJE', 'Gaytano Karen May', 21);
 
 -- --------------------------------------------------------
 
@@ -250,6 +293,12 @@ INSERT INTO `scholar_duty_records` (`date`, `Hours_In_Out`, `Minutes_In_Out`, `S
 --
 
 --
+-- Indexes for table `active_logs`
+--
+ALTER TABLE `active_logs`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `admin`
 --
 ALTER TABLE `admin`
@@ -304,6 +353,12 @@ ALTER TABLE `scholar_duty_records`
 --
 
 --
+-- AUTO_INCREMENT for table `active_logs`
+--
+ALTER TABLE `active_logs`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
@@ -319,7 +374,7 @@ ALTER TABLE `hk_assignd_teaecher`
 -- AUTO_INCREMENT for table `operation_request`
 --
 ALTER TABLE `operation_request`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `reports/announcement`
