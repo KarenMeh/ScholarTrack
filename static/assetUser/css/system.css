@@ -1,14 +1,4 @@
-/**
-* Template Name: NiceAdmin
-* Updated: Sep 18 2023 with Bootstrap v5.3.2
-* Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
 
-/*--------------------------------------------------------------
-# General
---------------------------------------------------------------*/
 :root {
     scroll-behavior: smooth;
   }
@@ -716,6 +706,7 @@
   th {
     background-color: #2eca6a;
     color: #eceefe;
+    text-align: center;
   }
   .dashboard .sales-card .card-icon {
     color: #4154f1;
@@ -790,17 +781,17 @@
   
   .dashboard .recent-sales .table thead {
     background: #f6f6fe;
-    margin-left: 20px;
+    
     text-align: center;
   }
   
   .dashboard .recent-sales .table thead th {
     border: 10;
     color: #ffffff;
-    margin-left: 3px;
+   
     text-align: center;
     background-color: #012970;
-    padding-right: -90px;
+
   }
   
   .container .sarch :placeholder-shown {
@@ -824,16 +815,22 @@
   }
   .table tbody td {
     border: 10;
-    font-size: 15px;
+    font-size: 8px;
     text-align: center;
-    padding: 10px;
-    padding-top: 15px;
+    
+    font-weight: 300;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
   }
   
   .table thead th {
     background-color: #012970;
     color: white;
-    padding-right: -90px;
+    font-size: 10px;
+    text-align: center;
+    align-items: center;
+    padding: 0;
+   
+
   }
   .table tbody td button {
     border: none;
@@ -884,6 +881,8 @@
   
   .dashboard .top-selling .table thead th {
     border: 0;
+    align-items: center;
+    text-align: center;
   }
   
   .table tbody td {
@@ -1027,3 +1026,32 @@
     color: #012970;
   }
   
+  .ratings{
+    margin-right:10px;
+}
+
+.ratings i{
+    
+    color:#cecece;
+    font-size:25px;
+}
+
+.rating-color{
+    color:#fbc634 !important;
+}
+
+.review-count{
+    font-weight:400;
+    margin-bottom:2px;
+    font-size:24px !important;
+}
+
+.small-ratings i{
+  color:#cecece;   
+}
+
+.review-stat{
+    font-weight:300;
+    font-size:18px;
+    margin-bottom:2px;
+}

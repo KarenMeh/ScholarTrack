@@ -233,6 +233,7 @@ hr.new2 {
 .bg-dark-light {
   background-color: #d3d3d4;
   border-color: #d3d3d4;
+  
 }
 
 /* Card */
@@ -284,7 +285,7 @@ hr.new2 {
   display: block;
   margin-left: -30px;
   margin-top: -18px;
-  width: 50%;
+  width: 60%;
 }
 .card-title1 span {
   color: #899bbd;
@@ -295,7 +296,7 @@ hr.new2 {
 }
 
 .card-body {
-  padding: 0 20px 20px 20px;
+  width: 300px;
 }
 
 .card-img-overlay {
@@ -556,9 +557,9 @@ hr.new2 {
 .container .row .col .non {
   /* border-left: 5px solid #012970; */
   font-size: 14px;
-  margin-top: -4px;
+  margin-top: -1px;
   margin-bottom: 10px;
-  padding-bottom: 4px;
+  padding-bottom: 20px;
 
 }
 
@@ -900,6 +901,7 @@ hr.new2 {
 /* Activity */
 .dashboard .activity {
   font-size: 14px;
+
 }
 
 .dashboard .activity .activity-item .activite-label {

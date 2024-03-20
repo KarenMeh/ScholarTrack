@@ -34,31 +34,68 @@
     .card  p{
       font-size: 40px;
       text-decoration: none;
+      margin: 0;
     }
 
     .card .ps-5 h6{
-      font-size: 40px;
-      padding-left: 15px;
-      margin-bottom: -12px;
+      font-size: 50px;
+      padding-left: 18px;
+      margin-bottom: -5px;
       font-weight: bold;
     }
 
     .card .ps-5 h5{
-      font-size: 40px;
+      font-size: 48px;
       font-weight: bold;
-      padding-left: 15px;
+      padding-left: 18px;
+      padding-top: 13px;
 
       color: #012970;
       font-weight: bolder;
       margin-top: 30px;
-      margin-bottom: -8px;
+      margin-bottom: -5px;
       
     }
 
+.activite-label p{
+  font-size: 9px;
+  color: #012970;
+  margin-left: -9px;
+  padding-top: 4px;
+}
 
+.activity-content1 p{
+  font-size: 10px;
+  color: #012970;
+  margin-left: 20px;
+  font-weight: bolder;
+  padding-top: 2px;
+  
+}
 
+.activity-content p{
+  font-size: 10px;
+  color: #012970;
+  margin-left: 10px;
+  margin-bottom: 20px;
+ 
 
+  
+}
 
+.cont{
+  padding-left: 30px;
+  margin-left: -140px;
+  background: #fff;
+  width: 225%;
+  padding-bottom: 50px;
+  border-radius: 5px;
+  box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
+
+ 
+}
+
+ 
   </style>
 
 </head>
@@ -269,11 +306,11 @@
           <div class="row">
 
             <!-- Sales Card -->
-            <div class="col-xxl-4 col-md-9" >
+            <div class="col-xxl-5 col-md-9" >
               <div class="card info-card sales-card">
 
                 <div class="card-body">
-                  <h5 class="card-title"> Total Scholar  <span>| Sem 2 <br> SY 2023-2024 </span></h5>  <hr class="new1">
+                  <h5 class="card-title"> Total Scholar  <span>| Sem 2 <br> SY 2023-2024 </span></h5>  
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon  d-flex align-items-center justify-content-center">
@@ -290,11 +327,36 @@
                 </div>
 
               </div>
-            </div><!-- End Sales Card -->
+           </div><!-- End Sales Card -->
 
+    <!-- Customers Card -->
+    <div class="col-xxl-5 col-xl-12">
+
+      <div class="card info-card customers-card ">
+        <div class="card-body">
+          <h5 class="card-title"> Compliance Rate </h5> 
+
+          <div class="d-flex align-items-center">
+            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+              <div class="piktur">
+                <img src="/static/assetUser/img/comply.png" alt="" width="95px">
+              </div>
+            </div>
+            <div class="ps-5">
+              <h5> {{complirate}}</h5>
+
+              <span class="text-danger small pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1"></span>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div><!-- End Customers Card -->
 
             <!-- Revenue Card -->
-            <div class="col-xxl-4 col-md-3">
+            <div class="col-xxl-10 col-md-3">
               <div class="card info-card revenue-card">
 
                 <div class="container">
@@ -324,75 +386,56 @@
             
 
 
-            <!-- Customers Card -->
-            <div class="col-xxl-4 col-xl-12">
-
-              <div class="card info-card customers-card ">
-                <div class="card-body">
-                  <h5 class="card-title"> Compliance Rate </h5> <hr class="new2">
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <div class="piktur">
-                        <img src="/static/assetUser/img/comply.png" alt="" width="95px">
-                      </div>
-                    </div>
-                    <div class="ps-5">
-                      <h5> {{complirate}}</h5>
-
-                      <span class="text-danger small pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1"></span>
-
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
-            </div><!-- End Customers Card -->
-
+        
 
           </div>
         </div><!-- End Left side columns -->
 
         <!-- Right side columns -->
-        <div class="col-lg-3">
+        <div class="col-lg-2 ">
 
           <!-- Recent Activity -->
           <div class="card">
           
 
-            
-            <div class="card-body">
+        
+            <div class="cont">
               <h5 class="card-title">Reports <span>| Today</span></h5>
+              
               {% for dateTIme in dateTimeLista_announcment%}
 
               <div class="activity">
 
                 <div class="activity-item d-flex">
 
-                  <div class="activite-label">{{dateTIme[0]}}</div>
+                  <div class="activite-label">
+                    <p> {{dateTIme[0]}} </p>
+
+                    </div>
                   <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
+
+                  <div class="activity-content1">
                   <p>{{dateTIme[1]}}</p>
+                  </div>
+
                   <div class="activity-content">
-                    <h6>{{dateTIme[2]}}</h6> <a href="#" class="fw-bold text-dark"></a>
+                    <p>{{dateTIme[2]}}</p> <a href="#" class="fw-bold text-dark"></a>
                   </div>
 
                 </div><!-- End activity item-->
                 {% endfor %}
+              </div>
 
 
 
 
 
 
-              </div><!-- End activity item-->
 
 
-            </div>
+           
 
-          </div>
-        </div><!-- End Recent Activity -->
-
+     
 
               
 
