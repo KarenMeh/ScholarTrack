@@ -1,6 +1,7 @@
 import os
 
-from flask import  Flask, render_template, request, redirect, url_for, session, flash
+import pandas as pd
+from flask import Flask, render_template, request, redirect, url_for, session, send_file
 from flaskext.mysql import MySQL
 import datetime
 
@@ -338,19 +339,20 @@ def Dashboard():
 
         for k in db_announc_data:
             announcment_List.append(k)
-        print(announcment_List)
+
         #       to display date and time
         dateTimeLista_announcment = []
         for k in range(len(announcment_List)):
-            dateTimeLista_announcment.append(
-                str(announcment_List[k][1]) + " " + str(announcment_List[k][2]) + "\n\n" + str(
-                    announcment_List[k][3]) + " >" + str(announcment_List[k][0]))
+            content = str(announcment_List[k][1]) + " " + str(announcment_List[k][2]) + ">20%" + str(announcment_List[k][3]) + ">20%" + str(announcment_List[k][0])
+
+            dateTimeLista_announcment.append(content.split(">20%"))
         print(dateTimeLista_announcment)
+
 
         # select profile pic
         qury.execute("SELECT `profilePics` FROM `operations_data` WHERE `Faculty_Id_Number`= '" + session["user"] + "'")
         profilepicDb = qury.fetchall()[0][0]
-        print(profilepicDb)
+
 
         # to display how many hk student there are
         qury.execute("SELECT * FROM `hk_users`")
@@ -796,8 +798,11 @@ def admindashBoard():
         print(announcment_List)
 #       to display date and time
         dateTimeLista_announcment = []
-        for k in range (len(announcment_List)):
-            dateTimeLista_announcment.append(str(announcment_List[k][1])+" "+str(announcment_List[k][2])+"\n\n"+str(announcment_List[k][3])+" >"+str(announcment_List[k][0]))
+        for k in range(len(announcment_List)):
+            content = str(announcment_List[k][1]) + " " + str(announcment_List[k][2]) + ">20%" + str(
+                announcment_List[k][3]) + ">20%" + str(announcment_List[k][0])
+
+            dateTimeLista_announcment.append(content.split(">20%"))
         print(dateTimeLista_announcment)
 
         # to display how many hk student there are
@@ -870,6 +875,40 @@ def compliance():
 
     else:
         return redirect(url_for("admin"))
+
+
+@app.route('/export_excel')
+def export_excel():
+    # -------------student informations---------------------
+    qury.execute("SELECT * FROM `hk_users` WHERE 1")
+    student_Info_FromDb = qury.fetchall()
+
+    student_info = []
+    for k in student_Info_FromDb:
+        student_info.append(k)
+    print(len(student_info))
+
+    table_OfStudent_Info = []
+    counter_Table1 = 0
+    # details to show in profile of the student searched #
+    for k in student_info:
+        std_fullNmae = str(student_info[counter_Table1][3]) + " " + str(student_info[counter_Table1][2])
+        dataProcess = {"STUDENT ID": student_info[counter_Table1][0], "SCHOLAR NAME": std_fullNmae,
+                       "COMPLETED HOURS": student_info[counter_Table1][5] + "m",
+                       "REMAINING HOURS": student_info[counter_Table1][13] + "h " +
+                                          str(float(student_info[counter_Table1][14]).__round__()).split(".")[0] + "m",
+                       "STATUS": student_info[counter_Table1][15]}
+        table_OfStudent_Info.append(dataProcess)
+        counter_Table1 += 1
+    # Convert the data to a pandas DataFrame
+    df = pd.DataFrame(table_OfStudent_Info)
+
+    # Save the DataFrame to an Excel file
+    excel_file_path = 'HK_Dataz.xlsx'
+    df.to_excel(excel_file_path, index=True)
+
+    # Send the Excel file as a response
+    return send_file(excel_file_path, as_attachment=True)
 
 #----------------------Hk 25, 50, 75, 100-----------------------------
 @app.route("/compliance_hk_25")
@@ -1103,7 +1142,7 @@ def Announcement():
     curtime =str(current_time.hour)+":"+str(current_time.minute)
 
     announcemnet = request.form.get('comment')
-    print(tday, curtime,announcemnet)
+    print(tday, curtime,str(announcemnet)+">20%")
 
     #INSERT ANNOUNCMENT TO DB
     qury.execute("INSERT INTO `reports/announcement`(`content`, `date`, `time`, `adminName`)"
@@ -1354,7 +1393,7 @@ def Assigment_modal_process():
         qury.execute("UPDATE `operation_request` SET `Request`='"+str(req_need_std)+"' WHERE `ID` ='"+session['reqid']+"' ")
         conn.commit()
     elif len(checkList) > int(req_Process_for_assigning_duty[0][0]):
-        print("nagsubra mango")
+        return '<script>alert("Exceeded number of request!!");window.location="/Duty Assignment And Management"</script>'
     else:
         print("error")
 
