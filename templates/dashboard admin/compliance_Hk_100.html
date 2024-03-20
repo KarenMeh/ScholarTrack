@@ -160,10 +160,17 @@
       </li><!-- End Dashboard Nav -->
 
 
-
       <li class="nav-item">
        
-       
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="/compliance">
+            <div class="comp">
+            <img src="/static/assetUser/img/compl.png" alt="" width="20px">
+          </div>
+            <span>Compliance Monitoring and Scholar Information</span>
+          </a>
+        </li><!-- End Profile Page Nav -->
+  
   
        
         <li class="nav-item">
@@ -249,8 +256,8 @@
                   <div class="card-title2 ">Scholar Compliance List</span></div> 
                                    
                <div class="container">
-                <button type="button" class="btn btn-info " data-toggle="modal" data-target="#myModal">Add New Scholar</button>
                 </div>
+                <div class ="hk">
                    <ul class="nav nav-tabs p-1 text-dark text">
                     <li><a href="{{url_for('compliance')}}">ALL</a></li>
                     <li><a href="{{url_for('compliance_Hk_25')}}">HK 25</a></li>
@@ -259,7 +266,7 @@
                     <li class="active"><a href="{{url_for('compliance_Hk_100')}}">HK 100</a></li>
 
                   </ul>
-          
+                </div>
     
                     
               
@@ -275,7 +282,7 @@
                                       <th>COMPLETED HOURS</th>
                                       <th>REMAINING HOURS</th>
                                       <th> STATUS </th>
-                                      <th> </th>
+                                      <th> PRINT </th>
                                    
                      </tr>
                  </thead>
@@ -290,8 +297,9 @@
                    <td>{{row['COMPLETED HOURS']}}</td>
                      <td>{{row['REMAINING HOURS']}}</td>
                    <td>{{row['STATUS']}}</td>
-                       <td><input type="hidden" name="Selected_Id" value="{{row['STUDENT ID']}}">
-                       </form>
+                   <td><button type="submit" name="select" value="select"> <i class="bi bi-printer"> </i></button></td>
+                   <input type="hidden" name="Selected_Id" value="{{row['STUDENT ID']}}"> 
+                  </form>
                    </tr>
                   {% endfor %}
                    

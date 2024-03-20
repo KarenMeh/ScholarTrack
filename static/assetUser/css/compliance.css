@@ -206,8 +206,8 @@ h6 {
   padding: 20px 0 2px 0;
   font-size: 25px;
   font-weight: bold;
-
   letter-spacing: 2px;
+  margin-left: 20px;
   font-weight: 300px;
   color: #012970;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
@@ -225,6 +225,12 @@ h6 {
   font-weight: 300px;
 }
 
+.hk ul a{
+  text-decoration: none;
+  color: #002b80;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+ 
 .card-title1 span {
   color: #899bbd;
   font-size: 12px;
@@ -555,6 +561,7 @@ h6 {
   padding: 0;
   margin: 0;
   list-style: none;
+  text-decoration: none;
 }
 
 .sidebar-nav .nav-item {
@@ -800,6 +807,7 @@ th {
   margin-left: 30px;
   text-align: center;
   background-color: #012970;
+  font-size: 13px;
 }
 /* 
 .container .sarch :placeholder-shown {
@@ -869,12 +877,12 @@ th {
   align-items: center;
 }
 .container button {
-  background-color: #069664;
+  background-color: #012970;
   border: none;
   color: white;
   padding: 8px 10px;
   text-align: center;
-  margin-left: 79%;
+  margin-left: 85%;
   margin-top: -40px;
   text-decoration: none;
   display: inline-block;

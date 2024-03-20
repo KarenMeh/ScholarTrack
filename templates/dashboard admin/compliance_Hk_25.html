@@ -253,8 +253,9 @@
                   <div class="card-title2 ">Scholar Compliance List</span></div> 
                                    
                <div class="container">
-                <button type="button" class="btn btn-info " data-toggle="modal" data-target="#myModal">Add New Scholar</button>
-                </div>
+
+              </div>
+                <div class = "hk">
                    <ul class="nav nav-tabs p-1 text-dark text">
                     <li><a href="{{url_for('compliance')}}">ALL</a></li>
                     <li class="active"><a href="{{url_for('compliance_Hk_25')}}">HK 25</a></li>
@@ -263,7 +264,7 @@
                     <li><a href="{{url_for('compliance_Hk_100')}}">HK 100</a></li>
 
                   </ul>
-      
+                </div> 
                   </div>         
                   <!--$%adsense%$-->
                   <main class="cd__main">
@@ -276,7 +277,7 @@
                                         <th>COMPLETED HOURS</th>
                                         <th>REMAINING HOURS</th>
                                         <th> STATUS </th>
-                                        <th> </th>
+                                        <th> PRINT</th>
                                      
                        </tr>
                    </thead>
@@ -291,8 +292,9 @@
                      <td>{{row['COMPLETED HOURS']}}</td>
                        <td>{{row['REMAINING HOURS']}}</td>
                      <td>{{row['STATUS']}}</td>
-                         <td><input type="hidden" name="Selected_Id" value="{{row['STUDENT ID']}}">
-                         </form>
+                     <td><button type="submit" name="select" value="select"> <i class="bi bi-printer"> </i></button></td>
+                     <input type="hidden" name="Selected_Id" value="{{row['STUDENT ID']}}"> 
+                    </form>
                      </tr>
                     {% endfor %}
                      
@@ -383,7 +385,7 @@
   <script src="static/assetUser/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="static/assetUser/js/table.js"></script>
+  <script src="static/assetUser/js/main.js"></script>
 
    <!-- Template Main JS File -->
    <script src="static/assetUser/js/table.js"></script>
