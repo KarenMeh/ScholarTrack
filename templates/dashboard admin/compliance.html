@@ -76,10 +76,6 @@
 
 
 
-
-
-
-
         </li><!-- End Messages Nav -->
 
         <li class="nav-item dropdown pe-3">
@@ -205,14 +201,16 @@
         </li><!-- End Profile Page Nav -->
   
         
+        
         <li class="nav-item">
           <a class="nav-link collapsed" href="/System Health Logs">
             <div class="comp">
               <img src="/static/assetUser/img/system health.png" alt="" width="20px">
             </div>
-            <span>System Health Logs and Feedback</span>
+            <span>Activity Log and Feedback</span>
           </a>
         </li><!-- End Profile Page Nav -->
+  
   
   
       </ul>
@@ -236,7 +234,7 @@
                   <div class="card-title2 ">Scholar Compliance List</span></div> 
                                    
                <div class="container">
-                <button type="button" class="btn btn-info " data-toggle="modal" data-target="#myModal"><a href="/export_excel">EXPORT TO EXCEL</a></button>
+                <button type="button" class="btn btn-info  " data-toggle="modal" data-target="#myModal"><a href="/export_excel">EXPORT TO EXCEL</a></button>
                 </div>
                 <div class ="hk">
                    <ul class="nav nav-tabs p-1">
@@ -259,7 +257,7 @@
                       <th>COMPLETED HOURS</th>
                       <th>REMAINING HOURS</th>
                       <th> STATUS </th>
-                      <th> PRINT</th>
+                   
                    
      </tr>
  </thead>
@@ -272,8 +270,7 @@
     <td>{{row['SCHOLAR NAME']}}</td>
    <td>{{row['COMPLETED HOURS']}}</td>
      <td>{{row['REMAINING HOURS']}}</td>
-   <td>{{row['STATUS']}}</td>
-       <td><button type="submit" name="select" value="select"> <i class="bi bi-printer"> </i></button></td>
+     <td class ="text-bg-warning text-white">{{row['STATUS']}}</td>
         <input type="hidden" name="Selected_Id" value="{{row['STUDENT ID']}}"> 
        </form>
    </tr>

@@ -28,14 +28,33 @@
 
   <!-- Template Main CSS File -->
   <link href="static/assetUser/css/assign.css" rel="stylesheet">
+<style>
+  .col-xl-4{
+    width: 50%;
+    padding-top: 20px;
+    border: 3px solid #012970;
+  }
 
-  <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Updated: Sep 18 2023 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  .col-xl-4 span{
+    padding-bottom: 20px;
+    font-weight: bold;
+    color: #012970;
+  }
+
+
+
+.date { 
+  font-size: 30px;
+  margin-top: -100px;
+  color: #012970;
+}
+
+.sem  select{
+ width: 100px;
+ border: 2px solid  #012970;;
+}
+
+</style>
 </head>
 
 <body>
@@ -200,23 +219,22 @@
         </li><!-- End Profile Page Nav -->
   
         
+        
         <li class="nav-item">
           <a class="nav-link collapsed" href="/System Health Logs">
             <div class="comp">
               <img src="/static/assetUser/img/system health.png" alt="" width="20px">
             </div>
-            <span>System Health Logs and Feedback</span>
+            <span>Activity Log and Feedback</span>
           </a>
         </li><!-- End Profile Page Nav -->
   
-       
   
       </ul>
   
     </aside><!-- End Sidebar-->
   
     <main id="main" class="main">
-      <h1 class="text-danger">  <img src="" alt="" srcset="">UNDER MAINTENANCE 75%</h1>
       <div class="pagetitle">
         <h1>Setting and Configuration</h1>
       
@@ -226,14 +244,14 @@
         <div class="row">
           <div class="col-xl-4">
   
-            <div class="card">
+            <div class="card col-15">
               <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
                 <span>Administration Account </span>
   
                 <img src="/static/profilePics/{{profilepicDb}}" alt="Profile" class="rounded-circle">
                 <h2>{{logUser}}</h2>
                 <h3>{{adminId}}</h3>
-                <div class="social-links mt-2">
+                <div class="social-links mt-2 mb-2">
                   <a href="{{twitter}}" class="twitter"><i class="bi bi-twitter"></i></a>
                   <a href="{{facebook}}" class="facebook"><i class="bi bi-facebook"></i></a>
                   <a href="{{instagram}}" class="instagram"><i class="bi bi-instagram"></i></a>
@@ -277,10 +295,10 @@
             
           </div>
   
-          <div class="col-xl-8">
+          <div class="col-xl-6">
   
             <div class="card">
-              <div class="card-body pt-3">
+              <div class="card-body pt-2">
                 <!-- Bordered Tabs -->
                 <ul class="nav nav-tabs nav-tabs-bordered">
   
@@ -304,25 +322,6 @@
                 <div class="tab-content pt-2">
   
                   <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    
-  
                     
                   </div>
   
@@ -429,17 +428,17 @@
                     <!-- Change Password Form -->
                     <form action="/semester_change" method="post">
 
-                        <div class="row mb-3">
-                          <label for="academicyr" class="col-md-4 col-lg-3 col-form-label">ACADEMIC YEAR</label>
-                          <div class="col-md-8 col-lg-9">
+                        <div class="row1 mb-3">
+                          <label for="academicyr" class="col-md-2 col-lg-6 col-form-label">ACADEMIC YEAR</label>
+                          <div class="date">  <br><br>
                             <script>document.write( new Date().getUTCFullYear() );</script>
                           </div>
                         </div>
 
                         <div class="row mb-3">
-                          <label for="semester"   class="col-md-4 col-lg-3 col-form-label">SEMESTER</label>
+                          <label for="semester"   class="sem">SEMESTER</label>
                           <div class="col-md-8 col-lg-9">
-                          <select name="semester" id="semester" required>
+                          <select name="semester" id="semester" class="sem" required>
                             <option value="">Select</option>
                             <option value="FIRST SEMESTER">FIRST SEMESTER</option>
                             <option value="SECOND SEMESTER">SECOND SEMESTER</option>

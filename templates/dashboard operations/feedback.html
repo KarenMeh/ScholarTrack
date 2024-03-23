@@ -44,15 +44,6 @@
   
  
 </head>
-<style>
-  .bi-printer {
-  font-size: 20px;
-  color: #002b80;
-  background: none;
-  margin-left: -10px;
-  align-items: center;
-}
-</style>
 <body>
 
 
@@ -240,7 +231,7 @@
                 <option value="Fourth Year">Fourth Year</option>
               </select>
 
-              <label for="Requirement">Reporting Days: </label> <br>
+              <label for="Requirement">Reporting Days: </label> </br>
                 <input type="checkbox"  name="monday" value="Mon" >
                 <label for="vehicle1"> Monday</label><br>
                 <input type="checkbox"  name="tuesday" value="Tues" >
@@ -306,7 +297,6 @@
       <th>COMPLETED MINUTES </th>
       <th>REMAINING HOURS</th>
       <th>STATUS</th>
-      <th>CERT</th>
         
      </tr>
  </thead>
@@ -320,8 +310,6 @@
    <td>{{row['COMPLETED HOURS']}}</td>
     <td>{{row['REMAINING HOURS']}}</td>
     <td class ="text-bg-warning"> {{row['STATUS']}}</td>
-    <td><button type="submit" name="select" value="select"> <i class="bi bi-printer"> </i></button></td>
-
   </form>
 </tr>
 

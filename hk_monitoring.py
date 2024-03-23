@@ -1,4 +1,5 @@
 import os
+from audioop import reverse
 
 import pandas as pd
 from flask import Flask, render_template, request, redirect, url_for, session, send_file
@@ -856,7 +857,7 @@ def compliance():
         table_OfStudent_Info = []
         counter_Table1 = 0
         # details to show in profile of the student searched #
-        for k in student_info:
+        for k in reversed(student_info):
             std_fullNmae = str(student_info[counter_Table1][3]) + " " + str(student_info[counter_Table1][2])
             dataProcess = {"STUDENT ID": student_info[counter_Table1][0], "SCHOLAR NAME": std_fullNmae,
                            "COMPLETED HOURS": student_info[counter_Table1][5] + "m",
@@ -1262,52 +1263,52 @@ def DutyAssig_process():
         table = {"STUDENT ID":avil_std_list[k][0],"SCHOLAR NAME":avil_std_list[k][1]+" "+avil_std_list[k][2],"YEAR LVL":avil_std_list[k][3],"PROGRAM":avil_std_list[k][4], "DEPARTMENT":avil_std_list[k][5]}
         table_avil_std.append(table)
 
-        # to display std whitout assigmnt
-        qury.execute("SELECT  `Status_avail` FROM `hk_users` WHERE `Status_avail` ='Na' ")
-        stduentNotAv = qury.fetchall()
+    # to display std whitout assigmnt
+    qury.execute("SELECT  `Status_avail` FROM `hk_users` WHERE `Status_avail` ='Na' ")
+    stduentNotAv = qury.fetchall()
 
-        # to display std whitout assigmnt
-        qury.execute("SELECT  `Status_avail` FROM `hk_users` WHERE `Status_avail` ='av' ")
-        studentAv = qury.fetchall()
+    # to display std whitout assigmnt
+    qury.execute("SELECT  `Status_avail` FROM `hk_users` WHERE `Status_avail` ='av' ")
+    studentAv = qury.fetchall()
 
-        # this is for puting value to the pai charts
-        qury.execute("SELECT `department` FROM `hk_users`")
-        department_data_db = qury.fetchall()
+    # this is for puting value to the pai charts
+    qury.execute("SELECT `department` FROM `hk_users`")
+    department_data_db = qury.fetchall()
 
-        coa = []
-        coed = []
-        cite = []
-        com = []
-        ccje = []
-        coe = []
-        cahs = []
-        come = []
-        for k in department_data_db:
+    coa = []
+    coed = []
+    cite = []
+    com = []
+    ccje = []
+    coe = []
+    cahs = []
+    come = []
+    for k in department_data_db:
 
-            if str(k[0]).upper() == "COA":
-                coa.append(str(k[0]).upper())
-            elif str(k[0]).upper() == "COED":
-                coed.append(str(k[0]).upper())
-            elif str(k[0]).upper() == "CITE":
-                cite.append(str(k[0]).upper())
-            elif str(k[0]).upper() == "COM":
-                com.append(str(k[0]).upper())
-            elif str(k[0]).upper() == "CCJE":
-                ccje.append(str(k[0]).upper())
-            elif str(k[0]).upper() == "COE":
-                coe.append(str(k[0]).upper())
-            elif str(k[0]).upper() == "CAHS":
-                cahs.append(str(k[0]).upper())
-            elif str(k[0]).upper() == "COME":
-                come.append(str(k[0]).upper())
+        if str(k[0]).upper() == "COA":
+            coa.append(str(k[0]).upper())
+        elif str(k[0]).upper() == "COED":
+            coed.append(str(k[0]).upper())
+        elif str(k[0]).upper() == "CITE":
+            cite.append(str(k[0]).upper())
+        elif str(k[0]).upper() == "COM":
+            com.append(str(k[0]).upper())
+        elif str(k[0]).upper() == "CCJE":
+            ccje.append(str(k[0]).upper())
+        elif str(k[0]).upper() == "COE":
+            coe.append(str(k[0]).upper())
+        elif str(k[0]).upper() == "CAHS":
+            cahs.append(str(k[0]).upper())
+        elif str(k[0]).upper() == "COME":
+            come.append(str(k[0]).upper())
 
-        qury.execute("SELECT * FROM `hk_users`")
-        number_of_stndt = qury.fetchall()
+    qury.execute("SELECT * FROM `hk_users`")
+    number_of_stndt = qury.fetchall()
 
-        complirate = (len(stduentNotAv) / len(number_of_stndt)) * 100
+    complirate = (len(stduentNotAv) / len(number_of_stndt)) * 100
 
-        qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
-        profilepicDb = qury.fetchall()[0][0]
+    qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
+    profilepicDb = qury.fetchall()[0][0]
     return render_template("dashboard admin/assignment.html",
                            logUser=session["adminUser"],profilepicDb=profilepicDb,
                            table_Assigment_Page_Admin=session["assigmentstdList"]

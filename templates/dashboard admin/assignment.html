@@ -41,7 +41,7 @@
 
 <body>
 
-  <!-- ======= Header ======= -->
+
 
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
@@ -433,16 +433,16 @@
             <div class="card info-card sales-card">
 
               <div class="card-body">
-                <h5 class="card-title"> Unassigned Scholar </h5>  <hr class="new1">
+                <h5 class="card-title">  Assigned Scholar </h5>  <hr class="new1">
 
                 <div class="d-flex align-items-center">
                   <div class="card-icon  d-flex align-items-center justify-content-center">
-                    <div class="piktur">
-                    <img src="/static/assetUser/img/boty.png" alt="" width="98px">
+                    <div class="piktur"> 
+                    <img src="/static/assetUser/img/girl.png" alt="" width="98px">
                   </div>
                   </div>
                   <div class="ps-5">
-                    <h6> {{stduentNotAv}}</h6>
+                    <h6> {{studentAv}} </h6>
                     <span class="text-success small pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1"></span>
 
                   </div>
@@ -460,16 +460,16 @@
 
           <div class="card info-card customers-card">
             <div class="card-body">
-              <h5 class="card-title"> Assigned Scholar </h5> <hr class="new2">
+              <h5 class="card-title"> Unassigned Scholar </h5> <hr class="new2">
 
               <div class="d-flex align-items-center">
                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                   <div class="piktur">
-                    <img src="/static/assetUser/img/girl.png" alt="" width="92px">
+                    <img src="/static/assetUser/img/boty.png" alt="" width="92px">
                   </div>
                 </div>
                 <div class="ps-5">
-                  <h6> {{studentAv}}</h6>
+                  <h6> {{stduentNotAv}}</h6>
                   <!-- <h6> {{remduty}}</h6> -->
                   <span class="text-danger small pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1"></span>
 
@@ -534,10 +534,7 @@
                  type: 'pie',
                  radius: '50%',
                  data: [
-                   {
-                     value: 0,
-                     name: 'Operations'
-                   },
+            
                    {
                      value: {{coa}},
                      name: 'COA'

@@ -68,6 +68,7 @@ tfoot tr {
     white-space: nowrap;
   }
 
+ 
   .table td:nth-child(1) {
     background: #ccc;
     height: 100%;

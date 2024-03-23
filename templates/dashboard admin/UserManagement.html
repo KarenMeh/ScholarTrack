@@ -32,8 +32,7 @@
   <link href="/static/assetUser/css/user.css" rel="stylesheet">
 
   <link rel="stylesheet" href="static/assetUser/css/style1.css">
-  <!-- Demo CSS (No need to include it into your project) -->
-  <link rel="stylesheet" href="static/assetUser/css/demo.css">
+  <!-- Demo CSS (No need to include it into your project) -->  <link rel="stylesheet" href="static/assetUser/css/demo.css">
   <!-- Bootstrap 5 CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
 <!-- Data Table CSS -->
@@ -41,18 +40,10 @@
 <!-- Font Awesome CSS -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
  
-  <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Updated: Sep 18 2023 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+ 
 </head>
 
 <body>
-
-  <!-- ======= Header ======= -->
 
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
@@ -67,8 +58,6 @@
       <i class="bi bi-list toggle-sidebar-btn"></i>
 
     </div><!-- End Logo -->
-
-
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
@@ -260,15 +249,16 @@
             <span>Setting and Configurations</span>
           </a>
         </li><!-- End Profile Page Nav -->
-  
+   
         <li class="nav-item">
           <a class="nav-link collapsed" href="/System Health Logs">
             <div class="comp">
               <img src="/static/assetUser/img/system health.png" alt="" width="20px">
             </div>
-            <span>System Health Logs and Feedback</span>
+            <span>Activity Log and Feedback</span>
           </a>
         </li><!-- End Profile Page Nav -->
+  
   
       
   
@@ -285,10 +275,9 @@
           <div class="card-title2 "> User Management</span>
 
 <div class="container mt-3">
-<div class = "add"
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-    ADD USER
-  </button>
+<div class = "add">
+  <button type="button" class="" data-bs-toggle="modal" data-bs-target="#myModal">
+    ADD USER </button>
 </div>
 </div>
 
@@ -299,28 +288,31 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">ADD USER</h4>
-        <h1 class="text-danger">  <img src="" alt="" srcset="">UNDER MAINTENANCE 80%</h1>
+        <h4 class="modal-title3">ADD USER</h4>
+       
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
       <!-- Modal body -->
       <div class="modal-body">
         <form action="/modal_add_user" method="post" >
-        <label for="lname">Employee ID</label>
-          <input type="text" id="lname" name="empid" required><br><br>
+
+          <div class="tb">
+          <label type="lname">Employee ID: </label>
+          <input type="text" id="lname" name="empid" required maxlength="14"><br><br>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required><br><br>
           <label for="lname">Last name:</label>
           <input type="text" id="lname" name="lname" required><br><br>
           <label for="fname">First name:</label>
           <input type="text" id="fname" name="fname" required><br><br>
           <label for="mname">Middlename:</label>
           <input type="text" id="mname" name="mname" required><br><br>
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required><br><br>
+         
           <label for="phone">  Phone:</label>
           <input type="number" id="phone" name="phone" required><br><br>
 
-          <label for="Requirement">Department</label>
+          <label for="Requirement">Department: </label>
           <select name="dept" id="Designation" required>
             <option value="">Select</option>
             <option value="COM">COM</option>
@@ -341,33 +333,37 @@
                 <option value="Faculty">Faculty</option>
                 <option value="COO">COO</option>
                 <option value="Dean">Dean</option>
-               
-              </select>
-
-
+               </select>
+              <br><br><br>
+              
               <div class="row mb-3">
-                <label for="newPassword"   class="col-md-5 col-lg-6 col-form-label">Password</label>
-                <div class="col-md-4 col-lg-9">
-                  <input   type="password"  name="psw" class="form-control" id="newPassword"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+             <label for="newPassword"   class="label pt-5 ">Password:</label> <br>
+                <div class="con ">
+                  <input   type="password"  name="psw" class="form-control1 w-200 p-3" id="newPassword"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
                 </div>
               </div>
 
               <div class="row mb-3">
-                <label for="renewPassword"  class="col-md-5 col-lg-6  col-form-label">Confirm Password</label>
-                <div class="col-md-4 col-lg-9">
-                  <input  type="password" name="repsw"  class="form-control" id="renewPassword"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                <label for="renewPassword"  class="label">Confirm Password:</label>
+                <div class="pass">
+                  <input  type="password" name="repsw"  class="form-control1" id="renewPassword"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
                 </div>
               </div>
-          <input type="Submit" value="Submit" name="request">
-           
+            </div>
+
+        </div>   
+
+      
+   
+   
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <input type="Submit" class="btn btn-success" value="Submit" name="request">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
 
       </div>
     </form>
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-      </div>
-
     </div>
   </div>
 </div>
@@ -375,8 +371,8 @@
  
 <!-- REQUEST -->
 <div class="container mt-3">
-  <div class = "req"
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal1">
+  <div class = "req">
+  <button type="button" class="" data-bs-toggle="modal" data-bs-target="#myModal1">
    REQUEST
   </button>
 </div>
@@ -450,7 +446,7 @@
       <th>DESIGNATION</th>
       <th>DEPARTMENT</th>
       <th>STATUS</th>
-      <th></th>
+      <th>DETAILS</th>
       
                    
      </tr>
@@ -458,15 +454,25 @@
  <tbody id="myTable">
   {% for row in operations_table%}
     <tr>
+      
       <td>{{row['USER ID']}}</td>
       <td>{{row['NAME']}}</td>
       <td>{{row['DESIGNATION']}}</td>
       <td>{{row['DEPARTMENT']}}</td>
 
 
-      <td> <span class=" bg-{{row['color_status']}} text-white d-inline p-1">{{row['STATUS']}}</span></td>
+<td> <span class=" bg-{{row['color_status']}} text-white d-inline p-1">{{row['STATUS']}}</span></td>
+<div class="containerbut"> 
+  <td><button type="button" class="text-white" data-bs-toggle="modal" data-bs-target="#myModal2">
+  
+     Details
+    </button></td>
 
-      <td><a href="">Details</a></td>
+
+
+
+</div>
+
     </tr>
 
 
@@ -475,15 +481,90 @@
   </tbody>
 </table>
 
-
- 
 </div>
 
-</div> 
+
+<!-- The Modal -->
+<div class="modal" id="myModal2">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title1 "> PROFILE DETAILS</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+                 
+        <div class="container mt-1 mb-1 p-3 d-flex justify-content-center"> 
+          <div class="card p-4"> 
+            <div class=" image d-flex flex-column justify-content-center align-items-center"> 
+              <button class="btn btn-secondary"> 
+
+                <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100" />
+              </button> 
+          
+              <span class="name mt-3">Eleanor Pena</span> <br>
+              <div class="conts "> 
+                
+              <span class="idd2">Email:</span> <br>
+              
+              <span class="idd2">Address:</span><br>
+              <span class="idd2">Phone number:</span><br>
+              <span class="idd2">Department:</span><br>
+              <span class="idd2">Department:</span>
+             
+               
+              </div> 
+              <div class="contsa "> 
+              <span class="idd3">About</span>
+              </div>
+              </div> <div class="text mt-3">
+            
+                 <span>Eleanor Pena is a creator of minimalistic x bold graphics and digital artwork.<br> </span> 
+                </div>
+                 <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"> 
+                  <span><i class="fa fa-twitter"></i></span> 
+                  <span><i class="fa fa-facebook-f"></i></span> 
+                  <span><i class="fa fa-instagram"></i></span> 
+                  <span><i class="fa fa-linkedin"></i></span> 
+                </div> 
+               
+              </div> 
+            </div>
+      </div>
+      
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
 
 
-    
-        </div><!-- End Right side columns -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div><!-- End Right side columns -->
 
 
       </div>
@@ -497,11 +578,7 @@
     <div class="copyright">
       &copy; Copyright <strong><span>Phinma-UI</span></strong>. All Rights Reserved
     </div>
-    <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+    
       Designed by Proglematicv3</a>
     </div>
 
