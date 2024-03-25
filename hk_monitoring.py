@@ -1,7 +1,8 @@
 import os
+from audioop import reverse
 
 import pandas as pd
-from flask import Flask, render_template, request, redirect, url_for, session, send_file
+from flask import Flask, render_template, request, redirect, url_for, session, send_file, jsonify
 from flaskext.mysql import MySQL
 import datetime
 
@@ -155,6 +156,8 @@ def logOutAmin():
     session.pop("Duty_record_table", None)
     session.pop("student_Id_num", None)
     session.pop("userIdAdmin", None)
+
+
     return '<script>alert("Log Out");window.location="/"</script>'
 
 
@@ -758,6 +761,7 @@ def scholarSearch():
 #------------------admin side------------------------------
 @app.route("/adminLanding")
 def admin():
+
     return render_template("admin.html")
 
 @app.route("/adminLog", methods=['POST'])
@@ -860,7 +864,7 @@ def compliance():
         table_OfStudent_Info = []
         counter_Table1 = 0
         # details to show in profile of the student searched #
-        for k in student_info:
+        for k in reversed(student_info):
             std_fullNmae = str(student_info[counter_Table1][3]) + " " + str(student_info[counter_Table1][2])
             dataProcess = {"STUDENT ID": student_info[counter_Table1][0], "SCHOLAR NAME": std_fullNmae,
                            "COMPLETED HOURS": student_info[counter_Table1][5] + "m",
@@ -1263,52 +1267,52 @@ def DutyAssig_process():
         table = {"STUDENT ID":avil_std_list[k][0],"SCHOLAR NAME":avil_std_list[k][1]+" "+avil_std_list[k][2],"YEAR LVL":avil_std_list[k][3],"PROGRAM":avil_std_list[k][4], "DEPARTMENT":avil_std_list[k][5]}
         table_avil_std.append(table)
 
-        # to display std whitout assigmnt
-        qury.execute("SELECT  `Status_avail` FROM `hk_users` WHERE `Status_avail` ='Na' ")
-        stduentNotAv = qury.fetchall()
+    # to display std whitout assigmnt
+    qury.execute("SELECT  `Status_avail` FROM `hk_users` WHERE `Status_avail` ='Na' ")
+    stduentNotAv = qury.fetchall()
 
-        # to display std whitout assigmnt
-        qury.execute("SELECT  `Status_avail` FROM `hk_users` WHERE `Status_avail` ='av' ")
-        studentAv = qury.fetchall()
+    # to display std whitout assigmnt
+    qury.execute("SELECT  `Status_avail` FROM `hk_users` WHERE `Status_avail` ='av' ")
+    studentAv = qury.fetchall()
 
-        # this is for puting value to the pai charts
-        qury.execute("SELECT `department` FROM `hk_users`")
-        department_data_db = qury.fetchall()
+    # this is for puting value to the pai charts
+    qury.execute("SELECT `department` FROM `hk_users`")
+    department_data_db = qury.fetchall()
 
-        coa = []
-        coed = []
-        cite = []
-        com = []
-        ccje = []
-        coe = []
-        cahs = []
-        come = []
-        for k in department_data_db:
+    coa = []
+    coed = []
+    cite = []
+    com = []
+    ccje = []
+    coe = []
+    cahs = []
+    come = []
+    for k in department_data_db:
 
-            if str(k[0]).upper() == "COA":
-                coa.append(str(k[0]).upper())
-            elif str(k[0]).upper() == "COED":
-                coed.append(str(k[0]).upper())
-            elif str(k[0]).upper() == "CITE":
-                cite.append(str(k[0]).upper())
-            elif str(k[0]).upper() == "COM":
-                com.append(str(k[0]).upper())
-            elif str(k[0]).upper() == "CCJE":
-                ccje.append(str(k[0]).upper())
-            elif str(k[0]).upper() == "COE":
-                coe.append(str(k[0]).upper())
-            elif str(k[0]).upper() == "CAHS":
-                cahs.append(str(k[0]).upper())
-            elif str(k[0]).upper() == "COME":
-                come.append(str(k[0]).upper())
+        if str(k[0]).upper() == "COA":
+            coa.append(str(k[0]).upper())
+        elif str(k[0]).upper() == "COED":
+            coed.append(str(k[0]).upper())
+        elif str(k[0]).upper() == "CITE":
+            cite.append(str(k[0]).upper())
+        elif str(k[0]).upper() == "COM":
+            com.append(str(k[0]).upper())
+        elif str(k[0]).upper() == "CCJE":
+            ccje.append(str(k[0]).upper())
+        elif str(k[0]).upper() == "COE":
+            coe.append(str(k[0]).upper())
+        elif str(k[0]).upper() == "CAHS":
+            cahs.append(str(k[0]).upper())
+        elif str(k[0]).upper() == "COME":
+            come.append(str(k[0]).upper())
 
-        qury.execute("SELECT * FROM `hk_users`")
-        number_of_stndt = qury.fetchall()
+    qury.execute("SELECT * FROM `hk_users`")
+    number_of_stndt = qury.fetchall()
 
-        complirate = (len(stduentNotAv) / len(number_of_stndt)) * 100
+    complirate = (len(stduentNotAv) / len(number_of_stndt)) * 100
 
-        qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
-        profilepicDb = qury.fetchall()[0][0]
+    qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
+    profilepicDb = qury.fetchall()[0][0]
     return render_template("dashboard admin/assignment.html",
                            logUser=session["adminUser"],profilepicDb=profilepicDb,
                            table_Assigment_Page_Admin=session["assigmentstdList"]
@@ -1414,60 +1418,172 @@ def Assigment_modal_process():
 
 @app.route("/User Management")
 def UserManagement():
-    try:
-
-        qury.execute("SELECT `Faculty_Lname` FROM `operations_data`")
-        operations_lname = qury.fetchall()
-
-        qury.execute("SELECT `Faculty_Fname` FROM `operations_data`")
-        operations_fname = qury.fetchall()
-
-        qury.execute("SELECT `Faculty_Id_Number` FROM `operations_data`")
-        operations_Id_number = qury.fetchall()
-
-        qury.execute("SELECT  `Operation_Dept` FROM `operations_data`")
-        operations_department = qury.fetchall()
-
-        qury.execute("SELECT `Operations_Mname` FROM `operations_data`")
-        operations_Mname = qury.fetchall()
-
-        qury.execute("SELECT `Operation_Designation-Position` FROM `operations_data`")
-        operations_Designate = qury.fetchall()
-
-        qury.execute("SELECT `status_ol` FROM `operations_data`")
-        status_ol = qury.fetchall()
-
-        qury.execute("SELECT `color_status` FROM `operations_data`")
-        color_status = qury.fetchall()
+    # try:
 
 
+    qury.execute("SELECT `Faculty_Lname` FROM `operations_data`")
+    operations_lname = qury.fetchall()
 
-        operations_table =[]
-        operations_counter = 0
-        for k in operations_lname:
-            tbl = {"USER ID":operations_Id_number[operations_counter][0], "NAME":str(operations_fname[operations_counter][0])+" "+str(k[0]), "DESIGNATION":operations_Designate[operations_counter][0],"DEPARTMENT":operations_department[operations_counter][0],"STATUS":status_ol[operations_counter][0],"color_status":color_status[operations_counter][0]}
-            operations_table.append(tbl)
-            operations_counter += 1
+    qury.execute("SELECT `Faculty_Fname` FROM `operations_data`")
+    operations_fname = qury.fetchall()
 
-        qury.execute("SELECT `Faculty_Lname`, `Faculty_Fname`, `Faculty_Id_Number`, `Operation_Dept`, `Operations_Mname`,`Operation_Designation-Position` FROM `opertaion_req_acc`")
-        operation_req_acc_data_db = qury.fetchall()
+    qury.execute("SELECT  `Operation_Dept` FROM `operations_data`")
+    operations_department = qury.fetchall()
 
+    qury.execute("SELECT `Operations_Mname` FROM `operations_data`")
+    operations_Mname = qury.fetchall()
 
+    qury.execute("SELECT `Operation_Designation-Position` FROM `operations_data`")
+    operations_Designate = qury.fetchall()
 
-        operation_req_acc_Table = []
-        for k in operation_req_acc_data_db:
+    qury.execute("SELECT `status_ol` FROM `operations_data`")
+    status_ol = qury.fetchall()
 
-            table = {"EMP ID":k[2], "NAME":str(k[1])+" "+str(k[0])+" "+str(k[4]), "POSITION":k[5], "DEPARTMENT":k[3]}
-            operation_req_acc_Table.append(table)
+    qury.execute("SELECT `color_status` FROM `operations_data`")
+    color_status = qury.fetchall()
+
+    qury.execute("SELECT `Faculty_Id_Number` FROM `operations_data`")
+    operations_Id_number = qury.fetchall()
+
+    operations_table =[]
+    operations_counter = 0
+    x=0
+    for k in operations_lname:
+        tbl = {"USER_ID":operations_Id_number[operations_counter][0], "NAME":str(operations_fname[operations_counter][0])+" "+str(k[0]), "DESIGNATION":operations_Designate[operations_counter][0],"DEPARTMENT":operations_department[operations_counter][0],"STATUS":status_ol[operations_counter][0],"color_status":color_status[operations_counter][0],"id":x}
+        operations_table.append(tbl)
+        operations_counter += 1
+        x+=1
+
+    qury.execute("SELECT `Faculty_Lname`, `Faculty_Fname`, `Faculty_Id_Number`, `Operation_Dept`, `Operations_Mname`,`Operation_Designation-Position` FROM `opertaion_req_acc`")
+    operation_req_acc_data_db = qury.fetchall()
 
 
 
-        qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
-        profilepicDb = qury.fetchall()[0][0]
+    operation_req_acc_Table = []
+    for k in operation_req_acc_data_db:
+        table = {"EMP ID":k[2], "NAME":str(k[1])+" "+str(k[0])+" "+str(k[4]), "POSITION":k[5], "DEPARTMENT":k[3]}
+        operation_req_acc_Table.append(table)
 
-        return render_template("dashboard admin/UserManagement.html",logUser=session["adminUser"],profilepicDb=profilepicDb,operations_table=operations_table, operation_req_acc_Table=operation_req_acc_Table)
-    except Exception:
-        return redirect(url_for("admin"))
+
+
+    qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
+    profilepicDb = qury.fetchall()[0][0]
+
+
+
+
+
+
+
+    return render_template("dashboard admin/UserManagement.html",logUser=session["adminUser"],profilepicDb=profilepicDb,operations_table=operations_table, operation_req_acc_Table=operation_req_acc_Table)
+
+    # except Exception:
+    #         return redirect(url_for("admin"))
+
+    #this is for passing value to modal operations details
+@app.route('/get_faculty_info', methods=['POST'])
+def get_faculty_info():
+    qury.execute("SELECT `Faculty_Lname` FROM `operations_data`")
+    operations_lname = qury.fetchall()
+
+    qury.execute("SELECT `Faculty_Fname` FROM `operations_data`")
+    operations_fname = qury.fetchall()
+
+    qury.execute("SELECT  `Operation_Dept` FROM `operations_data`")
+    operations_department = qury.fetchall()
+
+    qury.execute("SELECT `Operations_Mname` FROM `operations_data`")
+    operations_Mname = qury.fetchall()
+
+    qury.execute("SELECT `Operation_Designation-Position` FROM `operations_data`")
+    operations_Designate = qury.fetchall()
+
+    qury.execute("SELECT `status_ol` FROM `operations_data`")
+    status_ol = qury.fetchall()
+
+    qury.execute("SELECT `color_status` FROM `operations_data`")
+    color_status = qury.fetchall()
+
+    qury.execute("SELECT `Faculty_Id_Number` FROM `operations_data`")
+    operations_Id_number = qury.fetchall()
+
+    qury.execute("SELECT `Operations_Email` FROM `operations_data`")
+    operations_email = qury.fetchall()
+
+    qury.execute("SELECT `Address` FROM `operations_data`")
+    operations_adress = qury.fetchall()
+
+    qury.execute("SELECT `Operation_phone_Number` FROM `operations_data`")
+    operations_Phone = qury.fetchall()
+
+    qury.execute("SELECT `operations_about` FROM `operations_data`")
+    operations_about = qury.fetchall()
+
+
+
+    qury.execute("SELECT `twitter` FROM `operations_data`")
+    operations_twiiter = qury.fetchall()
+
+    qury.execute("SELECT `facebook` FROM `operations_data`")
+    operations_fb = qury.fetchall()
+
+    qury.execute("SELECT `instagram` FROM `operations_data`")
+    operations_insta = qury.fetchall()
+
+    qury.execute("SELECT `linkedin` FROM `operations_data`")
+    operations_linkIn = qury.fetchall()
+
+    qury.execute("SELECT `profilePics` FROM `operations_data`")
+    operations_Pic = qury.fetchall()
+
+
+    operations_table = []
+    operations_counter = 0
+    x = 0
+    for k in operations_lname:
+        tbl = {"USER_ID": operations_Id_number[operations_counter][0],
+               "NAME": str(operations_fname[operations_counter][0]) + " " + str(k[0]),
+               "DESIGNATION": operations_Designate[operations_counter][0],
+               "DEPARTMENT": operations_department[operations_counter][0], "STATUS": status_ol[operations_counter][0],
+               "color_status": color_status[operations_counter][0],"id":x, "email":operations_email[operations_counter][0],
+               "Address":operations_adress[operations_counter][0],"phone":operations_Phone[operations_counter][0],
+               "about":operations_about[operations_counter][0],"twitter":operations_twiiter[operations_counter][0],
+               "fb": operations_fb[operations_counter][0],"insta":operations_insta[operations_counter][0],
+               "linkIn": operations_linkIn[operations_counter][0], "pic": operations_Pic[operations_counter][0]
+
+               }
+        x+=1
+        operations_table.append(tbl)
+        operations_counter += 1
+
+    qury.execute(
+        "SELECT `Faculty_Lname`, `Faculty_Fname`, `Faculty_Id_Number`, `Operation_Dept`, `Operations_Mname`,`Operation_Designation-Position` FROM `opertaion_req_acc`")
+    operation_req_acc_data_db = qury.fetchall()
+    ope_id = "" # use to qury data to show in modal
+    id_checker_Minus = []
+    id_splitNum = []
+    faculty_id = request.form['faculty_id'] # from javascrip
+    for k in range (len(operations_table)):
+        id_checker_Minus.append(operations_table[k]['USER_ID'])
+
+    print(operations_table)
+    print(id_checker_Minus)
+    print(int(faculty_id))
+    ope_id = id_checker_Minus[int(faculty_id)]
+    print("=", ope_id)
+
+
+
+
+
+    selected_faculty = next((row for row in operations_table if row['id'] == int(faculty_id)), None)
+    print(selected_faculty)
+
+    # Fetch specific data based on faculty_id
+
+    return jsonify(selected_faculty)
+
+
 
 @app.route("/request_modal_Process_User_Management", methods = ['POST'])
 def request_modal_Process_User_Management():
@@ -1475,8 +1591,6 @@ def request_modal_Process_User_Management():
     delbtn = request.form.get('del')
     conbtn = request.form.get('con')
     confirmation = str(delbtn)+str(conbtn)
-
-
 
     if confirmation.split(">>")[0] == "del":
 
@@ -1535,11 +1649,12 @@ def modal_add_user():
         "UPDATE `operations_data` SET `status_ol`='INACTIVE',`color_status`='danger' WHERE `Faculty_Id_Number` = '" + empid + "' ")
     conn.commit()
 
-
-
-
-
     return redirect(url_for('UserManagement'))
+
+
+#for modal details in user management
+
+
 
 
 @app.route("/Export to Excel")
@@ -1931,8 +2046,6 @@ def StudentTimeIN_Out():
             timeInList.clear()
             #------------------formulation of remainin duty hours
 
-
-
             qury.execute("INSERT INTO `scholar_duty_records`"
                          "(`date`,`Hours_In_Out`, "
                          "`Minutes_In_Out`, `Student_id_Number`, "
@@ -1945,8 +2058,6 @@ def StudentTimeIN_Out():
             fname = fullname[0][1]
             lname = fullname[0][0]
 
-
-
             return render_template("Terminal/terminal.html", tday=tday, hours=current_hour, mins=current_minute,time_In_Out=time_In_Out, stdId=stdId, fname=fname, lname=lname)
 
 
@@ -1954,12 +2065,7 @@ def StudentTimeIN_Out():
         errormess = "Sign in first"
 
 
-
-
-
     return render_template("Terminal/terminal.html", errormess =errormess  )
-
-
 
 
 if __name__ == "__main__":

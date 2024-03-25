@@ -215,15 +215,16 @@
         </li><!-- End Profile Page Nav -->
   
         
-      
+     
         <li class="nav-item">
           <a class="nav-link collapsed" href="/System Health Logs">
             <div class="comp">
               <img src="/static/assetUser/img/system health.png" alt="" width="20px">
             </div>
-            <span>System Health Logs and Feedback</span>
+            <span>Activity Log and Feedback</span>
           </a>
         </li><!-- End Profile Page Nav -->
+  
   
   
        
@@ -291,7 +292,7 @@
                    <td>{{row['SCHOLAR NAME']}}</td>
                    <td>{{row['COMPLETED HOURS']}}</td>
                      <td>{{row['REMAINING HOURS']}}</td>
-                   <td>{{row['STATUS']}}</td>
+                     <td class ="text-bg-warning text-white">{{row['STATUS']}}</td>
                    <td><button type="submit" name="select" value="select"> <i class="bi bi-printer"> </i></button></td>
                    <input type="hidden" name="Selected_Id" value="{{row['STUDENT ID']}}"> 
                   </form>

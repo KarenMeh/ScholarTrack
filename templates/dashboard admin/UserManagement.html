@@ -32,8 +32,7 @@
   <link href="/static/assetUser/css/user.css" rel="stylesheet">
 
   <link rel="stylesheet" href="static/assetUser/css/style1.css">
-  <!-- Demo CSS (No need to include it into your project) -->
-  <link rel="stylesheet" href="static/assetUser/css/demo.css">
+  <!-- Demo CSS (No need to include it into your project) -->  <link rel="stylesheet" href="static/assetUser/css/demo.css">
   <!-- Bootstrap 5 CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
 <!-- Data Table CSS -->
@@ -41,18 +40,10 @@
 <!-- Font Awesome CSS -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
  
-  <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Updated: Sep 18 2023 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+ 
 </head>
 
 <body>
-
-  <!-- ======= Header ======= -->
 
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
@@ -67,8 +58,6 @@
       <i class="bi bi-list toggle-sidebar-btn"></i>
 
     </div><!-- End Logo -->
-
-
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
@@ -232,7 +221,7 @@
             <div class="comp">
               <img src="/static/assetUser/img/assign.png" alt="" width="20px">
             </div>
-            <span>Duty Assignment And Management</span>
+            <span>Duty Assignment and Management</span>
           </a>
         </li><!-- End Profile Page Nav -->
   
@@ -260,15 +249,16 @@
             <span>Setting and Configurations</span>
           </a>
         </li><!-- End Profile Page Nav -->
-  
+   
         <li class="nav-item">
           <a class="nav-link collapsed" href="/System Health Logs">
             <div class="comp">
               <img src="/static/assetUser/img/system health.png" alt="" width="20px">
             </div>
-            <span>System Health Logs and Feedback</span>
+            <span>Activity Log and Feedback</span>
           </a>
         </li><!-- End Profile Page Nav -->
+  
   
       
   
@@ -285,10 +275,9 @@
           <div class="card-title2 "> User Management</span>
 
 <div class="container mt-3">
-<div class = "add"
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-    ADD USER
-  </button>
+<div class = "add">
+  <button type="button" class="teble" data-bs-toggle="modal" data-bs-target="#myModal">
+    ADD USER </button>
 </div>
 </div>
 
@@ -299,28 +288,31 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">ADD USER</h4>
-        <h1 class="text-danger">  <img src="" alt="" srcset="">UNDER MAINTENANCE 80%</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <h4 class="modal-title3">ADD USER</h4>
+       
+        <button type="button" namclass="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
       <!-- Modal body -->
       <div class="modal-body">
         <form action="/modal_add_user" method="post" >
-        <label for="lname">Employee ID</label>
-          <input type="text" id="lname" name="empid" required><br><br>
+
+          <div class="tb">
+          <label type="lname">Employee ID: </label>
+          <input type="text" id="lname" name="empid" required maxlength="14"><br><br>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required><br><br>
           <label for="lname">Last name:</label>
           <input type="text" id="lname" name="lname" required><br><br>
           <label for="fname">First name:</label>
           <input type="text" id="fname" name="fname" required><br><br>
           <label for="mname">Middlename:</label>
           <input type="text" id="mname" name="mname" required><br><br>
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required><br><br>
+         
           <label for="phone">  Phone:</label>
           <input type="number" id="phone" name="phone" required><br><br>
 
-          <label for="Requirement">Department</label>
+          <label for="Requirement">Department: </label>
           <select name="dept" id="Designation" required>
             <option value="">Select</option>
             <option value="COM">COM</option>
@@ -334,6 +326,9 @@
             
           </select>
           <br>
+    
+       
+          <br>
 
           <label for="Designation">Designation/Position:</label>
               <select name="Designation" id="Designation" required>
@@ -341,33 +336,39 @@
                 <option value="Faculty">Faculty</option>
                 <option value="COO">COO</option>
                 <option value="Dean">Dean</option>
-               
-              </select>
-
-
+               </select>
+              <input type="hidden" name="">
+              
+              <br><br><br>
               <div class="row mb-3">
-                <label for="newPassword"   class="col-md-5 col-lg-6 col-form-label">Password</label>
-                <div class="col-md-4 col-lg-9">
-                  <input   type="password"  name="psw" class="form-control" id="newPassword"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+             <label for="newPassword"   class="label pt-5 ">Password:</label> <br>
+                <div class="con ">
+                  <input   type="password"  name="psw" class="form-control1 w-200 p-3" id="newPassword"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
                 </div>
               </div>
 
               <div class="row mb-3">
-                <label for="renewPassword"  class="col-md-5 col-lg-6  col-form-label">Confirm Password</label>
-                <div class="col-md-4 col-lg-9">
-                  <input  type="password" name="repsw"  class="form-control" id="renewPassword"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                <label for="renewPassword"  class="label">Confirm Password:</label>
+                <div class="pass">
+                  <input  type="password" name="repsw"  class="form-control1" id="renewPassword"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
                 </div>
               </div>
-          <input type="Submit" value="Submit" name="request">
-           
+            </div>
 
-      </div>
-    </form>
+        </div>   
+
+      
+   
+   
+
       <!-- Modal footer -->
       <div class="modal-footer">
+        <input type="Submit" class="btn btn-success" value="Submit" name="request">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-      </div>
 
+     
+    </form>
+  </div>
     </div>
   </div>
 </div>
@@ -375,8 +376,8 @@
  
 <!-- REQUEST -->
 <div class="container mt-3">
-  <div class = "req"
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal1">
+  <div class = "req">
+  <button type="button" class="" data-bs-toggle="modal" data-bs-target="#myModal1">
    REQUEST
   </button>
 </div>
@@ -444,13 +445,15 @@
   <!-- Start DEMO HTML (Use the following code into your project)-->
   <table id="example1" class="table table-striped" style="width:100%">
  <thead>
-     <tr>              
-      <th>USER ID</th>
-      <th>NAME</th>
-      <th>DESIGNATION</th>
-      <th>DEPARTMENT</th>
-      <th>STATUS</th>
-      <th></th>
+     <tr>
+       <th>ID</th>
+       <th>USER ID</th>
+       <th>NAME</th>
+       <th>DESIGNATION</th>
+       <th>DEPARTMENT</th>
+       <th>STATUS</th>
+       <th>DETAILS</th>
+
       
                    
      </tr>
@@ -458,15 +461,26 @@
  <tbody id="myTable">
   {% for row in operations_table%}
     <tr>
-      <td>{{row['USER ID']}}</td>
+
+      <td>{{row['id']}}</td>
+      <td>{{row['USER_ID']}}</td>
       <td>{{row['NAME']}}</td>
       <td>{{row['DESIGNATION']}}</td>
       <td>{{row['DEPARTMENT']}}</td>
 
 
-      <td> <span class=" bg-{{row['color_status']}} text-white d-inline p-1">{{row['STATUS']}}</span></td>
 
-      <td><a href="">Details</a></td>
+<td> <span class=" bg-{{row['color_status']}} text-white d-inline p-1">{{row['STATUS']}}</span></td>
+<div class="containerbut"> 
+  <td><button type="button" onclick="openModal({{row['id']}})" class="text-white" data-bs-toggle="modal" data-bs-target="#myModal2">
+     Details
+    </button></td>
+
+
+
+
+</div>
+
     </tr>
 
 
@@ -475,15 +489,140 @@
   </tbody>
 </table>
 
-
- 
 </div>
 
-</div> 
 
 
-    
-        </div><!-- End Right side columns -->
+
+
+    <script>
+
+
+
+        function openModal(facultyId) {
+            fetch('/get_faculty_info', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'faculty_id=' + facultyId,
+            })
+            .then(response => response.json())
+            .then(data => {
+
+                document.getElementById("facultyImage").src = 'static/profilePics/'+data.pic;
+                document.getElementById("modalContentName").innerText = `${data.NAME}`;
+
+                document.getElementById("modalContentEm").innerText = `${data.email}`
+                document.getElementById("modalContentAdd").innerText = `${data.Address}`;
+                document.getElementById("modalContentNumber").innerText = `${data.phone}`;
+                document.getElementById("modalContentDep").innerText = `${data.DEPARTMENT}`;
+                document.getElementById("modalContentPos").innerText = `${data.DESIGNATION}`;
+
+                document.getElementById("modalContentAbout").innerText = `${data.about}`;
+
+
+                document.getElementById("modalContentTwit").href = data.twitter;
+                document.getElementById("modalContentFb").href = data.fb;
+                document.getElementById("modalContentInsta").href = data.insta;
+                document.getElementById("modalContentLinkIn").href = data.linkIn;
+
+
+
+
+
+                document.getElementById("myModal2").style.display = "block";
+            });
+        }
+
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+    </script>
+
+
+<!-- The Modal -->
+<div class="modal" id="myModal2">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+       <span class="close" onclick="closeModal()">&times;</span>
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title1 "> PROFILE DETAILS</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+
+        <div class="container mt-1 mb-1 p-3 d-flex justify-content-center">
+          <div class="card p-4">
+            <div class=" image d-flex flex-column justify-content-center align-items-center">
+              <button class="btn btn-secondary">
+
+                <img id="facultyImage" src="" height="100" width="100" />
+              </button>
+
+              <span class="name mt-3"><p id="modalContentName"></p></span> <br>
+              <div class="conts ">
+
+              <span class="idd2">Email:<i id="modalContentEm"></i></span> <br>
+
+              <span class="idd2">Address:<i id="modalContentAdd"></i></span><br>
+              <span class="idd2">Phone number:<i id="modalContentNumber"></i></span><br>
+              <span class="idd2">Department:<i id="modalContentDep"></i></span><br>
+              <span class="idd2">Position:<i id="modalContentPos"></i></span>
+
+
+              </div>
+              <div class="contsa ">
+              <span class="idd3">About</span>
+              </div>
+              </div> <div class="text mt-3">
+
+                 <span><i id="modalContentAbout"></i><br> </span>
+                </div>
+                 <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center">
+                  <span><a  id="modalContentTwit" href="#" target="_blank"><i class="fa fa-twitter"></i></a></span>
+                  <span><a id="modalContentFb" href="#" target="_blank"><i class="fa fa-facebook-f"></i></a></span>
+                  <span><a id="modalContentInsta" href="#" target="_blank"><i class="fa fa-instagram"></i></a></span>
+                  <span><a id="modalContentLinkIn" href="#" target="_blank"><i class="fa fa-linkedin"></i></a></span>
+                </div>
+
+              </div>
+            </div>
+      </div>
+
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div><!-- End Right side columns -->
 
 
       </div>
@@ -497,11 +636,7 @@
     <div class="copyright">
       &copy; Copyright <strong><span>Phinma-UI</span></strong>. All Rights Reserved
     </div>
-    <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+    
       Designed by Proglematicv3</a>
     </div>
 
@@ -551,3 +686,6 @@
     });
   });
   </script>
+
+
+

@@ -263,6 +263,7 @@
                    
      </tr>
  </thead>
+ 
  <tbody id="myTable">
   {% for row in table_OfStudent_Info %}
    <tr>
@@ -271,17 +272,13 @@
       {{row['STUDENT ID']}}</td>
     <td>{{row['SCHOLAR NAME']}}</td>
    <td>{{row['COMPLETED HOURS']}}</td>
-     <td>{{row['REMAINING HOURS']}}</td>
+   <td>{{row['REMAINING HOURS']}}</td>
    <td>{{row['STATUS']}}</td>
-       <td><button type="submit" name="select" value="select"> <i class="bi bi-printer"> </i></button></td>
-        <input type="hidden" name="Selected_Id" value="{{row['STUDENT ID']}}"> 
-       </form>
+   <td><button type="submit" name="select" value="select"> <i class="bi bi-printer"> </i></button></td>
+   <input type="hidden" name="Selected_Id" value="{{row['STUDENT ID']}}"> 
+    </form>
    </tr>
   {% endfor %}
-   
-
-
-
   </tfoot>
  </tbody>
 </table>

@@ -70,6 +70,7 @@ h6 {
   transition: all 0.4s;
 }
 
+
 .back-to-top i {
   font-size: 24px;
   color: #fff;
@@ -178,7 +179,7 @@ h6 {
 
 /* Card */
 .card {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   border: none;
   border-radius: 5px;
   box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
@@ -203,10 +204,22 @@ h6 {
 }
 
 .card-title2 {
-  padding: 20px 10px 2px 0;
+  padding: 20px 0 0px 0;
   font-size: 20px;
+  margin-left: 20px;
   font-weight: bold;
-  margin-left: 25px;
+  letter-spacing: 2px;
+  font-weight: 300px;
+  color: #012970;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.card-title3 {
+  /* padding: 10px 0 0px 0; */
+  font-size: 15px;
+  padding-top: 15px;
+  font-weight: bold;
+  margin-left: -130px;
   letter-spacing: 2px;
   font-weight: 300px;
   color: #012970;
@@ -223,6 +236,10 @@ h6 {
   padding-bottom: 30px;
 
   font-weight: 300px;
+}
+
+.table-striped > td:nth-child(odd) {
+  background-color: red;
 }
 
 .card-title1 span {
@@ -313,10 +330,20 @@ h6 {
   }
 }
 
+.rej0 {
+  color: white;
+  font-size: 11px;
+  padding: 0;
+  margin: 0;
+}
+
 .header .search-form {
   width: 100%;
 }
 
+.text-right .btn-secondary {
+  font-size: 10px;
+}
 .header .search-form input {
   border: 0;
   font-size: 14px;
@@ -781,26 +808,52 @@ th {
 
 /* Recent Sales */
 .dashboard .recent-sales {
-  font-size: 16px;
-}
-
-.dashboard .recent-sales .button {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .dashboard .recent-sales .table thead {
   background: #f6f6fe;
-  margin-left: 20px;
-  text-align: center;
 }
 
 .dashboard .recent-sales .table thead th {
-  border: 10;
-  color: #ffffff;
-  margin-left: 3px;
-  text-align: center;
-  background-color: #012970;
-  padding-right: -90px;
+  border: 0;
+}
+
+.dashboard .recent-sales .dataTable-top {
+  padding: 0 0 10px 0;
+}
+
+.dashboard .recent-sales .dataTable-bottom {
+  padding: 10px 0 0 0;
+}
+
+.piktur {
+  display: block;
+  margin-left: -40px;
+  margin-top: -30px;
+  width: 50%;
+}
+
+/* Top Selling */
+.dashboard .top-selling {
+  font-size: 1px;
+}
+
+.dashboard .top-selling .table thead {
+  background: #f6f6fe;
+}
+
+.dashboard .top-selling .table thead th {
+  border: 0;
+}
+
+.dashboard .top-selling .table tbody td {
+  vertical-align: middle;
+}
+
+.dashboard .top-selling img {
+  border-radius: 5px;
+  max-width: 60px;
 }
 
 .container .sarch :placeholder-shown {
@@ -814,14 +867,81 @@ th {
   margin-left: -12px;
 }
 
+.container .req button{
+  background-color: #002b80;
+  color: white;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 10px;
+  border: white;
+  float: right;
+
+}
+
+.container button{
+  margin-top: -10px;
+}
+
+
+.text-white{
+  background-color: #002b80;
+  padding: 10px;
+  border: white;
+  font-size: 10px;
+  border-radius: 30px;
+  padding-right: 13px;
+  padding-left: 13px;
+}
+
+
+.container .add button{
+  background-color: #002b80;
+  color: white;
+  margin-right: 15px;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 10px;
+  float: right;
+  margin-left: 10px;
+  border: white;
+ 
+
+}
+
+ .add input{
+  background-color: #002b80;
+  color: white;
+  margin-right: 15px;
+  padding: 12px;
+  border-radius: 5px;
+  font-size: 10px;
+  float: right;
+  margin-left: -20px;
+  border: white;
+ 
+
+}
+
+.container .add button:hover{
+  background-color: #2eca6a;
+}
+
+.container .req button:hover{
+  background-color: #2eca6a;
+}
+
+.containerbut td button:hover{
+  background-color: #0c4d25;
+  
+}
+
+
+
+/*--------------------------------------------------------------
+    # CSS TH 
+    --------------------------------------------------------------*/
 .container .sarch::after {
   background-color: #002b80;
-}
-.table thead tr {
-  border: 10;
-  text-align: center;
-  background-color: #012970;
-  text-align: center;
 }
 
 
@@ -831,228 +951,43 @@ th {
   text-align: center;
   padding: 10px;
   padding-top: 15px;
-}
-
-.table thead th {
-  background-color: #012970;
-  font-size: 10px;
-  color: white;
- 
-  margin: 70px;
   text-align: center;
-}
-.table tbody td button {
-  border: none;
-  background: none;
-
-
+  
   text-decoration: none;
-}
-.dashboard .recent-sales .dataTable-top {
-  padding: 0 0 10px 0;
-}
-
-.dashboard .recent-sales .dataTable-bottom {
-  padding: 10px 0 0 0;
+  
+  
 }
 
-/* Top Selling */
-.dashboard .top-selling {
-  font-size: 14px;
-}
-
-.bi-calendar2-minus {
-  font-size: 20px;
+.tbody td {
+  margin: 500px;
+  text-decoration: none;
   color: #002b80;
-  background: none;
-  margin-left: -30px;
+  
+
+}
+.table thead th {
+  border: 10;
+  color: #ffffff;
+  font-size: 10px;
+  background-color: #012970;
+  margin-left: 200px;
   align-items: center;
-}
-
-.container button {
-  background-color: #017028;
-  border: none;
-  color: white;
-  padding: 8px 10px;
   text-align: center;
-  margin-left: 90%;
-  margin-top: -40px;
+  align-self: center;
   text-decoration: none;
-  display:block;
-  font-size: 16px;
-}
-
-
-
-.add  {
-  background-color: #012970;
-  border: none;
-  color: white;
-  border-radius: 10px;
-  padding: 8px 16px;
-  float: left;
-  padding-left: 10px;
-  padding-right: 10px;
-  text-align: center;
- margin-top: -40px;
- margin-left: 90%;
- text-decoration: none;
-  font-size: 13px;
-  margin-bottom: 40px;
 
 }
 
-.req  {
-  background-color: #012970;
-  border: none;
-  color: white;
-  border-radius: 10px;
-  padding: 8px 16px;
-  float: left;
-  padding-left: 11px;
-  padding-right: 11px;
-  text-align: center;
- margin-top: -30px;
- margin-left: 980px;
- text-decoration: none;
-  font-size: 13px;
-  margin-bottom: -20px;
-}
-
-
-
-.button .btn-primary{
-  font-size: 60px;
-}
-
-.container li {
-  font-size: 40px;
-}
-.table thead {
-  background-color: #012970;
-}
-
-.dashboard .top-selling .table thead th {
-  border: 0;
-}
-
-.table tbody td {
-  vertical-align: middle;
+.td a{
+  text-decoration: none;
+  color: #8e97ab;
   text-decoration: none;
 }
 
-.table tbody td a {
-  color: #017038;
+
+.container button a {
   text-decoration: none;
-}
-
-.table tbody td .bi-x {
-  color: #017038;
-  font-size: 20px;
-}
-.dashboard .top-selling img {
-  border-radius: 5px;
-  max-width: 60px;
-}
-
-/*--------------------------------------------------------------
-    # Profie Page
-    --------------------------------------------------------------*/
-.profile .profile-card img {
-  max-width: 120px;
-}
-
-.profile .profile-card h2 {
-  font-size: 24px;
-  font-weight: 700;
-  color: #2c384e;
-  margin: 10px 0 0 0;
-}
-
-.profile .profile-card h3 {
-  font-size: 18px;
-}
-
-.profile .profile-card .social-links a {
-  font-size: 20px;
-  display: inline-block;
-  color: rgba(1, 41, 112, 0.5);
-  line-height: 0;
-  margin-right: 10px;
-  transition: 0.3s;
-}
-
-.profile .profile-card .social-links a:hover {
-  color: #012970;
-}
-
-.profile .profile-overview .row {
-  margin-bottom: 20px;
-  font-size: 15px;
-}
-
-.profile .profile-overview .card-title {
-  color: #012970;
-}
-
-.profile .profile-overview .label {
-  font-weight: 600;
-  color: rgba(1, 41, 112, 0.6);
-}
-
-.profile .profile-edit label {
-  font-weight: 600;
-  color: rgba(1, 41, 112, 0.6);
-}
-
-.contact .php-email-form input,
-.contact .php-email-form textarea {
-  border-radius: 0;
-  box-shadow: none;
-  font-size: 14px;
-  border-radius: 0;
-}
-
-.contact .php-email-form input:focus,
-.contact .php-email-form textarea:focus {
-  border-color: #4154f1;
-}
-
-.contact .php-email-form input {
-  padding: 10px 15px;
-}
-
-.contact .php-email-form textarea {
-  padding: 12px 15px;
-}
-
-.contact .php-email-form button[type="submit"] {
-  background: #4154f1;
-  border: 0;
-  padding: 10px 30px;
-  color: #fff;
-  transition: 0.4s;
-  border-radius: 4px;
-}
-
-.contact .php-email-form button[type="submit"]:hover {
-  background: #5969f3;
-}
-
-@keyframes animate-loading {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@media (min-width: 992px) {
-  .error-404 img {
-    max-width: 50%;
-  }
+  color: white;
 }
 
 /*--------------------------------------------------------------
@@ -1075,4 +1010,174 @@ th {
   text-align: center;
   font-size: 13px;
   color: #012970;
+}
+
+
+.image img {
+  transition: all 0.5s
+}
+
+.card:hover .image img {
+  transform: scale(1.5)
+}
+
+.modal-title1{
+  
+  color: #002b80;
+  font-size: 20px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 900;
+}
+
+.modal-title3{
+  color: #002b80;
+  font-size: 20px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 900;
+  margin-bottom: -10px;
+}
+
+.name {
+  font-size: 22px;
+  font-weight: bold
+}
+
+.idd {
+  font-size: 14px;
+  font-weight: 600;
+ margin-left: -30%;
+
+  
+}
+
+.conts .idd2 {
+  font-size: 14px;
+  font-weight: 600;
+ margin-left: -150%;
+ color: #012970;
+ 
+}
+
+.tb{
+  float: left;
+  font-size: 18px;
+ 
+
+}
+
+.tb label{
+  
+  display: inline-block;
+  font-weight: 900;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  
+  
+
+  
+}
+
+.row .label {
+
+  display: inline-block;
+  font-weight: 900;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin-top: -10px;
+  text-align: left;
+}
+
+
+.tb input{
+  width: 60%;
+  height: 30px;
+  display:inline-block;
+  margin-left: 20px;
+  border: 2px solid #002b80;
+  float: inline-end;
+}
+
+.form-control1{
+  display: inline-block;
+  float: inline-end;
+}
+
+.contsa .idd3 {
+  font-size: 18px;
+  font-weight: 600;
+ text-align: center;
+ color: #012970;
+  
+}
+
+.pass1 input{
+  width: 60%;
+  height: 30px;
+  display:inline-block;
+  margin-left: 20px;
+  border: 2px solid #002b80;
+  float: inline-end;
+}
+
+.tb select{
+  width: 60%;
+  height: 30px;
+ margin-bottom: -20%;
+  margin-left: 20px;
+  border: 2px solid #002b80;
+  float: inline-end;
+ 
+}
+
+
+.card .p-4{
+  margin-bottom: -30px;
+  margin-top: -20px;
+  border: 2px solid #002b80;
+}
+.idd1 {
+  font-size: 12px;
+
+}
+
+.number {
+  font-size: 22px;
+  font-weight: bold
+}
+
+.follow {
+  font-size: 12px;
+  font-weight: 500;
+  color: #444444
+}
+
+.btn1 {
+  height: 40px;
+  width: 150px;
+  border: none;
+  background-color: #000;
+  color: #aeaeae;
+  font-size: 15px
+}
+
+.text span {
+  font-size: 13px;
+  color: #545454;
+  font-weight: 500
+}
+
+.icons i {
+  font-size: 19px
+}
+
+hr .new1 {
+  border: 1px solid
+}
+
+.join {
+  font-size: 14px;
+  color: #a0a0a0;
+  font-weight: bold
+}
+
+.date {
+  background-color: #ccc
 }
