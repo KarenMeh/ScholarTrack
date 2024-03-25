@@ -445,13 +445,15 @@
   <!-- Start DEMO HTML (Use the following code into your project)-->
   <table id="example1" class="table table-striped" style="width:100%">
  <thead>
-     <tr>              
-      <th>USER ID</th>
-      <th>NAME</th>
-      <th>DESIGNATION</th>
-      <th>DEPARTMENT</th>
-      <th>STATUS</th>
-      <th>DETAILS</th>
+     <tr>
+       <th>ID</th>
+       <th>USER ID</th>
+       <th>NAME</th>
+       <th>DESIGNATION</th>
+       <th>DEPARTMENT</th>
+       <th>STATUS</th>
+       <th>DETAILS</th>
+
       
                    
      </tr>
@@ -459,16 +461,22 @@
  <tbody id="myTable">
   {% for row in operations_table%}
     <tr>
-      
-      <td>{{row['USER ID']}}</td>
+
+      <td>{{row['id']}}</td>
+      <td>{{row['USER_ID']}}</td>
       <td>{{row['NAME']}}</td>
       <td>{{row['DESIGNATION']}}</td>
       <td>{{row['DEPARTMENT']}}</td>
 
 
+
 <td> <span class=" bg-{{row['color_status']}} text-white d-inline p-1">{{row['STATUS']}}</span></td>
 <div class="containerbut"> 
+<<<<<<< HEAD
   <td><button type="button" class="text-white" data-bs-toggle="modal" data-bs-target="#myModal2">
+=======
+  <td><button type="button" onclick="openModal({{row['id']}})" class="text-white" data-bs-toggle="modal" data-bs-target="#myModal2">
+>>>>>>> 0a802f96735666cb35b4f65a2e05f9a568649e3a
      Details
     </button></td>
 
@@ -488,10 +496,60 @@
 </div>
 
 
+
+
+
+    <script>
+
+
+
+        function openModal(facultyId) {
+            fetch('/get_faculty_info', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'faculty_id=' + facultyId,
+            })
+            .then(response => response.json())
+            .then(data => {
+
+                document.getElementById("facultyImage").src = 'static/profilePics/'+data.pic;
+                document.getElementById("modalContentName").innerText = `${data.NAME}`;
+
+                document.getElementById("modalContentEm").innerText = `${data.email}`
+                document.getElementById("modalContentAdd").innerText = `${data.Address}`;
+                document.getElementById("modalContentNumber").innerText = `${data.phone}`;
+                document.getElementById("modalContentDep").innerText = `${data.DEPARTMENT}`;
+                document.getElementById("modalContentPos").innerText = `${data.DESIGNATION}`;
+
+                document.getElementById("modalContentAbout").innerText = `${data.about}`;
+
+
+                document.getElementById("modalContentTwit").href = data.twitter;
+                document.getElementById("modalContentFb").href = data.fb;
+                document.getElementById("modalContentInsta").href = data.insta;
+                document.getElementById("modalContentLinkIn").href = data.linkIn;
+
+
+
+
+
+                document.getElementById("myModal2").style.display = "block";
+            });
+        }
+
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+    </script>
+
+
 <!-- The Modal -->
 <div class="modal" id="myModal2">
   <div class="modal-dialog ">
     <div class="modal-content">
+       <span class="close" onclick="closeModal()">&times;</span>
 
       <!-- Modal Header -->
       <div class="modal-header">
@@ -501,45 +559,45 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-                 
-        <div class="container mt-1 mb-1 p-3 d-flex justify-content-center"> 
-          <div class="card p-4"> 
-            <div class=" image d-flex flex-column justify-content-center align-items-center"> 
-              <button class="btn btn-secondary"> 
 
-                <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100" />
-              </button> 
-          
-              <span class="name mt-3">Eleanor Pena</span> <br>
-              <div class="conts "> 
-                
-              <span class="idd2">Email:</span> <br>
-              
-              <span class="idd2">Address:</span><br>
-              <span class="idd2">Phone number:</span><br>
-              <span class="idd2">Department:</span><br>
-              <span class="idd2">Department:</span>
-             
-               
-              </div> 
-              <div class="contsa "> 
+        <div class="container mt-1 mb-1 p-3 d-flex justify-content-center">
+          <div class="card p-4">
+            <div class=" image d-flex flex-column justify-content-center align-items-center">
+              <button class="btn btn-secondary">
+
+                <img id="facultyImage" src="" height="100" width="100" />
+              </button>
+
+              <span class="name mt-3"><p id="modalContentName"></p></span> <br>
+              <div class="conts ">
+
+              <span class="idd2">Email:<i id="modalContentEm"></i></span> <br>
+
+              <span class="idd2">Address:<i id="modalContentAdd"></i></span><br>
+              <span class="idd2">Phone number:<i id="modalContentNumber"></i></span><br>
+              <span class="idd2">Department:<i id="modalContentDep"></i></span><br>
+              <span class="idd2">Position:<i id="modalContentPos"></i></span>
+
+
+              </div>
+              <div class="contsa ">
               <span class="idd3">About</span>
               </div>
               </div> <div class="text mt-3">
-            
-                 <span>Eleanor Pena is a creator of minimalistic x bold graphics and digital artwork.<br> </span> 
+
+                 <span><i id="modalContentAbout"></i><br> </span>
                 </div>
-                 <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"> 
-                  <span><i class="fa fa-twitter"></i></span> 
-                  <span><i class="fa fa-facebook-f"></i></span> 
-                  <span><i class="fa fa-instagram"></i></span> 
-                  <span><i class="fa fa-linkedin"></i></span> 
-                </div> 
-               
-              </div> 
+                 <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center">
+                  <span><a  id="modalContentTwit" href="#" target="_blank"><i class="fa fa-twitter"></i></a></span>
+                  <span><a id="modalContentFb" href="#" target="_blank"><i class="fa fa-facebook-f"></i></a></span>
+                  <span><a id="modalContentInsta" href="#" target="_blank"><i class="fa fa-instagram"></i></a></span>
+                  <span><a id="modalContentLinkIn" href="#" target="_blank"><i class="fa fa-linkedin"></i></a></span>
+                </div>
+
+              </div>
             </div>
       </div>
-      
+
 
       <!-- Modal footer -->
       <div class="modal-footer">
@@ -632,3 +690,6 @@
     });
   });
   </script>
+
+
+

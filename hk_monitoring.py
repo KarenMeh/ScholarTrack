@@ -2,7 +2,7 @@ import os
 from audioop import reverse
 
 import pandas as pd
-from flask import Flask, render_template, request, redirect, url_for, session, send_file
+from flask import Flask, render_template, request, redirect, url_for, session, send_file, jsonify
 from flaskext.mysql import MySQL
 import datetime
 
@@ -37,14 +37,14 @@ userEmail = qury.fetchall()
 usremail = []
 for i in userEmail:
     usremail.append(i[0])
-print(usremail)
+
 
 qury.execute("SELECT `password` FROM `hk_users`")
 userPassword = qury.fetchall()
 usrpass = []
 for i in userPassword:
     usrpass.append(i[0])
-print(usrpass)
+
 
 #portanti ni sa log in
 credintials = []
@@ -52,7 +52,7 @@ index = 0
 for i in usremail:
     credintials.append(i +" "+ usrpass[index])
     index+=1
-print(credintials)
+
 
 #----student id numbers---
 qury.execute("SELECT `idnum` FROM `hk_users`")
@@ -60,7 +60,7 @@ idnumberStdnt = qury.fetchall()
 stdntIdNumberAvilable =[]
 for k in idnumberStdnt:
     stdntIdNumberAvilable.append(k[0])
-print(stdntIdNumberAvilable)
+
 
 
 
@@ -76,7 +76,7 @@ adminUsername = qury.fetchall()
 adminusernamels=[]
 for k in adminUsername:
     adminusernamels.append(k[0])
-print(adminusernamels)
+
 
 qury.execute("SELECT `passWord` FROM `admin` ")
 adminpass = qury.fetchall()
@@ -84,14 +84,14 @@ adminpass = qury.fetchall()
 adminuserpassWord=[]
 for k in adminpass:
     adminuserpassWord.append(k[0])
-print(adminuserpassWord)
+
 
 admin_cridentials = []
 indexadmin = 0
 for i in adminusernamels:
     admin_cridentials.append(i +" "+ adminuserpassWord[indexadmin])
     indexadmin+=1
-print(admin_cridentials)
+
 
 
 #-----------------operations Datas-------------------------------------------
@@ -102,7 +102,7 @@ Faculty_Id_Number = qury.fetchall()
 faculty_id = []
 for k in Faculty_Id_Number:
     faculty_id.append(k[0])
-print(faculty_id)
+
 
 qury.execute("SELECT `Faculty_Password`FROM `operations_data`")
 Faculty_PassWord = qury.fetchall()
@@ -110,7 +110,7 @@ Faculty_PassWord = qury.fetchall()
 faculty_psw = []
 for k in Faculty_PassWord:
     faculty_psw.append(k[0])
-print(faculty_psw)
+
 
 #faculty credintials
 faculty_credintials =[]
@@ -120,7 +120,7 @@ for k in faculty_id:
     compress = (k+" "+faculty_psw[faculty_counter])
     faculty_credintials.append(compress)
     faculty_counter+=1
-print(faculty_credintials)
+
 
 
 
@@ -138,9 +138,6 @@ table_Assigment_Page_Admin =[]
 for k in range(len(operation_request)):
     process = {"DESIGNATION": operation_request[k][0],"REQ": operation_request[k][1],"REPORT DAY/S": operation_request[k][2], "SUPERVISOR":str(operation_request[k][5]),	"DEPT":operation_request[k][4], "REQST":operation_request[k][3],"REQ ID":operation_request[k][6]}
     table_Assigment_Page_Admin.append(process)
-print(table_Assigment_Page_Admin)
-
-
 
 #checker if ang student naka sign in or wala pa
 list_of_sign_in = []
@@ -159,7 +156,13 @@ def logOutAmin():
     session.pop("Duty_record_table", None)
     session.pop("student_Id_num", None)
     session.pop("userIdAdmin", None)
+<<<<<<< HEAD
     return '<script>;window.location="/"</script>'
+=======
+
+
+    return '<script>alert("Log Out");window.location="/"</script>'
+>>>>>>> 0a802f96735666cb35b4f65a2e05f9a568649e3a
 
 
 #------------------------------------log out----------------------------------------------
@@ -180,7 +183,7 @@ def logOut():
         "SELECT `Faculty_Lname`, `Faculty_Fname`, `Faculty_Id_Number`, `Operation_Dept` FROM `operations_data` WHERE `Faculty_Id_Number` = '" +
         session['opration_Id'] + "'")
     operation_data = qury.fetchall()
-    print(operation_data)
+
     fullname = str(operation_data[0][0]) + " " + str(operation_data[0][1])
 
     qury.execute("INSERT INTO `active_logs`(`date_time`, `user_id`, `uname`, `dept`, `act_perm`)"
@@ -243,7 +246,7 @@ def indexprocess():
         phone = request.form['phone']
         Position = request.form['Position']
         dept = request.form.get('dept')
-        print(dept)
+
 
 
         if password == repPaswrd:
@@ -266,7 +269,7 @@ def indexprocess():
 
 @app.route("/Sign in")
 def signInPAge():
-    print(faculty_credintials)
+
     return render_template("SignIn.html")
 
 
@@ -311,7 +314,7 @@ def signInprocess():
 
         qury.execute("SELECT `Faculty_Lname`, `Faculty_Fname`, `Faculty_Id_Number`, `Operation_Dept` FROM `operations_data` WHERE `Faculty_Id_Number` = '"+ session['opration_Id']+"'")
         operation_data = qury.fetchall()
-        print(operation_data)
+
         fullname = str(operation_data[0][0])+" "+str(operation_data[0][1])
 
         qury.execute("INSERT INTO `active_logs`(`date_time`, `user_id`, `uname`, `dept`, `act_perm`)"
@@ -347,7 +350,7 @@ def Dashboard():
             content = str(announcment_List[k][1]) + " " + str(announcment_List[k][2]) + ">20%" + str(announcment_List[k][3]) + ">20%" + str(announcment_List[k][0])
 
             dateTimeLista_announcment.append(content.split(">20%"))
-        print(dateTimeLista_announcment)
+
 
 
         # select profile pic
@@ -387,14 +390,14 @@ def request_Scholar():
 
         qury.execute("SELECT `hk_ID`FROM `hk_assignd_teaecher` WHERE `operatikon_ID` = '"+str(session["lname"])+" "+str(session["fname"])+"'")
         mYStudent_Db_Id = qury.fetchall()
-        print("my student",mYStudent_Db_Id)
+
 
 
         for k in mYStudent_Db_Id:
-            print(k[0])
+
             qury.execute("SELECT `idnum`,`lname`, `fname`, `id_totalHours`,  `remaningDuty`, `remDutyMins`,`statsForRenewal` FROM `hk_users` WHERE `idnum`= '"+k[0]+"'")
             listahan.append(qury.fetchall()[0])
-        print(listahan)
+
 
         student_underMe=[]
         for k in range(len(listahan)):
@@ -403,7 +406,7 @@ def request_Scholar():
         #select profile pic
         qury.execute("SELECT `profilePics` FROM `operations_data` WHERE `Faculty_Id_Number`= '" + session["user"] + "'")
         profilepicDb = qury.fetchall()[0][0]
-        print(profilepicDb)
+
         return render_template("dashboard operations/requestmanage.html",logUser = session['username'], student_underMe =student_underMe,profilepicDb=profilepicDb)
 
     except Exception:
@@ -446,8 +449,6 @@ def Modal_request_process():
     else:
         sched_list.append(str(Report_Days_sat))
 
-    print(sched_list)
-
     dept = request.form["dept"]
 
     Request = request.form['Request']
@@ -473,7 +474,7 @@ def Modal_request_process():
         "SELECT `Faculty_Lname`, `Faculty_Fname`, `Faculty_Id_Number`, `Operation_Dept` FROM `operations_data` WHERE `Faculty_Id_Number` = '" +
         session['opration_Id'] + "'")
     operation_data = qury.fetchall()
-    print(operation_data)
+
     fullname = str(operation_data[0][0]) + " " + str(operation_data[0][1])
 
     qury.execute("INSERT INTO `active_logs`(`date_time`, `user_id`, `uname`, `dept`, `act_perm`)"
@@ -563,7 +564,7 @@ def uplaodProfile():
                 "SELECT `Faculty_Lname`, `Faculty_Fname`, `Faculty_Id_Number`, `Operation_Dept` FROM `operations_data` WHERE `Faculty_Id_Number` = '" +
                 session['opration_Id'] + "'")
             operation_data = qury.fetchall()
-            print(operation_data)
+
             fullname = str(operation_data[0][0]) + " " + str(operation_data[0][1])
 
             qury.execute("INSERT INTO `active_logs`(`date_time`, `user_id`, `uname`, `dept`, `act_perm`)"
@@ -603,7 +604,7 @@ def uplaodProfile():
                 "SELECT `Faculty_Lname`, `Faculty_Fname`, `Faculty_Id_Number`, `Operation_Dept` FROM `operations_data` WHERE `Faculty_Id_Number` = '" +
                 session['opration_Id'] + "'")
             operation_data = qury.fetchall()
-            print(operation_data)
+
             fullname = str(operation_data[0][0]) + " " + str(operation_data[0][1])
 
             qury.execute("INSERT INTO `active_logs`(`date_time`, `user_id`, `uname`, `dept`, `act_perm`)"
@@ -628,7 +629,7 @@ def change_password_operations():
     old_password = request.form['password']
     new_password = request.form['newpassword']
     re_enter_password = request.form['renewpassword']
-    print(old_password,new_password,re_enter_password)
+
 
     qury.execute("SELECT `Faculty_Password` FROM `operations_data` WHERE `Faculty_Id_Number` = '"+session["opration_Id"]+"'")
     old_password_db = qury.fetchall()[0][0]
@@ -650,7 +651,7 @@ def change_password_operations():
                 "SELECT `Faculty_Lname`, `Faculty_Fname`, `Faculty_Id_Number`, `Operation_Dept` FROM `operations_data` WHERE `Faculty_Id_Number` = '" +
                 session['opration_Id'] + "'")
             operation_data = qury.fetchall()
-            print(operation_data)
+
             fullname = str(operation_data[0][0]) + " " + str(operation_data[0][1])
 
             qury.execute("INSERT INTO `active_logs`(`date_time`, `user_id`, `uname`, `dept`, `act_perm`)"
@@ -685,9 +686,9 @@ def showDutyHours():
     minutes = float("0."+splitedHM[1])*60
     session["minutes"] = minutes
     timeToDisplay = ("Total Working Hours: '"+str(hour)+"' Hours and '"+str(int(minutes))+"' Minutes")
-    print(timeToDisplay)
+
     session["duty"]=timeToDisplay
-    print(session["duty"])
+
 #this is for remaining duty hours
     target = 10800
     H = int(session["hours"]) * 60
@@ -697,7 +698,7 @@ def showDutyHours():
     Minutes = str(int((float("0." + dataTime[1]) * 60)))
     reamining = str(Hour) + ":" + Minutes
     session["reamining"] =reamining
-    print(dataTime)
+
 #this is for records time date display
     qury.execute("SELECT * FROM `timeintimeout` WHERE `TinToutgmail` = '" + session["user"] + "'")
     userTimeRecords = qury.fetchall()
@@ -764,6 +765,7 @@ def scholarSearch():
 #------------------admin side------------------------------
 @app.route("/adminLanding")
 def admin():
+
     return render_template("admin.html")
 
 @app.route("/adminLog", methods=['POST'])
@@ -796,15 +798,24 @@ def admindashBoard():
 
         for k in db_announc_data:
             announcment_List.append(k)
-        print(announcment_List)
+
 #       to display date and time
+
+
+
+
         dateTimeLista_announcment = []
         for k in range(len(announcment_List)):
             content = str(announcment_List[k][1]) + " " + str(announcment_List[k][2]) + ">20%" + str(
                 announcment_List[k][3]) + ">20%" + str(announcment_List[k][0])
 
             dateTimeLista_announcment.append(content.split(">20%"))
-        print(dateTimeLista_announcment)
+        reversed_dare_announcment = []
+
+        for k in dateTimeLista_announcment[::-1]:
+            reversed_dare_announcment.append(k)
+
+
 
         # to display how many hk student there are
         qury.execute("SELECT * FROM `hk_users`")
@@ -826,7 +837,7 @@ def admindashBoard():
 
         return render_template('dashboard admin/dashboardAdminFinal.html',
                                logUser=session["adminUser"],
-                               dateTimeLista_announcment=dateTimeLista_announcment,
+                               dateTimeLista_announcment=reversed_dare_announcment,
                                number_of_stndt=len(number_of_stndt),
                                stduentNotAv=len(stduentNotAv),
                                studentAv=len(studentAv),complirate=str(complirate.__round__())+"%",
@@ -852,7 +863,7 @@ def compliance():
         student_info = []
         for k in student_Info_FromDb:
             student_info.append(k)
-        print(len(student_info))
+
 
         table_OfStudent_Info = []
         counter_Table1 = 0
@@ -887,7 +898,7 @@ def export_excel():
     student_info = []
     for k in student_Info_FromDb:
         student_info.append(k)
-    print(len(student_info))
+
 
     table_OfStudent_Info = []
     counter_Table1 = 0
@@ -1067,7 +1078,7 @@ def DutyAssig():
                        "REPORT DAY/S": operation_request[k][2], "SUPERVISOR": operation_request[k][5],
                        "DEPT": operation_request[k][4], "REQST": operation_request[k][3], "REQ ID": operation_request[k][6]}
             table_Assigment_Page_Admin1.append(process)
-        print(table_Assigment_Page_Admin1)
+
 
         # to display std whitout assigmnt
         qury.execute("SELECT  `Status_avail` FROM `hk_users` WHERE `Status_avail` ='Na' ")
@@ -1143,7 +1154,7 @@ def Announcement():
     curtime =str(current_time.hour)+":"+str(current_time.minute)
 
     announcemnet = request.form.get('comment')
-    print(tday, curtime,str(announcemnet)+">20%")
+
 
     #INSERT ANNOUNCMENT TO DB
     qury.execute("INSERT INTO `reports/announcement`(`content`, `date`, `time`, `adminName`)"
@@ -1164,7 +1175,6 @@ def Announcement():
                    "REPORT DAY/S": operation_request[k][2], "SUPERVISOR": operation_request[k][5],
                    "DEPT": operation_request[k][4], "REQST": operation_request[k][3], "REQ ID": operation_request[k][6]}
         table_Assigment_Page_Admin1.append(process)
-    print(table_Assigment_Page_Admin1)
 
     # to display std whitout assigmnt
     qury.execute("SELECT  `Status_avail` FROM `hk_users` WHERE `Status_avail` ='Na' ")
@@ -1254,9 +1264,7 @@ def DutyAssig_process():
     avil_std_list = []
     for k in student_db_data:
         avil_std_list.append(k)
-    print("selected supervisur:", supervi)
-    print("id of req", reqid)
-    print(avil_std_list)
+
 
     table_avil_std =[]
     for k in range (len(avil_std_list)):#table of request of the teacher from operations
@@ -1322,22 +1330,22 @@ def DutyAssig_process():
 def Assigment_modal_process():
 
     checkList = request.form.getlist("selected_std")
-    print(len(checkList))
+
     tc_selected = techer[len(techer)-1]
 
     session["supervi"]
     session['reqid']
-    print(session["supervi"],session['reqid'])
+
     qury.execute("SELECT `Request` FROM `operation_request` WHERE `ID` = '"+session['reqid']+"'")
     req_Process_for_assigning_duty = qury.fetchall()
-    print(">>>",req_Process_for_assigning_duty[0][0])
+
 
 
 
     if int(req_Process_for_assigning_duty[0][0]) == len(checkList):
 #       to assign a student to selected teacher
         for k in checkList:
-            print(k)
+
             qury.execute(
                 "INSERT INTO `hk_assignd_teaecher`(`operatikon_ID`, `hk_ID`) VALUES ('" + tc_selected + "','" + k + "')")
             conn.commit()
@@ -1357,9 +1365,9 @@ def Assigment_modal_process():
         qury.execute("SELECT * FROM `operation_request` WHERE `ID`='"+session['reqid']+"'")
 #       to remove the requst from list
         dataTodel=list(qury.fetchall()[0])
-        print(dataTodel)
+
         tableTodel = {"DESIGNATION":dataTodel[0],"REQ":dataTodel[1], "REPORT DAY/S":dataTodel[2],"SUPERVISOR":dataTodel[5],"DEPT":dataTodel[4],"REQST":dataTodel[3],"REQ ID":dataTodel[6]}
-        print(tableTodel)
+
         session["assigmentstdList"].remove(tableTodel)
         qury.execute("DELETE FROM `operation_request` WHERE `ID`='"+session['reqid']+"'")
         conn.commit()
@@ -1369,7 +1377,7 @@ def Assigment_modal_process():
 
     elif len(checkList) < int(req_Process_for_assigning_duty[0][0]) :
         for k in checkList:
-            print(k)
+
             qury.execute(
                 "INSERT INTO `hk_assignd_teaecher`(`operatikon_ID`, `hk_ID`) VALUES ('" + tc_selected + "','" + k + "')")
             conn.commit()
@@ -1396,7 +1404,7 @@ def Assigment_modal_process():
     elif len(checkList) > int(req_Process_for_assigning_duty[0][0]):
         return '<script>alert("Exceeded number of request!!");window.location="/Duty Assignment And Management"</script>'
     else:
-        print("error")
+        pass
 
 
 
@@ -1414,61 +1422,172 @@ def Assigment_modal_process():
 
 @app.route("/User Management")
 def UserManagement():
-    try:
-
-        qury.execute("SELECT `Faculty_Lname` FROM `operations_data`")
-        operations_lname = qury.fetchall()
-
-        qury.execute("SELECT `Faculty_Fname` FROM `operations_data`")
-        operations_fname = qury.fetchall()
-
-        qury.execute("SELECT `Faculty_Id_Number` FROM `operations_data`")
-        operations_Id_number = qury.fetchall()
-
-        qury.execute("SELECT  `Operation_Dept` FROM `operations_data`")
-        operations_department = qury.fetchall()
-
-        qury.execute("SELECT `Operations_Mname` FROM `operations_data`")
-        operations_Mname = qury.fetchall()
-
-        qury.execute("SELECT `Operation_Designation-Position` FROM `operations_data`")
-        operations_Designate = qury.fetchall()
-
-        qury.execute("SELECT `status_ol` FROM `operations_data`")
-        status_ol = qury.fetchall()
-
-        qury.execute("SELECT `color_status` FROM `operations_data`")
-        color_status = qury.fetchall()
-
-        print(color_status)
+    # try:
 
 
-        operations_table =[]
-        operations_counter = 0
-        for k in operations_lname:
-            tbl = {"USER ID":operations_Id_number[operations_counter][0], "NAME":str(operations_fname[operations_counter][0])+" "+str(k[0]), "DESIGNATION":operations_Designate[operations_counter][0],"DEPARTMENT":operations_department[operations_counter][0],"STATUS":status_ol[operations_counter][0],"color_status":color_status[operations_counter][0]}
-            operations_table.append(tbl)
-            operations_counter += 1
+    qury.execute("SELECT `Faculty_Lname` FROM `operations_data`")
+    operations_lname = qury.fetchall()
 
-        qury.execute("SELECT `Faculty_Lname`, `Faculty_Fname`, `Faculty_Id_Number`, `Operation_Dept`, `Operations_Mname`,`Operation_Designation-Position` FROM `opertaion_req_acc`")
-        operation_req_acc_data_db = qury.fetchall()
+    qury.execute("SELECT `Faculty_Fname` FROM `operations_data`")
+    operations_fname = qury.fetchall()
+
+    qury.execute("SELECT  `Operation_Dept` FROM `operations_data`")
+    operations_department = qury.fetchall()
+
+    qury.execute("SELECT `Operations_Mname` FROM `operations_data`")
+    operations_Mname = qury.fetchall()
+
+    qury.execute("SELECT `Operation_Designation-Position` FROM `operations_data`")
+    operations_Designate = qury.fetchall()
+
+    qury.execute("SELECT `status_ol` FROM `operations_data`")
+    status_ol = qury.fetchall()
+
+    qury.execute("SELECT `color_status` FROM `operations_data`")
+    color_status = qury.fetchall()
+
+    qury.execute("SELECT `Faculty_Id_Number` FROM `operations_data`")
+    operations_Id_number = qury.fetchall()
+
+    operations_table =[]
+    operations_counter = 0
+    x=0
+    for k in operations_lname:
+        tbl = {"USER_ID":operations_Id_number[operations_counter][0], "NAME":str(operations_fname[operations_counter][0])+" "+str(k[0]), "DESIGNATION":operations_Designate[operations_counter][0],"DEPARTMENT":operations_department[operations_counter][0],"STATUS":status_ol[operations_counter][0],"color_status":color_status[operations_counter][0],"id":x}
+        operations_table.append(tbl)
+        operations_counter += 1
+        x+=1
+
+    qury.execute("SELECT `Faculty_Lname`, `Faculty_Fname`, `Faculty_Id_Number`, `Operation_Dept`, `Operations_Mname`,`Operation_Designation-Position` FROM `opertaion_req_acc`")
+    operation_req_acc_data_db = qury.fetchall()
 
 
 
-        operation_req_acc_Table = []
-        for k in operation_req_acc_data_db:
-
-            table = {"EMP ID":k[2], "NAME":str(k[1])+" "+str(k[0])+" "+str(k[4]), "POSITION":k[5], "DEPARTMENT":k[3]}
-            operation_req_acc_Table.append(table)
-        print(operation_req_acc_Table)
+    operation_req_acc_Table = []
+    for k in operation_req_acc_data_db:
+        table = {"EMP ID":k[2], "NAME":str(k[1])+" "+str(k[0])+" "+str(k[4]), "POSITION":k[5], "DEPARTMENT":k[3]}
+        operation_req_acc_Table.append(table)
 
 
-        qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
-        profilepicDb = qury.fetchall()[0][0]
 
-        return render_template("dashboard admin/UserManagement.html",logUser=session["adminUser"],profilepicDb=profilepicDb,operations_table=operations_table, operation_req_acc_Table=operation_req_acc_Table)
-    except Exception:
-        return redirect(url_for("admin"))
+    qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
+    profilepicDb = qury.fetchall()[0][0]
+
+
+
+
+
+
+
+    return render_template("dashboard admin/UserManagement.html",logUser=session["adminUser"],profilepicDb=profilepicDb,operations_table=operations_table, operation_req_acc_Table=operation_req_acc_Table)
+
+    # except Exception:
+    #         return redirect(url_for("admin"))
+
+    #this is for passing value to modal operations details
+@app.route('/get_faculty_info', methods=['POST'])
+def get_faculty_info():
+    qury.execute("SELECT `Faculty_Lname` FROM `operations_data`")
+    operations_lname = qury.fetchall()
+
+    qury.execute("SELECT `Faculty_Fname` FROM `operations_data`")
+    operations_fname = qury.fetchall()
+
+    qury.execute("SELECT  `Operation_Dept` FROM `operations_data`")
+    operations_department = qury.fetchall()
+
+    qury.execute("SELECT `Operations_Mname` FROM `operations_data`")
+    operations_Mname = qury.fetchall()
+
+    qury.execute("SELECT `Operation_Designation-Position` FROM `operations_data`")
+    operations_Designate = qury.fetchall()
+
+    qury.execute("SELECT `status_ol` FROM `operations_data`")
+    status_ol = qury.fetchall()
+
+    qury.execute("SELECT `color_status` FROM `operations_data`")
+    color_status = qury.fetchall()
+
+    qury.execute("SELECT `Faculty_Id_Number` FROM `operations_data`")
+    operations_Id_number = qury.fetchall()
+
+    qury.execute("SELECT `Operations_Email` FROM `operations_data`")
+    operations_email = qury.fetchall()
+
+    qury.execute("SELECT `Address` FROM `operations_data`")
+    operations_adress = qury.fetchall()
+
+    qury.execute("SELECT `Operation_phone_Number` FROM `operations_data`")
+    operations_Phone = qury.fetchall()
+
+    qury.execute("SELECT `operations_about` FROM `operations_data`")
+    operations_about = qury.fetchall()
+
+
+
+    qury.execute("SELECT `twitter` FROM `operations_data`")
+    operations_twiiter = qury.fetchall()
+
+    qury.execute("SELECT `facebook` FROM `operations_data`")
+    operations_fb = qury.fetchall()
+
+    qury.execute("SELECT `instagram` FROM `operations_data`")
+    operations_insta = qury.fetchall()
+
+    qury.execute("SELECT `linkedin` FROM `operations_data`")
+    operations_linkIn = qury.fetchall()
+
+    qury.execute("SELECT `profilePics` FROM `operations_data`")
+    operations_Pic = qury.fetchall()
+
+
+    operations_table = []
+    operations_counter = 0
+    x = 0
+    for k in operations_lname:
+        tbl = {"USER_ID": operations_Id_number[operations_counter][0],
+               "NAME": str(operations_fname[operations_counter][0]) + " " + str(k[0]),
+               "DESIGNATION": operations_Designate[operations_counter][0],
+               "DEPARTMENT": operations_department[operations_counter][0], "STATUS": status_ol[operations_counter][0],
+               "color_status": color_status[operations_counter][0],"id":x, "email":operations_email[operations_counter][0],
+               "Address":operations_adress[operations_counter][0],"phone":operations_Phone[operations_counter][0],
+               "about":operations_about[operations_counter][0],"twitter":operations_twiiter[operations_counter][0],
+               "fb": operations_fb[operations_counter][0],"insta":operations_insta[operations_counter][0],
+               "linkIn": operations_linkIn[operations_counter][0], "pic": operations_Pic[operations_counter][0]
+
+               }
+        x+=1
+        operations_table.append(tbl)
+        operations_counter += 1
+
+    qury.execute(
+        "SELECT `Faculty_Lname`, `Faculty_Fname`, `Faculty_Id_Number`, `Operation_Dept`, `Operations_Mname`,`Operation_Designation-Position` FROM `opertaion_req_acc`")
+    operation_req_acc_data_db = qury.fetchall()
+    ope_id = "" # use to qury data to show in modal
+    id_checker_Minus = []
+    id_splitNum = []
+    faculty_id = request.form['faculty_id'] # from javascrip
+    for k in range (len(operations_table)):
+        id_checker_Minus.append(operations_table[k]['USER_ID'])
+
+    print(operations_table)
+    print(id_checker_Minus)
+    print(int(faculty_id))
+    ope_id = id_checker_Minus[int(faculty_id)]
+    print("=", ope_id)
+
+
+
+
+
+    selected_faculty = next((row for row in operations_table if row['id'] == int(faculty_id)), None)
+    print(selected_faculty)
+
+    # Fetch specific data based on faculty_id
+
+    return jsonify(selected_faculty)
+
+
 
 @app.route("/request_modal_Process_User_Management", methods = ['POST'])
 def request_modal_Process_User_Management():
@@ -1477,23 +1596,17 @@ def request_modal_Process_User_Management():
     conbtn = request.form.get('con')
     confirmation = str(delbtn)+str(conbtn)
 
-    print(confirmation.split(">>"))
-
     if confirmation.split(">>")[0] == "del":
-        print("deleted")
+
         register_Id = str(delbtn).split(">>")[1]
         qury.execute("DELETE FROM `opertaion_req_acc` WHERE `Faculty_Id_Number` = '"+register_Id+"'")
         conn.commit()
     else:
-        print("aproved")
+
         register_Id = str(conbtn).split(">>")[1]
         qury.execute("SELECT * FROM `opertaion_req_acc` WHERE `Faculty_Id_Number` = '"+register_Id+"'")
         data_to_Aprove = qury.fetchall()
 
-
-
-
-        print(data_to_Aprove)
 
         # to add the new user to the list so it can sign up
         add_user_data = str(data_to_Aprove[0][3]) + " " + str(data_to_Aprove[0][2])
@@ -1540,11 +1653,12 @@ def modal_add_user():
         "UPDATE `operations_data` SET `status_ol`='INACTIVE',`color_status`='danger' WHERE `Faculty_Id_Number` = '" + empid + "' ")
     conn.commit()
 
-
-
-
-
     return redirect(url_for('UserManagement'))
+
+
+#for modal details in user management
+
+
 
 
 @app.route("/Export to Excel")
@@ -1565,8 +1679,6 @@ def Setting():
         #get data from admin db to display in front end using jinja
         qury.execute("SELECT `userName`, `About`, `Phone`, `Address`, `Email`, `Twitter`, `Facebook`, `Instagram`, `Linkedin` ,`adminIdNumber` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
         adminData = qury.fetchall()
-
-        print(adminData[0][1])
 
 
         return render_template("dashboard admin/Setting.html",logUser=session["adminUser"],profilepicDb=profilepicDb,fullName=adminData[0][0],about=adminData[0][1],phone=adminData[0][2],Address = adminData[0][3],emailacc=adminData[0][4],twitter=adminData[0][5],facebook=adminData[0][6],instagram=adminData[0][7],linkedin=adminData[0][8], adminId =adminData[0][8+1])
@@ -1648,11 +1760,11 @@ def change_admin_password():
 
     currentPass = request.form['password']
     newPass = request.form['newpassword']
-    print(newPass, session["userIdAdmin"])
+
 
     if currentPass in adminuserpassWord:
 
-        print(newPass, session["userIdAdmin"])
+
         qury.execute("UPDATE `admin` SET `passWord`='"+str(newPass)+"' WHERE `adminIdNumber` = '"+session["userIdAdmin"]+"'")
         conn.commit()
 
@@ -1717,7 +1829,7 @@ def student_records():
 @app.route("/student_rec_process", methods=['POST'])
 def student_rec_process():
     if request.form.get('select') == 'select':
-        print('selected')
+
         student_Id = request.form.get("Selected_Id")
 
         qury.execute("SELECT * FROM `hk_users` WHERE `idnum` = '" + str(student_Id) + "'")
@@ -1766,7 +1878,7 @@ def Duty_Records():
     for k in rec_list_Db:
         rec_list.append(k)
     record_table = []
-    print(record_table)
+
 
     session["Duty_record_table"] = record_table
     time_in = ""
@@ -1846,7 +1958,7 @@ def StudentTimeIN_Out():
                 timeInList.append(current_hour)# index 0
                 timeInList.append(current_minute)# index 1
                 list_of_sign_in.append(stdId)
-                print(list_of_sign_in)
+
                 qury.execute("INSERT INTO `scholar_duty_records`"
                              "(`date`,`Hours_In_Out`, "
                              "`Minutes_In_Out`, `Student_id_Number`, "
@@ -1901,7 +2013,7 @@ def StudentTimeIN_Out():
 
 
                     total_duty += totalduty_mins
-                    print(total_duty)
+
                     duration = f"{durationoH:}h {durationm:02d}m"
                     rec_process = {"DATE": rec_list[k][0], "CHECK-IN TIME": time_in, "CHECK-OUT TIME": time_out,
                                    "DURATION": duration}
@@ -1920,14 +2032,12 @@ def StudentTimeIN_Out():
             timeOutHours = (float(current_hour)*60)
             timeOutMin = (float(current_minute)+timeOutHours)
             renderedDutyToday = (timeOutMin - timeInMin)
-            print("renderd today",renderedDutyToday)
+
 
             qury.execute("SELECT `remaningDuty`, `remDutyMins`FROM `hk_users` WHERE `idnum` = '" + stdId + "'")
             remdutyDb = qury.fetchall()
             remdutymins = (float(remdutyDb[0][1]))
             remduty = (float(remdutyDb[0][0])*60)+remdutymins
-
-            print(remduty)
 
 
             remdutyMins = remduty - renderedDutyToday
@@ -1935,16 +2045,10 @@ def StudentTimeIN_Out():
             remdutyHours = remdutyHoursConverstion[0]
             remdutyMinscpnvertion = (float("0."+remdutyHoursConverstion[1])*60)
 
-            print("remdutyMins",remdutyMins)
-            print("remdutyHoursConverstion", remdutyHoursConverstion)
-            print("remdutyHours", remdutyHours)
-            print("remdutyMinscpnvertion", remdutyMinscpnvertion)
             qury.execute("UPDATE `hk_users` SET `remaningDuty`='"+str(remdutyHours)+"',`remDutyMins`='"+str(remdutyMinscpnvertion)+"' WHERE `idnum` = '"+stdId+"'")
             conn.commit()
             timeInList.clear()
             #------------------formulation of remainin duty hours
-
-
 
             qury.execute("INSERT INTO `scholar_duty_records`"
                          "(`date`,`Hours_In_Out`, "
@@ -1958,8 +2062,6 @@ def StudentTimeIN_Out():
             fname = fullname[0][1]
             lname = fullname[0][0]
 
-
-
             return render_template("Terminal/terminal.html", tday=tday, hours=current_hour, mins=current_minute,time_In_Out=time_In_Out, stdId=stdId, fname=fname, lname=lname)
 
 
@@ -1967,12 +2069,7 @@ def StudentTimeIN_Out():
         errormess = "Sign in first"
 
 
-
-
-
     return render_template("Terminal/terminal.html", errormess =errormess  )
-
-
 
 
 if __name__ == "__main__":
