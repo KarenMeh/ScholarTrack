@@ -156,13 +156,10 @@ def logOutAmin():
     session.pop("Duty_record_table", None)
     session.pop("student_Id_num", None)
     session.pop("userIdAdmin", None)
-<<<<<<< HEAD
+
     return '<script>;window.location="/"</script>'
-=======
 
 
-    return '<script>alert("Log Out");window.location="/"</script>'
->>>>>>> 0a802f96735666cb35b4f65a2e05f9a568649e3a
 
 
 #------------------------------------log out----------------------------------------------
