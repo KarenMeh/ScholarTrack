@@ -159,7 +159,7 @@ def logOutAmin():
     session.pop("Duty_record_table", None)
     session.pop("student_Id_num", None)
     session.pop("userIdAdmin", None)
-    return '<script>alert("Log Out");window.location="/"</script>'
+    return '<script>;window.location="/"</script>'
 
 
 #------------------------------------log out----------------------------------------------
@@ -204,7 +204,7 @@ def logOut():
 
 
 
-    return '<script>alert("Log Out");window.location="/"</script>'
+    return '<script>;window.location="/"</script>'
 
 
 #-----------------------landing page----------------------------------------------
@@ -318,7 +318,7 @@ def signInprocess():
                      " VALUES ('"+str(x).split(".")[0]+"','"+str(operation_data[0][2])+"','"+str(fullname)+"','"+str(operation_data[0][3])+"','Just log in to the system')")
         conn.commit()
 
-        return '<script>alert("Log in");window.location="/Dash board"</script>'
+        return '<script>;window.location="/Dash board"</script>'
 
     else:
        
@@ -779,9 +779,9 @@ def adminLog():
 
     check = useraAdmin+" "+pswAdmin
     if check in admin_cridentials:
-        return '<script>alert("Welcome");window.location="admindashBoard"</script>'
+        return '<script>window.location="admindashBoard"</script>'
     else:
-        return  '<script>alert("Wrong Credetials!");window.location="/adminLanding"</script>'
+        return  '<script>alert("Wrong Credentials!");window.location="/adminLanding"</script>'
 
 @app.route("/admindashBoard")
 def admindashBoard():

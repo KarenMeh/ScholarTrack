@@ -221,7 +221,7 @@
             <div class="comp">
               <img src="/static/assetUser/img/assign.png" alt="" width="20px">
             </div>
-            <span>Duty Assignment And Management</span>
+            <span>Duty Assignment and Management</span>
           </a>
         </li><!-- End Profile Page Nav -->
   
@@ -276,7 +276,7 @@
 
 <div class="container mt-3">
 <div class = "add">
-  <button type="button" class="" data-bs-toggle="modal" data-bs-target="#myModal">
+  <button type="button" class="teble" data-bs-toggle="modal" data-bs-target="#myModal">
     ADD USER </button>
 </div>
 </div>
@@ -290,7 +290,7 @@
       <div class="modal-header">
         <h4 class="modal-title3">ADD USER</h4>
        
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <button type="button" namclass="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
       <!-- Modal body -->
@@ -326,6 +326,9 @@
             
           </select>
           <br>
+    
+       
+          <br>
 
           <label for="Designation">Designation/Position:</label>
               <select name="Designation" id="Designation" required>
@@ -334,8 +337,9 @@
                 <option value="COO">COO</option>
                 <option value="Dean">Dean</option>
                </select>
-              <br><br><br>
+              <input type="hidden" name="">
               
+              <br><br><br>
               <div class="row mb-3">
              <label for="newPassword"   class="label pt-5 ">Password:</label> <br>
                 <div class="con ">
@@ -362,8 +366,9 @@
         <input type="Submit" class="btn btn-success" value="Submit" name="request">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
 
-      </div>
+     
     </form>
+  </div>
     </div>
   </div>
 </div>
@@ -464,7 +469,6 @@
 <td> <span class=" bg-{{row['color_status']}} text-white d-inline p-1">{{row['STATUS']}}</span></td>
 <div class="containerbut"> 
   <td><button type="button" class="text-white" data-bs-toggle="modal" data-bs-target="#myModal2">
-  
      Details
     </button></td>
 

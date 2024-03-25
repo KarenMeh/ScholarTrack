@@ -51,9 +51,51 @@
 
 .sem  select{
  width: 100px;
- border: 2px solid  #012970;;
+color: #012970;
 }
 
+.sem{
+  font-size: 25px;
+  font-family:'Times New Roman', Times, serif;
+  font-weight: 100;
+  }
+.row1 col{
+  border-color: 3px solid #012970;
+}
+
+.card  {
+  border-color: 3px solid #012970;
+}
+
+.tab-pane{
+  font-weight: lighter;
+  align-items: center;
+  text-align: center;
+}
+.tab-pane .date{
+  font-size: 30px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin-bottom: 20px;
+} 
+
+.tab-pane .row1{
+  font-size: 25px;
+  font-family:'Times New Roman', Times, serif;
+  font-weight: 100;
+}
+
+.sem1{
+  width: 250px;
+  background-color: rgb(189, 193, 197);
+  color:#000000;
+  border-color:solid 2px#012a7079;
+  font-size: 15px;
+  border-radius: 10px;
+  margin-top: 5px;
+  padding: 3px;
+  margin-left: 130px;
+  
+}
 </style>
 </head>
 
@@ -181,7 +223,7 @@
             <div class="comp">
               <img src="/static/assetUser/img/assign.png" alt="" width="20px">
             </div>
-            <span>Duty Assignment And Management</span>
+            <span>Duty Assignment and Management</span>
           </a>
         </li><!-- End Profile Page Nav -->
   
@@ -297,7 +339,7 @@
   
           <div class="col-xl-6">
   
-            <div class="card">
+            <div class="card one">
               <div class="card-body pt-2">
                 <!-- Bordered Tabs -->
                 <ul class="nav nav-tabs nav-tabs-bordered">
@@ -306,10 +348,6 @@
                     <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-change-password">Academic Calendar</button>
                   </li>
 
-                  
-
-                 
-  
                   <li class="nav-item">
                     <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
                   </li>
@@ -428,8 +466,8 @@
                     <!-- Change Password Form -->
                     <form action="/semester_change" method="post">
 
-                        <div class="row1 mb-3">
-                          <label for="academicyr" class="col-md-2 col-lg-6 col-form-label">ACADEMIC YEAR</label>
+                        <div class="row1 mb-6">
+                          <label for="academicyr" class="col-md-2 col-lg-6 col-form-label">ACADEMIC YEAR: </label>
                           <div class="date">  <br><br>
                             <script>document.write( new Date().getUTCFullYear() );</script>
                           </div>
@@ -438,22 +476,19 @@
                         <div class="row mb-3">
                           <label for="semester"   class="sem">SEMESTER</label>
                           <div class="col-md-8 col-lg-9">
-                          <select name="semester" id="semester" class="sem" required>
+
+                           <select name="semester" id="semester" class="sem1" required>
                             <option value="">Select</option>
                             <option value="FIRST SEMESTER">FIRST SEMESTER</option>
                             <option value="SECOND SEMESTER">SECOND SEMESTER</option>
-
-
-                          </select>
-
-
+                           </select>
                           </div>
                         </div>
 
 
 
                         <div class="text-center">
-                          <button type="submit" class="btn btn-primary">SUBMIT</button>
+                          <button type="submit" class="btn btn-primary">UPDATE</button>
                         </div>
                     </form><!-- End Change Password Form -->
   
