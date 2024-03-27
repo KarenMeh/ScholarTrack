@@ -489,6 +489,10 @@ def Modal_request_process():
     else:
         sched_list.append(str(Report_Days_sat))
 
+    sched = str(sched_list).replace("['","").replace("']","").replace("', '","-")
+
+    print(sched)
+
     dept = request.form["dept"]
 
     Request = request.form['Request']
@@ -497,7 +501,7 @@ def Modal_request_process():
 
 
 
-    qury.execute("INSERT INTO `operation_request`(`Designation`, `Requirements`, `Report Day/s`, `Request`, `DEPT`, `SUPERVISOR`) VALUES ('"+Designation+"','"+Requirements+"','"+"wala"+"','"+Request+"', '"+dept
+    qury.execute("INSERT INTO `operation_request`(`Designation`, `Requirements`, `Report Day/s`, `Request`, `DEPT`, `SUPERVISOR`) VALUES ('"+Designation+"','"+Requirements+"','"+sched+"','"+Request+"', '"+dept
                  +"', '"+str(session['lname'])+" "+str(session['fname'])+"') ")
     conn.commit()
 
@@ -1429,92 +1433,97 @@ def DutyAssig_process():
 @app.route("/Assigment_modal_process", methods =['POST'])
 def Assigment_modal_process():
 
-    checkList = request.form.getlist("selected_std")
+    try:
 
-    tc_selected = techer[len(techer)-1]
+        checkList = request.form.getlist("selected_std")
 
-    session["supervi"]
-    session['reqid']
+        tc_selected = techer[len(techer)-1]
 
-    qury.execute("SELECT `Request` FROM `operation_request` WHERE `ID` = '"+session['reqid']+"'")
-    req_Process_for_assigning_duty = qury.fetchall()
+        session["supervi"]
+        session['reqid']
 
-
-
-
-    if int(req_Process_for_assigning_duty[0][0]) == len(checkList):
-#       to assign a student to selected teacher
-        for k in checkList:
-
-            qury.execute(
-                "INSERT INTO `hk_assignd_teaecher`(`operatikon_ID`, `hk_ID`) VALUES ('" + tc_selected + "','" + k + "')")
-            conn.commit()
-            #to update if the std is avilable
-            qury.execute("UPDATE `hk_users` SET `Status_avail`='Na' WHERE `idnum` = '" + k + "' ")
-            conn.commit()
-
-            # to update the sipervisor of the student in the student rec
-            qury.execute("UPDATE `hk_users` SET `dutySupervisor`='"+str(session["supervi"])+"' WHERE `idnum` = '" + k + "'")
-            conn.commit()
-
-            #to update the DUTY DESIGNATION
-            qury.execute("UPDATE `hk_users` SET `dutyDesignation`='"+session['hkDESIGNATION']+"'WHERE `idnum` = '" + k + "' ")
-            conn.commit()
-
-        #to remove the rows in the website
-        qury.execute("SELECT * FROM `operation_request` WHERE `ID`='"+session['reqid']+"'")
-#       to remove the requst from list
-        dataTodel=list(qury.fetchall()[0])
-
-        tableTodel = {"DESIGNATION":dataTodel[0],"REQ":dataTodel[1], "REPORT DAY/S":dataTodel[2],"SUPERVISOR":dataTodel[5],"DEPT":dataTodel[4],"REQST":dataTodel[3],"REQ ID":dataTodel[6]}
-
-        session["assigmentstdList"].remove(tableTodel)
-        qury.execute("DELETE FROM `operation_request` WHERE `ID`='"+session['reqid']+"'")
-        conn.commit()
+        qury.execute("SELECT `Request` FROM `operation_request` WHERE `ID` = '"+session['reqid']+"'")
+        req_Process_for_assigning_duty = qury.fetchall()
 
 
 
 
-    elif len(checkList) < int(req_Process_for_assigning_duty[0][0]) :
-        for k in checkList:
+        if int(req_Process_for_assigning_duty[0][0]) == len(checkList):
+    #       to assign a student to selected teacher
+            for k in checkList:
 
-            qury.execute(
-                "INSERT INTO `hk_assignd_teaecher`(`operatikon_ID`, `hk_ID`) VALUES ('" + tc_selected + "','" + k + "')")
+                qury.execute(
+                    "INSERT INTO `hk_assignd_teaecher`(`operatikon_ID`, `hk_ID`) VALUES ('" + tc_selected + "','" + k + "')")
+                conn.commit()
+                #to update if the std is avilable
+                qury.execute("UPDATE `hk_users` SET `Status_avail`='Na' WHERE `idnum` = '" + k + "' ")
+                conn.commit()
+
+                # to update the sipervisor of the student in the student rec
+                qury.execute("UPDATE `hk_users` SET `dutySupervisor`='"+str(session["supervi"])+"' WHERE `idnum` = '" + k + "'")
+                conn.commit()
+
+                #to update the DUTY DESIGNATION
+                qury.execute("UPDATE `hk_users` SET `dutyDesignation`='"+session['hkDESIGNATION']+"'WHERE `idnum` = '" + k + "' ")
+                conn.commit()
+
+            #to remove the rows in the website
+            qury.execute("SELECT * FROM `operation_request` WHERE `ID`='"+session['reqid']+"'")
+    #       to remove the requst from list
+            dataTodel=list(qury.fetchall()[0])
+
+            tableTodel = {"DESIGNATION":dataTodel[0],"REQ":dataTodel[1], "REPORT DAY/S":dataTodel[2],"SUPERVISOR":dataTodel[5],"DEPT":dataTodel[4],"REQST":dataTodel[3],"REQ ID":dataTodel[6]}
+
+            session["assigmentstdList"].remove(tableTodel)
+            qury.execute("DELETE FROM `operation_request` WHERE `ID`='"+session['reqid']+"'")
             conn.commit()
 
 
-            # to update the sipervisor of the student in the student rec
-            qury.execute("UPDATE `hk_users` SET `Status_avail`='Na' WHERE `idnum` = '" + k + "' ")
+
+
+        elif len(checkList) < int(req_Process_for_assigning_duty[0][0]) :
+            for k in checkList:
+
+                qury.execute(
+                    "INSERT INTO `hk_assignd_teaecher`(`operatikon_ID`, `hk_ID`) VALUES ('" + tc_selected + "','" + k + "')")
+                conn.commit()
+
+
+                # to update the sipervisor of the student in the student rec
+                qury.execute("UPDATE `hk_users` SET `Status_avail`='Na' WHERE `idnum` = '" + k + "' ")
+                conn.commit()
+
+                # to update the sipervisor of the student in the student rec
+
+                qury.execute("UPDATE `hk_users` SET `dutySupervisor`='"+str(session["supervi"])+"' WHERE `idnum` = '" + k + "'")
+                conn.commit()
+
+                # to update the DUTY DESIGNATION
+                qury.execute("UPDATE `hk_users` SET `dutyDesignation`='" + session[
+                    'hkDESIGNATION'] + "'WHERE `idnum` = '" + k + "' ")
+                conn.commit()
+
+
+            req_need_std = int(req_Process_for_assigning_duty[0][0])-len(checkList)
+            qury.execute("UPDATE `operation_request` SET `Request`='"+str(req_need_std)+"' WHERE `ID` ='"+session['reqid']+"' ")
             conn.commit()
+        elif len(checkList) > int(req_Process_for_assigning_duty[0][0]):
+            return '<script>alert("Exceeded number of request!!");window.location="/Duty Assignment And Management"</script>'
+        else:
+            pass
 
-            # to update the sipervisor of the student in the student rec
+        techer.clear()
+        session.pop("supervi", None)
+        session.pop("reqid", None)
 
-            qury.execute("UPDATE `hk_users` SET `dutySupervisor`='"+str(session["supervi"])+"' WHERE `idnum` = '" + k + "'")
-            conn.commit()
+        return redirect(url_for("DutyAssig"))
 
-            # to update the DUTY DESIGNATION
-            qury.execute("UPDATE `hk_users` SET `dutyDesignation`='" + session[
-                'hkDESIGNATION'] + "'WHERE `idnum` = '" + k + "' ")
-            conn.commit()
-
-
-        req_need_std = int(req_Process_for_assigning_duty[0][0])-len(checkList)
-        qury.execute("UPDATE `operation_request` SET `Request`='"+str(req_need_std)+"' WHERE `ID` ='"+session['reqid']+"' ")
-        conn.commit()
-    elif len(checkList) > int(req_Process_for_assigning_duty[0][0]):
-        return '<script>alert("Exceeded number of request!!");window.location="/Duty Assignment And Management"</script>'
-    else:
-        pass
+    except Exception:
+        return redirect(url_for('DutyAssig'))
 
 
 
-    techer.clear()
-    session.pop("supervi",None)
-    session.pop("reqid", None)
 
-
-
-    return redirect(url_for("DutyAssig"))
 #-----------------------------------------------------------------------------------------------------------------------
 
 
