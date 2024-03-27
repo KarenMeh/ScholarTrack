@@ -2070,9 +2070,6 @@ def StudentTimeIN_Out():
             return render_template("Terminal/terminal.html")
 
 
-
-
-
         elif time_In_Out =="OUT":
             list_of_sign_in.remove(stdId)
 
