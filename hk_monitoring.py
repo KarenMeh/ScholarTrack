@@ -390,24 +390,54 @@ def request_Scholar():
     listahan = []
     try:
 
+
+
         qury.execute("SELECT `hk_ID`FROM `hk_assignd_teaecher` WHERE `operatikon_ID` = '"+str(session["lname"])+" "+str(session["fname"])+"'")
         mYStudent_Db_Id = qury.fetchall()
 
 
 
+
         for k in mYStudent_Db_Id:
 
-            qury.execute("SELECT `idnum`,`lname`, `fname`, `id_totalHours`,  `remaningDuty`, `remDutyMins`,`statsForRenewal` FROM `hk_users` WHERE `idnum`= '"+k[0]+"'")
+            qury.execute("SELECT `idnum`,`lname`, `fname`, `id_totalHours`,  `remaningDuty`, `remDutyMins`,`statsForRenewal`, `status_color` FROM `hk_users` WHERE `idnum`= '"+k[0]+"'")
             listahan.append(qury.fetchall()[0])
 
 
         student_underMe=[]
         for k in range(len(listahan)):
-            tables = {"STUDENT ID":listahan[k][0],"SCHOLAR NAME":listahan[k][1]+" "+listahan[k][2],"COMPLETED HOURS":str(listahan[k][3])+"m","REMAINING HOURS":listahan[k][4]+"h "+str(float(listahan[k][5]).__round__()).split(".")[0]+"m","STATUS":listahan[k][6]}
+            tables = {"STUDENT ID":listahan[k][0],"SCHOLAR NAME":listahan[k][1]+" "+listahan[k][2],"COMPLETED HOURS":str(listahan[k][3])+"m","REMAINING HOURS":listahan[k][4]+"h "+str(float(listahan[k][5]).__round__()).split(".")[0]+"m","STATUS":listahan[k][6],"color":listahan[k][7]}
             student_underMe.append(tables)
+
+
         #select profile pic
         qury.execute("SELECT `profilePics` FROM `operations_data` WHERE `Faculty_Id_Number`= '" + session["user"] + "'")
         profilepicDb = qury.fetchall()[0][0]
+
+        for k in range (len(student_underMe)):
+            # status update function
+            qury.execute("SELECT  `hk_ID` FROM `hk_assignd_teaecher` WHERE `hk_ID`='"+student_underMe[k]['STUDENT ID']+"' ")
+            std_id_under_me = qury.fetchall()[0][0]
+
+            qury.execute("SELECT `remaningDuty`, `remDutyMins` FROM `hk_users` WHERE `idnum`='"+std_id_under_me+"'")
+            std_remning = qury.fetchall()[0]
+
+            hours = int(std_remning[0])
+            mins = float(std_remning[1]).__round__()
+
+            if hours <=0 and mins <=0.0 :
+                print("done")
+                qury.execute("UPDATE `hk_users` SET `status_color`='success',`statsForRenewal`='Complete' WHERE `idnum`='"+std_id_under_me+"'")
+                conn.commit()
+
+            else:
+                print("not yet")
+                qury.execute("UPDATE `hk_users` SET `status_color`='warning',`statsForRenewal`='pending' WHERE `idnum`='" + std_id_under_me + "'")
+                conn.commit()
+
+
+
+
 
         return render_template("dashboard operations/requestmanage.html",logUser = session['username'], student_underMe =student_underMe,profilepicDb=profilepicDb)
 
@@ -418,7 +448,7 @@ def request_Scholar():
 @app.route("/print_cert", methods =['POST'])
 def print_cert():
 
-    return render_template("dashboard operations/requestmanage.html")
+    return render_template("dashboard operations/print_cert.html")
 
     #this is for requesting a hk studen
 @app.route("/Modal_request_process", methods=['POST'])
@@ -502,34 +532,10 @@ def Modal_request_process():
 
 @app.route("/feedback")
 def feedback():
-    listahan = []
+
     try:
-
-        qury.execute(
-            "SELECT `hk_ID`FROM `hk_assignd_teaecher` WHERE `operatikon_ID` = '" + str(session["lname"]) + " " + str(
-                session["fname"]) + "'")
-        mYStudent_Db_Id = qury.fetchall()
-
-        for k in mYStudent_Db_Id:
-            qury.execute(
-                "SELECT `idnum`,`lname`, `fname`, `id_totalHours`,  `remaningDuty`, `remDutyMins`,`statsForRenewal` FROM `hk_users` WHERE `idnum`= '" +
-                k[0] + "'")
-            listahan.append(qury.fetchall()[0])
-
-        student_underMe = []
-        for k in range(len(listahan)):
-            tables = {"STUDENT ID": listahan[k][0], "SCHOLAR NAME": listahan[k][1] + " " + listahan[k][2],
-                      "COMPLETED HOURS": str(listahan[k][3]) + "m",
-                      "REMAINING HOURS": listahan[k][4] + "h " + str(float(listahan[k][5]).__round__()).split(".")[
-                          0] + "m", "STATUS": listahan[k][6]}
-            student_underMe.append(tables)
-        # select profile pic
-        qury.execute("SELECT `profilePics` FROM `operations_data` WHERE `Faculty_Id_Number`= '" + session["user"] + "'")
-        profilepicDb = qury.fetchall()[0][0]
-
         return render_template("dashboard operations/feedback.html", logUser=session['username'],
-                               student_underMe=student_underMe, profilepicDb=profilepicDb)
-
+                              )
     except Exception:
         return redirect(url_for("signInPAge"))
 
@@ -930,13 +936,37 @@ def compliance():
             dataProcess = {"STUDENT ID": student_info[counter_Table1][0], "SCHOLAR NAME": std_fullNmae,
                            "COMPLETED HOURS": student_info[counter_Table1][5] + "m",
                            "REMAINING HOURS": student_info[counter_Table1][13] + "h " +str(float(student_info[counter_Table1][14]).__round__()).split(".")[0] + "m",
-                           "STATUS": student_info[counter_Table1][15]}
+                           "STATUS": student_info[counter_Table1][15],"color":student_info[counter_Table1][19]}
             table_OfStudent_Info.append(dataProcess)
             counter_Table1 += 1
 
 
+
+
+
+
         qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
         profilepicDb = qury.fetchall()[0][0]
+
+
+         #status update function
+        qury.execute("SELECT `idnum`,`remaningDuty`, `remDutyMins` FROM `hk_users` ")
+        std_data_rem_time = qury.fetchall()
+
+        for k in std_data_rem_time:
+            hours = int(k[1])
+            mins = float(k[2]).__round__()
+
+            if hours <= 0 and mins <= 0.0:
+                print("tapos na", k[0])
+                qury.execute("UPDATE `hk_users` SET `statsForRenewal`='Complete',`status_color`='success' WHERE `idnum`= '"+str(k[0])+"'")
+                conn.commit()
+            else:
+                print("wala pa tapos", k[0])
+                qury.execute("UPDATE `hk_users` SET `statsForRenewal`='pending', `status_color`='warning' WHERE `idnum`= '" + str(k[0]) + "'")
+                conn.commit()
+
+
 
 
         return render_template("dashboard admin/compliance.html", logUser=session["adminUser"],
