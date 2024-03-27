@@ -15,6 +15,17 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <link rel="stylesheet" href="static/assetUser/css/style1.css">
+  <!-- Demo CSS (No need to include it into your project) -->
+  <link rel="stylesheet" href="static/assetUser/css/demo.css">
+  <!-- Bootstrap 5 CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+<!-- Data Table CSS -->
+<link rel='stylesheet' href='https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css'>
+<!-- Font Awesome CSS -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
 
   <!-- Vendor CSS Files -->
   <link href="static/assetUser/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -22,37 +33,32 @@
   <link href="static/assetUser/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="static/assetUser/vendor/quill/quill.snow.css" rel="stylesheet">
   <link href="static/assetUser/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link href="static/assetUser/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="static/assetUser/vendor/simple-datatables/style.css" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-
-  <link rel="stylesheet" href="static/assetUser/css/style1.css">
-  <!-- Demo CSS (No need to include it into your project) -->
-  <!-- Bootstrap 5 CSS -->
-<!-- Data Table CSS -->
-<link rel='stylesheet' href='https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css'>
-<!-- Font Awesome CSS -->
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
-
 
   <!-- Template Main CSS File -->
-  <link href="/static/assetUser/css/request.css" rel="stylesheet">
-  
+  <link href="static/assetUser/css/system.css" rel="stylesheet">
+
  
 </head>
+<style>
+  .ratings{
+    text-align: center;
+    align-items: center;
+    margin-left: 130px;
+    margin-bottom: 40px;
+    margin-top: -10px;
+    font-size: 40px;
+    padding: 0;
+  }
+</style>
+
 <body>
 
 
-  <style>
-  
-  </style>
-  
-  <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center">
+
+   <!-- ======= Header ======= -->
+   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="" class="logo d-flex align-items-center">
@@ -132,185 +138,132 @@
 
   </header><!-- End Header -->
 
- <!-- ======= Sidebar ======= -->
- <aside id="sidebar" class="sidebar">
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
 
-  <ul class="sidebar-nav" id="sidebar-nav">
+    <ul class="sidebar-nav" id="sidebar-nav">
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="/Dash board">
-        <div class="comp">
-          <img src="/static/assetUser/img/home.png" alt="" width="20px">
-        </div>
-        <span>Dashboard</span>
-      </a>
-    </li><!-- End Dashboard Nav -->
+      <li class="nav-item">
+        <a class="nav-link " href="/Dash board">
+          <div class="comp">
+            <img src="/static/assetUser/img/home.png" alt="" width="20px">
+          </div>
+          <span>Dashboard</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
 
 
 
-    <li class="nav-item">
-     
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="/Request and Scholar Management">
-        <div class="comp">
-          <img src="/static/assetUser/img/requestt.png" alt="" width="25px">
-      </div>
-        <span>Request and Scholar Management</span>
-      </a>
-    </li><!-- End Profile Page Nav -->
-
-    <li class="nav-item">
-      <a class="nav-link " href="/feedback">
-        <div class="comp">
-          <img src="/static/assetUser/img/system health.png" alt="" width="25px">
-        </div>
-        <span> Feedback and Activity Log</span>
-      </a>
-    </li><!-- End Profile Page Nav -->
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="/Profile">
-        <div class="comp">
-          <img src="/static/assetUser/img/user.png" alt="" width="25px">
-        </div>
-        <span>Profile </span>
-      </a>
-    </li><!-- End Profile Page Nav -->
-
+      <li class="nav-item">
        
-    
-
-
-    </ul>
-
-  </aside><!-- End Sidebar-->
-
-  <main id="main" class="main">
-    <section class="section dashboard">
-      <div class="row">
-
-        <!-- Left side columns -->
-        <div class="col-12">
-          <div class="card p-1" >
-            <!-- Recent Sales -->
-            <div class="col-30">
-              <div class="card recent-sales overflow-auto">
-                <div class="card-body">
-  <div class="card-title2">Assigned Scholar List</span>
-
-  
-    <div class="container">
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Request Scholar Assistance</button>
-  
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-      <div class="modal-dialog modal-dialog-centered">
-      
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">REGISTRATION</h4>
-          </div>
-          <div class="modal-body">
-            <form action="/Modal_request_process" method="post">
-
-              <label for="Designation">Designation</label>
-              <select name="Designation" id="Designation" required>
-                <option value="">Select</option>
-                <option value="SF">Student Facilitator(SF)</option>
-                <option value="AF">Assistant Facilitator(AF)</option>
-                <option value="Clerk">Clerk</option>
-               
-              </select>
-
-              <label for="Requirement">Specification</label>
-              <select name="Requirements" id="Requirements" required>
-                <option value="">Select</option>
-                <option value="First Year">First Year</option>
-                <option value="Second Year">Second Year</option>
-                <option value="Third Year">Third Year</option>
-                <option value="Fourth Year">Fourth Year</option>
-              </select>
-
-              <label for="Requirement">Reporting Days: </label> </br>
-                <input type="checkbox"  name="monday" value="Mon" >
-                <label for="vehicle1"> Monday</label><br>
-                <input type="checkbox"  name="tuesday" value="Tues" >
-                <label for="vehicle2"> Tuesday</label><br>
-                <input type="checkbox" name="wednesday" value="Wed">
-                <label for="vehicle3"> Wednesday</label><br>
-                <input type="checkbox"  name="thursday" value="Thurs">
-                <label for="vehicle2"> Thursday</label><br>
-                <input type="checkbox" name="friday" value="Fri">
-                <label for="vehicle3"> Friday</label><br>
-                <input type="checkbox"  name="saturday" value="Sat">
-                <label for="vehicle2"> Saturday</label><br>
-                
-
-
-     
-              <label for="Requirement">Department</label>
-              <select name="dept" id="Designation" required>
-                <option value="">Select</option>
-                <option value="COM">COM</option>
-                <option value="COA">COA</option>
-                <option value="COED">COED</option>
-                <option value="CCJE">CCJE</option>
-                <option value="COE">COE</option>
-                <option value="CAHS">CAHS</option>
-                <option value="CITE">CITE</option>
-                <option value="COME">COME</option>
-                
-              </select>
-              <label for="quantity">Number of Students:</label>
-              <input type="number" id="quantity" name="Request" min="1" max="10">
-
-              <br>
-
-                <input type="Submit" value="Submit" name="request">
-
-            </form>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        
-          
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/Request and Scholar Management">
+          <div class="comp">
+          <img src="/static/assetUser/img/requestt.png" alt="" width="25px">
         </div>
-      </div>
-    </div>
+          <span>Request and Scholar Management</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/feedback">
+          <div class="comp">
+            <img src="/static/assetUser/img/system health.png" alt="" width="25px">
+          </div>
+          <span> Feedback and Activity Log</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/Profile">
+          <div class="comp">
+            <img src="/static/assetUser/img/user.png" alt="" width="25px">
+          </div>
+          <span>Profile </span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+    </ul>
+  
+    </aside><!-- End Sidebar-->
+
+    <main id="main" class="main">
+
+      <section class="section">
+        <div class="row align-items-top">
+          
+  
+            <div class="col-5">
+
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">STAR RAING SYSTEM</h5>
     
-   </div>
+                  <!-- Default Progress Bars-->
 
-</div>
-</div>
+                
+                  
+                  
+                        <form class="px-2" action="">
+                          <p class="text-center"><strong>How do you rate customer support:</strong></p>
+                          <div class="d-flex justify-content-between align-items-center">
+                            <div class="ratings ">
+                                <i class="fa fa-star rating-color"></i>
+                                <i class="fa fa-star rating-color"></i>
+                                <i class="fa fa-star rating-color"></i>
+                                <i class="fa fa-star rating-color"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            
+                        </div>
+                          <p class="text-center"><strong>What could we improve?</strong></p>
+                  
+                          <!-- Message input -->
+                          <div class="form-outline mb-4">
+                            <textarea class="form-control" id="form4Example6" rows="4"></textarea>
+                            <label class="form-label" for="form4Example6">Your feedback</label>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="card-footer text-end">
+                        <button type="button" class="btn btn-primary">Submit</button>
+                      </div>
+                    </div>
+                
+  
+         
+          </div>
+  
+          <div class="col-7">
+  
+              <div class="card p-1" >
+                <div class="card-title2 ">ACTIVITY LOG</span>
 
-              
-
-      
-                          <!--$%adsense%$-->
+                  
+ <!--$%adsense%$-->
  <main class="cd__main">
   <!-- Start DEMO HTML (Use the following code into your project)-->
   <table id="example" class="table table-striped" style="width:100%">
  <thead>
      <tr>
-      <th>STUDENT ID</th>
-      <th>SCHOLAR NAME</th>
-      <th>COMPLETED MINUTES </th>
-      <th>REMAINING HOURS</th>
-      <th>STATUS</th>
+         <th>Date and Time</th>
+         <th>ID</th>
+         <th>USER</th>
+         <th>DEPT</th>
+         <th>ACT PERM</th>
         
      </tr>
  </thead>
- <tbody id="myTable">
+ <tbody>
 
-  {% for row in student_underMe %}
-  <tr>
-  <form action="{{url_for('student_rec_process')}}" method="POST">
-   <td><button type="submit" name="select" value="select"> <i style="margin-right: 0.5em; color: #000000;"><class="bi bi-calendar2-minus"></i></button> {{row['STUDENT ID']}}</td>
-   <td>{{row['SCHOLAR NAME']}}</td>
-   <td>{{row['COMPLETED HOURS']}}</td>
-    <td>{{row['REMAINING HOURS']}}</td>
-    <td class ="text-bg-warning"> {{row['STATUS']}}</td>
-  </form>
+ {% for row in activity_log_table%}
+
+ <tr>
+   <td>{{row['Date and Time']}}</td>
+   <td>{{row['ID']}}</td>
+   <td>{{row['USER']}}</td>
+   <td>{{row['DEPT']}}</td>
+   <td>{{row['ACT PERM']}}</td>
+ 
 </tr>
 
 
@@ -321,74 +274,27 @@
 </table>
 
 
-                          <!-- End Table with stripped rows -->
-          
-    </div>
               </div>
-            </div>
+            </div><!-- End Card with an image on top -->
+    
           </div>
+  
         </div>
       </section>
+    </main><!-- End #main -->
+   <!-- ======= Footer ======= -->
+   <footer id="footer" class="footer">
+     <div class="copyright">
+       &copy; Copyright <strong><span>Phinma-UI</span></strong>. All Rights Reserved
+     </div>
+     <div class="credits">
+       <!-- All the links in the footer should remain intact. -->
+       <!-- You can delete the links only if you purchased the pro version. -->
+       <!-- Licensing information: https://bootstrapmade.com/license/ -->
+       <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+       Designed by Proglematicv3</a>
+     </div>
    
-<script>
-  $(document).ready(function(){
-    $("#myInput").on("keyup", function() {
-      var value = $(this).val().toLowerCase();
-      $("#myTable tr").filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-      });
-    });
-  });
-  </script>
-
-                      <hr>
-
-
-
-                  </div>
-
-
-
-
-                </div>
-
-              </div>
-            </div><!-- End Recent Sales -->
-
-
-          </div>
-        </div><!-- End Left side columns -->
-
-        <!-- Right side columns -->
-        <div class="col-lg-3">
-
-
-
-
-
-
-
-        </div><!-- End Right side columns -->
-
-      </div>
-    </section>
-
-  </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
-    <div class="copyright">
-      &copy; Copyright <strong><span>Phinma-UI</span></strong>. All Rights Reserved
-    </div>
-    <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by Proglematicv3</a>
-    </div>
-    
 <script src='https://code.jquery.com/jquery-3.7.0.js'></script>
 <!-- Data Table JS -->
 <script src='https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js'></script>
@@ -397,42 +303,25 @@
       <!-- Script JS -->
       <script src="static/assetUser/js/script.js"></script>
    </footer><!-- End Footer -->
-  <!-- Vendor JS Files -->
-  <script src="static/assetUser/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="static/assetUser/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="static/assetUser/vendor/chart.js/chart.umd.js"></script>
-  <script src="static/assetUser/vendor/echarts/echarts.min.js"></script>
-  <script src="static/assetUser/vendor/quill/quill.min.js"></script>
-  <script src="static/assetUser/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="static/assetUser/vendor/tinymce/tinymce.min.js"></script>
-  <script src="static/assetUser/vendor/php-email-form/validate.js"></script>
-
-  <!-- Template Main JS File -->
-
-  <script src="static/assetUser/js/req.js"></script>
-  <script src="static/assetUser/js/script.js"></script>
-  <script src="static/assetUser/js/main.js"></script>
-
-</body>
-
-</html>
-
-<script>
-  $(document).ready(function(){
-    $("#myInput").on("keyup", function() {
-      var value = $(this).val().toLowerCase();
-      $("#myTable tr").filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-      });
-    });
-  });
-  </script>
+  
  
-  <script>
-    const toggleDropdown = document.getElementById('toggle-dropdown');
-    const optionsContainer = document.querySelector('.options');
-
-    toggleDropdown.addEventListener('change', () => {
-        optionsContainer.classList.toggle('open');
-    });
-</script>
+   
+ 
+   <!-- Vendor JS Files -->
+   <script src="static/assetUser/vendor/apexcharts/apexcharts.min.js"></script>
+   <script src="static/assetUser/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+   <script src="static/assetUser/vendor/chart.js/chart.umd.js"></script>
+   <script src="static/assetUser/vendor/echarts/echarts.min.js"></script>
+   <script src="static/assetUser/vendor/quill/quill.min.js"></script>
+   <script src="static/assetUser/vendor/simple-datatables/simple-datatables.js"></script>
+   <script src="static/assetUser/vendor/tinymce/tinymce.min.js"></script>
+   <script src="static/assetUser/vendor/php-email-form/validate.js"></script>
+ 
+   <!-- Template Main JS File -->
+   <script src="static/assetUser/js/script.js"></script>
+   <script src="static/assetUser/js/main.js"></script>
+ 
+ </body>
+ 
+ </html>
+ 

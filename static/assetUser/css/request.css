@@ -789,6 +789,7 @@ th {
   margin-left: 30px;
   text-align: center;
   background-color: #002b80;
+  font-size: 10px;
   
   
   
@@ -859,11 +860,11 @@ th {
   color: white;
   padding: 8px 10px;
   text-align: center;
-  margin-left: 79%;
+  margin-left: 83%;
   margin-top: -40px;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 13px;
 }
 
 .container li {

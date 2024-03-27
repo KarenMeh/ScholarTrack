@@ -184,17 +184,18 @@
   
   .card-title {
     padding: 20px 0 15px 0;
-    font-size: 13px;
+    font-size: 17px;
     font-weight: bold;
     letter-spacing: 1px;
     font-weight: 300px;
+    padding-bottom: 50px;
     color: #012970;
-    font-family: "Poppins", sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   
   .card-title2 {
     padding: 20px 10px 2px 0;
-    font-size: 20px;
+    font-size:
     font-weight: bold;
     margin-left: 25px;
     letter-spacing: 2px;
@@ -828,7 +829,9 @@
     font-size: 10px;
     text-align: center;
     align-items: center;
-    padding: 0;
+    margin-left: 20px;
+    padding: 10px;
+    padding-top: -10px;
    
 
   }
