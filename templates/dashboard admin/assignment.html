@@ -262,19 +262,21 @@
             <tr>
               <form action="/Duty Assignment" method="POST"  >
 
-             <td> {{row['DESIGNATION']}} </td>
-              <td>{{row['REQ']}}</td>
-              <td>{{row['REPORT DAY/S']}}</td>
-              <td>{{row['SUPERVISOR']}}</td>
-               <td>{{row['REQST']}}</td>
-                 <td>{{row['DEPT']}}</td>
-                <td>{{row['REQ ID']}}</td>
+                 <td>{{row['DESIGNATION']}}  </td>
+                 <td>{{row['REQ']}}          </td>
+                 <td>{{row['REPORT DAY/S']}} </td>
+                 <td>{{row['SUPERVISOR']}}   </td>
+                 <td>{{row['REQST']}}        </td>
+                 <td>{{row['DEPT']}}         </td>
+                 <td>{{row['REQ ID']}}       </td>
                           
 
 
                 <td><button type="submit" name ="operations_Id_Selected" value="{{row['SUPERVISOR']}}" class="btn btn-success"  data-toggle="modal" data-target="#myModal"> select</button> </td>
-              <td><input type="hidden" name="operationId" value="{{row['REQ ID']}}" ></td>
+                <td><input type="hidden" name="operationId" value="{{row['REQ ID']}}" >       </td>
                 <td><input type="hidden" name="hkDESIGNATION" value="{{row['DESIGNATION']}}" ></td>
+                <td><input type="hidden" name="std_yr_lvl" value="{{row['REQ']}}" >             </td>
+                <td><input type="hidden" name="std_dept" value="{{row['DEPT']}}" >          </td>
 
             </form>
             </tr>

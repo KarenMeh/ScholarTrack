@@ -1,11 +1,9 @@
 import os
-from audioop import reverse
-
+import serial
 import pandas as pd
 from flask import Flask, render_template, request, redirect, url_for, session, send_file, jsonify
 from flaskext.mysql import MySQL
 import datetime
-
 from werkzeug.exceptions import RequestEntityTooLarge
 from werkzeug.utils import secure_filename
 
@@ -254,7 +252,7 @@ def indexprocess():
 
             return '<script>alert("Registered Complete");window.location="/register"</script>'
         else:
-            return '<script>alert("wrong pass");window.location="/register"</script>'
+            return '<script>alert("Password not match");window.location="/register"</script>'
 
     except:
 
@@ -341,12 +339,19 @@ def Dashboard():
         for k in db_announc_data:
             announcment_List.append(k)
 
-        #       to display date and time
-        dateTimeLista_announcment = []
-        for k in range(len(announcment_List)):
-            content = str(announcment_List[k][1]) + " " + str(announcment_List[k][2]) + ">20%" + str(announcment_List[k][3]) + ">20%" + str(announcment_List[k][0])
+            #       to display date and time
 
-            dateTimeLista_announcment.append(content.split(">20%"))
+            dateTimeLista_announcment = []
+            for k in range(len(announcment_List)):
+                content = str(announcment_List[k][1]) + " " + str(announcment_List[k][2]) + ">20%" + str(
+                    announcment_List[k][3]) + ">20%" + str(announcment_List[k][0])
+
+                dateTimeLista_announcment.append(content.split(">20%"))
+            reversed_dare_announcment = []
+            # to display the latest announcement
+            for k in dateTimeLista_announcment[::-1]:
+                reversed_dare_announcment.append(k)
+            #      end  to display date and time
 
 
 
@@ -372,7 +377,7 @@ def Dashboard():
 
         return render_template("dashboard operations/OpartionsDashBoard.html",
                                logUser = session['username'],
-                               dateTimeLista_announcment=dateTimeLista_announcment,
+                               dateTimeLista_announcment=reversed_dare_announcment,
                                profilepicDb=profilepicDb,complirate=str(complirate.__round__())+"%",
                                number_of_stndt=len(number_of_stndt))
 
@@ -817,20 +822,26 @@ def admin():
 
 @app.route("/adminLog", methods=['POST'])
 def adminLog():
-    useraAdmin = request.form['email']
-    pswAdmin = request.form['pass']
 
-    qury.execute("SELECT `userName` FROM `admin` WHERE `adminIdNumber` = '"+useraAdmin+"'")
-    adminfullname = qury.fetchall()
-    session["userIdAdmin"] =useraAdmin
-    session["adminUser"] = adminfullname[0][0]
+    try:
+        useraAdmin = request.form['email']
+        pswAdmin = request.form['pass']
+
+        qury.execute("SELECT `userName` FROM `admin` WHERE `adminIdNumber` = '"+useraAdmin+"'")
+        adminfullname = qury.fetchall()
+        session["userIdAdmin"] =useraAdmin
+        session["adminUser"] = adminfullname[0][0]
 
 
-    check = useraAdmin+" "+pswAdmin
-    if check in admin_cridentials:
-        return '<script>window.location="admindashBoard"</script>'
-    else:
-        return  '<script>alert("Wrong Credentials!");window.location="/adminLanding"</script>'
+        check = useraAdmin+" "+pswAdmin
+        if check in admin_cridentials:
+            return '<script>window.location="admindashBoard"</script>'
+        else:
+            return  '<script>alert("Wrong Credentials!");window.location="/adminLanding"</script>'
+
+    except Exception:
+            return '<script>alert("Wrong Credentials!");window.location="/adminLanding"</script>'
+
 
 @app.route("/admindashBoard")
 def admindashBoard():
@@ -849,8 +860,6 @@ def admindashBoard():
 #       to display date and time
 
 
-
-
         dateTimeLista_announcment = []
         for k in range(len(announcment_List)):
             content = str(announcment_List[k][1]) + " " + str(announcment_List[k][2]) + ">20%" + str(
@@ -858,9 +867,10 @@ def admindashBoard():
 
             dateTimeLista_announcment.append(content.split(">20%"))
         reversed_dare_announcment = []
-
+       # to display the latest announcement
         for k in dateTimeLista_announcment[::-1]:
             reversed_dare_announcment.append(k)
+        #      end  to display date and time
 
 
 
@@ -1296,21 +1306,31 @@ techer =[]
 @app.route("/Duty Assignment", methods=['POST'])
 def DutyAssig_process():
     # messages = request.args['h'] mag pass value halin sa url_for
-    qury.execute("SELECT `idnum`, `lname`, `fname`,`program_course`, `department`, `yrLvL` FROM `hk_users` WHERE `Status_avail` = 'av'")
-    student_db_data = qury.fetchall()
 
+
+    hkDESIGNATION = request.form['hkDESIGNATION']
     supervi = request.form['operations_Id_Selected']
     reqid = request.form['operationId']
-    hkDESIGNATION = request.form['hkDESIGNATION']
+
     session["supervi"] = supervi
     session['reqid'] = reqid
+
+
+
+
     session['hkDESIGNATION'] = hkDESIGNATION
     techer.append(supervi)
+    #   to filter out the student by the request requirements
+    std_dept = request.form['std_dept']
+    std_yr_lvl = request.form['std_yr_lvl']
 
-
+    qury.execute("SELECT `idnum`, `lname`, `fname`,`program_course`, `department`, `yrLvL` FROM `hk_users` WHERE `Status_avail` = 'av' AND `yrLvL`= '"+std_yr_lvl+"' AND `department` = '"+std_dept+"' ")
+    student_db_data = qury.fetchall()
     avil_std_list = []
     for k in student_db_data:
         avil_std_list.append(k)
+
+
 
 
     table_avil_std =[]
@@ -1372,6 +1392,9 @@ def DutyAssig_process():
                            ,coa = len(coa), coed = len(coed),cite = len(cite),
                             com = len(com),ccje = len(ccje),coe = len(coe),
                             cahs = len(cahs),come = len(come),complirate=str(complirate.__round__())+"%",number_of_stndt=len(number_of_stndt))
+
+
+
 
 @app.route("/Assigment_modal_process", methods =['POST'])
 def Assigment_modal_process():
@@ -1840,7 +1863,14 @@ def Systemhealth():
             tables= {"Date and Time":k[1],"ID":k[2],"USER":k[3],"DEPT":k[4],"ACT PERM":k[5]}
             activity_log_table.append(tables)
 
-        return render_template("dashboard admin/Systemhealth.html",logUser=session["adminUser"],profilepicDb=profilepicDb, activity_log_table=activity_log_table)
+        activity_log_tabl_rev = []
+        for k in activity_log_table[::-1]:
+            activity_log_tabl_rev.append(k)
+
+
+
+
+        return render_template("dashboard admin/Systemhealth.html",logUser=session["adminUser"],profilepicDb=profilepicDb, activity_log_table=activity_log_tabl_rev)
     except Exception:
         return redirect(url_for("admin"))
 @app.route("/Feedback and Improvements")
@@ -1981,12 +2011,25 @@ def StudentTimeIN_Out():
     yr =current_date.year
     month = current_date.month
     date = current_date
+
+
+
+
+    #arduino id getter
+    ser = serial.Serial('COM3', 9600)
+
+
+
+
+    #arduino getter end
+
+
+
+
+
+
+
     #checker if the id number had sign in or not
-
-
-
-
-
     time_In_Out = request.form.get('login')
     stdId = request.form['idstndt']
     total_duty = 0
