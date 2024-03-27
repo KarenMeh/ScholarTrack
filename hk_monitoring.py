@@ -1,11 +1,9 @@
 import os
-from audioop import reverse
-
+import serial
 import pandas as pd
 from flask import Flask, render_template, request, redirect, url_for, session, send_file, jsonify
 from flaskext.mysql import MySQL
 import datetime
-
 from werkzeug.exceptions import RequestEntityTooLarge
 from werkzeug.utils import secure_filename
 
@@ -1308,21 +1306,31 @@ techer =[]
 @app.route("/Duty Assignment", methods=['POST'])
 def DutyAssig_process():
     # messages = request.args['h'] mag pass value halin sa url_for
-    qury.execute("SELECT `idnum`, `lname`, `fname`,`program_course`, `department`, `yrLvL` FROM `hk_users` WHERE `Status_avail` = 'av'")
-    student_db_data = qury.fetchall()
 
+
+    hkDESIGNATION = request.form['hkDESIGNATION']
     supervi = request.form['operations_Id_Selected']
     reqid = request.form['operationId']
-    hkDESIGNATION = request.form['hkDESIGNATION']
+
     session["supervi"] = supervi
     session['reqid'] = reqid
+
+
+
+
     session['hkDESIGNATION'] = hkDESIGNATION
     techer.append(supervi)
+    #   to filter out the student by the request requirements
+    std_dept = request.form['std_dept']
+    std_yr_lvl = request.form['std_yr_lvl']
 
-
+    qury.execute("SELECT `idnum`, `lname`, `fname`,`program_course`, `department`, `yrLvL` FROM `hk_users` WHERE `Status_avail` = 'av' AND `yrLvL`= '"+std_yr_lvl+"' AND `department` = '"+std_dept+"' ")
+    student_db_data = qury.fetchall()
     avil_std_list = []
     for k in student_db_data:
         avil_std_list.append(k)
+
+
 
 
     table_avil_std =[]
@@ -1384,6 +1392,9 @@ def DutyAssig_process():
                            ,coa = len(coa), coed = len(coed),cite = len(cite),
                             com = len(com),ccje = len(ccje),coe = len(coe),
                             cahs = len(cahs),come = len(come),complirate=str(complirate.__round__())+"%",number_of_stndt=len(number_of_stndt))
+
+
+
 
 @app.route("/Assigment_modal_process", methods =['POST'])
 def Assigment_modal_process():
@@ -2000,12 +2011,25 @@ def StudentTimeIN_Out():
     yr =current_date.year
     month = current_date.month
     date = current_date
+
+
+
+
+    #arduino id getter
+    ser = serial.Serial('COM3', 9600)
+
+
+
+
+    #arduino getter end
+
+
+
+
+
+
+
     #checker if the id number had sign in or not
-
-
-
-
-
     time_In_Out = request.form.get('login')
     stdId = request.form['idstndt']
     total_duty = 0
