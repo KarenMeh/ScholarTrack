@@ -899,13 +899,14 @@ th {
   color: #ffffff;
   font-size: 7px;
   background-color: #012970;
-  align-items: center;
-  margin-right: 30px;
-  align-self: center;
-  text-align: center;
+  padding: 20px;
+
   
  
  
+}
+table{
+  width: 50px;
 }
 
 .dashboard .recent-sales .table tbody td button {

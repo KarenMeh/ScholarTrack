@@ -240,7 +240,7 @@
         
 <br>
         <!-- Table with stripped rows -->
-        <table class="table table-striped ">
+        <table class="table table-striped-1 " width ="330px">
           <thead>
             <tr>
               <th scope="col">DESIGNATION</th>
@@ -251,8 +251,13 @@
               <th scope="col">DEPT</th>
                <th scope="col">REQID</th>
               <th scope="col"> SELECT </th>
-              <th scope="col">  </th>
-              <th scope="col">  </th>
+              <th scope="col"> </th>
+             <th scope="col"> </th>
+             <th scope="col"> </th>
+             <th scope="col"> </th>
+             
+            
+            
 
 
             </tr>
@@ -269,10 +274,11 @@
                  <td>{{row['REQST']}}        </td>
                  <td>{{row['DEPT']}}         </td>
                  <td>{{row['REQ ID']}}       </td>
+                 
                           
 
 
-                <td><button type="submit" name ="operations_Id_Selected" value="{{row['SUPERVISOR']}}" class="btn btn-success"  data-toggle="modal" data-target="#myModal"> select</button> </td>
+                <td><button type="submit" name ="operations_Id_Selected" value="{{row['SUPERVISOR']}}" class="btn btn-success"  data-toggle="modal" data-target="#myModal"> Select</button> </td>
                 <td><input type="hidden" name="operationId" value="{{row['REQ ID']}}" >       </td>
                 <td><input type="hidden" name="hkDESIGNATION" value="{{row['DESIGNATION']}}" ></td>
                 <td><input type="hidden" name="std_yr_lvl" value="{{row['REQ']}}" >             </td>
