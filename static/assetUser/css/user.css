@@ -392,6 +392,8 @@ h6 {
   position: relative;
 }
 
+
+
 .header-nav .nav-profile {
   color: #012970;
 }
@@ -947,7 +949,7 @@ th {
 
 .table tbody td {
   border: 10;
-  font-size: 15px;
+  font-size: 13px;
   text-align: center;
   padding: 10px;
   padding-top: 15px;
@@ -968,12 +970,12 @@ th {
 .table thead th {
   border: 10;
   color: #ffffff;
-  font-size: 10px;
+  font-size: 13px;
   background-color: #012970;
-  margin-left: 200px;
+ 
   align-items: center;
   text-align: center;
-  align-self: center;
+  padding: 18px;
   text-decoration: none;
 
 }
@@ -1038,8 +1040,21 @@ th {
 }
 
 .name {
-  font-size: 22px;
-  font-weight: bold
+  font-size: 18px;
+  font-weight: bold;
+  margin-top:  5px;
+  font-size: 20px;
+  margin-left: 100px;
+  
+
+}
+
+.con{
+  align-items: center;
+  text-align: center;
+  color: #012970;
+  
+
 }
 
 .idd {
@@ -1050,13 +1065,7 @@ th {
   
 }
 
-.conts .idd2 {
-  font-size: 14px;
-  font-weight: 600;
- margin-left: -150%;
- color: #012970;
- 
-}
+
 
 .tb{
   float: left;
@@ -1103,9 +1112,17 @@ th {
 .contsa .idd3 {
   font-size: 18px;
   font-weight: 600;
- text-align: center;
+ float: left;
+ margin-left: 100px;
  color: #012970;
+  margin-top: 20px;
+  padding-bottom: 0;
   
+}
+
+.about{
+  font-size: 10px;
+  color: #002b80;
 }
 
 .pass1 input{
@@ -1129,14 +1146,15 @@ th {
 
 
 .card .p-4{
-  margin-bottom: -30px;
-  margin-top: -20px;
-  border: 2px solid #002b80;
-}
-.idd1 {
-  font-size: 12px;
 
+  
+  border: 2px solid #002b80;
+  width: 500px;
+  align-items: center;
 }
+
+
+
 
 .number {
   font-size: 22px;
@@ -1158,6 +1176,14 @@ th {
   font-size: 15px
 }
 
+.btn {
+margin-left: 50px;
+margin-bottom: -20px;
+align-items: center;
+text-align: center;
+
+}
+
 .text span {
   font-size: 13px;
   color: #545454;
@@ -1168,9 +1194,47 @@ th {
   font-size: 19px
 }
 
+
+
+.pitch {
+  border-color:solid 2px #012970 ;
+  margin-bottom: 10px;
+  border-radius: 25px;
+ 
+}
+
+
 hr .new1 {
   border: 1px solid
 }
+
+.con2{
+  margin-top: -20px;
+  border-color: 2px #000;
+}
+
+.inputs{
+ 
+
+  color: #000;
+  margin-left: 80px;
+  float: right;
+  align-items: center;
+  text-align: center;
+
+}
+
+
+.idd2{
+   
+   float: left;
+   padding-left: -30px;
+   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+   color: #002b80;
+   line-height: 20px; 
+ 
+  
+ }
 
 .join {
   font-size: 14px;

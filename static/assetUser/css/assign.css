@@ -86,6 +86,16 @@ h6 {
   opacity: 1;
 }
 
+.search-form{
+  background-color: #ffffff;
+  color: rgb(19, 14, 120);
+  width: 160px;
+  border-radius: 4px;
+  float: left;
+  margin-bottom: 16px;
+}
+
+
 /*--------------------------------------------------------------
     # Override some default Bootstrap stylings
     --------------------------------------------------------------*/

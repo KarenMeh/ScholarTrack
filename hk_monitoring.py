@@ -156,13 +156,10 @@ def logOutAmin():
     session.pop("Duty_record_table", None)
     session.pop("student_Id_num", None)
     session.pop("userIdAdmin", None)
-<<<<<<< HEAD
+
     return '<script>;window.location="/"</script>'
-=======
 
 
-    return '<script>alert("Log Out");window.location="/"</script>'
->>>>>>> 0a802f96735666cb35b4f65a2e05f9a568649e3a
 
 
 #------------------------------------log out----------------------------------------------
@@ -411,6 +408,14 @@ def request_Scholar():
 
     except Exception:
         return redirect(url_for("signInPAge"))
+
+
+@app.route("/print_cert", methods =['POST'])
+def print_cert():
+
+    return render_template("dashboard operations/requestmanage.html")
+
+    #this is for requesting a hk studen
 @app.route("/Modal_request_process", methods=['POST'])
 def Modal_request_process():
 
@@ -486,6 +491,48 @@ def Modal_request_process():
 
 
 #-----------------------------end of operations requesr--------------------------------------------------
+
+
+#------------------feed back form----------------------
+
+@app.route("/feedback")
+def feedback():
+    listahan = []
+    try:
+
+        qury.execute(
+            "SELECT `hk_ID`FROM `hk_assignd_teaecher` WHERE `operatikon_ID` = '" + str(session["lname"]) + " " + str(
+                session["fname"]) + "'")
+        mYStudent_Db_Id = qury.fetchall()
+
+        for k in mYStudent_Db_Id:
+            qury.execute(
+                "SELECT `idnum`,`lname`, `fname`, `id_totalHours`,  `remaningDuty`, `remDutyMins`,`statsForRenewal` FROM `hk_users` WHERE `idnum`= '" +
+                k[0] + "'")
+            listahan.append(qury.fetchall()[0])
+
+        student_underMe = []
+        for k in range(len(listahan)):
+            tables = {"STUDENT ID": listahan[k][0], "SCHOLAR NAME": listahan[k][1] + " " + listahan[k][2],
+                      "COMPLETED HOURS": str(listahan[k][3]) + "m",
+                      "REMAINING HOURS": listahan[k][4] + "h " + str(float(listahan[k][5]).__round__()).split(".")[
+                          0] + "m", "STATUS": listahan[k][6]}
+            student_underMe.append(tables)
+        # select profile pic
+        qury.execute("SELECT `profilePics` FROM `operations_data` WHERE `Faculty_Id_Number`= '" + session["user"] + "'")
+        profilepicDb = qury.fetchall()[0][0]
+
+        return render_template("dashboard operations/feedback.html", logUser=session['username'],
+                               student_underMe=student_underMe, profilepicDb=profilepicDb)
+
+    except Exception:
+        return redirect(url_for("signInPAge"))
+
+
+#------------------end of feddback --------------------
+
+
+
 
 
 #-------------------------------------profile------------------------------------------
