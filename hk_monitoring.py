@@ -1,11 +1,18 @@
 import os
-import serial
+
+import bcrypt
 import pandas as pd
+import datetime
 from flask import Flask, render_template, request, redirect, url_for, session, send_file, jsonify
 from flaskext.mysql import MySQL
-import datetime
+from cryptography.fernet import Fernet
 from werkzeug.exceptions import RequestEntityTooLarge
 from werkzeug.utils import secure_filename
+# Generate a key
+key = Fernet.generate_key()
+# Create a Fernet symmetric key
+cipher_suite = Fernet(key)
+
 
 app = Flask(__name__)
 app.secret_key = "i love you cute"
@@ -109,15 +116,18 @@ faculty_psw = []
 for k in Faculty_PassWord:
     faculty_psw.append(k[0])
 
-
+print(faculty_psw)
 #faculty credintials
 faculty_credintials =[]
 faculty_counter = 0
+
 
 for k in faculty_id:
     compress = (k+" "+faculty_psw[faculty_counter])
     faculty_credintials.append(compress)
     faculty_counter+=1
+
+print(faculty_credintials)
 
 
 
@@ -142,6 +152,9 @@ list_of_sign_in = []
 #stroage for time in Time to use in formulation
 timeInList =[]
 # stroage for time in Time to use in formulation
+
+
+
 
 #----------------------main code------------------------------
 
@@ -229,35 +242,40 @@ def reg_render():
     return render_template('register.html')
 @app.route("/reg", methods=["POST"])
 def indexprocess():
-    try:
+    # try:
 
-        gmail = request.form["email"]
-        password = request.form["psw"]
-        repPaswrd = request.form['reppsw']
-        idnum = request.form['idnum']
-        fname = request.form['fname']
-        lname = request.form['lname']
-        mname = request.form['Mname']
-        phone = request.form['phone']
-        Position = request.form['Position']
-        dept = request.form.get('dept')
+    gmail = request.form["email"]
+    password = request.form["psw"]
+    repPaswrd = request.form['reppsw']
+    idnum = request.form['idnum']
+    fname = request.form['fname']
+    lname = request.form['lname']
+    mname = request.form['Mname']
+    phone = request.form['phone']
+    Position = request.form['Position']
+    dept = request.form.get('dept')
 
 
 
-        if password == repPaswrd:
+    if password == repPaswrd:
 
-            faculty_credintials.append(idnum+" "+password)
-            qury.execute("INSERT INTO `opertaion_req_acc`(`Faculty_Lname`, `Faculty_Fname`, `Faculty_Password`, `Faculty_Id_Number`, `Operation_Dept`, `Operations_Mname`, `Operation_phone_Number`, `Operation_Designation-Position`, `Operations_Email`) VALUES ('"+str(lname)+"','"+str(fname)+"','"+str(password)+"','"+str(idnum)+"','"+str(dept)+"','"+str(mname)+"','"+str(phone)+"','"+str(Position)+"','"+str(gmail)+"')")
-            conn.commit()
+        encrypted_pass =  bcrypt.hashpw(str(password).encode(), bcrypt.gensalt())
+        print(encrypted_pass)
 
-            return '<script>alert("Registered Complete");window.location="/register"</script>'
-        else:
-            return '<script>alert("Password not match");window.location="/register"</script>'
 
-    except:
 
-        return '<script>alert("ID number already used");window.location="/register"</script>'
+        qury.execute("INSERT INTO `opertaion_req_acc`(`Faculty_Lname`, `Faculty_Fname`, `Faculty_Password`, `Faculty_Id_Number`, `Operation_Dept`, `Operations_Mname`, `Operation_phone_Number`, `Operation_Designation-Position`, `Operations_Email`) VALUES ('"+str(lname)+"','"+str(fname)+"','"+str(encrypted_pass.decode())+"','"+str(idnum)+"','"+str(dept)+"','"+str(mname)+"','"+str(phone)+"','"+str(Position)+"','"+str(gmail)+"')")
+        conn.commit()
 
+
+        return '<script>alert("Registered Complete");window.location="/register"</script>'
+    else:
+        return '<script>alert("Password not match");window.location="/register"</script>'
+    #
+    # except:
+    #
+    #     return '<script>alert("ID number already used");window.location="/register"</script>'
+    #
 
 #---------------------------------/Sign in-----------------------------------------------------
 
@@ -273,53 +291,64 @@ def signInprocess():
 
     idNum = request.form['email']
     password = request.form['psw']
-    logindata = idNum+" "+password
+
     session["user"]=idNum
+    qury.execute("SELECT `Faculty_Password` FROM `operations_data` WHERE  `Faculty_Id_Number` = '"+idNum+"'")
+    from_db_pass = qury.fetchall()
+    print(from_db_pass[0][0])
 
-    if logindata in faculty_credintials:
+    if bcrypt.checkpw(password.encode(), from_db_pass[0][0].encode()):
+        password = str(from_db_pass[0][0])
+        logindata = idNum + " " + password
 
+        print(logindata)
 
-
-        # faculty usr namea
-        qury.execute("SELECT `Faculty_Fname` FROM `operations_data` WHERE `Faculty_Id_Number` = '"+idNum+"'")
-        fname = qury.fetchall()[0][0]
-
-        qury.execute("SELECT `Faculty_Lname` FROM `operations_data` WHERE `Faculty_Id_Number` = '"+idNum+"'")
-        lname = qury.fetchall()[0][0]
-
-        qury.execute("SELECT `Faculty_Id_Number` FROM `operations_data` WHERE `Faculty_Id_Number`= '"+idNum+"'")
-        opration_Id = qury.fetchall()[0][0]
+        if logindata in faculty_credintials:
 
 
-        session["fname"] = fname
-        session["lname"] = lname
 
-        username = (fname+" "+lname).upper()
-        session['username']=username
-        session["opration_Id"] = opration_Id
-        qury.execute("UPDATE `operations_data` SET `status_ol`='ACTIVE' WHERE `Faculty_Id_Number` = '" + session[
-            'opration_Id'] + "'")
-        conn.commit()
-        qury.execute("UPDATE `operations_data` SET `color_status`='success' WHERE `Faculty_Id_Number` = '" + session[
-            'opration_Id'] + "'")
-        conn.commit()
-#---------- this is for recording all activities of the user-----------------
+            # faculty usr namea
+            qury.execute("SELECT `Faculty_Fname` FROM `operations_data` WHERE `Faculty_Id_Number` = '"+idNum+"'")
+            fname = qury.fetchall()[0][0]
 
-        x = datetime.datetime.now()
+            qury.execute("SELECT `Faculty_Lname` FROM `operations_data` WHERE `Faculty_Id_Number` = '"+idNum+"'")
+            lname = qury.fetchall()[0][0]
 
-        qury.execute("SELECT `Faculty_Lname`, `Faculty_Fname`, `Faculty_Id_Number`, `Operation_Dept` FROM `operations_data` WHERE `Faculty_Id_Number` = '"+ session['opration_Id']+"'")
-        operation_data = qury.fetchall()
+            qury.execute("SELECT `Faculty_Id_Number` FROM `operations_data` WHERE `Faculty_Id_Number`= '"+idNum+"'")
+            opration_Id = qury.fetchall()[0][0]
 
-        fullname = str(operation_data[0][0])+" "+str(operation_data[0][1])
 
-        qury.execute("INSERT INTO `active_logs`(`date_time`, `user_id`, `uname`, `dept`, `act_perm`)"
-                     " VALUES ('"+str(x).split(".")[0]+"','"+str(operation_data[0][2])+"','"+str(fullname)+"','"+str(operation_data[0][3])+"','Just log in to the system')")
-        conn.commit()
+            session["fname"] = fname
+            session["lname"] = lname
 
-        return '<script>;window.location="/Dash board"</script>'
+            username = (fname+" "+lname).upper()
+            session['username']=username
+            session["opration_Id"] = opration_Id
+            qury.execute("UPDATE `operations_data` SET `status_ol`='ACTIVE' WHERE `Faculty_Id_Number` = '" + session[
+                'opration_Id'] + "'")
+            conn.commit()
+            qury.execute("UPDATE `operations_data` SET `color_status`='success' WHERE `Faculty_Id_Number` = '" + session[
+                'opration_Id'] + "'")
+            conn.commit()
+    #---------- this is for recording all activities of the user-----------------
 
+            x = datetime.datetime.now()
+
+            qury.execute("SELECT `Faculty_Lname`, `Faculty_Fname`, `Faculty_Id_Number`, `Operation_Dept` FROM `operations_data` WHERE `Faculty_Id_Number` = '"+ session['opration_Id']+"'")
+            operation_data = qury.fetchall()
+
+            fullname = str(operation_data[0][0])+" "+str(operation_data[0][1])
+
+            qury.execute("INSERT INTO `active_logs`(`date_time`, `user_id`, `uname`, `dept`, `act_perm`)"
+                         " VALUES ('"+str(x).split(".")[0]+"','"+str(operation_data[0][2])+"','"+str(fullname)+"','"+str(operation_data[0][3])+"','Just log in to the system')")
+            conn.commit()
+
+            return '<script>;window.location="/Dash board"</script>'
+
+        else:
+
+            return '<script>alert("Wrong password or Email");window.location="/Sign in"</script>'
     else:
-       
         return '<script>alert("Wrong password or Email");window.location="/Sign in"</script>'
 
 
@@ -695,15 +724,17 @@ def change_password_operations():
 
     qury.execute("SELECT `Faculty_Password` FROM `operations_data` WHERE `Faculty_Id_Number` = '"+session["opration_Id"]+"'")
     old_password_db = qury.fetchall()[0][0]
-    if old_password == old_password_db:
-        if new_password == re_enter_password:
-            qury.execute("UPDATE `operations_data` SET `Faculty_Password`='"+str(new_password)+"' WHERE `Faculty_Id_Number` = '"+session["opration_Id"]+"' ")
+    print(old_password_db)
+    if bcrypt.checkpw(old_password.encode(), str(old_password_db).encode()):
+        if str(new_password) == str(re_enter_password):
+            hashed_password_new = bcrypt.hashpw(new_password.encode(), bcrypt.gensalt())
+            qury.execute("UPDATE `operations_data` SET `Faculty_Password`='"+str(hashed_password_new.decode())+"' WHERE `Faculty_Id_Number` = '"+session["opration_Id"]+"' ")
             conn.commit()
 
             # -----------------operations Datas-------------------------------------------
 
-            faculty_credintials.insert(faculty_credintials.index(session["opration_Id"]+" "+old_password),session["opration_Id"]+" "+new_password)
-            faculty_credintials.remove(str(session["opration_Id"]+" "+old_password))
+            faculty_credintials.insert(faculty_credintials.index(str(session["opration_Id"])+" "+old_password_db) ,session["opration_Id"]+" "+hashed_password_new.decode())
+            faculty_credintials.remove(str(session["opration_Id"]+" "+old_password_db))
 
             # ---------- this is for recording all activities of the user-----------------
 
@@ -1035,8 +1066,9 @@ def compliance_Hk_25():
             dataProcess = {"STUDENT ID": student_info_25[counter_Table1][0], "SCHOLAR NAME": std_fullNmae,
                            "COMPLETED HOURS": student_info_25[counter_Table1][5] + "m",
                            "REMAINING HOURS": student_info_25[counter_Table1][13] + "h " +
-                                              str(float(student_info_25[counter_Table1][14]).__round__()).split(".")[0] + "m",
-                           "STATUS": student_info_25[counter_Table1][15]}
+                                              str(float(student_info_25[counter_Table1][14]).__round__()).split(".")[
+                                                  0] + "m",
+                           "STATUS": student_info_25[counter_Table1][15], "color": student_info_25[counter_Table1][19]}
             table_OfStudent_Info_25.append(dataProcess)
             counter_Table1 += 1
 
@@ -1070,8 +1102,9 @@ def compliance_Hk_50():
             dataProcess = {"STUDENT ID": student_info_50[counter_Table1][0], "SCHOLAR NAME": std_fullNmae,
                            "COMPLETED HOURS": student_info_50[counter_Table1][5] + "m",
                            "REMAINING HOURS": student_info_50[counter_Table1][13] + "h " +
-                                              str(float(student_info_50[counter_Table1][14]).__round__()).split(".")[0] + "m",
-                           "STATUS": student_info_50[counter_Table1][15]}
+                                              str(float(student_info_50[counter_Table1][14]).__round__()).split(".")[
+                                                  0] + "m",
+                           "STATUS": student_info_50[counter_Table1][15], "color": student_info_50[counter_Table1][19]}
             table_OfStudent_Info_50.append(dataProcess)
             counter_Table1 += 1
 
@@ -1104,8 +1137,9 @@ def compliance_Hk_75():
             dataProcess = {"STUDENT ID": student_info_75[counter_Table1][0], "SCHOLAR NAME": std_fullNmae,
                            "COMPLETED HOURS": student_info_75[counter_Table1][5] + "m",
                            "REMAINING HOURS": student_info_75[counter_Table1][13] + "h " +
-                                              str(float(student_info_75[counter_Table1][14]).__round__()).split(".")[0] + "m",
-                           "STATUS": student_info_75[counter_Table1][15]}
+                                              str(float(student_info_75[counter_Table1][14]).__round__()).split(".")[
+                                                  0] + "m",
+                           "STATUS": student_info_75[counter_Table1][15], "color": student_info_75[counter_Table1][19]}
             table_OfStudent_Info_75.append(dataProcess)
             counter_Table1 += 1
 
@@ -1138,8 +1172,9 @@ def compliance_Hk_100():
             dataProcess = {"STUDENT ID": student_info_100[counter_Table1][0], "SCHOLAR NAME": std_fullNmae,
                            "COMPLETED HOURS": student_info_100[counter_Table1][5] + "m",
                            "REMAINING HOURS": student_info_100[counter_Table1][13] + "h " +
-                                              str(float(student_info_100[counter_Table1][14]).__round__()).split(".")[0] + "m",
-                           "STATUS": student_info_100[counter_Table1][15]}
+                                              str(float(student_info_100[counter_Table1][14]).__round__()).split(".")[
+                                                  0] + "m",
+                           "STATUS": student_info_100[counter_Table1][15], "color": student_info_100[counter_Table1][19]}
             table_OfStudent_Info_100.append(dataProcess)
             counter_Table1 += 1
 
@@ -1712,7 +1747,16 @@ def request_modal_Process_User_Management():
         conn.commit()
     else:
 
+
+
         register_Id = str(conbtn).split(">>")[1]
+#       this line of code is if the admin approve the user can log in
+        qury.execute("SELECT `Faculty_Password` FROM `opertaion_req_acc` WHERE  `Faculty_Id_Number`= '"+register_Id+"'")
+        req_Pass = qury.fetchall()[0][0]
+        new_data_cred = str(register_Id) + " " + str(req_Pass)
+        faculty_credintials.append(new_data_cred)
+
+
         qury.execute("SELECT * FROM `opertaion_req_acc` WHERE `Faculty_Id_Number` = '"+register_Id+"'")
         data_to_Aprove = qury.fetchall()
 
@@ -1733,6 +1777,9 @@ def request_modal_Process_User_Management():
         conn.commit()
 
 
+
+
+
     return redirect(url_for('UserManagement'))
 
 
@@ -1749,13 +1796,16 @@ def modal_add_user():
     psw = request.form['psw']
 
     #to add the new user to the list so it can sign up
-    add_user_data = str(empid)+" "+str(psw)
-    credintials.append(add_user_data)
+
+    hashed_password = bcrypt.hashpw(psw.encode(), bcrypt.gensalt())# to encrypt password
+    add_user_data = str(empid)+" "+str(hashed_password.decode())
+    print(add_user_data)
+    faculty_credintials.append(add_user_data)
 
 
     qury.execute(
         "INSERT INTO `operations_data`(`Faculty_Lname`, `Faculty_Fname`, `Faculty_Password`, `Faculty_Id_Number`, `Operation_Dept`, `Operations_Mname`, `Operation_phone_Number`, `Operation_Designation-Position`, `Operations_Email`) VALUES "
-        "('" + str(lname) + "','" + str(fname) + "','" + str(psw) + "','" + str(empid) + "','" + str(dept) + "','" + str(mname) + "','" + str(phone) + "','" + str(Designation) + "','" + str(email) + "')")
+        "('" + str(lname) + "','" + str(fname) + "','" + str(hashed_password.decode()) + "','" + str(empid) + "','" + str(dept) + "','" + str(mname) + "','" + str(phone) + "','" + str(Designation) + "','" + str(email) + "')")
     conn.commit()
 
     qury.execute(
@@ -1902,14 +1952,14 @@ def Systemhealth():
             tables= {"Date and Time":k[1],"ID":k[2],"USER":k[3],"DEPT":k[4],"ACT PERM":k[5]}
             activity_log_table.append(tables)
 
-        activity_log_tabl_rev = []
-        for k in activity_log_table[::-1]:
-            activity_log_tabl_rev.append(k)
+        # activity_log_tabl_rev = []
+        # for k in activity_log_table[::-1]:
+        #     activity_log_tabl_rev.append(k)
 
 
 
 
-        return render_template("dashboard admin/Systemhealth.html",logUser=session["adminUser"],profilepicDb=profilepicDb, activity_log_table=activity_log_tabl_rev)
+        return render_template("dashboard admin/Systemhealth.html",logUser=session["adminUser"],profilepicDb=profilepicDb, activity_log_table=activity_log_table)
     except Exception:
         return redirect(url_for("admin"))
 @app.route("/Feedback and Improvements")
@@ -1944,86 +1994,92 @@ def student_records():
 
 @app.route("/student_rec_process", methods=['POST'])
 def student_rec_process():
-    if request.form.get('select') == 'select':
 
-        student_Id = request.form.get("Selected_Id")
+    try:
 
-        qury.execute("SELECT * FROM `hk_users` WHERE `idnum` = '" + str(student_Id) + "'")
-        hkdetails = qury.fetchall()  # len of 17
+        if request.form.get('select') == 'select':
 
-        # details to show in profile of the student searched
-        idnum= hkdetails[0][0]  # idnum
-        Lname= hkdetails[0][2]  # Lname
-        Fname= hkdetails[0][3]  # Fname
-        totalDuty= hkdetails[0][5]  # totalDuty
-        course_Program= hkdetails[0][6]  # course_Program
-        department = hkdetails[0][7]  # department
-        yearLvl= hkdetails[0][8]  # yearLvl
-        scholarship= hkdetails[0][9]  # scholarship
-        DUTY_DESIGNATION = hkdetails[0][10]  # DUTY_DESIGNATION
-        DUTY_SUPERVISOR = hkdetails[0][11]  # DUTY_SUPERVISOR
-        reqiredDuty = hkdetails[0][12]  # reqiredDuty
-        remaningDuty = hkdetails[0][13]  # remaningDuty
-        remDutyMin = str(float(hkdetails[0][14]).__round__()).split(".")# remDutyMin
-        statsuForRenewal = hkdetails[0][15]  # statsuForRenewal
-        Schoolyr = hkdetails[0][16]  # Schoolyr
-        semister = hkdetails[0][17]  # semister
+            student_Id = request.form.get("Selected_Id")
+
+            qury.execute("SELECT * FROM `hk_users` WHERE `idnum` = '" + str(student_Id) + "'")
+            hkdetails = qury.fetchall()  # len of 17
+
+            # details to show in profile of the student searched
+            idnum= hkdetails[0][0]  # idnum
+            Lname= hkdetails[0][2]  # Lname
+            Fname= hkdetails[0][3]  # Fname
+            totalDuty= hkdetails[0][5]  # totalDuty
+            course_Program= hkdetails[0][6]  # course_Program
+            department = hkdetails[0][7]  # department
+            yearLvl= hkdetails[0][8]  # yearLvl
+            scholarship= hkdetails[0][9]  # scholarship
+            DUTY_DESIGNATION = hkdetails[0][10]  # DUTY_DESIGNATION
+            DUTY_SUPERVISOR = hkdetails[0][11]  # DUTY_SUPERVISOR
+            reqiredDuty = hkdetails[0][12]  # reqiredDuty
+            remaningDuty = hkdetails[0][13]  # remaningDuty
+            remDutyMin = str(float(hkdetails[0][14]).__round__()).split(".")# remDutyMin
+            statsuForRenewal = hkdetails[0][15]  # statsuForRenewal
+            Schoolyr = hkdetails[0][16]  # Schoolyr
+            semister = hkdetails[0][17]  # semister
 
 
-        qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
-        profilepicDb = qury.fetchall()[0][0]
+            qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
+            profilepicDb = qury.fetchall()[0][0]
 
 
-    return render_template("dashboard admin/ScholarRecordAdmin.html",profilepicDb=profilepicDb,idnum=idnum,Lname=Lname,Fname=Fname,totalDuty=totalDuty,
-        course_Program=course_Program,department=department,yearLvl=yearLvl,scholarship=scholarship,
-        DUTY_DESIGNATION=DUTY_DESIGNATION,DUTY_SUPERVISOR=DUTY_SUPERVISOR,reqiredDuty=reqiredDuty,
-        remaningDuty=remaningDuty,statsuForRenewal=statsuForRenewal,Schoolyr=Schoolyr,semister=semister, remDutyMin = remDutyMin[0])
-
+        return render_template("dashboard admin/ScholarRecordAdmin.html",profilepicDb=profilepicDb,idnum=idnum,Lname=Lname,Fname=Fname,totalDuty=totalDuty,
+            course_Program=course_Program,department=department,yearLvl=yearLvl,scholarship=scholarship,
+            DUTY_DESIGNATION=DUTY_DESIGNATION,DUTY_SUPERVISOR=DUTY_SUPERVISOR,reqiredDuty=reqiredDuty,
+            remaningDuty=remaningDuty,statsuForRenewal=statsuForRenewal,Schoolyr=Schoolyr,semister=semister, remDutyMin = remDutyMin[0])
+    except Exception:
+        return redirect(url_for('compliance'))
 
 #-------------------------END OF ADMIN SIDE BARS------------------
 @app.route("/Duty_Records", methods=['POST'])
 def Duty_Records():
-    DUTY_Id_Num = request.form.get('Duty_Id')
-    session["student_Id_num"]=DUTY_Id_Num
+    try:
+        DUTY_Id_Num = request.form.get('Duty_Id')
+        session["student_Id_num"]=DUTY_Id_Num
 
-    qury.execute("SELECT * FROM `scholar_duty_records` WHERE `Student_id_Number` = '"+DUTY_Id_Num+"'")
-    rec_list_Db = qury.fetchall()
-
-
-    rec_list = []
-    for k in rec_list_Db:
-        rec_list.append(k)
-    record_table = []
+        qury.execute("SELECT * FROM `scholar_duty_records` WHERE `Student_id_Number` = '"+DUTY_Id_Num+"'")
+        rec_list_Db = qury.fetchall()
 
 
-    session["Duty_record_table"] = record_table
-    time_in = ""
-#----- solve the renderd duty hours in minutes format-----------
-    total_duty = 0
-    for k in range (len(rec_list)):
-
-        if rec_list[k][5]=="IN":
-            inh = rec_list[k][1]
-            inm = rec_list[k][2]
-            time_in =  f"{rec_list[k][1]:}:{rec_list[k][2]:02d}"
-
-        elif rec_list[k][5] == "OUT":
-            time_out = f"{rec_list[k][1]:}:{rec_list[k][2]:02d}"
-            durationoH = int(rec_list[k][1]) - int(inh)
-            durationm = int(rec_list[k][2]) - int(inm)
-            HourTo_min = durationoH * 60
-            totalduty_mins = HourTo_min + durationm
-            duration = f"{durationoH:}h {durationm:02d}m"
-            total_duty += totalduty_mins
-            rec_process = {"DATE": rec_list[k][0], "CHECK-IN TIME": time_in, "CHECK-OUT TIME": time_out, "DURATION": duration}
-            record_table.append(rec_process)
-
-            qury.execute("UPDATE `hk_users` SET `id_totalHours`='"+str(total_duty)+"' WHERE `idnum` = '" + DUTY_Id_Num + "' ")
-            conn.commit()
+        rec_list = []
+        for k in rec_list_Db:
+            rec_list.append(k)
+        record_table = []
 
 
-    return render_template("dashboard admin/dutyrecords.html", DUTY_Id_Num =DUTY_Id_Num, record_table= record_table)
+        session["Duty_record_table"] = record_table
+        time_in = ""
+    #----- solve the renderd duty hours in minutes format-----------
+        total_duty = 0
+        for k in range (len(rec_list)):
 
+            if rec_list[k][5]=="IN":
+                inh = rec_list[k][1]
+                inm = rec_list[k][2]
+                time_in =  f"{rec_list[k][1]:}:{rec_list[k][2]:02d}"
+
+            elif rec_list[k][5] == "OUT":
+                time_out = f"{rec_list[k][1]:}:{rec_list[k][2]:02d}"
+                durationoH = int(rec_list[k][1]) - int(inh)
+                durationm = int(rec_list[k][2]) - int(inm)
+                HourTo_min = durationoH * 60
+                totalduty_mins = HourTo_min + durationm
+                duration = f"{durationoH:}h {durationm:02d}m"
+                total_duty += totalduty_mins
+                rec_process = {"DATE": rec_list[k][0], "CHECK-IN TIME": time_in, "CHECK-OUT TIME": time_out, "DURATION": duration}
+                record_table.append(rec_process)
+
+                qury.execute("UPDATE `hk_users` SET `id_totalHours`='"+str(total_duty)+"' WHERE `idnum` = '" + DUTY_Id_Num + "' ")
+                conn.commit()
+
+
+        return render_template("dashboard admin/dutyrecords.html", DUTY_Id_Num =DUTY_Id_Num, record_table= record_table)
+    except Exception:
+        return redirect(url_for('compliance'))
 
 
 
@@ -2050,19 +2106,6 @@ def StudentTimeIN_Out():
     yr =current_date.year
     month = current_date.month
     date = current_date
-
-
-
-
-    #arduino id getter
-    ser = serial.Serial('COM3', 9600)
-
-
-
-
-    #arduino getter end
-
-
 
 
 
