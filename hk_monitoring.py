@@ -626,13 +626,40 @@ def feedback():
         qury.execute("SELECT `profilePics` FROM `operations_data` WHERE `Faculty_Id_Number`= '" + session["user"] + "'")
         profilepicDb = qury.fetchall()[0][0]
 
-        return render_template("dashboard operations/feedback.html", logUser=session['username'],profilepicDb=profilepicDb)
+        qury.execute("SELECT  `hk_ID` FROM `hk_assignd_teaecher` WHERE `operatikon_ID` ='"+str(session["lname"])+" "+str(session["fname"])+"'")
+        student_underme_Id = qury.fetchall()
+
+        activitys_all_hk_under_me = []
+        for k in student_underme_Id:
+            print(k[0])
+            qury.execute("SELECT * FROM `hk_user_activelogs` WHERE `hk_id` = '"+k[0]+"'")
+            activitys = qury.fetchall()
+            activitys_all_hk_under_me.append(activitys)
+
+        activitys_all_hk_under_me_toshow = []
+        counter = 0
+        #`date_time`, `hk_id`, `hk_name`, `dept`, `act_perm`
+        print(activitys_all_hk_under_me)
+        for k in activitys_all_hk_under_me:
+            for m in k:
+                table = {"Date and Time":m[1],"ID":m[2],"USER":m[3],"DEPT":m[4],"ACT PERM":m[5]}
+                activitys_all_hk_under_me_toshow.append(table)
+
+        return render_template("dashboard operations/feedback.html", logUser=session['username'],profilepicDb=profilepicDb,activitys_all_hk_under_me_toshow=activitys_all_hk_under_me_toshow)
     except Exception:
         return redirect(url_for("signInPAge"))
 
 @app.route("/feed_back", methods = ['POST'])
 def feed_back():
+    qury.execute("SELECT `profilePics` FROM `operations_data` WHERE `Faculty_Id_Number`= '" + session["user"] + "'")
+    profilepicDb = qury.fetchall()[0][0]
+
+    datez = str(datetime.datetime.now()).split(":")[0]+":"+str(datetime.datetime.now()).split(":")[1]
     feedbackMess = request.form['feedbackMess']
+    feedbacker_Name = session['username']
+
+    qury.execute("INSERT INTO `operation_feedback`(`feedMess`, `feed_name`, `feed_date`, `feed_pic`) VALUES ('"+feedbackMess+"','"+feedbacker_Name+"','"+datez+"','"+profilepicDb+"') ")
+    conn.commit()
 
     return redirect(url_for('feedback'))
 
@@ -2009,14 +2036,17 @@ def Systemhealth():
             tables= {"Date and Time":k[1],"ID":k[2],"USER":k[3],"DEPT":k[4],"ACT PERM":k[5]}
             activity_log_table.append(tables)
 
-        # activity_log_tabl_rev = []
-        # for k in activity_log_table[::-1]:
-        #     activity_log_tabl_rev.append(k)
+        qury.execute("SELECT * FROM `operation_feedback`")
+        feeds = qury.fetchall()
 
 
 
 
-        return render_template("dashboard admin/Systemhealth.html",logUser=session["adminUser"],profilepicDb=profilepicDb, activity_log_table=activity_log_table)
+
+
+
+
+        return render_template("dashboard admin/Systemhealth.html",logUser=session["adminUser"],profilepicDb=profilepicDb, activity_log_table=activity_log_table,feeds=feeds)
     except Exception:
         return redirect(url_for("admin"))
 @app.route("/Feedback and Improvements")
@@ -2173,8 +2203,23 @@ def StudentTimeIN_Out():
     stdId = request.form['idstndt']
     total_duty = 0
 
+
+    #data need for activity logs
+    datez = str(datetime.datetime.now()).split(":")[0] + ":" + str(datetime.datetime.now()).split(":")[1]
+    qury.execute("SELECT * FROM `hk_users` WHERE `idnum` = '" + stdId + "'")
+    hkdetails = qury.fetchall()  # len of 17
+    Lname = hkdetails[0][2]  # Lname
+    Fname = hkdetails[0][3]  # Fname
+    fullname = str(Fname)+" "+str(Lname)
+    department = hkdetails[0][7]  # department
+
     try:
         if  time_In_Out == "IN":
+            #to record activity od hk
+            qury.execute("INSERT INTO `hk_user_activelogs`(`date_time`, `hk_id`, `hk_name`, `dept`, `act_perm`)"
+                         " VALUES ('"+str(datez)+"','"+str(stdId)+"','"+str(fullname)+"','"+str(department)+"','Sing in')")
+            conn.commit()
+
             # to check if the user already sign in and need to sign out
             if stdId in list_of_sign_in:
                 errormess = "You already Sign in"
@@ -2210,6 +2255,11 @@ def StudentTimeIN_Out():
 
 
         elif time_In_Out =="OUT":
+            # to record activity od hk
+            qury.execute("INSERT INTO `hk_user_activelogs`(`date_time`, `hk_id`, `hk_name`, `dept`, `act_perm`)"
+                         " VALUES ('" + str(datez) + "','" + str(stdId) + "','" + str(fullname) + "','" + str(
+                department) + "','Sing out')")
+            conn.commit()
             list_of_sign_in.remove(stdId)
 
             qury.execute("SELECT * FROM `scholar_duty_records` WHERE `Student_id_Number` = '" + stdId + "'")

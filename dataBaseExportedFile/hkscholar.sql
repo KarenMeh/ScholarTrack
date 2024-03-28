@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 28, 2024 at 04:26 PM
+-- Generation Time: Mar 28, 2024 at 06:26 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -122,7 +122,18 @@ INSERT INTO `active_logs` (`id`, `date_time`, `user_id`, `uname`, `dept`, `act_p
 (80, '2024-03-28 21:53:37', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
 (81, '2024-03-28 21:54:08', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log out to the system'),
 (82, '2024-03-28 22:46:42', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(83, '2024-03-28 23:20:45', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Requested an HK scholar');
+(83, '2024-03-28 23:20:45', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Requested an HK scholar'),
+(84, '2024-03-28 23:33:44', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log out to the system'),
+(85, '2024-03-28 23:33:53', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
+(86, '2024-03-29 00:46:14', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
+(87, '2024-03-29 01:08:36', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log out to the system'),
+(88, '2024-03-29 01:08:45', '04-2122-022772', 'Mariano Jemima', 'COA', 'Just log in to the system'),
+(89, '2024-03-29 01:08:53', '04-2122-022772', 'Mariano Jemima', 'COA', 'Just log out to the system'),
+(90, '2024-03-29 01:08:58', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
+(91, '2024-03-29 01:23:09', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log out to the system'),
+(92, '2024-03-29 01:24:41', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
+(93, '2024-03-29 01:24:44', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log out to the system'),
+(94, '2024-03-29 01:24:50', '04-2122-022772', 'Mariano Jemima', 'COA', 'Just log in to the system');
 
 -- --------------------------------------------------------
 
@@ -171,9 +182,7 @@ CREATE TABLE `hk_assignd_teaecher` (
 
 INSERT INTO `hk_assignd_teaecher` (`operatikon_ID`, `hk_ID`, `assigmentID`) VALUES
 ('Gaytano Karen May', '04-2122-031572', 54),
-('Gaytano Karen May', '04-2122-000001', 55),
-('Gaytano Karen May', '02-2387-700001', 56),
-('Gaytano Karen May', '04-2122-78627', 57);
+('Gaytano Karen May', '04-2122-000001', 55);
 
 -- --------------------------------------------------------
 
@@ -209,11 +218,11 @@ CREATE TABLE `hk_users` (
 --
 
 INSERT INTO `hk_users` (`idnum`, `email`, `lname`, `fname`, `password`, `id_totalHours`, `program_course`, `department`, `yrLvL`, `scholarship`, `dutyDesignation`, `dutySupervisor`, `reqiredDuty`, `remaningDuty`, `remDutyMins`, `statsForRenewal`, `SchoolYr`, `semister`, `Status_avail`, `status_color`) VALUES
-('02-2387-700001', 'carmilo@gmail.com', 'Flame', 'Carmelo', '', '0', 'Bachelor of Science in Marine Engineering', 'COME', '4', 'HK100', 'SF', 'Gaytano Karen May', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'Na', 'warning'),
+('02-2387-700001', 'carmilo@gmail.com', 'Flame', 'Carmelo', '', '0', 'Bachelor of Science in Marine Engineering', 'COME', '4', 'HK100', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2200-90001', 'Dionar@gmail.com', 'Antioquia', 'Dionard', '', '0', 'Bachelor of Science in Accountancy', 'COA', '4', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-000002', 'donna@gmail.com', 'Mallorca', 'Donna', '', '0', 'Bachelor of Science in Tourism Management', 'COM', '1', 'HK25', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
-('04-2122-000001', 'jasper@gmail.com', 'operio', 'jasper', '', '0', 'Bachelor of Science in Information Technology', 'CITE', '3', 'HK100', 'SF', 'Gaytano Karen May', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'Na', 'warning'),
-('04-2122-78627', 'Javelosa@gmail.com', 'Javelosa ', 'Wolf', '', '0', 'Bachelor of Science in Criminology', 'CCJE', '1', 'HK100', 'SF', 'Gaytano Karen May', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'Na', 'warning'),
+('04-2122-000001', 'jasper@gmail.com', 'operio', 'jasper', '', '0', 'Bachelor of Science in Information Technology', 'CITE', '3', 'HK100', 'SF', 'Gaytano Karen May', '180', '180', '0.0', 'pending', '2023-2024', 'FIRST SEMESTER', 'Na', 'warning'),
+('04-2122-78627', 'Javelosa@gmail.com', 'Javelosa ', 'Wolf', '', '0', 'Bachelor of Science in Criminology', 'CCJE', '1', 'HK100', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-91734', 'jimama@gmail.com', 'Mariano', 'Jemima', '', '0', 'Bachelor of Science in Pharmacy', 'CAHS', '1', 'HK100', '', '', '180', '180', '0', 'pending', '2023 - 2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2002-90021', 'justin@gmail.com', 'Susal', 'Justiene', '', '0', 'Bachelor of Science in Civil Engineering', 'COE', '2', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-035512', 'karenmay@gmail.com', 'Gaytano', 'Karen May', '', '0', 'Bachelor of Science in Information Technology', 'CITE', '4', 'HK75', '', '', '180', '180', '0', 'pending', '2023 - 2024', 'FIRST SEMESTER', 'av', 'warning'),
@@ -222,6 +231,35 @@ INSERT INTO `hk_users` (`idnum`, `email`, `lname`, `fname`, `password`, `id_tota
 ('04-1234-87237', 'Pechera@gamil.com', 'Pechera', 'Alessandra', '', '0', 'Bachelor of Science in Mechanical Engineering', 'COE', '1', 'HK25', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-031572', 'ream.mallorca.ui@phinmaed.com', 'Mallorca', 'Reuben', '', '1', 'Bachelor of Science in Information Technology', 'CITE', '1', 'HK75', 'AF', 'Gaytano Karen May', '180', '0', '0.0', 'Complete', '2023 - 2024', 'FIRST SEMESTER', 'Na', 'success'),
 ('04-2122-000003', 'ryan@gmail.com', 'Mallorca', 'Ryan', '', '0', 'Bachelor of Secondary Education', 'COED', '4', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hk_user_activelogs`
+--
+
+CREATE TABLE `hk_user_activelogs` (
+  `id` int(11) NOT NULL,
+  `date_time` varchar(255) NOT NULL,
+  `hk_id` varchar(255) NOT NULL,
+  `hk_name` varchar(255) NOT NULL,
+  `dept` varchar(255) NOT NULL,
+  `act_perm` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `hk_user_activelogs`
+--
+
+INSERT INTO `hk_user_activelogs` (`id`, `date_time`, `hk_id`, `hk_name`, `dept`, `act_perm`) VALUES
+(5, '2024-03-29 00:24', '04-2122-031572', 'Reuben Mallorca', 'CITE', 'Sing in'),
+(6, '2024-03-29 00:24', '04-2122-031572', 'Reuben Mallorca', 'CITE', 'Sing out'),
+(7, '2024-03-29 00:24', '04-2122-031572', 'Reuben Mallorca', 'CITE', 'Sing in'),
+(8, '2024-03-29 00:24', '04-2122-031572', 'Reuben Mallorca', 'CITE', 'Sing out'),
+(9, '2024-03-29 00:47', '04-2122-000001', 'jasper operio', 'CITE', 'Sing in'),
+(10, '2024-03-29 00:47', '04-2122-000001', 'jasper operio', 'CITE', 'Sing out'),
+(11, '2024-03-29 00:48', '04-2122-000001', 'jasper operio', 'CITE', 'Sing in'),
+(12, '2024-03-29 00:48', '04-2122-000001', 'jasper operio', 'CITE', 'Sing out');
 
 -- --------------------------------------------------------
 
@@ -255,9 +293,31 @@ CREATE TABLE `operations_data` (
 --
 
 INSERT INTO `operations_data` (`Faculty_Lname`, `Faculty_Fname`, `Faculty_Password`, `Faculty_Id_Number`, `Operation_Dept`, `Operations_Mname`, `Operation_phone_Number`, `Operation_Designation-Position`, `Operations_Email`, `profilePics`, `operations_about`, `twitter`, `facebook`, `instagram`, `linkedin`, `Address`, `status_ol`, `color_status`) VALUES
-('Gaytano', 'Karen May', '$2b$12$2Y0s48Qxz1qKEYrMULbmFuMN9mnhO64AIJRw/93C2SEunafhGMaEq', '04-2122-000777', 'CITE', 'G', '09948486859', 'Super Cute', 'karenmaygaytano@gmail.com', 'KARENS.jpg', '', '', '', '', '', '', 'ACTIVE', 'success'),
-('Mariano', 'Jemima', '$2b$12$TKL1UrSENeGpc71Fwu9PzuBugGEKB/LMUzz/xlesk.Ap9jxqT9Ol.', '04-2122-022772', 'COA', 'G', '09476959407', 'Chairman', 'Jemima@gmail.com', 'jemProfile.jpg', '', '', '', '', '', '', 'INACTIVE', 'danger'),
+('Gaytano', 'Karen May', '$2b$12$2Y0s48Qxz1qKEYrMULbmFuMN9mnhO64AIJRw/93C2SEunafhGMaEq', '04-2122-000777', 'CITE', 'G', '09948486859', 'Super Cute', 'karenmaygaytano@gmail.com', 'KARENS.jpg', '', '', '', '', '', '', 'INACTIVE', 'danger'),
+('Mariano', 'Jemima', '$2b$12$TKL1UrSENeGpc71Fwu9PzuBugGEKB/LMUzz/xlesk.Ap9jxqT9Ol.', '04-2122-022772', 'COA', 'G', '09476959407', 'Chairman', 'Jemima@gmail.com', 'jemProfile.jpg', '', '', '', '', '', '', 'ACTIVE', 'success'),
 ('Mallorca', 'Reuben', '$2b$12$xUvJ73XI5Vfz1DwKT5rSt.9ohLSlKuHSXg/PWZW0Rzo4qzcFjLoxO', '04-2122-031572', 'COA', 'A', '09948486859', 'COO', 'ream.mallorca.ui@phinmaed.com', '', '', '', '', '', '', '', 'INACTIVE', 'danger');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `operation_feedback`
+--
+
+CREATE TABLE `operation_feedback` (
+  `id_feed` int(11) NOT NULL,
+  `feedMess` varchar(255) NOT NULL,
+  `feed_name` varchar(255) NOT NULL,
+  `feed_date` varchar(255) NOT NULL,
+  `feed_pic` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `operation_feedback`
+--
+
+INSERT INTO `operation_feedback` (`id_feed`, `feedMess`, `feed_name`, `feed_date`, `feed_pic`) VALUES
+(1, 'cute ni karen grabi', 'KAREN MAY GAYTANO', '2024-03-29 00:05', 'KARENS.jpg'),
+(2, 'i like the system the developers are super cute i love it omg', 'JEMIMA MARIANO', '2024-03-29 01:25', 'jemProfile.jpg');
 
 -- --------------------------------------------------------
 
@@ -345,7 +405,18 @@ CREATE TABLE `scholar_duty_records` (
 
 INSERT INTO `scholar_duty_records` (`date`, `Hours_In_Out`, `Minutes_In_Out`, `Student_id_Number`, `id`, `Type_of_Process`) VALUES
 ('2024-03-28', 11, 52, '04-2122-031572', 296, 'IN'),
-('2024-03-28', 11, 53, '04-2122-031572', 297, 'OUT');
+('2024-03-28', 11, 53, '04-2122-031572', 297, 'OUT'),
+('2024-03-29', 0, 22, '04-2122-031572', 298, 'IN'),
+('2024-03-29', 0, 24, '04-2122-031572', 299, 'IN'),
+('2024-03-29', 0, 24, '04-2122-031572', 300, 'OUT'),
+('2024-03-29', 0, 24, '04-2122-031572', 301, 'IN'),
+('2024-03-29', 0, 24, '04-2122-031572', 302, 'OUT'),
+('2024-03-29', 0, 24, '04-2122-031572', 303, 'IN'),
+('2024-03-29', 0, 24, '04-2122-031572', 304, 'OUT'),
+('2024-03-29', 0, 47, '04-2122-000001', 305, 'IN'),
+('2024-03-29', 0, 47, '04-2122-000001', 306, 'OUT'),
+('2024-03-29', 0, 48, '04-2122-000001', 307, 'IN'),
+('2024-03-29', 0, 48, '04-2122-000001', 308, 'OUT');
 
 --
 -- Indexes for dumped tables
@@ -378,10 +449,22 @@ ALTER TABLE `hk_users`
   ADD KEY `id_totalHours` (`id_totalHours`);
 
 --
+-- Indexes for table `hk_user_activelogs`
+--
+ALTER TABLE `hk_user_activelogs`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `operations_data`
 --
 ALTER TABLE `operations_data`
   ADD PRIMARY KEY (`Faculty_Id_Number`);
+
+--
+-- Indexes for table `operation_feedback`
+--
+ALTER TABLE `operation_feedback`
+  ADD PRIMARY KEY (`id_feed`);
 
 --
 -- Indexes for table `operation_request`
@@ -415,7 +498,7 @@ ALTER TABLE `scholar_duty_records`
 -- AUTO_INCREMENT for table `active_logs`
 --
 ALTER TABLE `active_logs`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT for table `admin`
@@ -428,6 +511,18 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `hk_assignd_teaecher`
   MODIFY `assigmentID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+
+--
+-- AUTO_INCREMENT for table `hk_user_activelogs`
+--
+ALTER TABLE `hk_user_activelogs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `operation_feedback`
+--
+ALTER TABLE `operation_feedback`
+  MODIFY `id_feed` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `operation_request`
@@ -445,7 +540,7 @@ ALTER TABLE `reports/announcement`
 -- AUTO_INCREMENT for table `scholar_duty_records`
 --
 ALTER TABLE `scholar_duty_records`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=298;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=309;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
