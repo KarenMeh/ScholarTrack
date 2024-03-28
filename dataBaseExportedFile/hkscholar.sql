@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 28, 2024 at 01:04 PM
+-- Generation Time: Mar 28, 2024 at 04:26 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -107,7 +107,22 @@ INSERT INTO `active_logs` (`id`, `date_time`, `user_id`, `uname`, `dept`, `act_p
 (65, '2024-03-28 19:21:36', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log out to the system'),
 (66, '2024-03-28 19:36:12', '04-2122-031572', 'Mallorca Reuben', 'CITE', 'Just log in to the system'),
 (67, '2024-03-28 19:40:49', '04-2122-031572', 'Mallorca Reuben', 'COA', 'Just log in to the system'),
-(68, '2024-03-28 19:51:27', '11-1111-111111', 'Pama Kyle Frances', 'CAHS', 'Just log in to the system');
+(68, '2024-03-28 19:51:27', '11-1111-111111', 'Pama Kyle Frances', 'CAHS', 'Just log in to the system'),
+(69, '2024-03-28 20:32:55', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
+(70, '2024-03-28 20:34:57', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
+(71, '2024-03-28 20:41:41', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log out to the system'),
+(72, '2024-03-28 20:41:48', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
+(73, '2024-03-28 20:46:05', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log out to the system'),
+(74, '2024-03-28 20:46:38', '04-2122-031572', 'Mallorca Reuben', 'COA', 'Just log in to the system'),
+(75, '2024-03-28 20:46:54', '04-2122-031572', 'Mallorca Reuben', 'COA', 'Just log out to the system'),
+(76, '2024-03-28 20:52:59', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
+(77, '2024-03-28 21:00:12', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log out to the system'),
+(78, '2024-03-28 21:00:57', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
+(79, '2024-03-28 21:04:07', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log out to the system'),
+(80, '2024-03-28 21:53:37', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
+(81, '2024-03-28 21:54:08', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log out to the system'),
+(82, '2024-03-28 22:46:42', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
+(83, '2024-03-28 23:20:45', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Requested an HK scholar');
 
 -- --------------------------------------------------------
 
@@ -157,7 +172,8 @@ CREATE TABLE `hk_assignd_teaecher` (
 INSERT INTO `hk_assignd_teaecher` (`operatikon_ID`, `hk_ID`, `assigmentID`) VALUES
 ('Gaytano Karen May', '04-2122-031572', 54),
 ('Gaytano Karen May', '04-2122-000001', 55),
-('Gaytano Karen May', '02-2387-700001', 56);
+('Gaytano Karen May', '02-2387-700001', 56),
+('Gaytano Karen May', '04-2122-78627', 57);
 
 -- --------------------------------------------------------
 
@@ -193,19 +209,19 @@ CREATE TABLE `hk_users` (
 --
 
 INSERT INTO `hk_users` (`idnum`, `email`, `lname`, `fname`, `password`, `id_totalHours`, `program_course`, `department`, `yrLvL`, `scholarship`, `dutyDesignation`, `dutySupervisor`, `reqiredDuty`, `remaningDuty`, `remDutyMins`, `statsForRenewal`, `SchoolYr`, `semister`, `Status_avail`, `status_color`) VALUES
-('02-2387-700001', 'carmilo@gmail.com', 'Flame', 'Carmelo', '', '0', 'BSCE', 'COME', '4', 'HK100', 'SF', 'Gaytano Karen May', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'Na', 'warning'),
-('04-2200-90001', 'Dionar@gmail.com', 'Antioquia', 'Dionard', '', '0', 'BSHM', 'COA', '4', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
-('04-2122-000002', 'donna@gmail.com', 'Mallorca', 'Donna', '', '0', 'BSBA', 'COM', '1', 'HK25', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
-('04-2122-000001', 'jasper@gmail.com', 'operio', 'jasper', '', '0', 'BSIT', 'CITE', '3', 'HK100', 'SF', 'Gaytano Karen May', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'Na', 'warning'),
-('04-2122-78627', 'Javelosa@gmail.com', 'Javelosa ', 'Wolf', '', '0', 'BSC', 'CCJE', '1', 'HK100', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
-('04-2122-91734', 'jimama@gmail.com', 'Mariano', 'Jemima', '', '0', 'BSBA', 'CAS', '1', 'HK100', '', '', '180', '180', '0', 'pending', '2023 - 2024', 'FIRST SEMESTER', 'av', 'warning'),
-('04-2002-90021', 'justin@gmail.com', 'Susal', 'Justiene', '', '0', 'BSCE', 'CHAS', '2', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
-('04-2122-035512', 'karenmay@gmail.com', 'Gaytano', 'Karen May', '', '0', 'BSIT', 'CITE', '4', 'HK75', '', '', '180', '180', '0', 'pending', '2023 - 2024', 'FIRST SEMESTER', 'av', 'warning'),
-('04-2122-035546', 'kylepama@gnail.cute', 'Pama', 'Kayle', '', '0', 'BSBA', 'CAS', '2', 'HK25', '', '', '180', '180', '0', 'pending', '2023 - 2024', 'FIRST SEMESTER', 'av', 'warning'),
-('09-2155-90828', 'malo@gmail.com', 'Amante', 'Malorena', '', '0', 'BSHM', 'CAHS', '1', 'HK100', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
-('04-1234-87237', 'Pechera@gamil.com', 'Pechera', 'Alessandra', '', '0', 'BSBS', 'COE', '1', 'HK25', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
-('04-2122-031572', 'ream.mallorca.ui@phinmaed.com', 'Mallorca', 'Reuben', '', '1', 'BSIT', 'CITE', '1', 'HK75', 'AF', 'Gaytano Karen May', '180', '0', '0.0', 'Complete', '2023 - 2024', 'FIRST SEMESTER', 'Na', 'success'),
-('04-2122-000003', 'ryan@gmail.com', 'Mallorca', 'Ryan', '', '0', 'BSCE', 'COED', '4', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning');
+('02-2387-700001', 'carmilo@gmail.com', 'Flame', 'Carmelo', '', '0', 'Bachelor of Science in Marine Engineering', 'COME', '4', 'HK100', 'SF', 'Gaytano Karen May', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'Na', 'warning'),
+('04-2200-90001', 'Dionar@gmail.com', 'Antioquia', 'Dionard', '', '0', 'Bachelor of Science in Accountancy', 'COA', '4', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
+('04-2122-000002', 'donna@gmail.com', 'Mallorca', 'Donna', '', '0', 'Bachelor of Science in Tourism Management', 'COM', '1', 'HK25', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
+('04-2122-000001', 'jasper@gmail.com', 'operio', 'jasper', '', '0', 'Bachelor of Science in Information Technology', 'CITE', '3', 'HK100', 'SF', 'Gaytano Karen May', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'Na', 'warning'),
+('04-2122-78627', 'Javelosa@gmail.com', 'Javelosa ', 'Wolf', '', '0', 'Bachelor of Science in Criminology', 'CCJE', '1', 'HK100', 'SF', 'Gaytano Karen May', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'Na', 'warning'),
+('04-2122-91734', 'jimama@gmail.com', 'Mariano', 'Jemima', '', '0', 'Bachelor of Science in Pharmacy', 'CAHS', '1', 'HK100', '', '', '180', '180', '0', 'pending', '2023 - 2024', 'FIRST SEMESTER', 'av', 'warning'),
+('04-2002-90021', 'justin@gmail.com', 'Susal', 'Justiene', '', '0', 'Bachelor of Science in Civil Engineering', 'COE', '2', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
+('04-2122-035512', 'karenmay@gmail.com', 'Gaytano', 'Karen May', '', '0', 'Bachelor of Science in Information Technology', 'CITE', '4', 'HK75', '', '', '180', '180', '0', 'pending', '2023 - 2024', 'FIRST SEMESTER', 'av', 'warning'),
+('04-2122-035546', 'kylepama@gnail.cute', 'Pama', 'Kayle', '', '0', 'Bachelor of Arts in Psychology', 'CAHS', '2', 'HK25', '', '', '180', '180', '0', 'pending', '2023 - 2024', 'FIRST SEMESTER', 'av', 'warning'),
+('09-2155-90828', 'malo@gmail.com', 'Amante', 'Malorena', '', '0', 'Bachelor of Science in Civil Engineering', 'COE', '1', 'HK100', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
+('04-1234-87237', 'Pechera@gamil.com', 'Pechera', 'Alessandra', '', '0', 'Bachelor of Science in Mechanical Engineering', 'COE', '1', 'HK25', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
+('04-2122-031572', 'ream.mallorca.ui@phinmaed.com', 'Mallorca', 'Reuben', '', '1', 'Bachelor of Science in Information Technology', 'CITE', '1', 'HK75', 'AF', 'Gaytano Karen May', '180', '0', '0.0', 'Complete', '2023 - 2024', 'FIRST SEMESTER', 'Na', 'success'),
+('04-2122-000003', 'ryan@gmail.com', 'Mallorca', 'Ryan', '', '0', 'Bachelor of Secondary Education', 'COED', '4', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning');
 
 -- --------------------------------------------------------
 
@@ -239,10 +255,9 @@ CREATE TABLE `operations_data` (
 --
 
 INSERT INTO `operations_data` (`Faculty_Lname`, `Faculty_Fname`, `Faculty_Password`, `Faculty_Id_Number`, `Operation_Dept`, `Operations_Mname`, `Operation_phone_Number`, `Operation_Designation-Position`, `Operations_Email`, `profilePics`, `operations_about`, `twitter`, `facebook`, `instagram`, `linkedin`, `Address`, `status_ol`, `color_status`) VALUES
-('Gaytano', 'Karen May', '$2b$12$2Y0s48Qxz1qKEYrMULbmFuMN9mnhO64AIJRw/93C2SEunafhGMaEq', '04-2122-000777', 'CITE', 'G', '09948486859', 'Super Cute', 'karenmaygaytano@gmail.com', 'KARENS.jpg', '', '', '', '', '', '', 'INACTIVE', 'danger'),
+('Gaytano', 'Karen May', '$2b$12$2Y0s48Qxz1qKEYrMULbmFuMN9mnhO64AIJRw/93C2SEunafhGMaEq', '04-2122-000777', 'CITE', 'G', '09948486859', 'Super Cute', 'karenmaygaytano@gmail.com', 'KARENS.jpg', '', '', '', '', '', '', 'ACTIVE', 'success'),
 ('Mariano', 'Jemima', '$2b$12$TKL1UrSENeGpc71Fwu9PzuBugGEKB/LMUzz/xlesk.Ap9jxqT9Ol.', '04-2122-022772', 'COA', 'G', '09476959407', 'Chairman', 'Jemima@gmail.com', 'jemProfile.jpg', '', '', '', '', '', '', 'INACTIVE', 'danger'),
-('Mallorca', 'Reuben', '$2b$12$xUvJ73XI5Vfz1DwKT5rSt.9ohLSlKuHSXg/PWZW0Rzo4qzcFjLoxO', '04-2122-031572', 'COA', 'A', '09948486859', 'COO', 'ream.mallorca.ui@phinmaed.com', '', '', '', '', '', '', '', 'ACTIVE', 'success'),
-('Pama', 'Kyle Frances', '$2b$12$N0yUdmSnFzTFStKvLDYu1.vf0Bw781c.hrDPPuR5w8m5/bnY7fCSK', '11-1111-111111', 'CAHS', 'P', '09476959407', 'Chairman', 'kylepama@gnail.cute', '', '', '', '', '', '', '', 'ACTIVE', 'success');
+('Mallorca', 'Reuben', '$2b$12$xUvJ73XI5Vfz1DwKT5rSt.9ohLSlKuHSXg/PWZW0Rzo4qzcFjLoxO', '04-2122-031572', 'COA', 'A', '09948486859', 'COO', 'ream.mallorca.ui@phinmaed.com', '', '', '', '', '', '', '', 'INACTIVE', 'danger');
 
 -- --------------------------------------------------------
 
@@ -265,7 +280,8 @@ CREATE TABLE `operation_request` (
 --
 
 INSERT INTO `operation_request` (`Designation`, `Requirements`, `Report Day/s`, `Request`, `DEPT`, `SUPERVISOR`, `ID`) VALUES
-('SF', '1', 'Mon-Tues', '1', 'CITE', 'Gaytano Karen May', 25);
+('SF', '1', 'Mon-Tues', '1', 'CITE', 'Gaytano Karen May', 25),
+('SF', '1', 'Mon-Tues', '1', 'CCJE', 'Gaytano Karen May', 27);
 
 -- --------------------------------------------------------
 
@@ -399,7 +415,7 @@ ALTER TABLE `scholar_duty_records`
 -- AUTO_INCREMENT for table `active_logs`
 --
 ALTER TABLE `active_logs`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `admin`
@@ -411,13 +427,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `hk_assignd_teaecher`
 --
 ALTER TABLE `hk_assignd_teaecher`
-  MODIFY `assigmentID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `assigmentID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `operation_request`
 --
 ALTER TABLE `operation_request`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `reports/announcement`
