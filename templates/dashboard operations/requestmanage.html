@@ -72,6 +72,36 @@
   margin-left: -10px;
   align-items: center;
 }
+
+.modal-title{
+  font-size: 25px;
+  padding-top: 15px;
+  font-weight: bold;
+  float: right;
+  letter-spacing: 2px;
+  font-weight: 300px;
+  padding: 0;
+  color: #012970;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.modal-body{
+  font-size: 20px;
+}
+
+.pindot input{
+  background-color: #002b80;
+  border: none;
+  color: white;
+  padding: 8px 10px;
+  float: left;
+  margin-right: 60px;
+  margin-top: -30px;
+  text-decoration: none;
+  border-radius: 5px;
+  
+  font-size: 13px;
+}
 </style>
 <body>
 
@@ -224,7 +254,7 @@
             <div class="col-30">
               <div class="card recent-sales overflow-auto">
                 <div class="card-body">
-  <div class="card-title2">Assigned Scholar List</span>
+  <div class="card-title2">Request and Scholar Management</span>
 
   
     <div class="container">
@@ -250,6 +280,7 @@
                 <option value="Clerk">Clerk</option>
                
               </select>
+              <br>
 
               <label for="Requirement">Specification</label>
               <select name="Requirements" id="Requirements" required>
@@ -258,7 +289,7 @@
                 <option value="2">Second Year</option>
                 <option value="3">Third Year</option>
                 <option value="4">Fourth Year</option>
-              </select>
+              </select><br>
 
               <label for="Requirement">Reporting Days: </label> <br>
                 <input type="checkbox"  name="monday" value="Mon" >
@@ -290,16 +321,19 @@
                 <option value="COME">COME</option>
                 
               </select>
-              <label for="quantity">Number of Students:</label>
+              <br>
+              <label for="quantity">Number of Students:</label> 
               <input type="number" id="quantity" name="Request" min="1" max="10">
 
-              <br>
-
-                <input type="Submit" value="Submit" name="request">
-
+              <br> 
+              <br> 
+              <div class="modal-footer">
+                <div class="pindot">
+                <input type="Submit"  class="bg-success text-white" value="Submit" name="request">
+              </div>
             </form>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+         
+            <button type="button" class="btn btn-default bg-danger text-white" data-dismiss="modal">Close</button>
           </div>
         
           

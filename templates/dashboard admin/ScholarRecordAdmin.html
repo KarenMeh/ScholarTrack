@@ -544,10 +544,22 @@ hr.new2 {
 
 .summary .info1{
 
-
-
-
 }
+
+.porm input{
+  border: 0;
+  color: #fbf7f7;
+  background: linear-gradient(180deg, rgba(0,31,63,1) 0%, rgba(4,75,148,1) 50%, rgba(61,153,112,1) 100%);
+  float: left;
+  margin-left: 35px;
+  font-size: 12px;
+  border-radius: 10px;
+  padding: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+
 </style>
 
     <title> ScholarTrack</title>
@@ -581,16 +593,19 @@ hr.new2 {
         <ul>
         <h3>Name</h3>
         <p> {{Fname}} {{Lname}}</p>
-        <h3>Program/Course</h3>
-        <p> {{course_Program}}</p>
+
 
         <h3>Department</h3>
         <p> {{department}}</p>
+<h3>Program/Course</h3>
+      <p style="font-size:12px; margin-bottom:50px;"> {{course_Program}}</p>
 
+      <div class="porm">
             <form action="/Duty_Records" method="post">
                 <input type="hidden" name="Duty_Id" value="{{idnum}}">
                 <input type="submit" value="Duty Records" >
             </form>
+      </div>
 
 
         <div class="left">
