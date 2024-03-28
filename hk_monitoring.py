@@ -116,7 +116,7 @@ faculty_psw = []
 for k in Faculty_PassWord:
     faculty_psw.append(k[0])
 
-print(faculty_psw)
+
 #faculty credintials
 faculty_credintials =[]
 faculty_counter = 0
@@ -127,7 +127,7 @@ for k in faculty_id:
     faculty_credintials.append(compress)
     faculty_counter+=1
 
-print(faculty_credintials)
+
 
 
 
@@ -260,7 +260,7 @@ def indexprocess():
     if password == repPaswrd:
 
         encrypted_pass =  bcrypt.hashpw(str(password).encode(), bcrypt.gensalt())
-        print(encrypted_pass)
+
 
 
 
@@ -296,13 +296,13 @@ def signInprocess():
         session["user"]=idNum
         qury.execute("SELECT `Faculty_Password` FROM `operations_data` WHERE  `Faculty_Id_Number` = '"+idNum+"'")
         from_db_pass = qury.fetchall()
-        print(from_db_pass[0][0])
+
 
         if bcrypt.checkpw(password.encode(), from_db_pass[0][0].encode()):
             password = str(from_db_pass[0][0])
             logindata = idNum + " " + password
 
-            print(logindata)
+
 
             if logindata in faculty_credintials:
 
@@ -457,12 +457,12 @@ def request_Scholar():
             mins = float(std_remning[1]).__round__()
 
             if hours <=0 and mins <=0.0 :
-                print("done")
+
                 qury.execute("UPDATE `hk_users` SET `status_color`='success',`statsForRenewal`='Complete' WHERE `idnum`='"+std_id_under_me+"'")
                 conn.commit()
 
             else:
-                print("not yet")
+
                 qury.execute("UPDATE `hk_users` SET `status_color`='warning',`statsForRenewal`='pending' WHERE `idnum`='" + std_id_under_me + "'")
                 conn.commit()
 
@@ -485,7 +485,7 @@ def print_cert():
 
         qury.execute("SELECT * FROM `hk_users` WHERE `idnum` = '" +button.split(" ")[1]+ "'")
         hkdetails = qury.fetchall()
-        print(hkdetails)
+
         Lname = hkdetails[0][2]  # Lname
         Fname = hkdetails[0][3]  # Fname
         DUTY_SUPERVISOR = hkdetails[0][11]  # DUTY_SUPERVISOR
@@ -575,7 +575,7 @@ def Modal_request_process():
 
     sched = str(sched_list).replace("['","").replace("']","").replace("', '","-")
 
-    print(sched)
+
 
     dept = request.form["dept"]
 
@@ -632,8 +632,7 @@ def feedback():
 
 @app.route("/feed_back", methods = ['POST'])
 def feed_back():
-
-    
+    feedbackMess = request.form['feedbackMess']
 
     return redirect(url_for('feedback'))
 
@@ -789,7 +788,7 @@ def change_password_operations():
 
     qury.execute("SELECT `Faculty_Password` FROM `operations_data` WHERE `Faculty_Id_Number` = '"+session["opration_Id"]+"'")
     old_password_db = qury.fetchall()[0][0]
-    print(old_password_db)
+
     if bcrypt.checkpw(old_password.encode(), str(old_password_db).encode()):
         if str(new_password) == str(re_enter_password):
             hashed_password_new = bcrypt.hashpw(new_password.encode(), bcrypt.gensalt())
@@ -1058,11 +1057,11 @@ def compliance():
             mins = float(k[2]).__round__()
 
             if hours <= 0 and mins <= 0.0:
-                print("tapos na", k[0])
+
                 qury.execute("UPDATE `hk_users` SET `statsForRenewal`='Complete',`status_color`='success' WHERE `idnum`= '"+str(k[0])+"'")
                 conn.commit()
             else:
-                print("wala pa tapos", k[0])
+
                 qury.execute("UPDATE `hk_users` SET `statsForRenewal`='pending', `status_color`='warning' WHERE `idnum`= '" + str(k[0]) + "'")
                 conn.commit()
 
@@ -1779,18 +1778,12 @@ def get_faculty_info():
     for k in range (len(operations_table)):
         id_checker_Minus.append(operations_table[k]['USER_ID'])
 
-    print(operations_table)
-    print(id_checker_Minus)
-    print(int(faculty_id))
+
     ope_id = id_checker_Minus[int(faculty_id)]
-    print("=", ope_id)
-
-
-
 
 
     selected_faculty = next((row for row in operations_table if row['id'] == int(faculty_id)), None)
-    print(selected_faculty)
+
 
     # Fetch specific data based on faculty_id
 
@@ -1864,7 +1857,6 @@ def modal_add_user():
 
     hashed_password = bcrypt.hashpw(psw.encode(), bcrypt.gensalt())# to encrypt password
     add_user_data = str(empid)+" "+str(hashed_password.decode())
-    print(add_user_data)
     faculty_credintials.append(add_user_data)
 
 
