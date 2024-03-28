@@ -5,13 +5,13 @@ import pandas as pd
 import datetime
 from flask import Flask, render_template, request, redirect, url_for, session, send_file, jsonify
 from flaskext.mysql import MySQL
-from cryptography.fernet import Fernet
+import cryptography.fernet
 from werkzeug.exceptions import RequestEntityTooLarge
 from werkzeug.utils import secure_filename
 # Generate a key
-key = Fernet.generate_key()
+key = cryptography.fernet.Fernet.generate_key()
 # Create a Fernet symmetric key
-cipher_suite = Fernet(key)
+cipher_suite = cryptography.fernet.Fernet(key)
 
 
 app = Flask(__name__)

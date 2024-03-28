@@ -522,7 +522,7 @@ hr.new2 {
   z-index: 3;
   height: 60px;  
   top: 34%;
-  margin-left: 260px;
+  margin-left: 270px;
   height: 10px;
   
 
@@ -547,6 +547,10 @@ hr.new2 {
 
 
 
+}
+
+.ayos{
+  font-size: 2px;
 }
 </style>
 
@@ -581,16 +585,17 @@ hr.new2 {
         <ul>
         <h3>Name</h3>
         <p> {{Fname}} {{Lname}}</p>
-        <h3>Program/Course</h3>
-        <p> {{course_Program}}</p>
-
-        <h3>Department</h3>
+            <h3>Department</h3>
         <p> {{department}}</p>
+
+        <h3>Program/Course</h3>
+        <p style="font-size:12px"> {{course_Program}}</p>
+
 
         <div class="left">
         <h3>Student Id</h3>
         <p>{{idnum}}</p>
-        <h3>Year Level</h3>
+ <h3>Year Level</h3>
         <p>{{yearLvl}}</p>
       </div>
 
@@ -614,10 +619,12 @@ hr.new2 {
         
         <h3>Department</h3>
         <p> {{department}}</p>
+
  
       
         <h3>Required Duty Hours</h3>
         <p> {{reqiredDuty}}h</p>
+          
         <h3>Rendered</h3>
         <p> {{totalDuty}}m</p>
         <h3>Remaining</h3>
