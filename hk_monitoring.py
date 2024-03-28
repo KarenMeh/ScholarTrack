@@ -288,69 +288,71 @@ def signInPAge():
 
 @app.route("/signed in", methods= ["POST"])
 def signInprocess():
+    try:
 
-    idNum = request.form['email']
-    password = request.form['psw']
+        idNum = request.form['email']
+        password = request.form['psw']
 
-    session["user"]=idNum
-    qury.execute("SELECT `Faculty_Password` FROM `operations_data` WHERE  `Faculty_Id_Number` = '"+idNum+"'")
-    from_db_pass = qury.fetchall()
-    print(from_db_pass[0][0])
+        session["user"]=idNum
+        qury.execute("SELECT `Faculty_Password` FROM `operations_data` WHERE  `Faculty_Id_Number` = '"+idNum+"'")
+        from_db_pass = qury.fetchall()
+        print(from_db_pass[0][0])
 
-    if bcrypt.checkpw(password.encode(), from_db_pass[0][0].encode()):
-        password = str(from_db_pass[0][0])
-        logindata = idNum + " " + password
+        if bcrypt.checkpw(password.encode(), from_db_pass[0][0].encode()):
+            password = str(from_db_pass[0][0])
+            logindata = idNum + " " + password
 
-        print(logindata)
+            print(logindata)
 
-        if logindata in faculty_credintials:
-
-
-
-            # faculty usr namea
-            qury.execute("SELECT `Faculty_Fname` FROM `operations_data` WHERE `Faculty_Id_Number` = '"+idNum+"'")
-            fname = qury.fetchall()[0][0]
-
-            qury.execute("SELECT `Faculty_Lname` FROM `operations_data` WHERE `Faculty_Id_Number` = '"+idNum+"'")
-            lname = qury.fetchall()[0][0]
-
-            qury.execute("SELECT `Faculty_Id_Number` FROM `operations_data` WHERE `Faculty_Id_Number`= '"+idNum+"'")
-            opration_Id = qury.fetchall()[0][0]
+            if logindata in faculty_credintials:
 
 
-            session["fname"] = fname
-            session["lname"] = lname
 
-            username = (fname+" "+lname).upper()
-            session['username']=username
-            session["opration_Id"] = opration_Id
-            qury.execute("UPDATE `operations_data` SET `status_ol`='ACTIVE' WHERE `Faculty_Id_Number` = '" + session[
-                'opration_Id'] + "'")
-            conn.commit()
-            qury.execute("UPDATE `operations_data` SET `color_status`='success' WHERE `Faculty_Id_Number` = '" + session[
-                'opration_Id'] + "'")
-            conn.commit()
-    #---------- this is for recording all activities of the user-----------------
+                # faculty usr namea
+                qury.execute("SELECT `Faculty_Fname` FROM `operations_data` WHERE `Faculty_Id_Number` = '"+idNum+"'")
+                fname = qury.fetchall()[0][0]
 
-            x = datetime.datetime.now()
+                qury.execute("SELECT `Faculty_Lname` FROM `operations_data` WHERE `Faculty_Id_Number` = '"+idNum+"'")
+                lname = qury.fetchall()[0][0]
 
-            qury.execute("SELECT `Faculty_Lname`, `Faculty_Fname`, `Faculty_Id_Number`, `Operation_Dept` FROM `operations_data` WHERE `Faculty_Id_Number` = '"+ session['opration_Id']+"'")
-            operation_data = qury.fetchall()
+                qury.execute("SELECT `Faculty_Id_Number` FROM `operations_data` WHERE `Faculty_Id_Number`= '"+idNum+"'")
+                opration_Id = qury.fetchall()[0][0]
 
-            fullname = str(operation_data[0][0])+" "+str(operation_data[0][1])
 
-            qury.execute("INSERT INTO `active_logs`(`date_time`, `user_id`, `uname`, `dept`, `act_perm`)"
-                         " VALUES ('"+str(x).split(".")[0]+"','"+str(operation_data[0][2])+"','"+str(fullname)+"','"+str(operation_data[0][3])+"','Just log in to the system')")
-            conn.commit()
+                session["fname"] = fname
+                session["lname"] = lname
 
-            return '<script>;window.location="/Dash board"</script>'
+                username = (fname+" "+lname).upper()
+                session['username']=username
+                session["opration_Id"] = opration_Id
+                qury.execute("UPDATE `operations_data` SET `status_ol`='ACTIVE' WHERE `Faculty_Id_Number` = '" + session[
+                    'opration_Id'] + "'")
+                conn.commit()
+                qury.execute("UPDATE `operations_data` SET `color_status`='success' WHERE `Faculty_Id_Number` = '" + session[
+                    'opration_Id'] + "'")
+                conn.commit()
+        #---------- this is for recording all activities of the user-----------------
 
+                x = datetime.datetime.now()
+
+                qury.execute("SELECT `Faculty_Lname`, `Faculty_Fname`, `Faculty_Id_Number`, `Operation_Dept` FROM `operations_data` WHERE `Faculty_Id_Number` = '"+ session['opration_Id']+"'")
+                operation_data = qury.fetchall()
+
+                fullname = str(operation_data[0][0])+" "+str(operation_data[0][1])
+
+                qury.execute("INSERT INTO `active_logs`(`date_time`, `user_id`, `uname`, `dept`, `act_perm`)"
+                             " VALUES ('"+str(x).split(".")[0]+"','"+str(operation_data[0][2])+"','"+str(fullname)+"','"+str(operation_data[0][3])+"','Just log in to the system')")
+                conn.commit()
+
+                return '<script>;window.location="/Dash board"</script>'
+
+            else:
+
+                return '<script>alert("Wrong password or Email");window.location="/Sign in"</script>'
         else:
-
             return '<script>alert("Wrong password or Email");window.location="/Sign in"</script>'
-    else:
+    except Exception:
         return '<script>alert("Wrong password or Email");window.location="/Sign in"</script>'
-
 
 
 #-------------------------------dash board-----------------------------------------
@@ -477,7 +479,60 @@ def request_Scholar():
 @app.route("/print_cert", methods =['POST'])
 def print_cert():
 
-    return render_template("dashboard operations/print_cert.html")
+    button = request.form['select']
+
+    if str(button.split(" ")[0]) == "print":
+
+        qury.execute("SELECT * FROM `hk_users` WHERE `idnum` = '" +button.split(" ")[1]+ "'")
+        hkdetails = qury.fetchall()
+        print(hkdetails)
+        Lname = hkdetails[0][2]  # Lname
+        Fname = hkdetails[0][3]  # Fname
+        DUTY_SUPERVISOR = hkdetails[0][11]  # DUTY_SUPERVISOR
+        department = hkdetails[0][7]  # department
+        scholarship = hkdetails[0][9]  # scholarship
+        DUTY_DESIGNATION = hkdetails[0][10]  # DUTY_DESIGNATION
+        reqiredDuty = hkdetails[0][12]  # reqiredDuty
+
+
+        return render_template("dashboard operations/print_cert.html",Fullname =Fname+" "+Lname, DUTY_SUPERVISOR=DUTY_SUPERVISOR,department=department,scholarship=scholarship,DUTY_DESIGNATION=DUTY_DESIGNATION,reqiredDuty=reqiredDuty)
+
+    else:
+
+        qury.execute("SELECT * FROM `hk_users` WHERE `idnum` = '" + button + "'")
+        hkdetails = qury.fetchall()  # len of 17
+        # details to show in profile of the student searched
+        idnum = hkdetails[0][0]  # idnum
+        Lname = hkdetails[0][2]  # Lname
+        Fname = hkdetails[0][3]  # Fname
+        totalDuty = hkdetails[0][5]  # totalDuty
+        course_Program = hkdetails[0][6]  # course_Program
+        department = hkdetails[0][7]  # department
+        yearLvl = hkdetails[0][8]  # yearLvl
+        scholarship = hkdetails[0][9]  # scholarship
+        DUTY_DESIGNATION = hkdetails[0][10]  # DUTY_DESIGNATION
+        DUTY_SUPERVISOR = hkdetails[0][11]  # DUTY_SUPERVISOR
+        reqiredDuty = hkdetails[0][12]  # reqiredDuty
+        remaningDuty = hkdetails[0][13]  # remaningDuty
+        remDutyMin = str(float(hkdetails[0][14])).split(".")  # remDutyMin
+        statsuForRenewal = hkdetails[0][15]  # statsuForRenewal
+        Schoolyr = hkdetails[0][16]  # Schoolyr
+        semister = hkdetails[0][17]  # semister
+
+
+
+        return render_template("dashboard operations/details.html",idnum=idnum, Lname=Lname, Fname=Fname, totalDuty=totalDuty,
+                               course_Program=course_Program, department=department, yearLvl=yearLvl,
+                               scholarship=scholarship,
+                               DUTY_DESIGNATION=DUTY_DESIGNATION, DUTY_SUPERVISOR=DUTY_SUPERVISOR,
+                               reqiredDuty=reqiredDuty,
+                               remaningDuty=remaningDuty, statsuForRenewal=statsuForRenewal, Schoolyr=Schoolyr,
+                               semister=semister, remDutyMin=remDutyMin[0])
+
+
+
+
+
 
     #this is for requesting a hk studen
 @app.route("/Modal_request_process", methods=['POST'])
@@ -567,10 +622,20 @@ def Modal_request_process():
 def feedback():
 
     try:
-        return render_template("dashboard operations/feedback.html", logUser=session['username'],
-                              )
+        # select profile pic
+        qury.execute("SELECT `profilePics` FROM `operations_data` WHERE `Faculty_Id_Number`= '" + session["user"] + "'")
+        profilepicDb = qury.fetchall()[0][0]
+
+        return render_template("dashboard operations/feedback.html", logUser=session['username'],profilepicDb=profilepicDb)
     except Exception:
         return redirect(url_for("signInPAge"))
+
+@app.route("/feed_back", methods = ['POST'])
+def feed_back():
+
+    
+
+    return redirect(url_for('feedback'))
 
 
 #------------------end of feddback --------------------

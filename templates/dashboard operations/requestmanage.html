@@ -336,14 +336,12 @@
   {% for row in student_underMe %}
   <tr>
   <form action="{{url_for('print_cert')}}" method="POST">
-    <td><button type="submit" name="select" value="select"> <i class="bi bi-calendar2-minus"> </i></button>
-      {{row['STUDENT ID']}}</td>
-         <td>{{row['SCHOLAR NAME']}}</td>
-   <td>{{row['COMPLETED HOURS']}}</td>
-    <td>{{row['REMAINING HOURS']}}</td>
-    <td class ="text-white text-bg-{{row['color']}}"> {{row['STATUS']}}</td>
-    
-    <td><button type="submit" name="select" value="select"><i class="bi bi-folder2-open"></i></button>  </td>
+          <td><button type="submit" name="select" value="{{row['STUDENT ID']}}"> <i class="bi bi-calendar2-minus"> </i></button>{{row['STUDENT ID']}}</td>
+          <td>{{row['SCHOLAR NAME']}}</td>
+          <td>{{row['COMPLETED HOURS']}}</td>
+          <td>{{row['REMAINING HOURS']}}</td>
+          <td class ="text-white text-bg-{{row['color']}}"> {{row['STATUS']}}</td>
+          <td><button type="submit" name="select" value="print {{row['STUDENT ID']}}"><i class="bi bi-folder2-open"></i></button>  </td>
 
   </form>
 </tr>
