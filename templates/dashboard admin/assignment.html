@@ -244,17 +244,14 @@
           <thead>
             <tr>
               <th scope="col">DESIGNATION</th>
-              <th scope="col">YRYLVL</th>
+              <th scope="col">YR LVL</th>
               <th scope="col">REPORT DAY/S</th>
               <th scope="col">SUPERVISOR</th>
               <th scope="col">NUMB</th>
               <th scope="col">DEPT</th>
                <th scope="col">REQID</th>
               <th scope="col"> SELECT </th>
-              <th scope="col"> </th>
-             <th scope="col"> </th>
-             <th scope="col"> </th>
-             <th scope="col"> </th>
+              
              
             
             
@@ -274,15 +271,11 @@
                  <td>{{row['REQST']}}        </td>
                  <td>{{row['DEPT']}}         </td>
                  <td>{{row['REQ ID']}}       </td>
-                 
-                          
-
-
                 <td><button type="submit" name ="operations_Id_Selected" value="{{row['SUPERVISOR']}}" class="btn btn-success"  data-toggle="modal" data-target="#myModal"> Select</button> </td>
-                <td><input type="hidden" name="operationId" value="{{row['REQ ID']}}" >       </td>
-                <td><input type="hidden" name="hkDESIGNATION" value="{{row['DESIGNATION']}}" ></td>
-                <td><input type="hidden" name="std_yr_lvl" value="{{row['REQ']}}" >             </td>
-                <td><input type="hidden" name="std_dept" value="{{row['DEPT']}}" >          </td>
+                <input type="hidden" name="operationId" value="{{row['REQ ID']}}" >      
+                <input type="hidden" name="hkDESIGNATION" value="{{row['DESIGNATION']}}" >
+                <input type="hidden" name="std_yr_lvl" value="{{row['REQ']}}" >            
+                <input type="hidden" name="std_dept" value="{{row['DEPT']}}" >          
 
             </form>
             </tr>
@@ -520,7 +513,7 @@
            document.addEventListener("DOMContentLoaded", () => {
              echarts.init(document.querySelector("#pieChart")).setOption({
                title: {
-                 text: 'Request Summary',
+                 text: ' HK SCHOLARS',
                 //  subtext: 'Fake Data',
                  left: 'center'
                },
