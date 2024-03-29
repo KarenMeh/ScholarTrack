@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 28, 2024 at 06:26 PM
+-- Generation Time: Mar 29, 2024 at 03:07 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -41,99 +41,34 @@ CREATE TABLE `active_logs` (
 --
 
 INSERT INTO `active_logs` (`id`, `date_time`, `user_id`, `uname`, `dept`, `act_perm`) VALUES
-(2, '2024-03-19 22:48:31', '03-1234-123456', 'Mondia Zesty', 'CAHS', 'Just log in to the system'),
-(3, '2024-03-19 23:15:59', '03-1234-123456', 'Mondia Zesty', 'CAHS', 'Just log out to the system'),
-(4, '2024-03-19 23:17:33', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(5, '2024-03-19 23:20:57', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Requested an HK scholar'),
-(6, '2024-03-19 23:30:55', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(7, '2024-03-19 23:31:12', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Update profile'),
-(8, '2024-03-19 23:34:44', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Change credentials'),
-(9, '2024-03-19 23:39:47', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log out to the system'),
-(10, '2024-03-19 23:40:35', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(11, '2024-03-19 23:40:39', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log out to the system'),
-(12, '2024-03-19 23:41:24', '04-2122-022772', 'Mariano Jemima', 'COA', 'Just log in to the system'),
-(13, '2024-03-19 23:41:46', '04-2122-022772', 'Mariano Jemima', 'COA', 'Update profile'),
-(14, '2024-03-19 23:43:12', '04-2122-022772', 'Mariano Jemima', 'COA', 'Update profile'),
-(15, '2024-03-26 18:33:06', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(16, '2024-03-27 14:38:01', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(17, '2024-03-27 15:27:18', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Requested an HK scholar'),
-(18, '2024-03-27 16:15:19', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(19, '2024-03-27 21:41:43', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log out to the system'),
-(20, '2024-03-27 21:41:48', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(21, '2024-03-27 21:44:30', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(22, '2024-03-27 21:44:33', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(23, '2024-03-27 21:55:39', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(24, '2024-03-27 21:58:15', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(25, '2024-03-27 22:00:30', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(26, '2024-03-27 22:00:57', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(27, '2024-03-27 22:01:19', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(28, '2024-03-27 22:02:32', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(29, '2024-03-27 22:02:51', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log out to the system'),
-(30, '2024-03-27 22:03:00', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(31, '2024-03-27 22:03:26', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(32, '2024-03-27 22:05:30', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Requested an HK scholar'),
-(33, '2024-03-27 22:09:29', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(34, '2024-03-27 22:12:08', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(35, '2024-03-27 22:12:48', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(36, '2024-03-27 22:27:33', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(37, '2024-03-27 22:28:19', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(38, '2024-03-27 22:28:41', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(39, '2024-03-27 22:29:52', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(40, '2024-03-27 22:35:46', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(41, '2024-03-27 22:35:48', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(42, '2024-03-27 23:35:18', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Requested an HK scholar'),
-(43, '2024-03-27 23:51:33', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Requested an HK scholar'),
-(44, '2024-03-27 23:55:19', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Requested an HK scholar'),
-(45, '2024-03-28 14:18:22', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(46, '2024-03-28 18:54:37', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(47, '2024-03-28 18:55:19', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Update profile'),
-(48, '2024-03-28 19:00:28', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log out to the system'),
-(49, '2024-03-28 19:01:03', '04-2122-022772', 'Mariano Jemima', 'COM', 'Just log in to the system'),
-(50, '2024-03-28 19:01:20', '04-2122-022772', 'Mariano Jemima', 'COM', 'Update profile'),
-(51, '2024-03-28 19:08:05', '04-2122-022772', 'Mariano Jemima', 'COM', 'Just log out to the system'),
-(52, '2024-03-28 19:08:30', '04-2122-022772', 'Mariano Jemima', 'COM', 'Just log in to the system'),
-(53, '2024-03-28 19:09:36', '04-2122-022772', 'Mariano Jemima', 'COM', 'Just log out to the system'),
-(54, '2024-03-28 19:11:25', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(55, '2024-03-28 19:11:29', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log out to the system'),
-(56, '2024-03-28 19:13:33', '04-2122-022772', 'Mariano Jemima', 'COA', 'Just log in to the system'),
-(57, '2024-03-28 19:18:02', '04-2122-022772', 'Mariano Jemima', 'COA', 'Just log out to the system'),
-(58, '2024-03-28 19:18:13', '04-2122-022772', 'Mariano Jemima', 'COA', 'Just log in to the system'),
-(59, '2024-03-28 19:20:34', '04-2122-022772', 'Mariano Jemima', 'COA', 'Change credentials'),
-(60, '2024-03-28 19:20:45', '04-2122-022772', 'Mariano Jemima', 'COA', 'Just log out to the system'),
-(61, '2024-03-28 19:20:53', '04-2122-022772', 'Mariano Jemima', 'COA', 'Just log in to the system'),
-(62, '2024-03-28 19:21:12', '04-2122-022772', 'Mariano Jemima', 'COA', 'Update profile'),
-(63, '2024-03-28 19:21:20', '04-2122-022772', 'Mariano Jemima', 'COA', 'Just log out to the system'),
-(64, '2024-03-28 19:21:33', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(65, '2024-03-28 19:21:36', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log out to the system'),
-(66, '2024-03-28 19:36:12', '04-2122-031572', 'Mallorca Reuben', 'CITE', 'Just log in to the system'),
-(67, '2024-03-28 19:40:49', '04-2122-031572', 'Mallorca Reuben', 'COA', 'Just log in to the system'),
-(68, '2024-03-28 19:51:27', '11-1111-111111', 'Pama Kyle Frances', 'CAHS', 'Just log in to the system'),
-(69, '2024-03-28 20:32:55', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(70, '2024-03-28 20:34:57', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(71, '2024-03-28 20:41:41', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log out to the system'),
-(72, '2024-03-28 20:41:48', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(73, '2024-03-28 20:46:05', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log out to the system'),
-(74, '2024-03-28 20:46:38', '04-2122-031572', 'Mallorca Reuben', 'COA', 'Just log in to the system'),
-(75, '2024-03-28 20:46:54', '04-2122-031572', 'Mallorca Reuben', 'COA', 'Just log out to the system'),
-(76, '2024-03-28 20:52:59', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(77, '2024-03-28 21:00:12', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log out to the system'),
-(78, '2024-03-28 21:00:57', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(79, '2024-03-28 21:04:07', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log out to the system'),
-(80, '2024-03-28 21:53:37', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(81, '2024-03-28 21:54:08', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log out to the system'),
-(82, '2024-03-28 22:46:42', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(83, '2024-03-28 23:20:45', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Requested an HK scholar'),
-(84, '2024-03-28 23:33:44', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log out to the system'),
-(85, '2024-03-28 23:33:53', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(86, '2024-03-29 00:46:14', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(87, '2024-03-29 01:08:36', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log out to the system'),
-(88, '2024-03-29 01:08:45', '04-2122-022772', 'Mariano Jemima', 'COA', 'Just log in to the system'),
-(89, '2024-03-29 01:08:53', '04-2122-022772', 'Mariano Jemima', 'COA', 'Just log out to the system'),
-(90, '2024-03-29 01:08:58', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(91, '2024-03-29 01:23:09', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log out to the system'),
-(92, '2024-03-29 01:24:41', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log in to the system'),
-(93, '2024-03-29 01:24:44', '04-2122-000777', 'Gaytano Karen May', 'CITE', 'Just log out to the system'),
-(94, '2024-03-29 01:24:50', '04-2122-022772', 'Mariano Jemima', 'COA', 'Just log in to the system');
+(95, '2024-03-29 08:06:05', 'UI-22-167-F', 'Parel Kurt', 'CITE', 'Just log in to the system'),
+(96, '2024-03-29 08:07:14', 'UI-22-167-F', 'Parel Kurt', 'CITE', 'Update profile'),
+(97, '2024-03-29 08:12:49', 'UI-22-167-F', 'Parel Kurt', 'CITE', 'Update profile'),
+(98, '2024-03-29 08:12:55', 'UI-22-167-F', 'Parel Kurt', 'CITE', 'Update profile'),
+(99, '2024-03-29 08:27:21', 'UI-22-167-F', 'Parel Kurt', 'CITE', 'Update profile'),
+(100, '2024-03-29 08:27:57', 'UI-22-167-F', 'Parel Kurt', 'CITE', 'Update profile'),
+(101, '2024-03-29 08:37:55', 'UI-22-167-F', 'Parel Kurt', 'CITE', 'Just log in to the system'),
+(102, '2024-03-29 08:40:01', 'UI-22-167-F', 'Parel Kurt', 'CITE', 'Update profile'),
+(103, '2024-03-29 08:40:35', 'UI-22-167-F', 'Parel Kurt', 'CITE', 'Update profile'),
+(104, '2024-03-29 08:43:14', 'UI-22-167-F', 'Parel Kurt', 'CITE', 'Just log in to the system'),
+(105, '2024-03-29 08:43:23', 'UI-22-167-F', 'Parel Kurt', 'CITE', 'Update profile'),
+(106, '2024-03-29 08:44:55', 'UI-22-167-F', 'Parel Kurt', 'CITE', 'Update profile'),
+(107, '2024-03-29 08:46:11', 'UI-22-167-F', 'Parel Kurt', 'CITE', 'Update profile'),
+(108, '2024-03-29 08:47:10', 'UI-22-167-F', 'Parel Kurt', 'CITE', 'Update profile'),
+(109, '2024-03-29 08:47:29', 'UI-22-167-F', 'Parel Kurt', 'CITE', 'Update profile'),
+(110, '2024-03-29 08:48:16', 'UI-22-167-F', 'Parel Kurt', 'CITE', 'Update profile'),
+(111, '2024-03-29 08:49:36', 'UI-22-167-F', 'Parel Kurt', 'CITE', 'Update profile'),
+(112, '2024-03-29 08:49:49', 'UI-22-167-F', 'Parel Kurt', 'CITE', 'Update profile'),
+(113, '2024-03-29 08:49:56', 'UI-22-167-F', 'Parel Kurt', 'CITE', 'Update profile'),
+(114, '2024-03-29 09:00:50', 'UI-22-167-F', 'Parel Kurt', 'CITE', 'Update profile'),
+(115, '2024-03-29 09:02:21', 'UI-22-167-F', 'Parel Kurt', 'CITE', 'Just log out to the system'),
+(116, '2024-03-29 09:10:21', 'UI-22-167-F', 'Parel Kurt', 'CITE', 'Just log in to the system'),
+(117, '2024-03-29 09:39:00', 'UI-22-167-F', 'Parel Kurt', 'CITE', 'Requested an HK scholar'),
+(118, '2024-03-29 09:47:38', 'UI-22-167-F', 'Parel Kurt', 'CITE', 'Just log in to the system'),
+(119, '2024-03-29 09:48:29', 'UI-22-167-F', 'Parel Kurt', 'CITE', 'Just log in to the system'),
+(120, '2024-03-29 09:49:37', 'UI-22-167-F', 'Parel Kurt', 'CITE', 'Just log in to the system'),
+(121, '2024-03-29 09:50:19', 'UI-22-167-F', 'Parel Kurt', 'CITE', 'Just log in to the system'),
+(122, '2024-03-29 09:57:16', 'UI-22-167-F', 'Parel Kurt', 'CITE', 'Just log in to the system');
 
 -- --------------------------------------------------------
 
@@ -162,7 +97,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `userName`, `adminIdNumber`, `passWord`, `profilePics`, `About`, `Phone`, `Address`, `Email`, `Twitter`, `Facebook`, `Instagram`, `Linkedin`) VALUES
-(1, 'Bacabac Jester Paul', '04-1234-1234', '@Jester123', 'serjester.jpg', 'im good', '09876543219', 'Iloilo city', 'Bruce@gmail', 'https://www.facebook.com/jemayyyy', 'https://www.facebook.com/karenmaygaytano', 'https://www.facebook.com/jemayyyy', 'https://www.facebook.com/reuben.mallorca');
+(1, 'Bacabac Jester Paul', '04-1234-1234', '@Jester1234', 'serjester.jpg', 'im good', '09876543219', 'Iloilo city', 'Bruce@gmail', 'https://www.facebook.com/jemayyyy', 'https://www.facebook.com/karenmaygaytano', 'https://www.facebook.com/jemayyyy', 'https://www.facebook.com/reuben.mallorca');
 
 -- --------------------------------------------------------
 
@@ -181,8 +116,7 @@ CREATE TABLE `hk_assignd_teaecher` (
 --
 
 INSERT INTO `hk_assignd_teaecher` (`operatikon_ID`, `hk_ID`, `assigmentID`) VALUES
-('Gaytano Karen May', '04-2122-031572', 54),
-('Gaytano Karen May', '04-2122-000001', 55);
+('Parel Kurt', '04-2122-031572', 58);
 
 -- --------------------------------------------------------
 
@@ -221,15 +155,15 @@ INSERT INTO `hk_users` (`idnum`, `email`, `lname`, `fname`, `password`, `id_tota
 ('02-2387-700001', 'carmilo@gmail.com', 'Flame', 'Carmelo', '', '0', 'Bachelor of Science in Marine Engineering', 'COME', '4', 'HK100', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2200-90001', 'Dionar@gmail.com', 'Antioquia', 'Dionard', '', '0', 'Bachelor of Science in Accountancy', 'COA', '4', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-000002', 'donna@gmail.com', 'Mallorca', 'Donna', '', '0', 'Bachelor of Science in Tourism Management', 'COM', '1', 'HK25', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
-('04-2122-000001', 'jasper@gmail.com', 'operio', 'jasper', '', '0', 'Bachelor of Science in Information Technology', 'CITE', '3', 'HK100', 'SF', 'Gaytano Karen May', '180', '180', '0.0', 'pending', '2023-2024', 'FIRST SEMESTER', 'Na', 'warning'),
+('04-2122-000001', 'jasper@gmail.com', 'Operio', 'Jasper', '', '0', 'Bachelor of Science in Information Technology', 'CITE', '3', 'HK100', '', '', '180', '180', '0.0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-78627', 'Javelosa@gmail.com', 'Javelosa ', 'Wolf', '', '0', 'Bachelor of Science in Criminology', 'CCJE', '1', 'HK100', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-91734', 'jimama@gmail.com', 'Mariano', 'Jemima', '', '0', 'Bachelor of Science in Pharmacy', 'CAHS', '1', 'HK100', '', '', '180', '180', '0', 'pending', '2023 - 2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2002-90021', 'justin@gmail.com', 'Susal', 'Justiene', '', '0', 'Bachelor of Science in Civil Engineering', 'COE', '2', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-035512', 'karenmay@gmail.com', 'Gaytano', 'Karen May', '', '0', 'Bachelor of Science in Information Technology', 'CITE', '4', 'HK75', '', '', '180', '180', '0', 'pending', '2023 - 2024', 'FIRST SEMESTER', 'av', 'warning'),
-('04-2122-035546', 'kylepama@gnail.cute', 'Pama', 'Kayle', '', '0', 'Bachelor of Arts in Psychology', 'CAHS', '2', 'HK25', '', '', '180', '180', '0', 'pending', '2023 - 2024', 'FIRST SEMESTER', 'av', 'warning'),
+('04-2122-035546', 'kylepama@gnail.cute', 'Pama', 'Kyle Francis', '', '0', 'Bachelor of Arts in Psychology', 'CAHS', '2', 'HK25', '', '', '180', '180', '0', 'pending', '2023 - 2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('09-2155-90828', 'malo@gmail.com', 'Amante', 'Malorena', '', '0', 'Bachelor of Science in Civil Engineering', 'COE', '1', 'HK100', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-1234-87237', 'Pechera@gamil.com', 'Pechera', 'Alessandra', '', '0', 'Bachelor of Science in Mechanical Engineering', 'COE', '1', 'HK25', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
-('04-2122-031572', 'ream.mallorca.ui@phinmaed.com', 'Mallorca', 'Reuben', '', '1', 'Bachelor of Science in Information Technology', 'CITE', '1', 'HK75', 'AF', 'Gaytano Karen May', '180', '0', '0.0', 'Complete', '2023 - 2024', 'FIRST SEMESTER', 'Na', 'success'),
+('04-2122-031572', 'ream.mallorca.ui@phinmaed.com', 'Mallorca', 'Reuben', '', '0', 'Bachelor of Science in Information Technology', 'CITE', '1', 'HK75', 'Student Facilitator', 'Parel Kurt', '180', '0', '0', 'Complete', '2023 - 2024', 'FIRST SEMESTER', 'Na', 'success'),
 ('04-2122-000003', 'ryan@gmail.com', 'Mallorca', 'Ryan', '', '0', 'Bachelor of Secondary Education', 'COED', '4', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning');
 
 -- --------------------------------------------------------
@@ -246,20 +180,6 @@ CREATE TABLE `hk_user_activelogs` (
   `dept` varchar(255) NOT NULL,
   `act_perm` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `hk_user_activelogs`
---
-
-INSERT INTO `hk_user_activelogs` (`id`, `date_time`, `hk_id`, `hk_name`, `dept`, `act_perm`) VALUES
-(5, '2024-03-29 00:24', '04-2122-031572', 'Reuben Mallorca', 'CITE', 'Sing in'),
-(6, '2024-03-29 00:24', '04-2122-031572', 'Reuben Mallorca', 'CITE', 'Sing out'),
-(7, '2024-03-29 00:24', '04-2122-031572', 'Reuben Mallorca', 'CITE', 'Sing in'),
-(8, '2024-03-29 00:24', '04-2122-031572', 'Reuben Mallorca', 'CITE', 'Sing out'),
-(9, '2024-03-29 00:47', '04-2122-000001', 'jasper operio', 'CITE', 'Sing in'),
-(10, '2024-03-29 00:47', '04-2122-000001', 'jasper operio', 'CITE', 'Sing out'),
-(11, '2024-03-29 00:48', '04-2122-000001', 'jasper operio', 'CITE', 'Sing in'),
-(12, '2024-03-29 00:48', '04-2122-000001', 'jasper operio', 'CITE', 'Sing out');
 
 -- --------------------------------------------------------
 
@@ -278,7 +198,7 @@ CREATE TABLE `operations_data` (
   `Operation_Designation-Position` varchar(255) NOT NULL,
   `Operations_Email` varchar(255) NOT NULL,
   `profilePics` varchar(255) NOT NULL,
-  `operations_about` varchar(255) NOT NULL,
+  `operations_about` varchar(2555) NOT NULL,
   `twitter` varchar(255) NOT NULL,
   `facebook` varchar(255) NOT NULL,
   `instagram` varchar(255) NOT NULL,
@@ -293,9 +213,7 @@ CREATE TABLE `operations_data` (
 --
 
 INSERT INTO `operations_data` (`Faculty_Lname`, `Faculty_Fname`, `Faculty_Password`, `Faculty_Id_Number`, `Operation_Dept`, `Operations_Mname`, `Operation_phone_Number`, `Operation_Designation-Position`, `Operations_Email`, `profilePics`, `operations_about`, `twitter`, `facebook`, `instagram`, `linkedin`, `Address`, `status_ol`, `color_status`) VALUES
-('Gaytano', 'Karen May', '$2b$12$2Y0s48Qxz1qKEYrMULbmFuMN9mnhO64AIJRw/93C2SEunafhGMaEq', '04-2122-000777', 'CITE', 'G', '09948486859', 'Super Cute', 'karenmaygaytano@gmail.com', 'KARENS.jpg', '', '', '', '', '', '', 'INACTIVE', 'danger'),
-('Mariano', 'Jemima', '$2b$12$TKL1UrSENeGpc71Fwu9PzuBugGEKB/LMUzz/xlesk.Ap9jxqT9Ol.', '04-2122-022772', 'COA', 'G', '09476959407', 'Chairman', 'Jemima@gmail.com', 'jemProfile.jpg', '', '', '', '', '', '', 'ACTIVE', 'success'),
-('Mallorca', 'Reuben', '$2b$12$xUvJ73XI5Vfz1DwKT5rSt.9ohLSlKuHSXg/PWZW0Rzo4qzcFjLoxO', '04-2122-031572', 'COA', 'A', '09948486859', 'COO', 'ream.mallorca.ui@phinmaed.com', '', '', '', '', '', '', '', 'INACTIVE', 'danger');
+('Parel', 'Kurt', '$2b$12$jpQ2KAxM9YkGXNdJ4LTXbO68.u5gex5TJUtX41hAXgUXSaM0QHDXO', 'UI-22-167-F', 'CITE', 'E', '09876543219', 'Faculty', 'kurt.parel.ui@phinmaed.com', 'ser.jpg', 'Hello Im Kurt parel, an IT instructor passionate about empowering individuals with the knowledge and skills needed to thrive in the dynamic world of technology', 'https://www.facebook.com/kurt.parel', 'https://www.facebook.com/kurt.parel', 'https://www.facebook.com/kurt.parel', 'https://www.facebook.com/kurt.parel', 'ILOILO CITY MANDORIAO', 'ACTIVE', 'success');
 
 -- --------------------------------------------------------
 
@@ -316,8 +234,7 @@ CREATE TABLE `operation_feedback` (
 --
 
 INSERT INTO `operation_feedback` (`id_feed`, `feedMess`, `feed_name`, `feed_date`, `feed_pic`) VALUES
-(1, 'cute ni karen grabi', 'KAREN MAY GAYTANO', '2024-03-29 00:05', 'KARENS.jpg'),
-(2, 'i like the system the developers are super cute i love it omg', 'JEMIMA MARIANO', '2024-03-29 01:25', 'jemProfile.jpg');
+(3, 'I like the system interface its very easy to use and understand', 'KURT PAREL', '2024-03-29 09:11', 'ser.jpg');
 
 -- --------------------------------------------------------
 
@@ -334,14 +251,6 @@ CREATE TABLE `operation_request` (
   `SUPERVISOR` varchar(255) NOT NULL,
   `ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `operation_request`
---
-
-INSERT INTO `operation_request` (`Designation`, `Requirements`, `Report Day/s`, `Request`, `DEPT`, `SUPERVISOR`, `ID`) VALUES
-('SF', '1', 'Mon-Tues', '1', 'CITE', 'Gaytano Karen May', 25),
-('SF', '1', 'Mon-Tues', '1', 'CCJE', 'Gaytano Karen May', 27);
 
 -- --------------------------------------------------------
 
@@ -360,6 +269,14 @@ CREATE TABLE `opertaion_req_acc` (
   `Operation_Designation-Position` varchar(255) NOT NULL,
   `Operations_Email` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `opertaion_req_acc`
+--
+
+INSERT INTO `opertaion_req_acc` (`Faculty_Lname`, `Faculty_Fname`, `Faculty_Password`, `Faculty_Id_Number`, `Operation_Dept`, `Operations_Mname`, `Operation_phone_Number`, `Operation_Designation-Position`, `Operations_Email`) VALUES
+('Mondia', 'Zesty', '$2b$12$ljb6UYc9A7ijJ.VKZRt/oeqbCCimrDCoAoymZ0oeKqZkceOxxAO46', 'UI-19-117-F', 'CITE', 'G', '09476959407', 'Faculty', 'zesty.mondia.ui@phinmaed.com'),
+('Calasara', 'Robert', '$2b$12$LqeyiTb3zlV61jP7iEsx4.WiUuJC6jGSFJWLswZMo.aWmjRT2fFtS', 'UI-19-120-F', 'CITE', 'J', '09876543219', 'Faculty', 'robert.calasara.ui@phinmaed.com');
 
 -- --------------------------------------------------------
 
@@ -380,9 +297,7 @@ CREATE TABLE `reports/announcement` (
 --
 
 INSERT INTO `reports/announcement` (`content`, `date`, `time`, `adminName`, `id`) VALUES
-('        Duty Assignments the Upcoming for Week Announce', '2024-02-22', '8:43', 'admin', 5),
-('        sir robert calasar ikaw gina pa tawag sa csdl kadto d mga 3 pm d ka ma late ha manda kalang', '2024-02-22', '10:28', 'admin', 6),
-('  DUTY HOURS EXTENDED      ', '2024-03-08', '15:3', 'Jester Paul Bacabac', 11);
+('Exciting news for all aspiring Python programmers! ????\r\n\r\nWe are thrilled to announce the launch of our brand new Python Programming Course, designed to kickstart your journey into the world of coding.', '2024-03-29', '10:0', 'Bacabac Jester Paul', 15);
 
 -- --------------------------------------------------------
 
@@ -398,25 +313,6 @@ CREATE TABLE `scholar_duty_records` (
   `id` int(11) NOT NULL,
   `Type_of_Process` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `scholar_duty_records`
---
-
-INSERT INTO `scholar_duty_records` (`date`, `Hours_In_Out`, `Minutes_In_Out`, `Student_id_Number`, `id`, `Type_of_Process`) VALUES
-('2024-03-28', 11, 52, '04-2122-031572', 296, 'IN'),
-('2024-03-28', 11, 53, '04-2122-031572', 297, 'OUT'),
-('2024-03-29', 0, 22, '04-2122-031572', 298, 'IN'),
-('2024-03-29', 0, 24, '04-2122-031572', 299, 'IN'),
-('2024-03-29', 0, 24, '04-2122-031572', 300, 'OUT'),
-('2024-03-29', 0, 24, '04-2122-031572', 301, 'IN'),
-('2024-03-29', 0, 24, '04-2122-031572', 302, 'OUT'),
-('2024-03-29', 0, 24, '04-2122-031572', 303, 'IN'),
-('2024-03-29', 0, 24, '04-2122-031572', 304, 'OUT'),
-('2024-03-29', 0, 47, '04-2122-000001', 305, 'IN'),
-('2024-03-29', 0, 47, '04-2122-000001', 306, 'OUT'),
-('2024-03-29', 0, 48, '04-2122-000001', 307, 'IN'),
-('2024-03-29', 0, 48, '04-2122-000001', 308, 'OUT');
 
 --
 -- Indexes for dumped tables
@@ -498,7 +394,7 @@ ALTER TABLE `scholar_duty_records`
 -- AUTO_INCREMENT for table `active_logs`
 --
 ALTER TABLE `active_logs`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
 
 --
 -- AUTO_INCREMENT for table `admin`
@@ -510,7 +406,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `hk_assignd_teaecher`
 --
 ALTER TABLE `hk_assignd_teaecher`
-  MODIFY `assigmentID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `assigmentID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `hk_user_activelogs`
@@ -522,19 +418,19 @@ ALTER TABLE `hk_user_activelogs`
 -- AUTO_INCREMENT for table `operation_feedback`
 --
 ALTER TABLE `operation_feedback`
-  MODIFY `id_feed` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_feed` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `operation_request`
 --
 ALTER TABLE `operation_request`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `reports/announcement`
 --
 ALTER TABLE `reports/announcement`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `scholar_duty_records`
