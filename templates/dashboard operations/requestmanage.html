@@ -355,12 +355,13 @@
   <table id="example" class="table table-striped" style="width:100%">
  <thead>
      <tr>
-      <th>STUDENT ID</th>
-      <th>SCHOLAR NAME</th>
-      <th>COMPLETED MINUTES </th>
-      <th>REMAINING HOURS</th>
-      <th>STATUS</th>
-      <th>CERTIFICATE</th>
+       <th>STUDENT ID</th>
+       <th>SCHOLAR NAME</th>
+       <th>COMPLETED MINUTES </th>
+       <th>REMAINING HOURS</th>
+       <th>DEPARTMENT</th>
+       <th>STATUS</th>
+       <th>CERTIFICATE</th>
     
         
      </tr>
@@ -374,6 +375,7 @@
           <td>{{row['SCHOLAR NAME']}}</td>
           <td>{{row['COMPLETED HOURS']}}</td>
           <td>{{row['REMAINING HOURS']}}</td>
+          <td>{{row['Department']}}</td>
           <td class ="text-white text-bg-{{row['color']}}"> {{row['STATUS']}}</td>
           <td><button type="submit" name="select" value="print {{row['STUDENT ID']}}"><i class="bi bi-folder2-open"></i></button>  </td>
 
