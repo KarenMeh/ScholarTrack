@@ -417,6 +417,7 @@ margin-top: 20px;
                 </div>
               </div>
               <section style="background-color: #ffffff;">
+                  {% for row in feeds%}
                 <div class="container ">
                   <div class="row d-flex justify-content-center">
                     <div class="col-md-17 col-lg-17">
@@ -427,10 +428,10 @@ margin-top: 20px;
               
                           <div class="d-flex flex-start">
                             <img class="rounded-circle shadow-1-strong me-3"
-                              src="/static/assetUser/img/ser.jpg" alt="avatar" width="60"
+                              src="/static/profilePics/{{row[4]}}" alt="avatar" width="60"
                               height="60" />
                             <div>
-                              <h3 class="fw-bold mb-1 b-7" >Kurt Ellie Parel</h3>
+                              <h3 class="fw-bold mb-1 b-7" >{{row[2]}}</h3>
                             <i class="fa fa-star rating-color fs-4"></i>
                             <i class="fa fa-star rating-color fs-4"></i>
                             <i class="fa fa-star rating-color fs-4"></i>
@@ -438,81 +439,23 @@ margin-top: 20px;
                             <i class="fa fa-star rating-color fs-4"></i>
                               <div class="d-flex align-items-center mb-3">
                                 <p class="mb-0 fs-4">
-                                  Cute mo talaga karen
+                                  {{row[1]}}
                                 </p>
   
                                 
                               </div>
                               
                               <p class="mb-1 fs-6">
-                                March 28, 2024
+                                {{row[3]}}
                               </p>
                             </div>
                           </div>
                         </div>
               
                         <hr class="my-0" />
+                          {% endfor %}
               
-                        <div class="card-body p-4">
-                          <div class="d-flex flex-start">
-                            <img class="rounded-circle shadow-1-strong me-3"
-                              src="/static/assetUser/img/girl.png" alt="avatar" width="60"
-                              height="60" />
-                            <div>
-                              <h3 class="fw-bold mb-1 mb-6" >Zesty Kein Mondia</h3>
-                              <i class="fa fa-star rating-color fs-4"></i>
-                              <i class="fa fa-star rating-color fs-4"></i>
-                              <i class="fa fa-star rating-color fs-4"></i>
-                              <i class="fa fa-star rating-color fs-4"></i>
-                              <i class="fa fa-star rating-color fs-4"></i>
-                                <div class="d-flex align-items-center mb-3">
-                                  <p class="mb-0 fs-4">
-                                    Cute mo talaga karen
-                                  </p>
-    
-                                  
-                                </div>
-                                
-                                <p class="mb-1 fs-6">
-                                  March 28, 2024
-                                </p>
-                            </div>
-                          </div>
-                        </div>
-              
-                     
-                        <hr class="my-0" />
-              
-                        <div class="card-body p-4">
-                          <div class="d-flex flex-start">
-                            <img class="rounded-circle shadow-1-strong me-3"
-                              src="/static/assetUser/img/faculty_robert.jpg" alt="avatar" width="60"
-                              height="60" />
-                            <div>
-                              <h3 class="fw-bold mb-1 mb-6" >Robert Calasara</h3>
-                              <i class="fa fa-star rating-color fs-4"></i>
-                              <i class="fa fa-star rating-color fs-4"></i>
-                              <i class="fa fa-star rating-color fs-4"></i>
-                              <i class="fa fa-star rating-color fs-4"></i>
-                              <i class="fa fa-star rating-color fs-4"></i>
-                                <div class="d-flex align-items-center mb-3">
-                                  <p class="mb-0 fs-4">
-                                    Cute mo talaga karen
-                                  </p>
-    
-                                  
-                                </div>
-                                
-                                <p class="mb-1 fs-6">
-                                  March 28, 2024
-                                </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+
               </section>
            
           </div>
