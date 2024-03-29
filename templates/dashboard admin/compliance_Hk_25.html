@@ -277,6 +277,7 @@
                                         <th>SCHOLAR NAME</th>
                                         <th>COMPLETED HOURS</th>
                                         <th>REMAINING HOURS</th>
+                                        <th>DEPARTMENT</th>
                                         <th> STATUS </th>
                                       
                                      
@@ -289,10 +290,11 @@
                       <td><button type="submit" name="select" value="select"> <i class="bi bi-calendar2-minus"> </i></button>
                         {{row['STUDENT ID']}}</td>
                     
-                     <td>{{row['SCHOLAR NAME']}}</td>
-                     <td>{{row['COMPLETED HOURS']}}</td>
-                       <td>{{row['REMAINING HOURS']}}</td>
-                       <td class ="text-bg-{{row['color']}} text-white">{{row['STATUS']}}</td>
+                          <td>{{row['SCHOLAR NAME']}}</td>
+                          <td>{{row['COMPLETED HOURS']}}</td>
+                          <td>{{row['REMAINING HOURS']}}</td>
+                          <td>{{row['DEPARTENT']}}</td>
+                          <td class ="text-bg-{{row['color']}} text-white">{{row['STATUS']}}</td>
                      <input type="hidden" name="Selected_Id" value="{{row['STUDENT ID']}}">
                     </form>
                      </tr>

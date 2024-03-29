@@ -273,12 +273,14 @@
                   <table id="example1" class="table table-striped" style="width:100%">
                  <thead>
                      <tr>              
-                                      <th>STUDENT ID</th>
-                                      <th>SCHOLAR NAME</th>
-                                      <th>COMPLETED HOURS</th>
-                                      <th>REMAINING HOURS</th>
-                                      <th> STATUS </th>
-                                    
+
+                                        <th>STUDENT ID</th>
+                                        <th>SCHOLAR NAME</th>
+                                        <th>COMPLETED HOURS</th>
+                                        <th>REMAINING HOURS</th>
+                                        <th>DEPARTMENT</th>
+                                        <th> STATUS </th>
+
                                    
                      </tr>
                  </thead>
@@ -289,9 +291,10 @@
                     <td><button type="submit" name="select" value="select"> <i class="bi bi-calendar2-minus"> </i></button>
                       {{row['STUDENT ID']}}</td>
                   
-                   <td>{{row['SCHOLAR NAME']}}</td>
-                   <td>{{row['COMPLETED HOURS']}}</td>
-                     <td>{{row['REMAINING HOURS']}}</td>
+                         <td>{{row['SCHOLAR NAME']}}</td>
+                         <td>{{row['COMPLETED HOURS']}}</td>
+                         <td>{{row['REMAINING HOURS']}}</td>
+                         <td>{{row['DEPARTENT']}}</td>
                      <td class ="text-bg-{{row['color']}} text-white">{{row['STATUS']}}</td>
                    <input type="hidden" name="Selected_Id" value="{{row['STUDENT ID']}}"> 
                   </form>

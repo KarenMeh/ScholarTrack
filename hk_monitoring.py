@@ -427,7 +427,10 @@ def Dashboard():
         studentAv = qury.fetchall()
 
         # comliance rate data
-        complirate = ((len(complete)/len(pending))*100).__round__()
+        if len(complete) == 0 and len(pending) == 0:
+            complirate = 0
+        else:
+            complirate = ((len(complete)/len(pending))*100).__round__()
 
         return render_template("dashboard operations/OpartionsDashBoard.html",
                                logUser = session['username'],
@@ -1098,7 +1101,7 @@ def compliance():
             dataProcess = {"STUDENT ID": student_info[counter_Table1][0], "SCHOLAR NAME": std_fullNmae,
                            "COMPLETED HOURS": student_info[counter_Table1][5] + "m",
                            "REMAINING HOURS": student_info[counter_Table1][13] + "h " +str(float(student_info[counter_Table1][14]).__round__()).split(".")[0] + "m",
-                           "STATUS": student_info[counter_Table1][15],"color":student_info[counter_Table1][19]}
+                           "STATUS": student_info[counter_Table1][15],"color":student_info[counter_Table1][19],"DEPARTENT":student_info[counter_Table1][7]}
             table_OfStudent_Info.append(dataProcess)
             counter_Table1 += 1
 
@@ -1158,7 +1161,7 @@ def export_excel():
                        "COMPLETED HOURS": student_info[counter_Table1][5] + "m",
                        "REMAINING HOURS": student_info[counter_Table1][13] + "h " +
                                           str(float(student_info[counter_Table1][14]).__round__()).split(".")[0] + "m",
-                       "STATUS": student_info[counter_Table1][15]}
+                       "STATUS": student_info[counter_Table1][15],"DEPARTENT":student_info[counter_Table1][7]}
         table_OfStudent_Info.append(dataProcess)
         counter_Table1 += 1
     # Convert the data to a pandas DataFrame
@@ -1195,7 +1198,7 @@ def compliance_Hk_25():
                            "REMAINING HOURS": student_info_25[counter_Table1][13] + "h " +
                                               str(float(student_info_25[counter_Table1][14]).__round__()).split(".")[
                                                   0] + "m",
-                           "STATUS": student_info_25[counter_Table1][15], "color": student_info_25[counter_Table1][19]}
+                           "STATUS": student_info_25[counter_Table1][15], "color": student_info_25[counter_Table1][19],"DEPARTENT":student_info_25[counter_Table1][7]}
             table_OfStudent_Info_25.append(dataProcess)
             counter_Table1 += 1
 
@@ -1231,7 +1234,7 @@ def compliance_Hk_50():
                            "REMAINING HOURS": student_info_50[counter_Table1][13] + "h " +
                                               str(float(student_info_50[counter_Table1][14]).__round__()).split(".")[
                                                   0] + "m",
-                           "STATUS": student_info_50[counter_Table1][15], "color": student_info_50[counter_Table1][19]}
+                           "STATUS": student_info_50[counter_Table1][15], "color": student_info_50[counter_Table1][19],"DEPARTENT":student_info_50[counter_Table1][7]}
             table_OfStudent_Info_50.append(dataProcess)
             counter_Table1 += 1
 
@@ -1266,7 +1269,7 @@ def compliance_Hk_75():
                            "REMAINING HOURS": student_info_75[counter_Table1][13] + "h " +
                                               str(float(student_info_75[counter_Table1][14]).__round__()).split(".")[
                                                   0] + "m",
-                           "STATUS": student_info_75[counter_Table1][15], "color": student_info_75[counter_Table1][19]}
+                           "STATUS": student_info_75[counter_Table1][15], "color": student_info_75[counter_Table1][19],"DEPARTENT":student_info_75[counter_Table1][7]}
             table_OfStudent_Info_75.append(dataProcess)
             counter_Table1 += 1
 
@@ -1301,7 +1304,7 @@ def compliance_Hk_100():
                            "REMAINING HOURS": student_info_100[counter_Table1][13] + "h " +
                                               str(float(student_info_100[counter_Table1][14]).__round__()).split(".")[
                                                   0] + "m",
-                           "STATUS": student_info_100[counter_Table1][15], "color": student_info_100[counter_Table1][19]}
+                           "STATUS": student_info_100[counter_Table1][15], "color": student_info_100[counter_Table1][19],"DEPARTENT":student_info_100[counter_Table1][7]}
             table_OfStudent_Info_100.append(dataProcess)
             counter_Table1 += 1
 

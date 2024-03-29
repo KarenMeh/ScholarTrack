@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 29, 2024 at 10:30 AM
+-- Generation Time: Mar 29, 2024 at 01:14 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -130,21 +130,6 @@ CREATE TABLE `hk_assignd_teaecher` (
   `assigmentID` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `hk_assignd_teaecher`
---
-
-INSERT INTO `hk_assignd_teaecher` (`operatikon_ID`, `hk_ID`, `assigmentID`) VALUES
-('Parel Kurt', '04-2122-031572', 58),
-('Parel Kurt Ellie', '04-1920-02837', 59),
-('Parel Kurt Ellie', '04-1920-02836', 60),
-('Parel Kurt Ellie', '04-2122-14569', 61),
-('Parel Kurt Ellie', '04-2122-000001', 62),
-('Parel Kurt Ellie', '04-2122-59333', 63),
-('Parel Kurt Ellie', '04-2122-59433', 64),
-('Parel Kurt Ellie', '04-1920-04122', 65),
-('Parel Kurt Ellie', '04-2122-78627', 66);
-
 -- --------------------------------------------------------
 
 --
@@ -182,7 +167,7 @@ INSERT INTO `hk_users` (`idnum`, `email`, `lname`, `fname`, `password`, `id_tota
 ('04-2122-045729', 'abegail@gmail.com', 'Pang-al', 'Abegail', '', '0', 'Bachelor of Science in Information Technology', 'CITE', '2', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-1920-02832', 'addie@gmail.com', 'Gaytano', '\r\nAddie', '', '0', 'Bachelor of Science in Civil Engineering', 'COE', '2', 'HK25', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2120-02883', 'adrian@gmail.com', 'Quia', 'Adrian', '', '0', 'Bachelor of Science in Civil Engineering', 'COE', '3', 'HK25', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
-('04-2122-59333', 'albina@gmail.com', 'Sacapno', 'Albina', '', '0', 'Bachelor of Science in Nursing', 'CAHS', '3', 'HK75', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'Na', 'warning'),
+('04-2122-59333', 'albina@gmail.com', 'Sacapno', 'Albina', '', '0', 'Bachelor of Science in Nursing', 'CAHS', '3', 'HK75', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-54863', 'alden@gmail.com', 'Alde', 'Rochielle', '', '0', 'Bachelor of Science in Nursing', 'CAHS', '1', 'HK75', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-85249', 'aldric@gmail.com', 'Richard', 'Alden', '', '0', 'Bachelor of Science in Marine Engineering', 'COME', '3', 'HK75', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2120-02863', 'alex@gmail.com', 'Gonzaga', 'Alex', '', '0', 'Bachelor of Science in Civil Engineering', 'COE', '3', 'HK25', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
@@ -196,12 +181,12 @@ INSERT INTO `hk_users` (`idnum`, `email`, `lname`, `fname`, `password`, `id_tota
 ('04-2122-59343', 'andrew@gmail.com', 'Sacapano', 'Andrew', '', '0', 'Bachelor of Science in Nursing', 'CAHS', '2', 'HK75', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-1617-05234	', 'antioquia@gmail.com', 'Antioquia', 'Dionard', '@Dionard123', '0', 'Bachelor of Science in Business Administration', 'COM', '2', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2021-02572	', 'aragorata@gmail.com', 'Aragorat', 'Kim Raxamm', '@Raxamm123', '0', 'Bachelor of Science in Business Administration', 'COM', '2', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
-('04-1920-02837', 'arthur@gmail.com', 'Nery', '\r\nArthur', '', '0', 'Bachelor of Science in Civil Engineering', 'COE', '1', 'HK25', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'Na', 'warning'),
+('04-1920-02837', 'arthur@gmail.com', 'Nery', '\r\nArthur', '', '0', 'Bachelor of Science in Civil Engineering', 'COE', '1', 'HK25', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-52863', 'belen@gmail.com', 'Gregorio', 'Belen', '', '0', 'Bachelor of Science in Nursing', 'CAHS', '1', 'HK75', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-030617', 'bernaalfonso@gmail.com', 'Alfonso', 'Bernadeth', '@berna', '0', 'Bachelor of Science in Hospitality Management', 'COM', '1', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-032061', 'biboso@gmmail.com', 'Biboso', 'Rona Mae', '@Ronamae', '0', 'Bachelor of Science in Tourism Management', 'COM', '2', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2120-02963', 'bonnie@gmail.com', 'Onnie', 'Bonnie', '', '0', 'Bachelor of Science in Civil Engineering', 'COE', '3', 'HK25', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
-('04-2122-59433', 'buday@gmail.com', 'Mariano', 'Gem', '', '0', 'Bachelor of Science in Nursing', 'CAHS', '3', 'HK75', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'Na', 'warning'),
+('04-2122-59433', 'buday@gmail.com', 'Mariano', 'Gem', '', '0', 'Bachelor of Science in Nursing', 'CAHS', '3', 'HK75', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-031410', 'bunagan@gmmail.com', 'Bunagan', 'Sean Carlo', '@Seancarlo', '0', 'Bachelor of Science in Tourism Management', 'COM', '2', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-1617-01658', 'buslon@gmmail.com', 'Buslon', 'Ai Xylnn', '@Buslon123', '0', 'Bachelor of Science in Tourism Management', 'COM', '2', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-034824', 'calatana@gmmail.com', 'Calatana', 'Allyna Treyes', '@Calatana123', '0', 'Bachelor of Science in Tourism Management', 'COM', '3', 'HK75', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
@@ -220,10 +205,10 @@ INSERT INTO `hk_users` (`idnum`, `email`, `lname`, `fname`, `password`, `id_tota
 ('04-2231-01836', 'daisy@gmail.com', 'Lamboya', 'Daisy', '', '0', 'Bachelor of Science in Information Technology', 'CITE', '1', 'HK100', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-1920-02636', 'daniel@gmail.com', 'Padilla', 'Daniel', '', '0', 'Bachelor of Science in Criminology', 'CCJE', '4', 'HK100', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-14739', 'daren@gmail.com', 'Gado', 'Daren', '', '0', 'Bachelor of Science in Marine Engineering', 'COME', '1', 'HK25', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
-('04-2122-14569', 'dave@gmail.com', 'Ildefonso', 'Dave', '', '0', 'Bachelor of Science in Information Technology', 'CITE', '3', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'Na', 'warning'),
+('04-2122-14569', 'dave@gmail.com', 'Ildefonso', 'Dave', '', '0', 'Bachelor of Science in Information Technology', 'CITE', '3', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-035939', 'david@gmail.com', 'Patricio', 'David', '', '0', 'Bachelor of Science in Marine Engineering', 'COME', '4', 'HK75', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-000002', 'donna@gmail.com', 'Mallorca', 'Donna', '', '0', 'Bachelor of Science in Tourism Management', 'COM', '1', 'HK25', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
-('04-1920-04122', 'edwin@gmail.com', 'Jaytano', 'Edwin', '', '0', 'Bachelor of Science in Criminology', 'CCJE', '1', 'HK50', 'Student Facilitator', 'Parel Kurt Ellie', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'Na', 'warning'),
+('04-1920-04122', 'edwin@gmail.com', 'Jaytano', 'Edwin', '', '0', 'Bachelor of Science in Criminology', 'CCJE', '1', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-033129', 'eleferia@gmail.com', 'Eleferia', 'John Carl', '', '0', 'Bachelor of Science in Business Administration', 'COM', '3', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-24839', 'elmo@gmail.com', 'Luces', 'Elmo', '', '0', 'Bachelor of Science in Marine Engineering', 'COME', '1', 'HK25', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-001010', 'embon@gmail.com', 'Embon', 'Farah', '', '0', 'Bachelor of Science in Business Administration', 'COM', '4', 'HK75', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
@@ -237,8 +222,8 @@ INSERT INTO `hk_users` (`idnum`, `email`, `lname`, `fname`, `password`, `id_tota
 ('04-1920-02222', 'james@gmail.com', 'Bond', 'James', '', '0', 'Bachelor of Science in Criminology', 'CCJE', '2', 'HK100', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-1920-02422', 'jamesong@gmail.com', 'Reid', 'James', '', '0', 'Bachelor of Science in Criminology', 'CCJE', '2', 'HK100', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2231-51836', 'janela@gmail.com', 'Huam', 'Janela', '', '0', 'Bachelor of Science in Information Technology', 'CITE', '1', 'HK100', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
-('04-2122-000001', 'jasper@gmail.com', 'Operio', 'Jasper', '', '0', 'Bachelor of Science in Information Technology', 'CITE', '3', 'HK100', '', '', '180', '180', '0.0', 'pending', '2023-2024', 'FIRST SEMESTER', 'Na', 'warning'),
-('04-2122-78627', 'Javelosa@gmail.com', 'Javelosa ', 'Wolf', '', '0', 'Bachelor of Science in Criminology', 'CCJE', '1', 'HK100', 'Student Facilitator', 'Parel Kurt Ellie', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'Na', 'warning'),
+('04-2122-000001', 'jasper@gmail.com', 'Operio', 'Jasper', '', '0', 'Bachelor of Science in Information Technology', 'CITE', '3', 'HK100', '', '', '180', '180', '0.0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
+('04-2122-78627', 'Javelosa@gmail.com', 'Javelosa ', 'Wolf', '', '0', 'Bachelor of Science in Criminology', 'CCJE', '1', 'HK100', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-045839', 'jayar@gmail.com', 'Pagsagan', 'Jayar', '', '0', 'Bachelor of Science in Marine Engineering', 'COME', '4', 'HK75', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-13479', 'jc@gmail.com', 'Delos Santos', 'Jc', '', '0', 'Bachelor of Science in Information Technology', 'CITE', '4', 'HK100', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-14759', 'jema@gmail.com', 'Galanza', 'Jema', '', '0', 'Bachelor of Science in Information Technology', 'CITE', '4', 'HK100', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
@@ -256,7 +241,7 @@ INSERT INTO `hk_users` (`idnum`, `email`, `lname`, `fname`, `password`, `id_tota
 ('04-2122-035512', 'karenmay@gmail.com', 'Gaytano', 'Karen May', '', '0', 'Bachelor of Science in Information Technology', 'CITE', '4', 'HK75', '', '', '180', '180', '0', 'pending', '2023 - 2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-145859', 'kenneth@gmail.com', 'Tio', 'Kenneth', '', '0', 'Bachelor of Science in Information Technology', 'CITE', '3', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-88249', 'kiana@gmail.com', 'Coning', '\r\nKiana', '', '0', 'Bachelor of Science in Marine Engineering', 'COME', '3', 'HK75', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
-('04-1920-02836', 'kiddie@gmail.com', 'Santos', 'Kiddie', '', '0', 'Bachelor of Science in Civil Engineering', 'COE', '1', 'HK25', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'Na', 'warning'),
+('04-1920-02836', 'kiddie@gmail.com', 'Santos', 'Kiddie', '', '0', 'Bachelor of Science in Civil Engineering', 'COE', '1', 'HK25', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-1920-04442', 'kim@gmail.com', 'Gonzaga', 'Kim', '', '0', 'Bachelor of Science in Criminology', 'CCJE', '1', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-145829', 'kimmy@gmail.com', 'Dionasa', 'Kimmy', '', '0', 'Bachelor of Science in Information Technology', 'CITE', '2', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-1920-04342', 'kingston@gmail.com', 'Gobaga', 'Kingston', '', '0', 'Bachelor of Science in Criminology', 'CCJE', '1', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
@@ -287,7 +272,7 @@ INSERT INTO `hk_users` (`idnum`, `email`, `lname`, `fname`, `password`, `id_tota
 ('04-2122-15479', 'Queenie@gmail.com', 'Delos Reyes', 'Queenie', '', '0', 'Bachelor of Science in Information Technology', 'CITE', '4', 'HK100', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-25949', 'ralph@gmail.com', 'Susang', 'Ralph', '', '0', 'Bachelor of Science in Marine Engineering', 'COME', '2', 'HK75', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-02863', 'randy@gmail.com', 'Santiago', 'Randy', '', '0', 'Bachelor of Science in Civil Engineering', 'COE', '4', 'HK50', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
-('04-2122-031572', 'ream.mallorca.ui@phinmaed.com', 'Mallorca', 'Reuben', '', '0', 'Bachelor of Science in Information Technology', 'CITE', '1', 'HK75', '', '', '180', '0', '0', 'Complete', '2023 - 2024', 'FIRST SEMESTER', 'Na', 'success'),
+('04-2122-031572', 'ream.mallorca.ui@phinmaed.com', 'Mallorca', 'Reuben', '', '0', 'Bachelor of Science in Information Technology', 'CITE', '1', 'HK75', '', '', '180', '0', '0', 'Complete', '2023 - 2024', 'FIRST SEMESTER', 'av', 'success'),
 ('04-1920-03635', 'regine@gmail.com', 'Onatyag', 'Regine', '', '0', 'Bachelor of Science in Criminology', 'CCJE', '3', 'HK100', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-1920-02839', 'rico@gmail.com', 'Blangko', 'Rico', '', '0', 'Bachelor of Science in Civil Engineering', 'COE', '1', 'HK25', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
 ('04-2122-59323', 'rjames@gmail.com', 'Meren', 'Rjames', '', '0', 'Bachelor of Science in Nursing', 'CAHS', '3', 'HK75', '', '', '180', '180', '0', 'pending', '2023-2024', 'FIRST SEMESTER', 'av', 'warning'),
