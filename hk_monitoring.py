@@ -394,8 +394,29 @@ def Dashboard():
 
 
         # to display how many hk student there are
-        qury.execute("SELECT * FROM `hk_users`")
+        qury.execute("SELECT `hk_ID` FROM `hk_assignd_teaecher` WHERE  `operatikon_ID` = '"+session["lname"]+" "+session["fname"]+"'")
         number_of_stndt = qury.fetchall()
+
+
+        std_under_me = []
+        for k in number_of_stndt:
+            for m in k:
+
+                qury.execute("SELECT `statsForRenewal` FROM `hk_users` WHERE `idnum`='"+str(m)+"'")
+                dataz = qury.fetchall()[0][0]
+                std_under_me.append(dataz)
+
+        pending = []
+        complete =[]
+
+        for k in std_under_me:
+            if str(k) == "Complete":
+                complete.append(k)
+            else:
+                pending.append(k)
+
+
+
 
         # to display std whitout assigmnt
         qury.execute("SELECT  `Status_avail` FROM `hk_users` WHERE `Status_avail` ='Na' ")
@@ -406,12 +427,12 @@ def Dashboard():
         studentAv = qury.fetchall()
 
         # comliance rate data
-        complirate = (len(stduentNotAv) / len(number_of_stndt)) * 100
+        complirate = ((len(complete)/len(pending))*100).__round__()
 
         return render_template("dashboard operations/OpartionsDashBoard.html",
                                logUser = session['username'],
                                dateTimeLista_announcment=reversed_dare_announcment,
-                               profilepicDb=profilepicDb,complirate=str(complirate.__round__())+"%",
+                               profilepicDb=profilepicDb,complirate=str(complirate)+"%",
                                number_of_stndt=len(number_of_stndt))
 
     else:
@@ -1025,12 +1046,16 @@ def admindashBoard():
         qury.execute("SELECT  `Status_avail` FROM `hk_users` WHERE `Status_avail` ='Na' ")
         stduentNotAv = qury.fetchall()
 
-        # to display std whitout assigmnt
-        qury.execute("SELECT  `Status_avail` FROM `hk_users` WHERE `Status_avail` ='av' ")
-        studentAv = qury.fetchall()
+
+        qury.execute("SELECT * FROM `hk_users` WHERE `statsForRenewal` = 'Complete'")
+        std_complied = qury.fetchall()
+
+        qury.execute("SELECT * FROM `hk_users` WHERE `statsForRenewal` = 'pending'")
+        std_Notcomplied = qury.fetchall()
+        print(len(std_complied))
 
         #comliance rate data
-        complirate = (len(stduentNotAv)/len(number_of_stndt))*100
+        complirate = (len(std_complied)/len(number_of_stndt))*100
 
         qury.execute("SELECT `profilePics` FROM `admin` WHERE `adminIdNumber`= '" + session["userIdAdmin"] + "'")
         profilepicDb = qury.fetchall()[0][0]
@@ -1039,8 +1064,8 @@ def admindashBoard():
                                logUser=session["adminUser"],
                                dateTimeLista_announcment=reversed_dare_announcment,
                                number_of_stndt=len(number_of_stndt),
-                               stduentNotAv=len(stduentNotAv),
-                               studentAv=len(studentAv),complirate=str(complirate.__round__())+"%",
+                               stduentNotAv=len(std_complied),
+                               studentAv=len(std_Notcomplied),complirate=str(complirate.__round__())+"%",
                                profilepicDb=profilepicDb)
     else:
         return redirect(url_for("admin"))
