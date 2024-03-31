@@ -457,13 +457,15 @@ def request_Scholar():
 
         for k in mYStudent_Db_Id:
 
-            qury.execute("SELECT `idnum`,`lname`, `fname`, `id_totalHours`,  `remaningDuty`, `remDutyMins`,`statsForRenewal`, `status_color` FROM `hk_users` WHERE `idnum`= '"+k[0]+"'")
+            qury.execute("SELECT `idnum`,`lname`, `fname`, `id_totalHours`,  `remaningDuty`, `remDutyMins`,`statsForRenewal`, `status_color` , `department` FROM `hk_users` WHERE `idnum`= '"+k[0]+"'")
             listahan.append(qury.fetchall()[0])
 
 
         student_underMe=[]
         for k in range(len(listahan)):
-            tables = {"STUDENT ID":listahan[k][0],"SCHOLAR NAME":listahan[k][1]+" "+listahan[k][2],"COMPLETED HOURS":str(listahan[k][3])+"m","REMAINING HOURS":listahan[k][4]+"h "+str(float(listahan[k][5]).__round__()).split(".")[0]+"m","STATUS":listahan[k][6],"color":listahan[k][7]}
+            tables = {"STUDENT ID":listahan[k][0],"SCHOLAR NAME":listahan[k][1]+" "+listahan[k][2],
+                      "COMPLETED HOURS":str(listahan[k][3])+"m","REMAINING HOURS":listahan[k][4]+"h "+str(float(listahan[k][5]).__round__()).split(".")[0]+"m",
+                      "STATUS":listahan[k][6],"color":listahan[k][7], "Department":listahan[k][8]}
             student_underMe.append(tables)
 
 
@@ -2396,3 +2398,6 @@ def StudentTimeIN_Out():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+    ### end ###
