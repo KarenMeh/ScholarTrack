@@ -2087,14 +2087,15 @@ def Systemhealth():
         qury.execute("SELECT * FROM `operation_feedback`")
         feeds = qury.fetchall()
 
+        qury.execute("SELECT * FROM `operation_feedback`")
+        total_feed = qury.fetchall()
 
 
 
 
-
-
-
-        return render_template("dashboard admin/Systemhealth.html",logUser=session["adminUser"],profilepicDb=profilepicDb, activity_log_table=activity_log_table,feeds=feeds)
+        return render_template("dashboard admin/Systemhealth.html",logUser=session["adminUser"],
+                               profilepicDb=profilepicDb, activity_log_table=activity_log_table,
+                               feeds=feeds, total_feed=len(total_feed))
     except Exception:
         return redirect(url_for("admin"))
 @app.route("/Feedback and Improvements")

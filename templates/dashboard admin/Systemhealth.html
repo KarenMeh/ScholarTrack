@@ -331,7 +331,7 @@ margin-top: 20px;
                                           <span class="glyphicon glyphicon-star"></span>
                                         </div>
                                         <div> <hr class="harang">
-                                            <span class="glyphicon glyphicon-user"> 3 Total</span>
+                                            <span class="glyphicon glyphicon-user"> {{total_feed}} Total</span>
                                         
                                         </div>
                                     </div>
@@ -416,16 +416,21 @@ margin-top: 20px;
     
                 </div>
               </div>
+              
               <section style="background-color: #ffffff;">
-                  {% for row in feeds%}
+                
                 <div class="container ">
+                
                   <div class="row d-flex justify-content-center">
                     <div class="col-md-17 col-lg-17">
+                      
                       <div class="card text-dark">
                         <div class="card-body p-5 pt-4">
                           <h1 class=" huh mb-1">Recent Feedbacks</h1>
                           <p class="fw-light mb-5 pb-2 fs-4">Latest Comments section by users</p>
-              
+                        {% for row in feeds%}
+                        <div class="card-body p-5 pt-4">
+                         
                           <div class="d-flex flex-start">
                             <img class="rounded-circle shadow-1-strong me-3"
                               src="/static/profilePics/{{row[4]}}" alt="avatar" width="60"
