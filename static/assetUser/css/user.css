@@ -947,6 +947,9 @@ th {
 }
 
 
+/*--------------------------------------------------------------
+    # CSS TH 
+    --------------------------------------------------------------*/
 .table tbody td {
   border: 10;
   font-size: 13px;
@@ -954,14 +957,16 @@ th {
   padding: 10px;
   padding-top: 15px;
   text-align: center;
-  
+  font-weight: 100;
   text-decoration: none;
   
   
 }
 
+
+
 .tbody td {
-  margin: 500px;
+  margin: 50px;
   text-decoration: none;
   color: #002b80;
   
@@ -972,11 +977,13 @@ th {
   color: #ffffff;
   font-size: 13px;
   background-color: #012970;
- 
+ margin-left: 30px;
   align-items: center;
   text-align: center;
-  padding: 18px;
+  padding: 30px;
   text-decoration: none;
+  padding-bottom: 4px;
+  padding-top: 4px;
 
 }
 
@@ -1113,7 +1120,7 @@ th {
   font-size: 18px;
   font-weight: 600;
  float: left;
- margin-left: 100px;
+ margin-left: 130px;
  color: #012970;
   margin-top: 20px;
   padding-bottom: 0;
