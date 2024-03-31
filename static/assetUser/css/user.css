@@ -965,6 +965,7 @@ th {
 
 
 
+
 .tbody td {
   margin: 50px;
   text-decoration: none;
@@ -972,10 +973,12 @@ th {
   
 
 }
+
+
 .table thead th {
   border: 10;
   color: #ffffff;
-  font-size: 13px;
+  font-size: 12px;
   background-color: #012970;
  margin-left: 30px;
   align-items: center;
@@ -1127,6 +1130,34 @@ th {
   
 }
 
+.keke{
+  background-color: green;
+  border: none;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.colang th{
+font-size: 1px;
+}
+.kuku{
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.keke:hover{
+  background-color: #002b80;
+  color: white;
+}
+
+.kuku:hover{
+  background-color: #002b80;
+  color: white;
+}
 .about{
   font-size: 10px;
   color: #002b80;

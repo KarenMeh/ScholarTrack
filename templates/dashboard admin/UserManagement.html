@@ -43,6 +43,7 @@
  
 </head>
 
+
 <body>
 
   <!-- ======= Header ======= -->
@@ -395,18 +396,17 @@
       </div>
 
       <!-- Modal body -->
-      <div class="modal-body">
-                 
+  <div class="modal-body">          
   <table class="table table-striped-1">
     <thead>
       <tr>
-        
+        <div class="colang">
         <th scope="col">EMP ID</th>
         <th scope="col">NAME</th>
         <th scope="col">POSITION</th>
         <th scope="col">DEPARTMENT</th>
         <th scope="col">ACTION</th>
-  
+      </div>
       </tr>
     </thead>
     <tbody>
@@ -415,11 +415,11 @@
   
       <tr>
         <td> {{row['EMP ID']}}</td>
-        <th scope="row"> {{row['NAME']}} </th>
+        <td scope="row"> {{row['NAME']}} </td>
         <td> {{row['POSITION']}}</td>
         <td>{{row['DEPARTMENT']}} </td>
-        <td> <button type="submit" name="con" value="confirm>>{{row['EMP ID']}}" onclick="alert('CUTE SI KAREN')">CONFIRM</button>
-       <button type="submit" name="del" value="del>>{{row['EMP ID']}}"  onclick="alert('CUTE SI KAREN SUPER')">DELETE</button></td>
+        <td> <button type="submit" class="kuku"  name="con" value="confirm>>{{row['EMP ID']}}" onclick="alert('Account Accepted')">CONFIRM</button>
+       <button type="submit" class="keke"     name="del" value="del>>{{row['EMP ID']}}"  onclick="alert('Account Deleted')">DELETE</button></td>
   
       </tr>
   

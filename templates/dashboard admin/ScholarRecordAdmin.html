@@ -559,6 +559,25 @@ hr.new2 {
   letter-spacing: 1px;
 }
 
+.porm a{
+  border: 0;
+  color: #fbf7f7;
+  background: linear-gradient(180deg, rgba(0,31,63,1) 0%, rgba(4,75,148,1) 50%, rgba(61,153,112,1) 100%);
+  float: left;
+  margin-left: 10px;
+  font-size: 12px;
+  border-radius: 10px;
+  padding: 10px;
+  padding-left: 15px;
+  padding-right:15px ;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.porm a:hover{
+  background-color: #002b80;
+  color: #fff;
+}
 
 </style>
 
@@ -604,9 +623,16 @@ hr.new2 {
             <form action="/Duty_Records" method="post">
                 <input type="hidden" name="Duty_Id" value="{{idnum}}">
                 <input type="submit" value="Duty Records" >
+
+              
             </form>
       </div>
 
+
+      <div class="porm">
+        <a href="/compliance">Back</a>
+  </div>
+    
 
         <div class="left">
         <h3>Student Id</h3>
