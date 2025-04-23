@@ -472,7 +472,7 @@ margin: 0;
     <a class="btn-group2" href="{{url_for('admin')}}"> ADMINISTRATION</a>
     </div>
     <div class="button">
-    <a class="btn-group3" href="http://127.0.0.1:5000/Sign in" class="btn-get-started2 scrollto" > OPERATIONS </a>
+    <a class="btn-group3" href="/Sign in" class="btn-get-started2 scrollto" > OPERATIONS </a>
     </div>
     <div class="button">
     <a class="btn-group4" href='{{url_for("searchPage")}}'> SCHOLAR DETAILS</a>
