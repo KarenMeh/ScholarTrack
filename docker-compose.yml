@@ -1,0 +1,58 @@
+
+# services:
+#   scholartrack:
+#      build: .
+#      ports:
+#       - "7000:7000"
+#      volumes:
+#       - ./src:/app/src
+#      environment:
+#       - FLASK_APP=src/hk_monitoring.py
+#       - FLASK_ENV=development
+#       - DB_HOST=db
+#       - DB_USER=root
+#       - DB_PASSWORD=rootpass
+#       - DB_NAME=scholartrack
+#      depends_on:
+#       - db
+
+#   db:
+#     image: mysql:8.0
+#     restart: always
+#     environment:
+#       MYSQL_ROOT_PASSWORD: rootpass
+#       MYSQL_DATABASE: scholartrack
+#     volumes:
+#       - ./src/db:/docker-entrypoint-initdb.d
+#     ports:
+#       - "3306:3306"
+
+
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: scholartrack-db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: scholartrack
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  scholartrack:
+    build: .
+    container_name: scholartrack-app
+    volumes:
+      - ./src:/app/src
+
+    environment:
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=rootpass
+      - DB_NAME=scholartrack
+    depends_on:
+      - db
+    ports:
+      - "7000:7000"

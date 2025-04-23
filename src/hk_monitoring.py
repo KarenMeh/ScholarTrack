@@ -1,5 +1,4 @@
 import os
-
 import bcrypt
 import pandas as pd
 import datetime
@@ -23,17 +22,20 @@ mysql = MySQL()
 app.config['UPLOAD_DIR']="static/profilePics/"
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
-#setter kung ano nga db gamiton
-app.config["MYSQL_DATABASE_USER"]="root"
-app.config["MYSQL_DATABASE_PASSWORD"]=""
-app.config["MYSQL_DATABASE_DB"]="hkscholar"
-app.config["MYSQLI_DATABASE_HOST"]="localhost"
+# Database settings
+app.config["MYSQL_DATABASE_USER"] = "root"
+app.config["MYSQL_DATABASE_PASSWORD"] = "rootpass"
+app.config["MYSQL_DATABASE_DB"] = "scholartrack"
+app.config["MYSQL_DATABASE_HOST"] = "db"  # ✅ Fixed here"
 
-
+global qury
 #connection mo ni sa db kag sa python aka conn
 mysql.init_app(app)
-conn = mysql.connect()
-qury = conn.cursor()
+try:
+    conn = mysql.connect()
+    qury = conn.cursor()
+except Exception as e:
+    print("DB Connection failed:", e)
 
 #--------------------------log in data dont tandog--------------------------------
 
@@ -2398,7 +2400,7 @@ def StudentTimeIN_Out():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=7000)
 
 
     ### end ###
