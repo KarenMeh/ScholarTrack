@@ -1897,8 +1897,8 @@ def request_modal_Process_User_Management():
         add_user_data = str(data_to_Aprove[0][3]) + " " + str(data_to_Aprove[0][2])
         credintials.append(add_user_data)
 
-        qury.execute("INSERT INTO `operations_data`(`Faculty_Lname`, `Faculty_Fname`, `Faculty_Password`, `Faculty_Id_Number`, `Operation_Dept`, `Operations_Mname`, `Operation_phone_Number`, `Operation_Designation-Position`, `Operations_Email`, `profilePics`) VALUES "
-                     "('"+str(data_to_Aprove[0][0])+"','"+str(data_to_Aprove[0][1])+"','"+str(data_to_Aprove[0][2])+"','"+str(data_to_Aprove[0][3])+"','"+str(data_to_Aprove[0][4])+"','"+str(data_to_Aprove[0][5])+"','"+str(data_to_Aprove[0][6])+"','"+str(data_to_Aprove[0][7])+"','"+str(data_to_Aprove[0][8])+"','default.png')")
+        qury.execute("INSERT INTO `operations_data`(`Faculty_Lname`, `Faculty_Fname`, `Faculty_Password`, `Faculty_Id_Number`, `Operation_Dept`, `Operations_Mname`, `Operation_phone_Number`, `Operation_Designation-Position`, `Operations_Email`, `profilePics`, `operations_about`, `twitter`, `facebook`, `instagram`,`linkedin`, `Address`, `status_ol`, `color_status`) VALUES "
+                     "('"+str(data_to_Aprove[0][0])+"','"+str(data_to_Aprove[0][1])+"','"+str(data_to_Aprove[0][2])+"','"+str(data_to_Aprove[0][3])+"','"+str(data_to_Aprove[0][4])+"','"+str(data_to_Aprove[0][5])+"','"+str(data_to_Aprove[0][6])+"','"+str(data_to_Aprove[0][7])+"','"+str(data_to_Aprove[0][8])+"','default.png', 'About me...', 'twitter', 'facebook', 'instagram','linkedin', 'address', 'ACTIVE','success')")
         conn.commit()
 
 
